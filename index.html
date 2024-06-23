@@ -20,16 +20,6 @@
         </div>
     </nav>
 
-    <!-- Tabs for Sections -->
-    <div class="tabs">
-        <div class="container">
-            <button class="tablinks" onclick="openTab(event, 'about')" id="defaultOpen">About</button>
-            <button class="tablinks" onclick="openTab(event, 'portfolio')">Portfolio</button>
-            <button class="tablinks" onclick="openTab(event, 'blog')">Blog</button>
-            <button class="tablinks" onclick="openTab(event, 'contact')">Contact</button>
-        </div>
-    </div>
-
     <!-- Content Sections -->
     <div id="about" class="tabcontent">
         <div class="container">
@@ -65,26 +55,6 @@
             <p>&copy; 2024 Your Name. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- JavaScript to handle tab switching -->
-    <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-
-        // Open the default tab on page load
-        document.getElementById("defaultOpen").click();
-    </script>
 
 </body>
 </html>
