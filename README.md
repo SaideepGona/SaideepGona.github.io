@@ -1,2 +1,3 @@
-# SaideepGona.github.io
-Personal Website Repo
+# Repo for my personal website hosted on github pages
+
+https://saideepgona.github.io/
