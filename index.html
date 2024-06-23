@@ -1,9 +1,90 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Personal Website</title>
-    </head>
-    <body>
-        <p>This is an example of a simple HTML page with one paragraph.</p>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Personal Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">Your Name</h1>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Tabs for Sections -->
+    <div class="tabs">
+        <div class="container">
+            <button class="tablinks" onclick="openTab(event, 'about')" id="defaultOpen">About</button>
+            <button class="tablinks" onclick="openTab(event, 'portfolio')">Portfolio</button>
+            <button class="tablinks" onclick="openTab(event, 'blog')">Blog</button>
+            <button class="tablinks" onclick="openTab(event, 'contact')">Contact</button>
+        </div>
+    </div>
+
+    <!-- Content Sections -->
+    <div id="about" class="tabcontent">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>Add your introduction here.</p>
+        </div>
+    </div>
+
+    <div id="portfolio" class="tabcontent">
+        <div class="container">
+            <h2>Portfolio</h2>
+            <!-- Add your portfolio items here -->
+        </div>
+    </div>
+
+    <div id="blog" class="tabcontent">
+        <div class="container">
+            <h2>Blog</h2>
+            <!-- Add your blog posts here -->
+        </div>
+    </div>
+
+    <div id="contact" class="tabcontent">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <!-- Add your contact form or details here -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript to handle tab switching -->
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Open the default tab on page load
+        document.getElementById("defaultOpen").click();
+    </script>
+
+</body>
 </html>
