@@ -48,15 +48,18 @@ https://www.tooplate.com/view/2120-ben-resume
                     </li>
                     <li class="nav-item">
                       <a href="#skills" class="nav-link smoothScroll">Skills</a>
-                  </li>
+                    </li>
+                    <li class="nav-item">
+                      <a href="#skills" class="nav-link smoothScroll">Skills</a>
+                    </li>
                     <li class="nav-item">
                         <a href="#contact" class="nav-link smoothScroll">Contact</a>
                     </li>
                 </ul>
-
+<!-- 
                 <div class="mt-lg-0 mt-3 mb-4 mb-lg-0">
                     <a href="#" class="custom-btn btn" download>Download CV</a>
-                </div>
+                </div> -->
             </div>
 
         </div>
@@ -135,7 +138,7 @@ https://www.tooplate.com/view/2120-ben-resume
         <div class="container">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-12">
-              <h2 class="mb-4">About Me</h3>
+              <h2 class="mb-4">About me</h3>
 
                 <p>I am currently a PhD candidate at the University of Chicago studying statistical/computational genetics. 
                   I have almost 10 years of academic and work experience at the interface of computer science, data science, 
@@ -145,7 +148,8 @@ https://www.tooplate.com/view/2120-ben-resume
                 <p>My current work revolves around developing new generations of statistical methods for undercovering the genetic influences on disease. </p>
                       
                 <p>Check out my Quarto site showcasing my progress!: 
-                  <a rel="nofollow" href="quarto_site/_site/index.html" target="_blank" rel="noopener noreferrer">Research Blog</a>. </p>
+                  <a rel="nofollow" href="quarto_site/_site/index.html" target="_blank" rel="noopener noreferrer">Research Blog</a>. 
+                </p>
 
             </div>
 
@@ -156,6 +160,260 @@ https://www.tooplate.com/view/2120-ben-resume
           </div>
         </div>
       </section>
+
+    <!-- Micro-blog -->
+
+    <section class="testimonials section-padding" id="microblog">
+      <div class="container">
+        <h2 class="mb-5">What have I been up to lately?</h3>
+        <div id="accordion">
+
+          <div class="card row">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link text-center" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  <h6 class="mb-0 text-center">Annual GME Hackathon 2024</h6>
+                  <p>June 2024</p>
+                </button>
+              </h5>
+            </div>
+        
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                <p>One of the events associated with my Genetic Mechanism and Evolution training grant is an annual hackathon.
+                  As the training grant supports students with varying levels of computational experience, one of the aims is to improve
+                  computational literacy. Given my computational experience, I volunteered to be on the organizing committee. The theme 
+                  we chose for the hackathon was <strong>interactive plotting</strong>. 
+                </p>
+                <p>
+                  The value of interactive plots is obvious, but it is the type of thing where the "activation energy" of actually learning
+                  to make them and deploy them in practice is high enough of a barrier for adoption. We therefore slotted the event for a 
+                  period of two days, starting with a few short tutorial lectures followed by 10+ hours of "hacking" sessions. 
+                </p>
+                <p>
+                  The tutorials we made can be be found in this <a href="https://github.com/SaideepGona/ai-science-training-series/tree/main" target="_blank" rel="noopener noreferrer">repo.</a>
+                  Basically, the tutorials include plotly + dash in both R and Python as well as rshiny for R. These are the major relevant interactive
+                  plotting libraries which would be practical for researchers.
+                </p>
+                <p>
+                  As something of an experimental event, we were super pleased with how it went! People ended up splitting into 4 groups 
+                  based on their programming language preference. Although we provided a curated dataset to practice with, it ended up being more 
+                  natural for people to use their own datasets from personal or research interests. We ended up having people work with 
+                  several approaches:
+
+                  <ul>
+                    <li>Python: Plotly + Dash</li>
+                    <li>R: Plotly + Dash</li>
+                    <li>R: Rshiny + ggplot</li>
+                    <li>R: Rshiny + plotly + ggplot</li>
+                  </ul>
+
+                </p>
+                <p>
+                  Interestingly, it was found that:
+                  
+                  <ol>
+                    <li>
+                      Plotly + Dash are not as well developed in R as in Python, such that it is better 
+                      to use Python if favoring these libraries.
+                    </li>
+                    <li>
+                      Converting ggplot plots to plotly and then embedding in RShiny can work, but adds many layers of 
+                      abstraction which should be avoided if possible.
+                    </li>
+                  </ol>
+                </p>
+
+                <p>
+                  Overall, it was an enriching experience, well worth the time off from the daily research grind. On my
+                  end, I used some of my spare time to build an interactive RShiny app showcasing some of my recent research 
+                  results. It is hosted <a href="https://imlab.shinyapps.io/xwas_shiny_app/" target="_blank" rel="noopener noreferrer">here.</a>
+                  
+                </p>
+
+                            
+              </div>
+            </div>
+          </div>
+
+          <div class="card row">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link text-center" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <h6 class="mb-0 text-center">ALCF AI for Science Training Series</h6>
+                  <p>April 2024</p>
+                </button>
+              </h5>
+            </div>
+        
+            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div class="card-body">
+                <p>Argonne Leadership Computing Facility (ALCF) hosts regular workshops and trainings to improve AI researcher's capacity
+                  to adopt AI into their work and make use of their vast supercompute resources. I attended the AI for Science Training Series,
+                  a multi-lecture series with homeworks. Here is the <a href="https://github.com/SaideepGona/ai-science-training-series/tree/main" target="_blank" rel="noopener noreferrer">repo.</a>
+
+                </p>
+                <p>
+                  I do have a pretty solid machine learning/AI background, but I still found the series very useful. For one, ALCF has one of the most
+                  powerful GPU clusters in the world. Even though we have been able to utilize these resources ourselves to perform inference and training,
+                  there is still a great deal we don't know about this infrastructure. For example, ALCF also experiments with AI testbeds housing 
+                  up-and-coming specialized hardware resources. Some of these hardware like groq-chips, could proliferate due to their efficient 
+                  inference potential relative to standard NVIDIA A100 gpus. 
+                </p>
+                <p>
+                  Another nice benefit of this series was that it gave me a chance to revisit the mathematics of transformers, specifically self-attention.
+                  I've been pretty busy so I never really had a chance to sit down and properly derive the math at the core of the hubub surrounding 
+                  LLMs. What helped me is to just think of attention as analogous to other neural network layers, such as fully connected layers which map
+                  inputs to outputs via linear transformations with added weights. From that perspective, self-attention is just a different way of performing
+                  such transformations which has a number of desirable properties over other layers for language-based tasks. I made a little diagram/explainer 
+                  <a href="https://drive.google.com/file/d/1pFi4Nw7OgvUJJtTfypotlZLNq6Yhdiag/view?usp=sharing" target="_blank" rel="noopener noreferrer">here!</a>
+                </p>
+                <p>
+                  Finally, after completing all the assignments, the ALCF people were so kind as to give me a digital badge for my efforts :).
+                </p>              
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="card row">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link text-center" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <h6 class="mb-0 text-center">ALCF AI for Science Training Series</h6>
+                  <p>April 2024</p>
+                </button>
+              </h5>
+            </div>
+        
+            <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+              <div class="card-body">
+                <p>Argonne Leadership Computing Facility (ALCF) hosts regular workshops and trainings to improve AI researcher's capacity
+                  to adopt AI into their work and make use of their vast supercompute resources. I attended the AI for Science Training Series,
+                  a multi-lecture series with homeworks. Here is the <a href="https://github.com/SaideepGona/ai-science-training-series/tree/main" target="_blank" rel="noopener noreferrer">repo.</a>
+
+                </p>
+                <p>
+                  I do have a pretty solid machine learning/AI background, but I still found the series very useful. For one, ALCF has one of the most
+                  powerful GPU clusters in the world. Even though we have been able to utilize these resources ourselves to perform inference and training,
+                  there is still a great deal we don't know about this infrastructure. For example, ALCF also experiments with AI testbeds housing 
+                  up-and-coming specialized hardware resources. Some of these hardware like groq-chips, could proliferate due to their efficient 
+                  inference potential relative to standard NVIDIA A100 gpus. 
+                </p>
+                <p>
+                  Another nice benefit of this series was that it gave me a chance to revisit the mathematics of transformers, specifically self-attention.
+                  I've been pretty busy so I never really had a chance to sit down and properly derive the math at the core of the hubub surrounding 
+                  LLMs. What helped me is to just think of attention as analogous to other neural network layers, such as fully connected layers which map
+                  inputs to outputs via linear transformations with added weights. From that perspective, self-attention is just a different way of performing
+                  such transformations which has a number of desirable properties over other layers for language-based tasks. I made a little diagram/explainer 
+                  <a href="https://drive.google.com/file/d/1pFi4Nw7OgvUJJtTfypotlZLNq6Yhdiag/view?usp=sharing" target="_blank" rel="noopener noreferrer">here!</a>
+                </p>
+                <p>
+                  Finally, after completing all the assignments, the ALCF people were so kind as to give me a digital badge for my efforts :).
+                </p>              
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+      </div>
+    </section>
+      
+<!--       
+      
+      
+      
+      
+      <div class="container">
+           <div class="row"> 
+
+                <div class="col-12">
+                    <h3 class="mb-5 text-center">What I've Been Up To Lately</h3>
+
+                    <div class="owl-carousel owl-theme" id="testimonials-carousel">
+                        <div class="item">
+                            <div class="testimonials-thumb d-flex">
+
+                                <div class="testimonials-info">
+                                    <p>I attended Parslfest 2023. Parsl is a workflow management python package. It is especially good for scalably running tasks in parallel on remote computing resources.
+                                    It has proven invaluable in being able to scale up our personalized Enformer inference on Argonne National Labratory's Polaris compute cluster. Our Parsl pipelines are showcased <a href="https://github.com/SaideepGona/shared_pipelines">here.</a>
+                                    As a result, we have worked quite closely with the Parsl Devs who are based out of UChicago and Argonne National Labs. Parslfest is an event they host every year where
+                                    they discuss updates and showcase projects. This year, my good friend in the lab Temi is presenting our Enformer inference pipeline.
+                                    </p>
+
+                                    <h6 class="mb-0">Parslfest 2023</h6>
+                                    <span>Art Director</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="testimonials-thumb d-flex">
+
+                                <div class="testimonials-info">
+                                    <p>Argonne Leadership Computing Facility (ALCF) hosts regular workshops and trainings to improve AI researcher's capacity
+                                      to adopt AI into their work and make use of their vast supercompute resources. I attended the AI for Science Training Series,
+                                      a multi-lecture series with homeworks. Here is the <a href="https://github.com/SaideepGona/ai-science-training-series/tree/main">repo.</a>
+
+                                      I do have a pretty solid machine learning/AI background, but I still found the series very useful. For one, ALCF has one of the most
+                                      powerful GPU clusters in the world. Even though we have been able to utilize these resources ourselves to perform inference and training,
+                                      there is still a great deal we don't know about this infrastructure. For example, ALCF also experiments with AI testbeds housing 
+                                      up-and-coming specialized hardware resources. Some of these hardware like groq-chips, could proliferate due to their efficient 
+                                      inference potential relative to standard NVIDIA A100 gpus. 
+
+                                      Another nice benefit of this series was that it gave me a chance to revisit the mathematics of transformers, specifically self-attention.
+                                      I've been pretty busy so I never really had a chance to sit down and properly derive the math at the core of the hubub surrounding 
+                                      LLMs. What helped me is to just think of attention as analogous to other neural network layers, such as fully connected layers which map
+                                      inputs to outputs via linear transformations with added weights. From that perspective, self-attention is just a different way of performing
+                                      such transformations which has a number of desirable properties over other layers for language-based tasks. I made a little diagram/explainer 
+                                      <a href="https://drive.google.com/file/d/1pFi4Nw7OgvUJJtTfypotlZLNq6Yhdiag/view?usp=sharing">here!</a>
+
+                                      Finally, after completing all the assignments, the ALCF people were so kind as to give me a digital badge for my efforts :).
+                                      
+                                    </p>
+
+                                    <h6 class="mb-0">ALCF AI for Science Training Series</h6>
+                                    <span>Marketing Consultant</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="testimonials-thumb d-flex">
+                                <div class="testimonials-image">
+                                    <img src="images/testimonials/testimonial-image03.jpg" class="img-fluid" alt="testimonials image">
+                                </div>
+
+                                <div class="testimonials-info">
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+
+                                    <h6 class="mb-0">Jen</h6>
+                                    <span>Product Manager</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="testimonials-thumb d-flex">
+                                <div class="testimonials-image">
+                                    <img src="images/testimonials/testimonial-image04.jpg" class="img-fluid" alt="testimonials image">
+                                </div>
+
+                                <div class="testimonials-info">
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+
+                                    <h6 class="mb-0">Wilson</h6>
+                                    <span>Web Developer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+           </div>
+      </div>
+ </section> -->
+
 
 
     <!-- SKILLS -->
@@ -201,12 +459,12 @@ https://www.tooplate.com/view/2120-ben-resume
     </section>
 
 
-    <!-- TESTIMONIAL -->
-     <!-- <section class="testimonials section-padding" id="testimonials">
+    <!-- TESTIMONIAL
+     <section class="testimonials section-padding" id="testimonials">
           <div class="container">
-               <div class="row"> -->
+               <div class="row"> 
 
-                    <!-- <div class="col-12">
+                    <div class="col-12">
                         <h3 class="mb-5 text-center">What People say</h3>
 
                         <div class="owl-carousel owl-theme" id="testimonials-carousel">
@@ -271,9 +529,9 @@ https://www.tooplate.com/view/2120-ben-resume
                             </div>
                         </div>
 
-                    </div> -->
+                    </div>
 
-               <!-- </div>
+               </div>
           </div>
      </section> -->
 
