@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saideep Gona">
+<meta name="dcterms.date" content="2023-09-21">
+
+<title>Daily-Blog-Sai - retraining_pred_to_aracena_models_evaluation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daily-Blog-Sai</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#evaluation-of-the-performance-of-the-aracena-models" id="toc-evaluation-of-the-performance-of-the-aracena-models" class="nav-link active" data-scroll-target="#evaluation-of-the-performance-of-the-aracena-models">Evaluation of the performance of the aracena models</a>
+  <ul class="collapse">
+  <li><a href="#use-tss-site-basenji-sequences" id="toc-use-tss-site-basenji-sequences" class="nav-link" data-scroll-target="#use-tss-site-basenji-sequences">Use TSS site basenji sequences</a></li>
+  <li><a href="#observe-performance-on-validation-set" id="toc-observe-performance-on-validation-set" class="nav-link" data-scroll-target="#observe-performance-on-validation-set">Observe performance on validation set</a></li>
+  <li><a href="#training-set-example" id="toc-training-set-example" class="nav-link" data-scroll-target="#training-set-example">TRAINING SET EXAMPLE</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">retraining_pred_to_aracena_models_evaluation</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saideep Gona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 21, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="evaluation-of-the-performance-of-the-aracena-models" class="level1">
+<h1>Evaluation of the performance of the aracena models</h1>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5py</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os,sys</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle <span class="im">as</span> pkl</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kipoiseq</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"./../2023-09-05-ref_to_aracena_mlp"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ref_to_aracena_models</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>model_type <span class="op">=</span> <span class="st">"cnn"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cur_individual <span class="op">=</span> <span class="st">"AF20"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> (</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cuda"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> torch.cuda.is_available()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="st">"mps"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> torch.backends.mps.is_available()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="st">"cpu"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(device)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model_type <span class="op">==</span> <span class="st">"linear"</span>:</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    cur_model <span class="op">=</span> ref_to_aracena_models.RefToAracenaMLP(hidden_layer_dims<span class="op">=</span>[])</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    cur_model <span class="op">=</span> ref_to_aracena_models.RefToAracenaCNN()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>cur_model <span class="op">=</span> cur_model.to(device)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>cpu</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>saved_models_path <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/saved_models"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>trained_model_path <span class="op">=</span> os.path.join(saved_models_path, <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/saved_models/train1_ref_to_aracena_cnn_poissonlog_ep9_lr1e-06.pt"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># trained_model_path = os.path.join(saved_models_path, "train1_ref_to_aracena_cnn_poissonlog_ep19_lr1e-06.pt")</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>saved_model <span class="op">=</span> torch.load(trained_model_path, map_location<span class="op">=</span>device)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>cur_model.load_state_dict(saved_model[<span class="st">"model_state_dict"</span>])</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>cur_model.<span class="bu">eval</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>RefToAracenaCNN(
+  (model): Sequential(
+    (0): Sequential(
+      (0): BatchNorm1d(5313, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (1): GELU()
+      (2): Conv1d(5313, 24, kernel_size=(4,), stride=(2,), padding=(1,))
+      (3): BatchNorm1d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): GELU()
+      (5): Conv1d(24, 24, kernel_size=(4,), stride=(2,), padding=(1,))
+      (6): BatchNorm1d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (7): GELU()
+      (8): Conv1d(24, 24, kernel_size=(4,), stride=(2,), padding=(1,))
+    )
+    (1): Sequential(
+      (0): Flatten(start_dim=1, end_dim=-1)
+      (1): Linear(in_features=2688, out_features=10752, bias=True)
+      (2): Softplus(beta=1, threshold=20)
+      (3): Unflatten(dim=1, unflattened_size=(12, 896))
+    )
+  )
+)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>saved_model_loss <span class="op">=</span> saved_model[<span class="st">"loss"</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(loss_tracker)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>sns.lineplot(saved_model_loss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>&lt;Axes: &gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-5-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(saved_model_loss[<span class="op">-</span><span class="dv">50</span>:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>&lt;Axes: &gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<section id="use-tss-site-basenji-sequences" class="level2">
+<h2 class="anchored" data-anchor-id="use-tss-site-basenji-sequences">Use TSS site basenji sequences</h2>
+<p>These sites and corresponding TSS sites were extracted in 2023-09-20-diagnose_training_tracks_issue and serve as a good test set to observe model performance.</p>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_tracks(tracks, interval, vlines,height<span class="op">=</span><span class="fl">1.5</span>):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  fig, axes <span class="op">=</span> plt.subplots(<span class="bu">len</span>(tracks), <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, height <span class="op">*</span> <span class="bu">len</span>(tracks)), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> ax, (title, y) <span class="kw">in</span> <span class="bu">zip</span>(axes, tracks.items()):</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    ax.fill_between(np.linspace(interval[<span class="dv">1</span>], interval[<span class="dv">2</span>], num<span class="op">=</span><span class="bu">len</span>(y)), y)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    ax.set_title(title, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    ax.vlines(<span class="bu">list</span>(vlines),<span class="dv">0</span>, <span class="bu">max</span>(y), color<span class="op">=</span><span class="st">"red"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    sns.despine(top<span class="op">=</span><span class="va">True</span>, right<span class="op">=</span><span class="va">True</span>, bottom<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  ax.set_xlabel(<span class="st">"_"</span>.join([<span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> interval]))</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  plt.tight_layout()</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> query_epigenome_from_hdf5(region, individual<span class="op">=</span><span class="st">"AF20"</span>):</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> h5py </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  col_region <span class="op">=</span> <span class="st">"_"</span>.join([region[<span class="dv">0</span>].strip(<span class="st">"chr"</span>),region[<span class="dv">1</span>],region[<span class="dv">2</span>]])</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  mapping_table <span class="op">=</span> pd.read_csv(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/index_files/remapped_table_filt.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> col_region <span class="kw">not</span> <span class="kw">in</span> mapping_table.columns:</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(col_region, <span class="st">"not present in hdf5"</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="va">None</span>,<span class="st">"region not present in hdf5"</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  query_index <span class="op">=</span> <span class="bu">int</span>(mapping_table.loc[<span class="st">"ref-epigenome"</span>, col_region])</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  query_group <span class="op">=</span> mapping_table.loc[<span class="st">"group"</span>, col_region]</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(query_index,query_group)</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  enformer_ref_targets <span class="op">=</span> <span class="ss">f"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/ref-epigenome_</span><span class="sc">{</span>query_group<span class="sc">}</span><span class="ss">_aracena.h5"</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">with</span> h5py.File(enformer_ref_targets, <span class="st">'r'</span>) <span class="im">as</span> ert:</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>      query <span class="op">=</span> ert[<span class="st">'ref_epigenome'</span>][:,:,query_index]</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> query, <span class="va">None</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> query_aracena_from_hdf5(region, individual<span class="op">=</span><span class="st">"AF20"</span>):</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> h5py </span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>  col_region <span class="op">=</span> <span class="st">"_"</span>.join([region[<span class="dv">0</span>].strip(<span class="st">"chr"</span>),region[<span class="dv">1</span>],region[<span class="dv">2</span>]])</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>  mapping_table <span class="op">=</span> pd.read_csv(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/index_files/remapped_table_filt.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> col_region <span class="kw">not</span> <span class="kw">in</span> mapping_table.columns:</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(col_region, <span class="st">"not present in hdf5"</span>)</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="va">None</span>,<span class="st">"region not present in hdf5"</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>  query_index <span class="op">=</span> <span class="bu">int</span>(mapping_table.loc[individual, col_region])</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>  query_group <span class="op">=</span> mapping_table.loc[<span class="st">"group"</span>, col_region]</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(query_index,query_group)</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>  enformer_ara_targets <span class="op">=</span> <span class="ss">f"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/</span><span class="sc">{</span>individual<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>query_group<span class="sc">}</span><span class="ss">_aracena.h5"</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(enformer_ara_targets)</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">with</span> h5py.File(enformer_ara_targets, <span class="st">'r'</span>) <span class="im">as</span> ert:</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>      query <span class="op">=</span> ert[<span class="st">'targets'</span>][:,<span class="dv">0</span>,query_index]</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> query, <span class="va">None</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_on_ref_epi(cur_model, ref_epi_input, model_type, device <span class="op">=</span> <span class="st">"cpu"</span>):</span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>  cur_model <span class="op">=</span> cur_model.to(device)</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> model_type <span class="op">==</span> <span class="st">"linear"</span>:</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>      input_tensor <span class="op">=</span> torch.from_numpy(ref_epi_input).to(device).unsqueeze(<span class="dv">0</span>)</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elif</span> model_type <span class="op">==</span> <span class="st">"cnn"</span>:</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">"pred_func"</span>, ref_epi_input.shape)</span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>      input_tensor <span class="op">=</span> torch.from_numpy(ref_epi_input).to(device).unsqueeze(<span class="dv">0</span>).swapaxes(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>  prediction_raw <span class="op">=</span> cur_model(input_tensor)</span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> model_type <span class="op">==</span> <span class="st">"linear"</span>:</span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>      prediction <span class="op">=</span> prediction_raw.squeeze().cpu().detach().numpy()[:,:].swapaxes(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>  <span class="cf">elif</span> model_type <span class="op">==</span> <span class="st">"cnn"</span>:</span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">"pred_func"</span>, prediction_raw.shape)</span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>      prediction <span class="op">=</span> prediction_raw.squeeze().cpu().detach().numpy()[:,:].swapaxes(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"pred_func_last"</span>,prediction.shape)</span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> prediction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-09-20-diagnose_training_tracks_issue/tss_mapping_dict.pkl"</span>, <span class="st">"rb"</span>) <span class="im">as</span> tmd:</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    tss_mapping_dict <span class="op">=</span> pkl.load(tmd)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-09-20-diagnose_training_tracks_issue/tss_mapping_dict_gene_names.pkl"</span>, <span class="st">"rb"</span>) <span class="im">as</span> tmd:</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    tss_mapping_dict_gene_names <span class="op">=</span> pkl.load(tmd)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="19">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>c<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> region <span class="kw">in</span> tss_mapping_dict.keys():</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(region)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> c <span class="op">&lt;</span> <span class="dv">3</span>:</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        c<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> c<span class="op">==</span><span class="dv">10</span>:</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        c<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    region_split <span class="op">=</span> region.split(<span class="st">"_"</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"collecting ref query"</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    ref_query_hdf5, flag <span class="op">=</span> query_epigenome_from_hdf5(region_split)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> flag <span class="op">==</span> <span class="st">"region not present in hdf5"</span>:</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    ara_query_hdf5, flag <span class="op">=</span> query_aracena_from_hdf5(region_split)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> flag <span class="op">==</span> <span class="st">"region not present in hdf5"</span>:</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    region_for_plot_raw <span class="op">=</span> [region_split[<span class="dv">0</span>],<span class="bu">int</span>(region_split[<span class="dv">1</span>]),<span class="bu">int</span>(region_split[<span class="dv">2</span>])]</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    region_for_plot_kipoi_resized <span class="op">=</span> kipoiseq.Interval(<span class="op">*</span>region_for_plot_raw).resize(<span class="dv">896</span><span class="op">*</span><span class="dv">128</span>)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    region_for_plot <span class="op">=</span> [region_for_plot_kipoi_resized.chrom,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>                       region_for_plot_kipoi_resized.start,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>                       region_for_plot_kipoi_resized.end]</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    region_browser <span class="op">=</span> region_for_plot[<span class="dv">0</span>]<span class="op">+</span><span class="st">":"</span><span class="op">+</span><span class="bu">str</span>(region_for_plot[<span class="dv">1</span>])<span class="op">+</span><span class="st">"-"</span><span class="op">+</span><span class="bu">str</span>(region_for_plot[<span class="dv">2</span>])</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"ref_query"</span>,ref_query_hdf5.shape)</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    model_prediction <span class="op">=</span> predict_on_ref_epi(cur_model, ref_query_hdf5, <span class="st">"cnn"</span>)</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(region_browser, <span class="st">"genes:"</span>, tss_mapping_dict_gene_names[region], <span class="st">"region len:"</span>, (<span class="bu">int</span>(region_for_plot[<span class="dv">2</span>])<span class="op">-</span><span class="bu">int</span>(region_for_plot[<span class="dv">1</span>])))</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    tracks_for_plot <span class="op">=</span> {<span class="st">"ref_epi_hdf5"</span>:ref_query_hdf5[:,<span class="dv">4766</span>],</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"aracena_hdf5"</span>:ara_query_hdf5,</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"model_predict"</span>:model_prediction[:,<span class="dv">0</span>]}</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>    plot_tracks(tracks_for_plot,region_for_plot, tss_mapping_dict[region])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>chr4_113630947_113762019
+chr11_18427720_18558792
+chr16_85805681_85936753
+chr7_136783551_136914623
+collecting ref query
+7_136783551_136914623 not present in hdf5
+chr16_24521594_24652666
+collecting ref query
+7 train1
+8 train1
+/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/AF20_train1_aracena.h5
+ref_query (896, 5313)
+pred_func (896, 5313)
+pred_func torch.Size([1, 12, 896])
+pred_func_last (896, 12)
+chr16:24529786-24644474 genes: ['RBBP6'] region len: 114688
+chr17_74167260_74298332
+collecting ref query
+10 train1
+11 train1
+/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/AF20_train1_aracena.h5
+ref_query (896, 5313)
+pred_func (896, 5313)
+pred_func torch.Size([1, 12, 896])
+pred_func_last (896, 12)
+chr17:74175452-74290140 genes: ['RPL38', 'TTYH2', 'DNAI2'] region len: 114688
+chr9_93148172_93279244
+collecting ref query
+13 train1
+14 train1
+/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/AF20_train1_aracena.h5
+ref_query (896, 5313)
+pred_func (896, 5313)
+pred_func torch.Size([1, 12, 896])
+pred_func_last (896, 12)
+chr9:93156364-93271052 genes: ['WNK2'] region len: 114688
+chr4_165060563_165191635
+collecting ref query
+17 train1
+18 train1
+/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/AF20_train1_aracena.h5
+ref_query (896, 5313)
+pred_func (896, 5313)
+pred_func torch.Size([1, 12, 896])
+pred_func_last (896, 12)
+chr4:165068755-165183443 genes: ['TMEM192'] region len: 114688
+chr17_19514821_19645893
+collecting ref query
+18 train1
+19 train1
+/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/AF20_train1_aracena.h5
+ref_query (896, 5313)
+pred_func (896, 5313)
+pred_func torch.Size([1, 12, 896])
+pred_func_last (896, 12)
+chr17:19523013-19637701 genes: ['SLC47A1'] region len: 114688
+chr3_52196061_52327133
+collecting ref query
+19 train1
+20 train1
+/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/AF20_train1_aracena.h5
+ref_query (896, 5313)
+pred_func (896, 5313)
+pred_func torch.Size([1, 12, 896])
+pred_func_last (896, 12)
+chr3:52204253-52318941 genes: ['ALAS1', '', 'TLR9', 'TWF2', 'PPM1M', 'WDR82', 'GLYCTK', 'DNAH1'] region len: 114688
+chr2_167285886_167416958</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-9-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-9-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-9-output-4.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-9-output-5.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-9-output-6.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-9-output-7.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="observe-performance-on-validation-set" class="level2">
+<h2 class="anchored" data-anchor-id="observe-performance-on-validation-set">Observe performance on validation set</h2>
+<p>Load in some validation datasets for evaluation</p>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>validation_path <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/AF20_valid_aracena.h5"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sequence_ind <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>track_ind <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5py.File(validation_path, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    example_valid <span class="op">=</span> f[<span class="st">'targets'</span>][:,:,sequence_ind]</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    example_valid_reg <span class="op">=</span> f[<span class="st">'regions'</span>][:,:,sequence_ind]</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(example_valid.shape)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(example_valid_reg.shape)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(example_valid_reg[<span class="dv">0</span>,<span class="dv">2</span>]<span class="op">-</span>example_valid_reg[<span class="dv">0</span>,<span class="dv">1</span>])</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>bigwig_track_readouts <span class="op">=</span> [</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"RNAseq"</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ATACseq"</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me1"</span>,</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me3"</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27ac"</span>,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27me3"</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>conditions <span class="op">=</span> [<span class="st">"Flu"</span>,<span class="st">"NI"</span>]</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>bigwig_tracks <span class="op">=</span> []</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition <span class="kw">in</span> conditions:</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> bigwig_track_readout <span class="kw">in</span> bigwig_track_readouts:</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>        bigwig_tracks.append(condition<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>bigwig_track_readout)</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(896, 12)
+(1, 3)
+131072</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tracks <span class="op">=</span> {}</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i,track <span class="kw">in</span> <span class="bu">enumerate</span>(bigwig_tracks):</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    tracks[track] <span class="op">=</span> example_valid[:,i]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>target_interval <span class="op">=</span> [<span class="bu">str</span>(example_valid_reg[<span class="dv">0</span>,<span class="dv">0</span>]), example_valid_reg[<span class="dv">0</span>,<span class="dv">1</span>], example_valid_reg[<span class="dv">0</span>,<span class="dv">2</span>]]</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>plot_tracks(tracks, target_interval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>We can now make a prediction on the corresponding input region using our stored model(s)</p>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>group <span class="op">=</span> <span class="st">"valid"</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>mapping_table <span class="op">=</span> pd.read_csv(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/index_files/remapped_table_filt.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mapping_table.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(9, 1572)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>target_interval_str <span class="op">=</span> <span class="st">"_"</span>.join([<span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> target_interval])</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(target_interval_str)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>ref_index <span class="op">=</span> mapping_table.loc[<span class="st">"ref-epigenome"</span>, target_interval_str]</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ref_index)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(target_interval_str <span class="kw">in</span> mapping_table.columns)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5py.File(<span class="ss">f"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/ref-epigenome_</span><span class="sc">{</span>group<span class="sc">}</span><span class="ss">_aracena.h5"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    example_ref_pred <span class="op">=</span> f[<span class="st">'ref_epigenome'</span>][:,:,<span class="bu">int</span>(ref_index)]</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    example_ref_region <span class="op">=</span> f[<span class="st">'regions'</span>][:,:,<span class="bu">int</span>(ref_index)]</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>example_ref_region_str <span class="op">=</span> <span class="st">"_"</span>.join([<span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> example_ref_region[<span class="dv">0</span>,:]])</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(example_ref_region_str)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(target_interval_str)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(example_ref_pred.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>2_238660836_238791908</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>KeyError: '2_238660836_238791908'</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_tracks(aracena, predictions, track_names):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    tracks <span class="op">=</span> {}</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i,track_name <span class="kw">in</span> <span class="bu">enumerate</span>(track_names):</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> track_type <span class="kw">in</span> [<span class="st">'aracena'</span>, <span class="st">'model_prediction'</span>]:</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> track_type <span class="op">==</span> <span class="st">'aracena'</span>:</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                tracks[track_name<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>track_type] <span class="op">=</span> aracena[:,i]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> track_type <span class="op">==</span> <span class="st">'model_prediction'</span>:</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                tracks[track_name<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>track_type] <span class="op">=</span> predictions[i,:]</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tracks</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>cur_model <span class="op">=</span> cur_model.to(device)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model_type <span class="op">==</span> <span class="st">"linear"</span>:</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    input_tensor <span class="op">=</span> torch.from_numpy(example_ref_pred).to(device).unsqueeze(<span class="dv">0</span>).to(device)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> model_type <span class="op">==</span> <span class="st">"cnn"</span>:</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    input_tensor <span class="op">=</span> torch.from_numpy(example_ref_pred).to(device).unsqueeze(<span class="dv">0</span>).to(device).swapaxes(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co"># input_tensor = torch.from_numpy(example_ref_pred).to(device).unsqueeze(0).to(device)</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>ex_out_raw <span class="op">=</span> cur_model(input_tensor)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model_type <span class="op">==</span> <span class="st">"linear"</span>:</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    ex_out <span class="op">=</span> ex_out_raw.squeeze().cpu().detach().numpy()[:,:].swapaxes(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> model_type <span class="op">==</span> <span class="st">"cnn"</span>:</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    ex_out <span class="op">=</span> ex_out_raw.squeeze().cpu().detach().numpy()[:,:].swapaxes(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ex_out.shape)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">sum</span>(ex_out, axis<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>tracks <span class="op">=</span> create_tracks(example_valid, ex_out.swapaxes(<span class="dv">0</span>,<span class="dv">1</span>), bigwig_tracks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>NameError: name 'example_ref_pred' is not defined</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plot_tracks(tracks, target_interval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="training-set-example" class="level2">
+<h2 class="anchored" data-anchor-id="training-set-example">TRAINING SET EXAMPLE</h2>
+<p>OK, for this example things are not so promising. It seems like the model was converging on the training set at least, maybe some of those predictions will show promise.</p>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>model_type <span class="op">=</span> <span class="st">"cnn"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>group <span class="op">=</span> <span class="st">"train1"</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>cur_individual <span class="op">=</span> <span class="st">"AF20"</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> (</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cuda"</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> torch.cuda.is_available()</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="st">"mps"</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> torch.backends.mps.is_available()</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="st">"cpu"</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(device)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model_type <span class="op">==</span> <span class="st">"linear"</span>:</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    cur_model <span class="op">=</span> ref_to_aracena_models.RefToAracenaMLP(hidden_layer_dims<span class="op">=</span>[])</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    cur_model <span class="op">=</span> ref_to_aracena_models.RefToAracenaCNN()</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>cur_model <span class="op">=</span> cur_model.to(device)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>train_path <span class="op">=</span> <span class="ss">f"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/AF20_</span><span class="sc">{</span>group<span class="sc">}</span><span class="ss">_aracena.h5"</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>saved_models_path <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/saved_models"</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>trained_model_path <span class="op">=</span> os.path.join(saved_models_path, <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/saved_models/train1_ref_to_aracena_cnn_poissonlog_ep9_lr1e-06.pt"</span>)</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="co"># trained_model_path = os.path.join(saved_models_path, "train1_ref_to_aracena_cnn_poissonlog_ep19_lr1e-06.pt")</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>saved_model <span class="op">=</span> torch.load(trained_model_path, map_location<span class="op">=</span>device)</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>cur_model.load_state_dict(saved_model[<span class="st">"model_state_dict"</span>])</span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>cur_model.<span class="bu">eval</span>()</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>sequence_ind <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5py.File(train_path, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>    example_train <span class="op">=</span> f[<span class="st">'targets'</span>][:,:,sequence_ind]</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>    example_train_reg <span class="op">=</span> f[<span class="st">'regions'</span>][:,:,sequence_ind]</span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>target_interval <span class="op">=</span> [<span class="bu">str</span>(example_train_reg[<span class="dv">0</span>,<span class="dv">0</span>]), example_train_reg[<span class="dv">0</span>,<span class="dv">1</span>], example_train_reg[<span class="dv">0</span>,<span class="dv">2</span>]]</span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>target_interval_str <span class="op">=</span> <span class="st">"_"</span>.join([<span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> target_interval])</span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(target_interval_str)</span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>ref_index <span class="op">=</span> mapping_table.loc[<span class="st">"ref-epigenome"</span>, target_interval_str]</span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ref_index)</span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5py.File(<span class="ss">f"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/ref-epigenome_</span><span class="sc">{</span>group<span class="sc">}</span><span class="ss">_aracena.h5"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a>    example_ref_pred <span class="op">=</span> f[<span class="st">'ref_epigenome'</span>][:,:,<span class="bu">int</span>(ref_index)]</span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>    example_ref_region <span class="op">=</span> f[<span class="st">'regions'</span>][:,:,<span class="bu">int</span>(ref_index)]</span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(example_train_reg, example_ref_region)</span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model_type <span class="op">==</span> <span class="st">"linear"</span>:</span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a>    input_tensor <span class="op">=</span> torch.from_numpy(example_ref_pred).to(device).unsqueeze(<span class="dv">0</span>).to(device)</span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> model_type <span class="op">==</span> <span class="st">"cnn"</span>:</span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a>    input_tensor <span class="op">=</span> torch.from_numpy(example_ref_pred).to(device).unsqueeze(<span class="dv">0</span>).to(device).swapaxes(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a>ex_out_raw <span class="op">=</span> cur_model(input_tensor)</span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a>ex_out <span class="op">=</span> ex_out_raw.squeeze().cpu().detach().numpy()[:,:].swapaxes(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model_type <span class="op">==</span> <span class="st">"linear"</span>:</span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> model_type <span class="op">==</span> <span class="st">"cnn"</span>:</span>
+<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a>    ex_out <span class="op">=</span> ex_out.swapaxes(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb25-72"><a href="#cb25-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-73"><a href="#cb25-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-74"><a href="#cb25-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a>tracks <span class="op">=</span> create_tracks(example_train, ex_out, bigwig_tracks)</span>
+<span id="cb25-76"><a href="#cb25-76" aria-hidden="true" tabindex="-1"></a>tracks[<span class="st">"CAGE_ref"</span>] <span class="op">=</span> example_ref_pred[:,<span class="dv">4766</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>cpu
+8_132158314_132289386
+5
+[[        8 132158314 132289386]] [[        8 132158314 132289386]]</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>example_ref_pred.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>(896, 5313)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="23">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plot_tracks(tracks, target_interval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="evaluate_training_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

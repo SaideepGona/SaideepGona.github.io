@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saideep Gona">
+<meta name="dcterms.date" content="2023-11-16">
+
+<title>Daily-Blog-Sai - linearization</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daily-Blog-Sai</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a>
+  <ul class="collapse">
+  <li><a href="#convert-gene-centered-geuvadis-predictions-to-single-values" id="toc-convert-gene-centered-geuvadis-predictions-to-single-values" class="nav-link" data-scroll-target="#convert-gene-centered-geuvadis-predictions-to-single-values">1.) Convert gene centered GEUVADIS predictions to single values</a></li>
+  <li><a href="#collect-predictions-into-expression-table" id="toc-collect-predictions-into-expression-table" class="nav-link" data-scroll-target="#collect-predictions-into-expression-table">3.) Collect predictions into expression table</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">linearization</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saideep Gona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 16, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="context" class="level1">
+<h1>Context</h1>
+<p>Now that I have a working model of gene expression prediction in flu from Enformer predictions, I can continue with the linearization process.</p>
+<section id="convert-gene-centered-geuvadis-predictions-to-single-values" class="level2">
+<h2 class="anchored" data-anchor-id="convert-gene-centered-geuvadis-predictions-to-single-values">1.) Convert gene centered GEUVADIS predictions to single values</h2>
+<p>Charles has already generated geuvadis predictions at gene TSS sites stored as 4x5313 per gene and individual combo. I need these to be averaged into 1x5313 and in a format which can be easily read to be predicted by my glmnet. The code below accomplishes this.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os,sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5py</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-16-linearization/individuals.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> inds_f:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    inds <span class="op">=</span> inds_f.read().split()</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># gene_list = []</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># c=0</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># with open("/beagle3/haky/users/charles/project/singleXcanDL/PredicDB/LCL_PredictDb/files/Gene_anno.txt", "r") as genes_f:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     for line in genes_f:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#         if c==0:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#             c+=1</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#             continue</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#         gene_list.append("chr"+"_".join([line.split("\t")[x] for x in [0,3,4]]))</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># print(gene_list)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>enformer_geuvadis_pred_folder <span class="op">=</span> <span class="st">"/beagle3/haky/data/Geuvadis_TSS_enformer_prediction"</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5py.File(os.path.join(enformer_geuvadis_pred_folder, inds[<span class="dv">0</span>]<span class="op">+</span><span class="st">".h5"</span>), <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    genes_dsets <span class="op">=</span> <span class="bu">list</span>(f.keys())</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    genes_dsets.sort()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dset_lengths = []</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># c=0</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for ind in inds:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     if os.path.exists(os.path.join(enformer_geuvadis_pred_folder, ind+".h5")):</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#         with h5py.File(os.path.join(enformer_geuvadis_pred_folder, ind+".h5"), "r") as f:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#             dset_lengths.append(len(f.keys()))</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#             print(c)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#             c+=1</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     else:</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#         print(ind)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># print(dset_lengths)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ind <span class="kw">in</span> inds:</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.exists(os.path.join(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/linearization"</span>,ind<span class="op">+</span><span class="st">".txt"</span>)):</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    expression_array <span class="op">=</span> np.zeros((<span class="bu">len</span>(genes_dsets),<span class="dv">5313</span>))</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.exists(os.path.join(enformer_geuvadis_pred_folder, ind<span class="op">+</span><span class="st">".h5"</span>)):</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> h5py.File(os.path.join(enformer_geuvadis_pred_folder, ind<span class="op">+</span><span class="st">".h5"</span>), <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i, gene <span class="kw">in</span> <span class="bu">enumerate</span>(genes_dsets):</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                <span class="co"># print(i)</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                <span class="co"># print(np.mean(f[gene][:,:],axis=0).shape)</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                expression_array[i,:] <span class="op">=</span> np.mean(f[gene][:,:],axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            np.savetxt(os.path.join(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/linearization"</span>,ind<span class="op">+</span><span class="st">".txt"</span>),expression_array)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(ind)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>HG00107
+HG00113
+HG00128
+HG00140
+HG00190</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5py.File(os.path.join(enformer_geuvadis_pred_folder, inds[<span class="dv">63</span>]<span class="op">+</span><span class="st">".h5"</span>), <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">len</span>(f.keys()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>19563</code></pre>
+</div>
+</div>
+</section>
+<section id="collect-predictions-into-expression-table" class="level2">
+<h2 class="anchored" data-anchor-id="collect-predictions-into-expression-table">3.) Collect predictions into expression table</h2>
+<p>After the above steps, predict_for_linearization.qmd was run in order to generate predictions from all the GEUVADIS inputs. These predictions need to be combined and formatted for use in the predixcan pipeline in order to perform the linearization.</p>
+<p>This will be done here. First lets join the individual columns together</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os,sys</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5py</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-16-linearization/individuals.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> inds_f:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    inds <span class="op">=</span> inds_f.read().split()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>enformer_geuvadis_pred_folder <span class="op">=</span> <span class="st">"/beagle3/haky/data/Geuvadis_TSS_enformer_prediction"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5py.File(os.path.join(enformer_geuvadis_pred_folder, inds[<span class="dv">0</span>]<span class="op">+</span><span class="st">".h5"</span>), <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    genes_dsets <span class="op">=</span> <span class="bu">list</span>(f.keys())</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    genes_dsets.sort()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>paste_com <span class="op">=</span> [</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"paste"</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"-d'</span><span class="ch">\t</span><span class="st">'"</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>inds_include <span class="op">=</span> []</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ind <span class="kw">in</span> inds:</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.exists(os.path.join(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/linearization"</span>,ind<span class="op">+</span><span class="st">"_preds.txt"</span>)):</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        paste_com.append(os.path.join(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/linearization"</span>,ind<span class="op">+</span><span class="st">"_preds.txt"</span>))</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        inds_include.append(ind)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>paste_com.append(<span class="st">"|"</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>paste_com.append(<span class="st">"tail"</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>paste_com.append(<span class="st">"-n"</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>paste_com.append(<span class="st">"+2"</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>paste_com.append(<span class="st">"&gt;"</span>)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>paste_com.append(os.path.join(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/linearization"</span>,<span class="st">"combined_expression.txt"</span>))</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">" "</span>.join(paste_com))</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>os.system(<span class="st">" "</span>.join(paste_com))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>paste -d'   ' /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00096_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00097_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00099_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00100_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00101_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00102_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00103_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00104_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00105_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00106_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00108_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00109_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00110_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00111_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00112_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00114_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00115_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00116_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00117_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00118_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00119_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00120_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00121_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00122_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00123_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00125_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00126_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00127_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00129_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00130_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00131_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00132_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00133_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00134_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00135_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00136_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00137_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00138_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00139_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00141_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00142_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00143_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00145_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00146_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00148_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00149_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00150_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00151_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00152_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00154_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00155_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00156_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00157_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00158_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00159_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00160_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00171_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00173_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00174_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00176_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00177_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00178_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00179_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00180_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00181_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00182_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00183_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00185_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00186_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00187_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00188_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00189_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00231_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00232_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00233_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00234_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00235_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00236_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00238_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00239_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00240_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00242_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00243_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00244_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00245_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00246_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00250_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00251_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00252_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00253_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00255_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00256_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00257_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00258_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00259_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00260_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00261_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00262_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00263_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00264_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00265_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00266_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00267_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00268_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00269_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00271_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00272_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00273_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00274_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00275_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00276_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00277_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00278_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00280_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00281_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00282_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00284_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00285_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00306_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00308_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00309_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00310_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00311_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00312_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00313_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00315_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00319_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00320_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00321_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00323_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00324_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00325_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00326_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00327_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00328_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00329_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00330_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00331_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00332_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00334_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00335_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00336_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00337_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00338_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00339_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00341_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00342_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00343_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00344_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00345_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00346_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00349_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00350_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00351_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00353_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00355_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00356_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00358_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00359_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00360_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00361_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00362_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00364_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00365_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00366_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00367_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00369_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00371_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00372_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00373_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00375_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00376_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00377_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00378_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00379_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00380_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00381_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00382_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00383_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG00384_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG01334_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG01789_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG01790_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG01791_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/HG02215_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA06984_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA06985_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA06986_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA06989_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA06994_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA07037_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA07048_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA07051_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA07056_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA07357_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA10847_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA10851_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11829_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11830_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11831_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11832_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11840_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11843_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11881_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11892_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11893_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11894_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11918_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11920_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11930_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11931_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11992_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA11995_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12004_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12005_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12006_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12043_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12044_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12045_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12058_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12144_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12154_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12155_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12156_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12234_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12249_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12272_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12273_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12275_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12282_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12283_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12286_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12287_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12340_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12341_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12342_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12347_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12348_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12383_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12399_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12400_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12413_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12489_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12546_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12716_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12717_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12718_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12749_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12750_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12751_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12760_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12761_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12762_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12763_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12775_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12776_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12777_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12778_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12812_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12813_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12814_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12815_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12827_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12829_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12830_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12842_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12843_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12872_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12873_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12874_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12889_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA12890_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18486_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18488_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18489_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18499_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18502_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18505_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18511_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18517_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18519_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18520_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18858_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18861_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18867_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18868_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18870_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18873_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18907_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18908_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18909_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18910_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18912_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18916_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18917_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18923_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18933_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA18934_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19092_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19093_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19095_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19096_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19098_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19099_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19102_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19107_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19108_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19113_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19114_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19116_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19117_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19118_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19119_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19121_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19129_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19130_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19131_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19137_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19138_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19141_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19143_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19144_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19146_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19147_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19149_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19152_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19159_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19160_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19171_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19172_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19175_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19184_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19185_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19189_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19190_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19197_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19198_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19200_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19201_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19204_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19206_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19207_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19209_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19210_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19213_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19214_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19222_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19223_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19225_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19235_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19236_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19247_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19248_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19256_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA19257_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20502_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20503_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20504_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20505_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20506_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20507_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20508_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20509_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20510_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20512_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20513_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20514_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20515_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20516_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20517_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20518_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20519_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20520_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20521_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20524_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20525_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20527_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20528_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20529_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20530_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20531_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20532_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20534_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20535_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20536_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20537_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20538_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20539_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20540_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20541_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20542_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20543_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20544_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20581_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20582_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20585_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20586_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20588_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20589_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20752_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20754_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20756_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20757_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20758_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20759_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20760_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20761_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20765_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20766_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20768_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20769_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20770_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20771_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20772_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20773_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20774_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20778_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20783_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20785_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20786_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20787_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20790_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20792_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20795_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20796_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20797_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20798_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20799_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20800_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20801_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20802_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20803_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20804_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20805_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20806_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20807_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20808_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20809_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20810_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20811_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20812_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20813_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20814_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20815_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20816_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20819_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20826_preds.txt /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/NA20828_preds.txt | tail -n +2 &gt; /beagle3/haky/users/saideep/projects/aracena_modeling/linearization/combined_expression.txt</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>0</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>combined_expression_table <span class="op">=</span> pd.read_csv(os.path.join(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/linearization"</span>,<span class="st">"combined_expression.txt"</span>), delimiter<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>combined_expression_table.columns <span class="op">=</span> inds_include</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="29">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create mapping of gene regions to ensemble gene ids</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gene_region_mapping <span class="op">=</span> {}</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>c<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-16-linearization/canonical_TSS_full_metadata.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> genes_f:</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> genes_f:</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> c<span class="op">==</span><span class="dv">0</span>:</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            c<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        tss_region <span class="op">=</span> line.strip().split(<span class="st">","</span>)[<span class="dv">9</span>].split(<span class="st">"_"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        tss_plus_one <span class="op">=</span> <span class="st">"_"</span>.join([tss_region[<span class="dv">0</span>],<span class="bu">str</span>(<span class="bu">int</span>(tss_region[<span class="dv">1</span>])<span class="op">-</span><span class="dv">1</span>),<span class="bu">str</span>(<span class="bu">int</span>(tss_region[<span class="dv">2</span>])<span class="op">-</span><span class="dv">1</span>)])</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        gene_region_mapping[tss_plus_one] <span class="op">=</span> line.split(<span class="st">","</span>)[<span class="dv">0</span>]</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter gene list for genes not in the gene annotation file</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>include_gene <span class="op">=</span> []</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>gene_ids <span class="op">=</span> []</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> gene <span class="kw">in</span> genes_dsets:</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    cur_gene_region <span class="op">=</span> gene.rstrip(<span class="st">"_predictions"</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cur_gene_region <span class="kw">not</span> <span class="kw">in</span> gene_region_mapping:</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(cur_gene_region)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        include_gene.append(<span class="va">False</span>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        gene_ids.append(gene_region_mapping[cur_gene_region])</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        include_gene.append(<span class="va">True</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>combined_expression_table_genes_in_anno <span class="op">=</span> combined_expression_table[include_gene]</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>combined_expression_table_genes_in_anno.index <span class="op">=</span> gene_ids</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="34">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>combined_expression_table_genes_in_anno.to_csv(os.path.join(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/linearization"</span>,<span class="st">"combined_expression_labeled.csv"</span>), index<span class="op">=</span><span class="va">True</span>, index_label<span class="op">=</span><span class="st">"NAME"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>combined_expression_table_genes_in_anno</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">HG00096</th>
+<th data-quarto-table-cell-role="th">HG00097</th>
+<th data-quarto-table-cell-role="th">HG00099</th>
+<th data-quarto-table-cell-role="th">HG00100</th>
+<th data-quarto-table-cell-role="th">HG00101</th>
+<th data-quarto-table-cell-role="th">HG00102</th>
+<th data-quarto-table-cell-role="th">HG00103</th>
+<th data-quarto-table-cell-role="th">HG00104</th>
+<th data-quarto-table-cell-role="th">HG00105</th>
+<th data-quarto-table-cell-role="th">HG00106</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">NA20810</th>
+<th data-quarto-table-cell-role="th">NA20811</th>
+<th data-quarto-table-cell-role="th">NA20812</th>
+<th data-quarto-table-cell-role="th">NA20813</th>
+<th data-quarto-table-cell-role="th">NA20814</th>
+<th data-quarto-table-cell-role="th">NA20815</th>
+<th data-quarto-table-cell-role="th">NA20816</th>
+<th data-quarto-table-cell-role="th">NA20819</th>
+<th data-quarto-table-cell-role="th">NA20826</th>
+<th data-quarto-table-cell-role="th">NA20828</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">ENSG00000107554</td>
+<td>-0.067708</td>
+<td>-0.069715</td>
+<td>-0.067695</td>
+<td>-0.065804</td>
+<td>-0.066442</td>
+<td>-0.070470</td>
+<td>-0.069931</td>
+<td>-0.066396</td>
+<td>-0.069017</td>
+<td>-0.068121</td>
+<td>...</td>
+<td>-0.066092</td>
+<td>-0.079097</td>
+<td>-0.072408</td>
+<td>-0.072700</td>
+<td>-0.068084</td>
+<td>-0.079158</td>
+<td>-0.065807</td>
+<td>-0.073517</td>
+<td>-0.068969</td>
+<td>-0.067933</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">ENSG00000120054</td>
+<td>-0.043449</td>
+<td>-0.044064</td>
+<td>-0.044349</td>
+<td>-0.042859</td>
+<td>-0.043716</td>
+<td>-0.043965</td>
+<td>-0.044212</td>
+<td>-0.044322</td>
+<td>-0.044301</td>
+<td>-0.044090</td>
+<td>...</td>
+<td>-0.043625</td>
+<td>-0.042630</td>
+<td>-0.044360</td>
+<td>-0.044357</td>
+<td>-0.043995</td>
+<td>-0.043175</td>
+<td>-0.043779</td>
+<td>-0.043147</td>
+<td>-0.043031</td>
+<td>-0.043770</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">ENSG00000107566</td>
+<td>0.246413</td>
+<td>0.247575</td>
+<td>0.254017</td>
+<td>0.244225</td>
+<td>0.245029</td>
+<td>0.246469</td>
+<td>0.253154</td>
+<td>0.258049</td>
+<td>0.249720</td>
+<td>0.255736</td>
+<td>...</td>
+<td>0.245446</td>
+<td>0.244844</td>
+<td>0.252450</td>
+<td>0.246691</td>
+<td>0.254097</td>
+<td>0.266294</td>
+<td>0.244424</td>
+<td>0.247727</td>
+<td>0.247761</td>
+<td>0.244369</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">ENSG00000213341</td>
+<td>0.078040</td>
+<td>0.077490</td>
+<td>0.084288</td>
+<td>0.076513</td>
+<td>0.077776</td>
+<td>0.078267</td>
+<td>0.079760</td>
+<td>0.086668</td>
+<td>0.079473</td>
+<td>0.085564</td>
+<td>...</td>
+<td>0.077617</td>
+<td>0.078623</td>
+<td>0.082075</td>
+<td>0.077816</td>
+<td>0.083754</td>
+<td>0.082068</td>
+<td>0.076547</td>
+<td>0.078124</td>
+<td>0.077698</td>
+<td>0.077902</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">ENSG00000095485</td>
+<td>0.224175</td>
+<td>0.216422</td>
+<td>0.219703</td>
+<td>0.218413</td>
+<td>0.224677</td>
+<td>0.226130</td>
+<td>0.217048</td>
+<td>0.218370</td>
+<td>0.215557</td>
+<td>0.225863</td>
+<td>...</td>
+<td>0.231997</td>
+<td>0.216629</td>
+<td>0.218340</td>
+<td>0.217358</td>
+<td>0.217651</td>
+<td>0.217105</td>
+<td>0.218990</td>
+<td>0.225677</td>
+<td>0.218895</td>
+<td>0.217907</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">ENSG00000147202</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>...</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+<td>0.616342</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">ENSG00000204086</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>...</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+<td>0.087435</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">ENSG00000101850</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>...</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+<td>0.008612</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">ENSG00000146950</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>...</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+<td>-0.002481</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">ENSG00000234469</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>...</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+<td>0.111147</td>
+</tr>
+</tbody>
+</table>
+
+<p>19563 rows × 448 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="31">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>genes_dsets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>['chr10_100009946_100009948_predictions',
+ 'chr10_100081868_100081870_predictions',
+ 'chr10_100186028_100186030_predictions',
+ 'chr10_100229595_100229597_predictions',
+ 'chr10_100267637_100267639_predictions',
+ 'chr10_100286679_100286681_predictions',
+ 'chr10_100330227_100330229_predictions',
+ 'chr10_100347232_100347234_predictions',
+ 'chr10_100463008_100463010_predictions',
+ 'chr10_100519860_100519862_predictions',
+ 'chr10_100529870_100529872_predictions',
+ 'chr10_100535942_100535944_predictions',
+ 'chr10_100745581_100745583_predictions',
+ 'chr10_100912962_100912964_predictions',
+ 'chr10_100969503_100969505_predictions',
+ 'chr10_100987496_100987498_predictions',
+ 'chr10_100987542_100987544_predictions',
+ 'chr10_100999807_100999809_predictions',
+ 'chr10_101031128_101031130_predictions',
+ 'chr10_101031233_101031235_predictions',
+ 'chr10_101061988_101061990_predictions',
+ 'chr10_101131299_101131301_predictions',
+ 'chr10_101229462_101229464_predictions',
+ 'chr10_101354164_101354166_predictions',
+ 'chr10_101588256_101588258_predictions',
+ 'chr10_101588320_101588322_predictions',
+ 'chr10_101695169_101695171_predictions',
+ 'chr10_101776113_101776115_predictions',
+ 'chr10_101783445_101783447_predictions',
+ 'chr10_101818443_101818445_predictions',
+ 'chr10_101843799_101843801_predictions',
+ 'chr10_102056172_102056174_predictions',
+ 'chr10_102065348_102065350_predictions',
+ 'chr10_102120367_102120369_predictions',
+ 'chr10_102133039_102133041_predictions',
+ 'chr10_102152388_102152390_predictions',
+ 'chr10_102226298_102226300_predictions',
+ 'chr10_102241511_102241513_predictions',
+ 'chr10_102245531_102245533_predictions',
+ 'chr10_102395704_102395706_predictions',
+ 'chr10_102418784_102418786_predictions',
+ 'chr10_102420835_102420837_predictions',
+ 'chr10_102432573_102432575_predictions',
+ 'chr10_102451542_102451544_predictions',
+ 'chr10_102461394_102461396_predictions',
+ 'chr10_102502711_102502713_predictions',
+ 'chr10_102503971_102503973_predictions',
+ 'chr10_1025858_1025860_predictions',
+ 'chr10_102644478_102644480_predictions',
+ 'chr10_102714396_102714398_predictions',
+ 'chr10_102714635_102714637_predictions',
+ 'chr10_102743947_102743949_predictions',
+ 'chr10_102837412_102837414_predictions',
+ 'chr10_102854258_102854260_predictions',
+ 'chr10_102869469_102869471_predictions',
+ 'chr10_102918293_102918295_predictions',
+ 'chr10_103193271_103193273_predictions',
+ 'chr10_103245886_103245888_predictions',
+ 'chr10_103277137_103277139_predictions',
+ 'chr10_103351139_103351141_predictions',
+ 'chr10_103367975_103367977_predictions',
+ 'chr10_103396474_103396476_predictions',
+ 'chr10_103396625_103396627_predictions',
+ 'chr10_103452369_103452371_predictions',
+ 'chr10_103458899_103458901_predictions',
+ 'chr10_103479239_103479241_predictions',
+ 'chr10_103493704_103493706_predictions',
+ 'chr10_103855575_103855577_predictions',
+ 'chr10_103918183_103918185_predictions',
+ 'chr10_103967139_103967141_predictions',
+ 'chr10_104085879_104085881_predictions',
+ 'chr10_104122170_104122172_predictions',
+ 'chr10_104232363_104232365_predictions',
+ 'chr10_104254891_104254893_predictions',
+ 'chr10_104269183_104269185_predictions',
+ 'chr10_104338464_104338466_predictions',
+ 'chr10_104353832_104353834_predictions',
+ 'chr10_104641289_104641291_predictions',
+ 'chr10_1049118_1049120_predictions',
+ 'chr10_1056384_1056386_predictions',
+ 'chr10_107164705_107164707_predictions',
+ 'chr10_109923510_109923512_predictions',
+ 'chr10_110007983_110007985_predictions',
+ 'chr10_11017871_11017873_predictions',
+ 'chr10_110207604_110207606_predictions',
+ 'chr10_110304919_110304921_predictions',
+ 'chr10_110497906_110497908_predictions',
+ 'chr10_110567694_110567696_predictions',
+ 'chr10_110644335_110644337_predictions',
+ 'chr10_110871927_110871929_predictions',
+ 'chr10_110919179_110919181_predictions',
+ 'chr10_110919603_110919605_predictions',
+ 'chr10_111077028_111077030_predictions',
+ 'chr10_112183764_112183766_predictions',
+ 'chr10_112283399_112283401_predictions',
+ 'chr10_112374115_112374117_predictions',
+ 'chr10_112446913_112446915_predictions',
+ 'chr10_112447214_112447216_predictions',
+ 'chr10_112950246_112950248_predictions',
+ 'chr10_113553052_113553054_predictions',
+ 'chr10_113664040_113664042_predictions',
+ 'chr10_113679911_113679913_predictions',
+ 'chr10_113751681_113751683_predictions',
+ 'chr10_113854081_113854083_predictions',
+ 'chr10_113854660_113854662_predictions',
+ 'chr10_114043865_114043867_predictions',
+ 'chr10_114174202_114174204_predictions',
+ 'chr10_114179352_114179354_predictions',
+ 'chr10_114239253_114239255_predictions',
+ 'chr10_114404501_114404503_predictions',
+ 'chr10_114658274_114658276_predictions',
+ 'chr10_114821779_114821781_predictions',
+ 'chr10_114938194_114938196_predictions',
+ 'chr10_115093364_115093366_predictions',
+ 'chr10_11611649_11611651_predictions',
+ 'chr10_116273205_116273207_predictions',
+ 'chr10_116324447_116324449_predictions',
+ 'chr10_116427846_116427848_predictions',
+ 'chr10_116545930_116545932_predictions',
+ 'chr10_116590958_116590960_predictions',
+ 'chr10_116669965_116669967_predictions',
+ 'chr10_116742565_116742567_predictions',
+ 'chr10_116849498_116849500_predictions',
+ 'chr10_117005186_117005188_predictions',
+ 'chr10_117138269_117138271_predictions',
+ 'chr10_117197488_117197490_predictions',
+ 'chr10_117241113_117241115_predictions',
+ 'chr10_117375439_117375441_predictions',
+ 'chr10_11742381_11742383_predictions',
+ 'chr10_117542745_117542747_predictions',
+ 'chr10_118046940_118046942_predictions',
+ 'chr10_11823355_11823357_predictions',
+ 'chr10_118342323_118342325_predictions',
+ 'chr10_118595647_118595649_predictions',
+ 'chr10_118754969_118754971_predictions',
+ 'chr10_119029713_119029715_predictions',
+ 'chr10_119080816_119080818_predictions',
+ 'chr10_119104112_119104114_predictions',
+ 'chr10_119165713_119165715_predictions',
+ 'chr10_119178811_119178813_predictions',
+ 'chr10_119207570_119207572_predictions',
+ 'chr10_119542718_119542720_predictions',
+ 'chr10_119596963_119596965_predictions',
+ 'chr10_119651379_119651381_predictions',
+ 'chr10_119726049_119726051_predictions',
+ 'chr10_119872842_119872844_predictions',
+ 'chr10_119892729_119892731_predictions',
+ 'chr10_12042808_12042810_predictions',
+ 'chr10_120457226_120457228_predictions',
+ 'chr10_12068953_12068955_predictions',
+ 'chr10_120851361_120851363_predictions',
+ 'chr10_12129676_12129678_predictions',
+ 'chr10_121598443_121598445_predictions',
+ 'chr10_121928030_121928032_predictions',
+ 'chr10_12195890_12195892_predictions',
+ 'chr10_12196187_12196189_predictions',
+ 'chr10_121975216_121975218_predictions',
+ 'chr10_121989162_121989164_predictions',
+ 'chr10_122271295_122271297_predictions',
+ 'chr10_122374707_122374709_predictions',
+ 'chr10_122454652_122454654_predictions',
+ 'chr10_122461552_122461554_predictions',
+ 'chr10_122560753_122560755_predictions',
+ 'chr10_122672849_122672851_predictions',
+ 'chr10_122699845_122699847_predictions',
+ 'chr10_122845856_122845858_predictions',
+ 'chr10_122879580_122879582_predictions',
+ 'chr10_122910609_122910611_predictions',
+ 'chr10_122954226_122954228_predictions',
+ 'chr10_122980400_122980402_predictions',
+ 'chr10_123008794_123008796_predictions',
+ 'chr10_123009005_123009007_predictions',
+ 'chr10_123135969_123135971_predictions',
+ 'chr10_123148135_123148137_predictions',
+ 'chr10_123154401_123154403_predictions',
+ 'chr10_12349546_12349548_predictions',
+ 'chr10_123666354_123666356_predictions',
+ 'chr10_123891806_123891808_predictions',
+ 'chr10_124093597_124093599_predictions',
+ 'chr10_124418922_124418924_predictions',
+ 'chr10_124450034_124450036_predictions',
+ 'chr10_124461822_124461824_predictions',
+ 'chr10_124744377_124744379_predictions',
+ 'chr10_124791886_124791888_predictions',
+ 'chr10_124801818_124801820_predictions',
+ 'chr10_124942122_124942124_predictions',
+ 'chr10_125028070_125028072_predictions',
+ 'chr10_125683162_125683164_predictions',
+ 'chr10_125719708_125719710_predictions',
+ 'chr10_125775820_125775822_predictions',
+ 'chr10_125823257_125823259_predictions',
+ 'chr10_125823545_125823547_predictions',
+ 'chr10_125881291_125881293_predictions',
+ 'chr10_125896563_125896565_predictions',
+ 'chr10_126388476_126388478_predictions',
+ 'chr10_126670692_126670694_predictions',
+ 'chr10_126905427_126905429_predictions',
+ 'chr10_127196590_127196592_predictions',
+ 'chr10_127549308_127549310_predictions',
+ 'chr10_127737184_127737186_predictions',
+ 'chr10_127892940_127892942_predictions',
+ 'chr10_127907102_127907104_predictions',
+ 'chr10_128126422_128126424_predictions',
+ 'chr10_129467240_129467242_predictions',
+ 'chr10_129964273_129964275_predictions',
+ 'chr10_13001712_13001714_predictions',
+ 'chr10_130110829_130110831_predictions',
+ 'chr10_130136390_130136392_predictions',
+ 'chr10_13100162_13100164_predictions',
+ 'chr10_131311720_131311722_predictions',
+ 'chr10_13161557_13161559_predictions',
+ 'chr10_131901007_131901009_predictions',
+ 'chr10_131981922_131981924_predictions',
+ 'chr10_132065945_132065947_predictions',
+ 'chr10_132186947_132186949_predictions',
+ 'chr10_132307949_132307951_predictions',
+ 'chr10_132332192_132332194_predictions',
+ 'chr10_13234373_13234375_predictions',
+ 'chr10_132397199_132397201_predictions',
+ 'chr10_132537786_132537788_predictions',
+ 'chr10_132786146_132786148_predictions',
+ 'chr10_132942569_132942571_predictions',
+ 'chr10_13300063_13300065_predictions',
+ 'chr10_133087923_133087925_predictions',
+ 'chr10_133160218_133160220_predictions',
+ 'chr10_133230216_133230218_predictions',
+ 'chr10_133237854_133237856_predictions',
+ 'chr10_133276867_133276869_predictions',
+ 'chr10_133308871_133308873_predictions',
+ 'chr10_133308913_133308915_predictions',
+ 'chr10_133309409_133309411_predictions',
+ 'chr10_133336895_133336897_predictions',
+ 'chr10_133347372_133347374_predictions',
+ 'chr10_133358018_133358020_predictions',
+ 'chr10_133373353_133373355_predictions',
+ 'chr10_133379261_133379263_predictions',
+ 'chr10_133394156_133394158_predictions',
+ 'chr10_133424624_133424626_predictions',
+ 'chr10_133453944_133453946_predictions',
+ 'chr10_13348292_13348294_predictions',
+ 'chr10_133527362_133527364_predictions',
+ 'chr10_133565582_133565584_predictions',
+ 'chr10_133626794_133626796_predictions',
+ 'chr10_13529013_13529015_predictions',
+ 'chr10_135454_135456_predictions',
+ 'chr10_13586964_13586966_predictions',
+ 'chr10_14330923_14330925_predictions',
+ 'chr10_14774896_14774898_predictions',
+ 'chr10_14838036_14838038_predictions',
+ 'chr10_14838305_14838307_predictions',
+ 'chr10_14878865_14878867_predictions',
+ 'chr10_14954095_14954097_predictions',
+ 'chr10_14959387_14959389_predictions',
+ 'chr10_15043942_15043944_predictions',
+ 'chr10_15088775_15088777_predictions',
+ 'chr10_15097354_15097356_predictions',
+ 'chr10_15168692_15168694_predictions',
+ 'chr10_15371288_15371290_predictions',
+ 'chr10_15719921_15719923_predictions',
+ 'chr10_15860506_15860508_predictions',
+ 'chr10_16437009_16437011_predictions',
+ 'chr10_16521878_16521880_predictions',
+ 'chr10_16817423_16817425_predictions',
+ 'chr10_17129810_17129812_predictions',
+ 'chr10_17201671_17201673_predictions',
+ 'chr10_17228240_17228242_predictions',
+ 'chr10_1737524_1737526_predictions',
+ 'chr10_17454594_17454596_predictions',
+ 'chr10_17617373_17617375_predictions',
+ 'chr10_17644150_17644152_predictions',
+ 'chr10_17752200_17752202_predictions',
+ 'chr10_17809347_17809349_predictions',
+ 'chr10_17951917_17951919_predictions',
+ 'chr10_18140423_18140425_predictions',
+ 'chr10_18651586_18651588_predictions',
+ 'chr10_18659430_18659432_predictions',
+ 'chr10_19048800_19048802_predictions',
+ 'chr10_19816431_19816433_predictions',
+ 'chr10_20897310_20897312_predictions',
+ 'chr10_21525681_21525683_predictions',
+ 'chr10_21534231_21534233_predictions',
+ 'chr10_22003729_22003731_predictions',
+ 'chr10_22218014_22218016_predictions',
+ 'chr10_22316387_22316389_predictions',
+ 'chr10_22316408_22316410_predictions',
+ 'chr10_22321098_22321100_predictions',
+ 'chr10_22345495_22345497_predictions',
+ 'chr10_22714577_22714579_predictions',
+ 'chr10_22928052_22928054_predictions',
+ 'chr10_23095578_23095580_predictions',
+ 'chr10_23192311_23192313_predictions',
+ 'chr10_23344796_23344798_predictions',
+ 'chr10_23439074_23439076_predictions',
+ 'chr10_24209137_24209139_predictions',
+ 'chr10_24723886_24723888_predictions',
+ 'chr10_24952605_24952607_predictions',
+ 'chr10_25016157_25016159_predictions',
+ 'chr10_25016611_25016613_predictions',
+ 'chr10_25175000_25175002_predictions',
+ 'chr10_25934228_25934230_predictions',
+ 'chr10_26216773_26216775_predictions',
+ 'chr10_26438340_26438342_predictions',
+ 'chr10_26697700_26697702_predictions',
+ 'chr10_26860957_26860959_predictions',
+ 'chr10_27100493_27100495_predictions',
+ 'chr10_27154383_27154385_predictions',
+ 'chr10_27155351_27155353_predictions',
+ 'chr10_27240796_27240798_predictions',
+ 'chr10_27504303_27504305_predictions',
+ 'chr10_27745818_27745820_predictions',
+ 'chr10_27999078_27999080_predictions',
+ 'chr10_28303063_28303065_predictions',
+ 'chr10_28533117_28533119_predictions',
+ 'chr10_28677520_28677522_predictions',
+ 'chr10_29289069_29289071_predictions',
+ 'chr10_29634970_29634972_predictions',
+ 'chr10_30059585_30059587_predictions',
+ 'chr10_30349277_30349279_predictions',
+ 'chr10_30434183_30434185_predictions',
+ 'chr10_30629752_30629754_predictions',
+ 'chr10_3067547_3067549_predictions',
+ 'chr10_31031864_31031866_predictions',
+ 'chr10_31319215_31319217_predictions',
+ 'chr10_3172781_3172783_predictions',
+ 'chr10_31928830_31928832_predictions',
+ 'chr10_32056424_32056426_predictions',
+ 'chr10_32347157_32347159_predictions',
+ 'chr10_32446139_32446141_predictions',
+ 'chr10_32958229_32958231_predictions',
+ 'chr10_33334666_33334668_predictions',
+ 'chr10_34815295_34815297_predictions',
+ 'chr10_35090340_35090342_predictions',
+ 'chr10_35126845_35126847_predictions',
+ 'chr10_35336508_35336510_predictions',
+ 'chr10_35605340_35605342_predictions',
+ 'chr10_35642295_35642297_predictions',
+ 'chr10_37125597_37125599_predictions',
+ 'chr10_3785208_3785210_predictions',
+ 'chr10_37857609_37857611_predictions',
+ 'chr10_37976646_37976648_predictions',
+ 'chr10_38010674_38010676_predictions',
+ 'chr10_38094336_38094338_predictions',
+ 'chr10_42638569_42638571_predictions',
+ 'chr10_42782794_42782796_predictions',
+ 'chr10_43077068_43077070_predictions',
+ 'chr10_43138444_43138446_predictions',
+ 'chr10_43267064_43267066_predictions',
+ 'chr10_43371635_43371637_predictions',
+ 'chr10_43409185_43409187_predictions',
+ 'chr10_43437110_43437112_predictions',
+ 'chr10_43574615_43574617_predictions',
+ 'chr10_43606437_43606439_predictions',
+ 'chr10_43648880_43648882_predictions',
+ 'chr10_44385096_44385098_predictions',
+ 'chr10_44911336_44911338_predictions',
+ 'chr10_44959801_44959803_predictions',
+ 'chr10_44978808_44978810_predictions',
+ 'chr10_45000922_45000924_predictions',
+ 'chr10_45315607_45315609_predictions',
+ 'chr10_45374215_45374217_predictions',
+ 'chr10_45535370_45535372_predictions',
+ 'chr10_45672771_45672773_predictions',
+ 'chr10_45727265_45727267_predictions',
+ 'chr10_45847499_45847501_predictions',
+ 'chr10_45972488_45972490_predictions',
+ 'chr10_46030622_46030624_predictions',
+ 'chr10_46046268_46046270_predictions',
+ 'chr10_46286996_46286998_predictions',
+ 'chr10_46375775_46375777_predictions',
+ 'chr10_46465957_46465959_predictions',
+ 'chr10_46556657_46556659_predictions',
+ 'chr10_46579127_46579129_predictions',
+ 'chr10_46911427_46911429_predictions',
+ 'chr10_47300196_47300198_predictions',
+ 'chr10_47322453_47322455_predictions',
+ 'chr10_47348362_47348364_predictions',
+ 'chr10_47384292_47384294_predictions',
+ 'chr10_47484114_47484116_predictions',
+ 'chr10_47491699_47491701_predictions',
+ 'chr10_47523637_47523639_predictions',
+ 'chr10_47763591_47763593_predictions',
+ 'chr10_47918661_47918663_predictions',
+ 'chr10_47999790_47999792_predictions',
+ 'chr10_4826206_4826208_predictions',
+ 'chr10_48274695_48274697_predictions',
+ 'chr10_48306676_48306678_predictions',
+ 'chr10_48605072_48605074_predictions',
+ 'chr10_48684872_48684874_predictions',
+ 'chr10_48939839_48939841_predictions',
+ 'chr10_49115521_49115523_predictions',
+ 'chr10_49134020_49134022_predictions',
+ 'chr10_49188390_49188392_predictions',
+ 'chr10_49295_49297_predictions',
+ 'chr10_49299169_49299171_predictions',
+ 'chr10_49396088_49396090_predictions',
+ 'chr10_49539120_49539122_predictions',
+ 'chr10_49610309_49610311_predictions',
+ 'chr10_49614036_49614038_predictions',
+ 'chr10_4963414_4963416_predictions',
+ 'chr10_49679650_49679652_predictions',
+ 'chr10_49762322_49762324_predictions',
+ 'chr10_49942026_49942028_predictions',
+ 'chr10_49942052_49942054_predictions',
+ 'chr10_49988405_49988407_predictions',
+ 'chr10_5003856_5003858_predictions',
+ 'chr10_50067953_50067955_predictions',
+ 'chr10_50251515_50251517_predictions',
+ 'chr10_50623955_50623957_predictions',
+ 'chr10_50739935_50739937_predictions',
+ 'chr10_50885626_50885628_predictions',
+ 'chr10_5094413_5094415_predictions',
+ 'chr10_51074486_51074488_predictions',
+ 'chr10_51699594_51699596_predictions',
+ 'chr10_5185149_5185151_predictions',
+ 'chr10_5196836_5196838_predictions',
+ 'chr10_52314280_52314282_predictions',
+ 'chr10_52772783_52772785_predictions',
+ 'chr10_5364965_5364967_predictions',
+ 'chr10_5404827_5404829_predictions',
+ 'chr10_5412556_5412558_predictions',
+ 'chr10_54801230_54801232_predictions',
+ 'chr10_5499569_5499571_predictions',
+ 'chr10_5524960_5524962_predictions',
+ 'chr10_56361258_56361260_predictions',
+ 'chr10_5666594_5666596_predictions',
+ 'chr10_5684837_5684839_predictions',
+ 'chr10_5813433_5813435_predictions',
+ 'chr10_58267893_58267895_predictions',
+ 'chr10_58269161_58269163_predictions',
+ 'chr10_58335005_58335007_predictions',
+ 'chr10_58385409_58385411_predictions',
+ 'chr10_58512871_58512873_predictions',
+ 'chr10_5889892_5889894_predictions',
+ 'chr10_5890242_5890244_predictions',
+ 'chr10_59176642_59176644_predictions',
+ 'chr10_59362548_59362550_predictions',
+ 'chr10_59709849_59709851_predictions',
+ 'chr10_59753454_59753456_predictions',
+ 'chr10_5977542_5977544_predictions',
+ 'chr10_59906555_59906557_predictions',
+ 'chr10_60389874_60389876_predictions',
+ 'chr10_6062366_6062368_predictions',
+ 'chr10_60778477_60778479_predictions',
+ 'chr10_6089033_6089035_predictions',
+ 'chr10_60944184_60944186_predictions',
+ 'chr10_61453380_61453382_predictions',
+ 'chr10_61662928_61662930_predictions',
+ 'chr10_61901698_61901700_predictions',
+ 'chr10_6202931_6202933_predictions',
+ 'chr10_62268843_62268845_predictions',
+ 'chr10_62374191_62374193_predictions',
+ 'chr10_62374368_62374370_predictions',
+ 'chr10_62804719_62804721_predictions',
+ 'chr10_62816365_62816367_predictions',
+ 'chr10_63133327_63133329_predictions',
+ 'chr10_63465976_63465978_predictions',
+ 'chr10_63521400_63521402_predictions',
+ 'chr10_6580275_6580277_predictions',
+ 'chr10_66926035_66926037_predictions',
+ 'chr10_66926307_66926309_predictions',
+ 'chr10_67696194_67696196_predictions',
+ 'chr10_67838187_67838189_predictions',
+ 'chr10_67884655_67884657_predictions',
+ 'chr10_68075282_68075284_predictions',
+ 'chr10_68109487_68109489_predictions',
+ 'chr10_68232112_68232114_predictions',
+ 'chr10_68332063_68332065_predictions',
+ 'chr10_68332927_68332929_predictions',
+ 'chr10_68407276_68407278_predictions',
+ 'chr10_68471972_68471974_predictions',
+ 'chr10_68527522_68527524_predictions',
+ 'chr10_68560336_68560338_predictions',
+ 'chr10_68721238_68721240_predictions',
+ 'chr10_68827530_68827532_predictions',
+ 'chr10_68901314_68901316_predictions',
+ 'chr10_68956169_68956171_predictions',
+ 'chr10_689667_689669_predictions',
+ 'chr10_68988802_68988804_predictions',
+ 'chr10_69088102_69088104_predictions',
+ 'chr10_69124177_69124179_predictions',
+ 'chr10_69180233_69180235_predictions',
+ 'chr10_69220331_69220333_predictions',
+ 'chr10_69318846_69318848_predictions',
+ 'chr10_69416917_69416919_predictions',
+ 'chr10_69451464_69451466_predictions',
+ 'chr10_69573421_69573423_predictions',
+ 'chr10_69630246_69630248_predictions',
+ 'chr10_69801905_69801907_predictions',
+ 'chr10_70052845_70052847_predictions',
+ 'chr10_70132824_70132826_predictions',
+ 'chr10_70146699_70146701_predictions',
+ 'chr10_70170513_70170515_predictions',
+ 'chr10_70233428_70233430_predictions',
+ 'chr10_70284003_70284005_predictions',
+ 'chr10_70382624_70382626_predictions',
+ 'chr10_70404144_70404146_predictions',
+ 'chr10_70441680_70441682_predictions',
+ 'chr10_70478766_70478768_predictions',
+ 'chr10_70602740_70602742_predictions',
+ 'chr10_70672505_70672507_predictions',
+ 'chr10_70785376_70785378_predictions',
+ 'chr10_70815947_70815949_predictions',
+ 'chr10_70888564_70888566_predictions',
+ 'chr10_71212569_71212571_predictions',
+ 'chr10_71319258_71319260_predictions',
+ 'chr10_71396919_71396921_predictions',
+ 'chr10_71719777_71719779_predictions',
+ 'chr10_71773519_71773521_predictions',
+ 'chr10_71851250_71851252_predictions',
+ 'chr10_71964394_71964396_predictions',
+ 'chr10_72088550_72088552_predictions',
+ 'chr10_72216011_72216013_predictions',
+ 'chr10_72216275_72216277_predictions',
+ 'chr10_72273923_72273925_predictions',
+ 'chr10_72354918_72354920_predictions',
+ 'chr10_72626078_72626080_predictions',
+ 'chr10_72692142_72692144_predictions',
+ 'chr10_72893738_72893740_predictions',
+ 'chr10_72954805_72954807_predictions',
+ 'chr10_73096865_73096867_predictions',
+ 'chr10_73110454_73110456_predictions',
+ 'chr10_73168007_73168009_predictions',
+ 'chr10_73168118_73168120_predictions',
+ 'chr10_73247254_73247256_predictions',
+ 'chr10_73252643_73252645_predictions',
+ 'chr10_73358863_73358865_predictions',
+ 'chr10_73414057_73414059_predictions',
+ 'chr10_73433560_73433562_predictions',
+ 'chr10_73496023_73496025_predictions',
+ 'chr10_73591341_73591343_predictions',
+ 'chr10_73641473_73641475_predictions',
+ 'chr10_73656028_73656030_predictions',
+ 'chr10_73698108_73698110_predictions',
+ 'chr10_73744371_73744373_predictions',
+ 'chr10_73772275_73772277_predictions',
+ 'chr10_73782047_73782049_predictions',
+ 'chr10_73785605_73785607_predictions',
+ 'chr10_73811597_73811599_predictions',
+ 'chr10_73874554_73874556_predictions',
+ 'chr10_73911131_73911133_predictions',
+ 'chr10_73998115_73998117_predictions',
+ 'chr10_7411033_7411035_predictions',
+ 'chr10_74150827_74150829_predictions',
+ 'chr10_74151220_74151222_predictions',
+ 'chr10_74826599_74826601_predictions',
+ 'chr10_75073641_75073643_predictions',
+ 'chr10_75099511_75099513_predictions',
+ 'chr10_75111655_75111657_predictions',
+ 'chr10_75210795_75210797_predictions',
+ 'chr10_75235956_75235958_predictions',
+ 'chr10_75401763_75401765_predictions',
+ 'chr10_75431623_75431625_predictions',
+ 'chr10_7666965_7666967_predictions',
+ 'chr10_7703315_7703317_predictions',
+ 'chr10_77637807_77637809_predictions',
+ 'chr10_7787992_7787994_predictions',
+ 'chr10_7788176_7788178_predictions',
+ 'chr10_77926754_77926756_predictions',
+ 'chr10_78029514_78029516_predictions',
+ 'chr10_78033862_78033864_predictions',
+ 'chr10_7818504_7818506_predictions',
+ 'chr10_79068965_79068967_predictions',
+ 'chr10_79347468_79347470_predictions',
+ 'chr10_79445623_79445625_predictions',
+ 'chr10_79512532_79512534_predictions',
+ 'chr10_79560406_79560408_predictions',
+ 'chr10_79610938_79610940_predictions',
+ 'chr10_79703226_79703228_predictions',
+ 'chr10_79826738_79826740_predictions',
+ 'chr10_79949104_79949106_predictions',
+ 'chr10_80078664_80078666_predictions',
+ 'chr10_80132729_80132731_predictions',
+ 'chr10_80205536_80205538_predictions',
+ 'chr10_80289657_80289659_predictions',
+ 'chr10_80356754_80356756_predictions',
+ 'chr10_80356780_80356782_predictions',
+ 'chr10_80408550_80408552_predictions',
+ 'chr10_80454309_80454311_predictions',
+ 'chr10_80537901_80537903_predictions',
+ 'chr10_8054687_8054689_predictions',
+ 'chr10_81875193_81875195_predictions',
+ 'chr10_84139508_84139510_predictions',
+ 'chr10_84173800_84173802_predictions',
+ 'chr10_84194536_84194538_predictions',
+ 'chr10_84225543_84225545_predictions',
+ 'chr10_84241545_84241547_predictions',
+ 'chr10_84245052_84245054_predictions',
+ 'chr10_84328588_84328590_predictions',
+ 'chr10_86366794_86366796_predictions',
+ 'chr10_86521791_86521793_predictions',
+ 'chr10_86654546_86654548_predictions',
+ 'chr10_86654616_86654618_predictions',
+ 'chr10_86668510_86668512_predictions',
+ 'chr10_86756618_86756620_predictions',
+ 'chr10_86957614_86957616_predictions',
+ 'chr10_86958598_86958600_predictions',
+ 'chr10_86968481_86968483_predictions',
+ 'chr10_87020293_87020295_predictions',
+ 'chr10_87094842_87094844_predictions',
+ 'chr10_87095205_87095207_predictions',
+ 'chr10_87225447_87225449_predictions',
+ 'chr10_87357743_87357745_predictions',
+ 'chr10_87504892_87504894_predictions',
+ 'chr10_87659877_87659879_predictions',
+ 'chr10_87818225_87818227_predictions',
+ 'chr10_87863532_87863534_predictions',
+ 'chr10_87863558_87863560_predictions',
+ 'chr10_87863624_87863626_predictions',
+ 'chr10_88583317_88583319_predictions',
+ 'chr10_88586761_88586763_predictions',
+ 'chr10_88664441_88664443_predictions',
+ 'chr10_88706248_88706250_predictions',
+ 'chr10_88760019_88760021_predictions',
+ 'chr10_88802729_88802731_predictions',
+ 'chr10_88851843_88851845_predictions',
+ 'chr10_88880244_88880246_predictions',
+ 'chr10_88952772_88952774_predictions',
+ 'chr10_88990797_88990799_predictions',
+ 'chr10_89207316_89207318_predictions',
+ 'chr10_89251774_89251776_predictions',
+ 'chr10_89302045_89302047_predictions',
+ 'chr10_89327996_89327998_predictions',
+ 'chr10_89378055_89378057_predictions',
+ 'chr10_89392622_89392624_predictions',
+ 'chr10_89414567_89414569_predictions',
+ 'chr10_89535593_89535595_predictions',
+ 'chr10_89645241_89645243_predictions',
+ 'chr10_89701589_89701591_predictions',
+ 'chr10_90858038_90858040_predictions',
+ 'chr10_90871973_90871975_predictions',
+ 'chr10_90921086_90921088_predictions',
+ 'chr10_91220662_91220664_predictions',
+ 'chr10_91410343_91410345_predictions',
+ 'chr10_91633070_91633072_predictions',
+ 'chr10_91798425_91798427_predictions',
+ 'chr10_91909485_91909487_predictions',
+ 'chr10_91923769_91923771_predictions',
+ 'chr10_92291077_92291079_predictions',
+ 'chr10_92291166_92291168_predictions',
+ 'chr10_92574092_92574094_predictions',
+ 'chr10_92593129_92593131_predictions',
+ 'chr10_92689954_92689956_predictions',
+ 'chr10_92848519_92848521_predictions',
+ 'chr10_93060797_93060799_predictions',
+ 'chr10_93073892_93073894_predictions',
+ 'chr10_931704_931706_predictions',
+ 'chr10_93482333_93482335_predictions',
+ 'chr10_93496611_93496613_predictions',
+ 'chr10_93566664_93566666_predictions',
+ 'chr10_93601234_93601236_predictions',
+ 'chr10_93612536_93612538_predictions',
+ 'chr10_93702591_93702593_predictions',
+ 'chr10_93757935_93757937_predictions',
+ 'chr10_93893977_93893979_predictions',
+ 'chr10_93993930_93993932_predictions',
+ 'chr10_94362938_94362940_predictions',
+ 'chr10_94402540_94402542_predictions',
+ 'chr10_94545787_94545789_predictions',
+ 'chr10_94683728_94683730_predictions',
+ 'chr10_94762680_94762682_predictions',
+ 'chr10_94938657_94938659_predictions',
+ 'chr10_95069496_95069498_predictions',
+ 'chr10_95194237_95194239_predictions',
+ 'chr10_95291002_95291004_predictions',
+ 'chr10_95561370_95561372_predictions',
+ 'chr10_95656710_95656712_predictions',
+ 'chr10_95693926_95693928_predictions',
+ 'chr10_95756162_95756164_predictions',
+ 'chr10_95907974_95907976_predictions',
+ 'chr10_96043582_96043584_predictions',
+ 'chr10_96130296_96130298_predictions',
+ 'chr10_96271568_96271570_predictions',
+ 'chr10_96304433_96304435_predictions',
+ 'chr10_96359001_96359003_predictions',
+ 'chr10_96513925_96513927_predictions',
+ 'chr10_96587011_96587013_predictions',
+ 'chr10_96720513_96720515_predictions',
+ 'chr10_96832297_96832299_predictions',
+ 'chr10_97185958_97185960_predictions',
+ 'chr10_97292636_97292638_predictions',
+ 'chr10_97319270_97319272_predictions',
+ 'chr10_97334728_97334730_predictions',
+ 'chr10_97401339_97401341_predictions',
+ 'chr10_97426190_97426192_predictions',
+ 'chr10_97446005_97446007_predictions',
+ 'chr10_97446174_97446176_predictions',
+ 'chr10_97498421_97498423_predictions',
+ 'chr10_97498923_97498925_predictions',
+ 'chr10_97572778_97572780_predictions',
+ 'chr10_97584373_97584375_predictions',
+ 'chr10_97584388_97584390_predictions',
+ 'chr10_97589720_97589722_predictions',
+ 'chr10_97633499_97633501_predictions',
+ 'chr10_97640670_97640672_predictions',
+ 'chr10_97687240_97687242_predictions',
+ 'chr10_97713729_97713731_predictions',
+ 'chr10_97737127_97737129_predictions',
+ 'chr10_97771998_97772000_predictions',
+ 'chr10_97849842_97849844_predictions',
+ 'chr10_98030620_98030622_predictions',
+ 'chr10_98134656_98134658_predictions',
+ 'chr10_98268193_98268195_predictions',
+ 'chr10_98415181_98415183_predictions',
+ 'chr10_98446934_98446936_predictions',
+ 'chr10_988433_988435_predictions',
+ 'chr10_99235851_99235853_predictions',
+ 'chr10_99329355_99329357_predictions',
+ 'chr10_99430623_99430625_predictions',
+ 'chr10_99532941_99532943_predictions',
+ 'chr10_99620438_99620440_predictions',
+ 'chr10_99659508_99659510_predictions',
+ 'chr10_99732126_99732128_predictions',
+ 'chr10_99732233_99732235_predictions',
+ 'chr10_99782639_99782641_predictions',
+ 'chr11_100687287_100687289_predictions',
+ 'chr11_101129812_101129814_predictions',
+ 'chr11_101584006_101584008_predictions',
+ 'chr11_101915009_101915011_predictions',
+ 'chr11_101916521_101916523_predictions',
+ 'chr11_102047436_102047438_predictions',
+ 'chr11_102110446_102110448_predictions',
+ 'chr11_102317483_102317485_predictions',
+ 'chr11_102347213_102347215_predictions',
+ 'chr11_102452764_102452766_predictions',
+ 'chr11_102530746_102530748_predictions',
+ 'chr11_102625331_102625333_predictions',
+ 'chr11_102705768_102705770_predictions',
+ 'chr11_102724953_102724955_predictions',
+ 'chr11_102780627_102780629_predictions',
+ 'chr11_102798159_102798161_predictions',
+ 'chr11_102843608_102843610_predictions',
+ 'chr11_102874981_102874983_predictions',
+ 'chr11_10294218_10294220_predictions',
+ 'chr11_102955731_102955733_predictions',
+ 'chr11_10305072_10305074_predictions',
+ 'chr11_103092159_103092161_predictions',
+ 'chr11_103109425_103109427_predictions',
+ 'chr11_1036717_1036719_predictions',
+ 'chr11_104036639_104036641_predictions',
+ 'chr11_104164146_104164148_predictions',
+ 'chr11_10455263_10455265_predictions',
+ 'chr11_104968573_104968575_predictions',
+ 'chr11_105023167_105023169_predictions',
+ 'chr11_105035143_105035145_predictions',
+ 'chr11_105045334_105045336_predictions',
+ 'chr11_105139768_105139770_predictions',
+ 'chr11_10541186_10541188_predictions',
+ 'chr11_105610072_105610074_predictions',
+ 'chr11_10568664_10568666_predictions',
+ 'chr11_106022239_106022241_predictions',
+ 'chr11_106077346_106077348_predictions',
+ 'chr11_106077661_106077663_predictions',
+ 'chr11_10693754_10693756_predictions',
+ 'chr11_107018475_107018477_predictions',
+ 'chr11_107457824_107457826_predictions',
+ 'chr11_1074874_1074876_predictions',
+ 'chr11_10751245_10751247_predictions',
+ 'chr11_107565734_107565736_predictions',
+ 'chr11_107591146_107591148_predictions',
+ 'chr11_107712055_107712057_predictions',
+ 'chr11_107858786_107858788_predictions',
+ 'chr11_107928447_107928449_predictions',
+ 'chr11_108008897_108008899_predictions',
+ 'chr11_10808925_10808927_predictions',
+ 'chr11_108121566_108121568_predictions',
+ 'chr11_108222637_108222639_predictions',
+ 'chr11_108223066_108223068_predictions',
+ 'chr11_108467528_108467530_predictions',
+ 'chr11_108498383_108498385_predictions',
+ 'chr11_10858052_10858054_predictions',
+ 'chr11_108593767_108593769_predictions',
+ 'chr11_108665068_108665070_predictions',
+ 'chr11_109422189_109422191_predictions',
+ 'chr11_110093391_110093393_predictions',
+ 'chr11_110296613_110296615_predictions',
+ 'chr11_110429947_110429949_predictions',
+ 'chr11_110712436_110712438_predictions',
+ 'chr11_111245724_111245726_predictions',
+ 'chr11_111298545_111298547_predictions',
+ 'chr11_111379274_111379276_predictions',
+ 'chr11_111512385_111512387_predictions',
+ 'chr11_111514777_111514779_predictions',
+ 'chr11_111540719_111540721_predictions',
+ 'chr11_111602448_111602450_predictions',
+ 'chr11_111766388_111766390_predictions',
+ 'chr11_111871580_111871582_predictions',
+ 'chr11_111879164_111879166_predictions',
+ 'chr11_111879424_111879426_predictions',
+ 'chr11_111879540_111879542_predictions',
+ 'chr11_111911769_111911771_predictions',
+ 'chr11_111912733_111912735_predictions',
+ 'chr11_111918912_111918914_predictions',
+ 'chr11_111937342_111937344_predictions',
+ 'chr11_112025407_112025409_predictions',
+ 'chr11_112074016_112074018_predictions',
+ 'chr11_112074298_112074300_predictions',
+ 'chr11_112086755_112086757_predictions',
+ 'chr11_112086872_112086874_predictions',
+ 'chr11_112164093_112164095_predictions',
+ 'chr11_112167371_112167373_predictions',
+ 'chr11_112175511_112175513_predictions',
+ 'chr11_112226427_112226429_predictions',
+ 'chr11_112260859_112260861_predictions',
+ 'chr11_112961419_112961421_predictions',
+ 'chr11_113314582_113314584_predictions',
+ 'chr11_113387778_113387780_predictions',
+ 'chr11_113475397_113475399_predictions',
+ 'chr11_11353249_11353251_predictions',
+ 'chr11_113706307_113706309_predictions',
+ 'chr11_113773691_113773693_predictions',
+ 'chr11_113779795_113779797_predictions',
+ 'chr11_113875571_113875573_predictions',
+ 'chr11_113904795_113904797_predictions',
+ 'chr11_113975107_113975109_predictions',
+ 'chr11_114059710_114059712_predictions',
+ 'chr11_114296398_114296400_predictions',
+ 'chr11_114400510_114400512_predictions',
+ 'chr11_114400665_114400667_predictions',
+ 'chr11_114439466_114439468_predictions',
+ 'chr11_114559880_114559882_predictions',
+ 'chr11_114595785_114595787_predictions',
+ 'chr11_114678526_114678528_predictions',
+ 'chr11_115504414_115504416_predictions',
+ 'chr11_1157952_1157954_predictions',
+ 'chr11_11622004_11622006_predictions',
+ 'chr11_116772986_116772988_predictions',
+ 'chr11_116788022_116788024_predictions',
+ 'chr11_116791878_116791880_predictions',
+ 'chr11_116823303_116823305_predictions',
+ 'chr11_116829906_116829908_predictions',
+ 'chr11_116837621_116837623_predictions',
+ 'chr11_117098427_117098429_predictions',
+ 'chr11_117144286_117144288_predictions',
+ 'chr11_117178742_117178744_predictions',
+ 'chr11_117199369_117199371_predictions',
+ 'chr11_117232072_117232074_predictions',
+ 'chr11_117232670_117232672_predictions',
+ 'chr11_117316255_117316257_predictions',
+ 'chr11_117327853_117327855_predictions',
+ 'chr11_117797215_117797217_predictions',
+ 'chr11_117824743_117824745_predictions',
+ 'chr11_117876627_117876629_predictions',
+ 'chr11_117876657_117876659_predictions',
+ 'chr11_117929401_117929403_predictions',
+ 'chr11_117986393_117986395_predictions',
+ 'chr11_118077077_118077079_predictions',
+ 'chr11_118086962_118086964_predictions',
+ 'chr11_118152822_118152824_predictions',
+ 'chr11_118176638_118176640_predictions',
+ 'chr11_118225010_118225012_predictions',
+ 'chr11_118252364_118252366_predictions',
+ 'chr11_118264296_118264298_predictions',
+ 'chr11_118304729_118304731_predictions',
+ 'chr11_118342704_118342706_predictions',
+ 'chr11_118344343_118344345_predictions',
+ 'chr11_118359599_118359601_predictions',
+ 'chr11_118401605_118401607_predictions',
+ 'chr11_118401606_118401608_predictions',
+ 'chr11_11841971_11841973_predictions',
+ 'chr11_118436491_118436493_predictions',
+ 'chr11_118527473_118527475_predictions',
+ 'chr11_118531191_118531193_predictions',
+ 'chr11_118565930_118565932_predictions',
+ 'chr11_118572408_118572410_predictions',
+ 'chr11_118607614_118607616_predictions',
+ 'chr11_118679649_118679651_predictions',
+ 'chr11_118791163_118791165_predictions',
+ 'chr11_118883891_118883893_predictions',
+ 'chr11_118925925_118925927_predictions',
+ 'chr11_118956297_118956299_predictions',
+ 'chr11_118971760_118971762_predictions',
+ 'chr11_118998137_118998139_predictions',
+ 'chr11_119018342_119018344_predictions',
+ 'chr11_119018765_119018767_predictions',
+ 'chr11_119030905_119030907_predictions',
+ 'chr11_119057204_119057206_predictions',
+ 'chr11_119067817_119067819_predictions',
+ 'chr11_119084880_119084882_predictions',
+ 'chr11_119095464_119095466_predictions',
+ 'chr11_119101852_119101854_predictions',
+ 'chr11_119107343_119107345_predictions',
+ 'chr11_119121579_119121581_predictions',
+ 'chr11_119149051_119149053_predictions',
+ 'chr11_119168724_119168726_predictions',
+ 'chr11_119185474_119185476_predictions',
+ 'chr11_119195840_119195842_predictions',
+ 'chr11_119206338_119206340_predictions',
+ 'chr11_119317129_119317131_predictions',
+ 'chr11_119334526_119334528_predictions',
+ 'chr11_119340882_119340884_predictions',
+ 'chr11_119346704_119346706_predictions',
+ 'chr11_119381689_119381691_predictions',
+ 'chr11_119423171_119423173_predictions',
+ 'chr11_119729199_119729201_predictions',
+ 'chr11_12008625_12008627_predictions',
+ 'chr11_120138112_120138114_predictions',
+ 'chr11_120211031_120211033_predictions',
+ 'chr11_120240139_120240141_predictions',
+ 'chr11_120325298_120325300_predictions',
+ 'chr11_120336412_120336414_predictions',
+ 'chr11_120511747_120511749_predictions',
+ 'chr11_121024101_121024103_predictions',
+ 'chr11_121045738_121045740_predictions',
+ 'chr11_121101242_121101244_predictions',
+ 'chr11_12110589_12110591_predictions',
+ 'chr11_121292770_121292772_predictions',
+ 'chr11_121452313_121452315_predictions',
+ 'chr11_122116214_122116216_predictions',
+ 'chr11_1223065_1223067_predictions',
+ 'chr11_122655721_122655723_predictions',
+ 'chr11_122838499_122838501_predictions',
+ 'chr11_122882758_122882760_predictions',
+ 'chr11_122981833_122981835_predictions',
+ 'chr11_123062135_123062137_predictions',
+ 'chr11_123195247_123195249_predictions',
+ 'chr11_123430268_123430270_predictions',
+ 'chr11_123654623_123654625_predictions',
+ 'chr11_123741659_123741661_predictions',
+ 'chr11_123754517_123754519_predictions',
+ 'chr11_12377570_12377572_predictions',
+ 'chr11_123806348_123806350_predictions',
+ 'chr11_123885669_123885671_predictions',
+ 'chr11_123902166_123902168_predictions',
+ 'chr11_123939616_123939618_predictions',
+ 'chr11_123943837_123943839_predictions',
+ 'chr11_123977780_123977782_predictions',
+ 'chr11_123995160_123995162_predictions',
+ 'chr11_124012996_124012998_predictions',
+ 'chr11_124023012_124023014_predictions',
+ 'chr11_124026797_124026799_predictions',
+ 'chr11_124041324_124041326_predictions',
+ 'chr11_124115449_124115451_predictions',
+ 'chr11_124183344_124183346_predictions',
+ 'chr11_124241094_124241096_predictions',
+ 'chr11_124256375_124256377_predictions',
+ 'chr11_124313948_124313950_predictions',
+ 'chr11_124320196_124320198_predictions',
+ 'chr11_124384498_124384500_predictions',
+ 'chr11_124399023_124399025_predictions',
+ 'chr11_124424870_124424872_predictions',
+ 'chr11_124445695_124445697_predictions',
+ 'chr11_124543653_124543655_predictions',
+ 'chr11_124569996_124569998_predictions',
+ 'chr11_124611427_124611429_predictions',
+ 'chr11_124622863_124622865_predictions',
+ 'chr11_124673738_124673740_predictions',
+ 'chr11_124673903_124673905_predictions',
+ 'chr11_124739941_124739943_predictions',
+ 'chr11_124752254_124752256_predictions',
+ 'chr11_124762289_124762291_predictions',
+ 'chr11_124800405_124800407_predictions',
+ 'chr11_124865431_124865433_predictions',
+ 'chr11_124897864_124897866_predictions',
+ 'chr11_124919249_124919251_predictions',
+ 'chr11_124936046_124936048_predictions',
+ 'chr11_124954201_124954203_predictions',
+ 'chr11_125063304_125063306_predictions',
+ 'chr11_125111625_125111627_predictions',
+ 'chr11_125164750_125164752_predictions',
+ 'chr11_125496264_125496266_predictions',
+ 'chr11_125569476_125569478_predictions',
+ 'chr11_125592851_125592853_predictions',
+ 'chr11_125625162_125625164_predictions',
+ 'chr11_125680846_125680848_predictions',
+ 'chr11_125746278_125746280_predictions',
+ 'chr11_125778827_125778829_predictions',
+ 'chr11_125788126_125788128_predictions',
+ 'chr11_125833315_125833317_predictions',
+ 'chr11_125887667_125887669_predictions',
+ 'chr11_125903205_125903207_predictions',
+ 'chr11_125904507_125904509_predictions',
+ 'chr11_125946043_125946045_predictions',
+ 'chr11_126062865_126062867_predictions',
+ 'chr11_126211649_126211651_predictions',
+ 'chr11_126211781_126211783_predictions',
+ 'chr11_126268894_126268896_predictions',
+ 'chr11_126269153_126269155_predictions',
+ 'chr11_126283092_126283094_predictions',
+ 'chr11_126304059_126304061_predictions',
+ 'chr11_126355685_126355687_predictions',
+ 'chr11_12674420_12674422_predictions',
+ 'chr11_127000769_127000771_predictions',
+ 'chr11_128587557_128587559_predictions',
+ 'chr11_128694071_128694073_predictions',
+ 'chr11_128867295_128867297_predictions',
+ 'chr11_128891355_128891357_predictions',
+ 'chr11_128942870_128942872_predictions',
+ 'chr11_129192324_129192326_predictions',
+ 'chr11_129375847_129375849_predictions',
+ 'chr11_129815847_129815849_predictions',
+ 'chr11_129895577_129895579_predictions',
+ 'chr11_130002834_130002836_predictions',
+ 'chr11_130069893_130069895_predictions',
+ 'chr11_13009315_13009317_predictions',
+ 'chr11_130159781_130159783_predictions',
+ 'chr11_130314916_130314918_predictions',
+ 'chr11_130428608_130428610_predictions',
+ 'chr11_130448644_130448646_predictions',
+ 'chr11_130916478_130916480_predictions',
+ 'chr11_1309631_1309633_predictions',
+ ...]</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

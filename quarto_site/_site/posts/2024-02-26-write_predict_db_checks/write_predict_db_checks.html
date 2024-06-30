@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saideep Gona">
+<meta name="dcterms.date" content="2024-02-26">
+
+<title>Daily-Blog-Sai - write_predict_db_checks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daily-Blog-Sai</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a>
+  <ul class="collapse">
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a></li>
+  <li><a href="#set-paths" id="toc-set-paths" class="nav-link" data-scroll-target="#set-paths">Set paths</a></li>
+  <li><a href="#test-main" id="toc-test-main" class="nav-link" data-scroll-target="#test-main">Test MAIN</a>
+  <ul class="collapse">
+  <li><a href="#read-gene-get_gene_annotation" id="toc-read-gene-get_gene_annotation" class="nav-link" data-scroll-target="#read-gene-get_gene_annotation">read gene get_gene_annotation</a></li>
+  <li><a href="#set-seed-and-cv-fold_idxs" id="toc-set-seed-and-cv-fold_idxs" class="nav-link" data-scroll-target="#set-seed-and-cv-fold_idxs">Set seed and cv fold_idxs</a></li>
+  <li><a href="#start-training-models" id="toc-start-training-models" class="nav-link" data-scroll-target="#start-training-models">Start training models</a></li>
+  </ul></li>
+  <li><a href="#prechecks" id="toc-prechecks" class="nav-link" data-scroll-target="#prechecks">Prechecks</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">write_predict_db_checks</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saideep Gona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 26, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="context" class="level1">
+<h1>Context</h1>
+<p>We have been having some difficulties running Predict-DB, so here I am going to debug my latest issues and make a more formal set of pre-checks everyone can use.</p>
+<section id="functions" class="level3">
+<h3 class="anchored" data-anchor-id="functions">Functions</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>get_filtered_snp_annot <span class="ot">&lt;-</span> <span class="cf">function</span>(snp_annot_file_name) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  snp_annot <span class="ot">&lt;-</span> <span class="fu">read.table</span>(snp_annot_file_name, <span class="at">header =</span> T, <span class="at">stringsAsFactors =</span> F) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="st">"refAllele"</span> <span class="sc">%in%</span> <span class="fu">names</span>(snp_annot)) {snp_annot <span class="ot">&lt;-</span> snp_annot <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">ref_vcf =</span> refAllele)}</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="st">"effectAllele"</span> <span class="sc">%in%</span> <span class="fu">names</span>(snp_annot)) {snp_annot <span class="ot">&lt;-</span> snp_annot <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">alt_vcf =</span> effectAllele)}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  snp_annot <span class="ot">&lt;-</span> snp_annot <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>((ref_vcf <span class="sc">==</span> <span class="st">'A'</span> <span class="sc">&amp;</span> alt_vcf <span class="sc">==</span> <span class="st">'T'</span>) <span class="sc">|</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>               (ref_vcf <span class="sc">==</span> <span class="st">'T'</span> <span class="sc">&amp;</span> alt_vcf <span class="sc">==</span> <span class="st">'A'</span>) <span class="sc">|</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>               (ref_vcf <span class="sc">==</span> <span class="st">'C'</span> <span class="sc">&amp;</span> alt_vcf <span class="sc">==</span> <span class="st">'G'</span>) <span class="sc">|</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>               (ref_vcf <span class="sc">==</span> <span class="st">'G'</span> <span class="sc">&amp;</span> alt_vcf <span class="sc">==</span> <span class="st">'C'</span>)) <span class="sc">&amp;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>             <span class="sc">!</span>(<span class="fu">is.na</span>(rsid))) <span class="sc">%&gt;%</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>(varID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  snp_annot</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>get_maf_filtered_genotype <span class="ot">&lt;-</span> <span class="cf">function</span>(genotype_file_name,  maf, samples) {</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  gt_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(genotype_file_name, <span class="at">header =</span> T, <span class="at">stringsAsFactors =</span> F, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  gt_df <span class="ot">&lt;-</span> gt_df[,(<span class="fu">colnames</span>(gt_df) <span class="sc">%in%</span> samples )] <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  effect_allele_freqs <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(gt_df) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  gt_df <span class="ot">&lt;-</span> gt_df[,<span class="fu">which</span>((effect_allele_freqs <span class="sc">&gt;=</span> maf) <span class="sc">&amp;</span> (effect_allele_freqs <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">-</span> maf))]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  gt_df</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>get_gene_annotation <span class="ot">&lt;-</span> <span class="cf">function</span>(gene_annot_file_name, chrom, <span class="at">gene_types=</span><span class="fu">c</span>(<span class="st">'protein_coding'</span>, <span class="st">'pseudogene'</span>, <span class="st">'lincRNA'</span>)){</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  gene_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(gene_annot_file_name, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>((chr <span class="sc">==</span> chrom) <span class="sc">&amp;</span> gene_type <span class="sc">%in%</span> gene_types) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">gene_id =</span> <span class="fu">file_path_sans_ext</span>(gene_id))  <span class="co"># remove gene ver from gene names</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  gene_df</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>get_gene_type <span class="ot">&lt;-</span> <span class="cf">function</span>(gene_annot, gene) {</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  gene_annot <span class="ot">&lt;-</span> gene_annot <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">gene_id =</span> <span class="fu">file_path_sans_ext</span>(gene_id))</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene_annot, gene_id <span class="sc">==</span> gene)<span class="sc">$</span>gene_type</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>get_gene_expression <span class="ot">&lt;-</span> <span class="cf">function</span>(gene_expression_file_name, gene_annot) {</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  expr_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">t</span>(<span class="fu">read.table</span>(gene_expression_file_name, <span class="at">header =</span> T, <span class="at">stringsAsFactors =</span> F, <span class="at">row.names =</span> <span class="dv">1</span>)))</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  expr_df <span class="ot">&lt;-</span> expr_df <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(expr_df) <span class="ot">&lt;-</span> <span class="fu">file_path_sans_ext</span>(<span class="fu">colnames</span>(expr_df)) <span class="co"># remove gene version number</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  expr_df <span class="ot">&lt;-</span> expr_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">intersect</span>(gene_annot<span class="sc">$</span>gene_id, <span class="fu">colnames</span>(expr_df))))</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  expr_df</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>get_gene_coords <span class="ot">&lt;-</span> <span class="cf">function</span>(gene_annot, gene) {</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  row <span class="ot">&lt;-</span> gene_annot[<span class="fu">which</span>(gene_annot<span class="sc">$</span>gene_id <span class="sc">==</span> gene),]</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(row<span class="sc">$</span>start, row<span class="sc">$</span>end)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>get_cis_genotype <span class="ot">&lt;-</span> <span class="cf">function</span>(gt_df, snp_annot, coords, cis_window) {</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  snp_info <span class="ot">&lt;-</span> snp_annot <span class="sc">%&gt;%</span> <span class="fu">filter</span>((pos <span class="sc">&gt;=</span> (coords[<span class="dv">1</span>] <span class="sc">-</span> cis_window) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(rsid)) <span class="sc">&amp;</span> (pos <span class="sc">&lt;=</span> (coords[<span class="dv">2</span>] <span class="sc">+</span> cis_window)))</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(snp_info) <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Check of the varID exist in the data</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="cn">TRUE</span> <span class="sc">%in%</span> (snp_info<span class="sc">$</span>varID <span class="sc">%in%</span> <span class="fu">names</span>(gt_df))) {</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    cis_gt <span class="ot">&lt;-</span> gt_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">intersect</span>(snp_info<span class="sc">$</span>varID, <span class="fu">colnames</span>(gt_df))))</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">NA</span>) <span class="co"># the varID doesn't exist in the gt_df dataset</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  column_labels <span class="ot">&lt;-</span> <span class="fu">colnames</span>(cis_gt)</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  row_labels <span class="ot">&lt;-</span> <span class="fu">rownames</span>(cis_gt)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert cis_gt to a matrix for glmnet</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  cis_gt <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">as.matrix</span>(cis_gt), <span class="at">ncol=</span><span class="fu">ncol</span>(cis_gt)) <span class="co"># R is such a bad language.</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(cis_gt) <span class="ot">&lt;-</span> column_labels</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(cis_gt) <span class="ot">&lt;-</span> row_labels</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  cis_gt</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>get_covariates <span class="ot">&lt;-</span> <span class="cf">function</span>(covariate_file_name, samples) {</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  cov_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(covariate_file_name, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  cov_df <span class="ot">&lt;-</span> cov_df[,(<span class="fu">names</span>(cov_df) <span class="sc">%in%</span> samples )] <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  cov_df</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>adjust_for_covariates <span class="ot">&lt;-</span> <span class="cf">function</span>(expression_vec, cov_df) {</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>  combined_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(expression_vec, cov_df)</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  expr_resid <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">lm</span>(expression_vec <span class="sc">~</span> ., <span class="at">data=</span>combined_df))<span class="sc">$</span>residuals</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  expr_resid <span class="ot">&lt;-</span> <span class="fu">scale</span>(expr_resid, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>  expr_resid</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>do_elastic_net <span class="ot">&lt;-</span> <span class="cf">function</span>(cis_gt, expr_adj, n_folds, cv_fold_ids, n_times, alpha) {</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>  <span class="co">#tryCatch({</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    cis_gt <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(cis_gt)</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(cis_gt, expr_adj, <span class="at">nfolds =</span> n_folds, <span class="at">alpha =</span> alpha, <span class="at">keep =</span> <span class="cn">TRUE</span>, <span class="at">type.measure=</span><span class="st">'mse'</span>, <span class="at">foldid =</span> cv_fold_ids[,<span class="dv">1</span>], <span class="at">parallel =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>    lambda_seq <span class="ot">&lt;-</span> fit<span class="sc">$</span>lambda</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    cvms <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow=</span><span class="fu">length</span>(lambda_seq), <span class="at">ncol=</span>n_times)</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>    fits <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>    fits[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> fit</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    cvms <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">100</span>, <span class="at">ncol =</span> n_times)</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    cvms[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fit<span class="sc">$</span>cvm),<span class="dv">1</span>] <span class="ot">&lt;-</span> fit<span class="sc">$</span>cvm</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>(n_times)) {</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>      fit <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(cis_gt, expr_adj, <span class="at">lambda =</span> lambda_seq, <span class="at">nfolds =</span> n_folds, <span class="at">alpha =</span> alpha, <span class="at">keep =</span> <span class="cn">FALSE</span>, <span class="at">foldid =</span> cv_fold_ids[,i], <span class="at">parallel =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>      fits[[i]] <span class="ot">&lt;-</span> fit</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>      cvms[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fit<span class="sc">$</span>cvm),i] <span class="ot">&lt;-</span> fit<span class="sc">$</span>cvm</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>    avg_cvm <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(cvms)</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>    best_lam_ind <span class="ot">&lt;-</span> <span class="fu">which.min</span>(avg_cvm)</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>    best_lambda <span class="ot">&lt;-</span> lambda_seq[best_lam_ind]</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">cv_fit =</span> fits[[<span class="dv">1</span>]], <span class="at">min_avg_cvm =</span> <span class="fu">min</span>(avg_cvm, <span class="at">na.rm =</span> T), <span class="at">best_lam_ind =</span> best_lam_ind, <span class="at">best_lambda =</span> best_lambda)</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  out</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>  <span class="co">#},error = function(cond) {</span></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  message('Error')</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  message(geterrmessage())</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  out &lt;- list()</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  out</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>  <span class="co">#}</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>  <span class="co">#)</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>evaluate_performance <span class="ot">&lt;-</span> <span class="cf">function</span>(cis_gt, expr_adj, fit, best_lam_ind, best_lambda, cv_fold_ids, n_folds) {</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>  n_nonzero <span class="ot">&lt;-</span> fit<span class="sc">$</span>nzero[best_lam_ind]</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"Num-nonzero: {n_nonzero}"</span>))</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (n_nonzero <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>    R2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_folds)</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>    corr_folds <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_folds)</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>    pval_folds <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_folds)</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>    zscore_folds <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_folds)</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> (<span class="dv">1</span><span class="sc">:</span>n_folds)) {</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>      fold_idxs <span class="ot">&lt;-</span> <span class="fu">which</span>(cv_fold_ids[,<span class="dv">1</span>] <span class="sc">==</span> j)</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>      fitted_y <span class="ot">&lt;-</span> fit<span class="sc">$</span>fit.preval[, best_lam_ind]</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>      tss <span class="ot">&lt;-</span> <span class="fu">sum</span>(expr_adj[fold_idxs]<span class="sc">**</span><span class="dv">2</span>)</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>      rss <span class="ot">&lt;-</span> <span class="fu">sum</span>((expr_adj[fold_idxs] <span class="sc">-</span> fitted_y[fold_idxs])<span class="sc">**</span><span class="dv">2</span>)</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>      R2[j] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (rss<span class="sc">/</span>tss)</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>      corr_folds[j] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">sd</span>(fitted_y[fold_idxs]) <span class="sc">!=</span> <span class="dv">0</span>,</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">cor</span>(expr_adj[fold_idxs], fitted_y[fold_idxs]), <span class="dv">0</span>)</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>      pval_folds[j] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">sd</span>(fitted_y[fold_idxs]) <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">length</span>(expr_adj[fold_idxs]) <span class="sc">&gt;</span> <span class="dv">3</span>,</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">cor.test</span>(expr_adj[fold_idxs],fitted_y[fold_idxs])<span class="sc">$</span>p.value, <span class="dv">1</span>)</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>      zscore_folds[j] <span class="ot">&lt;-</span> <span class="fu">atanh</span>(corr_folds[j]) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(expr_adj[fold_idxs]) <span class="sc">-</span> <span class="dv">3</span>) <span class="co"># Fisher transformation</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>    best_fit <span class="ot">&lt;-</span> fit<span class="sc">$</span>glmnet.fit</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    expr_adj_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(best_fit, <span class="fu">as.matrix</span>(cis_gt), <span class="at">s =</span> best_lambda)</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>    tss <span class="ot">&lt;-</span> <span class="fu">sum</span>(expr_adj<span class="sc">**</span><span class="dv">2</span>)</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>    rss <span class="ot">&lt;-</span> <span class="fu">sum</span>((expr_adj <span class="sc">-</span> expr_adj_pred)<span class="sc">**</span><span class="dv">2</span>)</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>    n_samp <span class="ot">&lt;-</span> <span class="fu">length</span>(expr_adj)</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>    <span class="co">#f_stat &lt;- ((tss - rss) / n_nonzero) / (rss / (n_samp - ncol(cis_gt) - 1))</span></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="co">#p_val &lt;- pf(f_stat, n_samp - 1, n_samp - ncol(cis_gt) - 1, lower.tail = FALSE)</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> best_fit<span class="sc">$</span>beta[<span class="fu">which</span>(best_fit<span class="sc">$</span>beta[,best_lam_ind] <span class="sc">!=</span> <span class="dv">0</span>), best_lam_ind]</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>    weighted_snps <span class="ot">&lt;-</span> <span class="fu">names</span>(best_fit<span class="sc">$</span>beta[,best_lam_ind])[<span class="fu">which</span>(best_fit<span class="sc">$</span>beta[,best_lam_ind] <span class="sc">!=</span> <span class="dv">0</span>)]</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>    R2_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(R2)</span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>    R2_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(R2)</span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>    inR2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (rss<span class="sc">/</span>tss)</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>    rho_avg <span class="ot">&lt;-</span> <span class="fu">mean</span>(corr_folds)</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>    rho_se <span class="ot">&lt;-</span> <span class="fu">sd</span>(corr_folds)</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>    rho_avg_squared <span class="ot">&lt;-</span> rho_avg<span class="sc">**</span><span class="dv">2</span></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Stouffer's method for combining z scores.</span></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>    zscore_est <span class="ot">&lt;-</span> <span class="fu">sum</span>(zscore_folds) <span class="sc">/</span> <span class="fu">sqrt</span>(n_folds)</span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>    zscore_pval <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="fu">abs</span>(zscore_est), <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fisher's method for combining p-values: https://en.wikipedia.org/wiki/Fisher%27s_method</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>    pval_est <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">log</span>(pval_folds)), <span class="dv">2</span><span class="sc">*</span>n_folds, <span class="at">lower.tail =</span> F)</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Old way</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>    pred_perf <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">lm</span>(expr_adj <span class="sc">~</span> fit<span class="sc">$</span>fit.preval[,best_lam_ind]))</span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>    pred_perf_rsq <span class="ot">&lt;-</span> pred_perf<span class="sc">$</span>r.squared</span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>    <span class="co">#one_sided_pval &lt;- cor.test(expr_adj, fit$fit.preval[,best_lam_ind], alternative = 'greater')$p.value</span></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">weights =</span> weights, <span class="at">n_weights =</span> n_nonzero, <span class="at">weighted_snps =</span> weighted_snps, <span class="at">R2_mean =</span> R2_mean, <span class="at">R2_sd =</span> R2_sd,</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>                <span class="at">inR2 =</span> inR2, <span class="at">pval_est=</span>pval_est, <span class="at">rho_avg=</span>rho_avg, <span class="at">rho_se=</span>rho_se, </span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>                <span class="at">rho_zscore=</span>zscore_est, <span class="at">rho_avg_squared=</span>rho_avg_squared, <span class="at">zscore_pval=</span>zscore_pval)</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">weights =</span> <span class="cn">NA</span>, <span class="at">n_weights =</span> n_nonzero, <span class="at">weighted_snps =</span> <span class="cn">NA</span>, <span class="at">R2_mean =</span> <span class="cn">NA</span>, <span class="at">R2_sd =</span> <span class="cn">NA</span>,</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>                <span class="at">inR2 =</span> <span class="cn">NA</span>, <span class="at">pval_est =</span> <span class="cn">NA</span>, <span class="at">rho_avg =</span> <span class="cn">NA</span>, <span class="at">rho_se=</span> <span class="cn">NA</span>, </span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>                <span class="at">rho_zscore=</span> <span class="cn">NA</span>, <span class="at">rho_avg_squared=</span> <span class="cn">NA</span>, <span class="at">zscore_pval=</span> <span class="cn">NA</span>)</span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>do_covariance <span class="ot">&lt;-</span> <span class="cf">function</span>(gene_id, cis_gt, rsids, varIDs, out_file) {</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>  model_gt <span class="ot">&lt;-</span> cis_gt[,varIDs, drop<span class="ot">=</span><span class="cn">FALSE</span>]</span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>  geno_cov <span class="ot">&lt;-</span> <span class="fu">cov</span>(model_gt)</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(dim(geno_cov))</span></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>  cov_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">gene=</span><span class="fu">character</span>(),<span class="at">rsid1=</span><span class="fu">character</span>(),<span class="at">rsid2=</span><span class="fu">character</span>(), <span class="at">covariance=</span><span class="fu">double</span>())</span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(rsids)) {</span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> i<span class="sc">:</span><span class="fu">length</span>(rsids)) {</span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>      <span class="co">#print(c(i, j))</span></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>      cov_df <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">rbind</span>(cov_df, <span class="fu">data.frame</span>(<span class="at">gene=</span>gene_id,<span class="at">rsid1=</span>rsids[i], <span class="at">rsid2=</span>rsids[j], <span class="at">covariance=</span>geno_cov[i,j])),</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>                         <span class="at">error =</span> <span class="cf">function</span>(cond) <span class="fu">browser</span>())</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.table</span>(cov_df, <span class="at">file =</span> out_file, <span class="at">append =</span> <span class="cn">TRUE</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">sep =</span> <span class="st">" "</span>)</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="set-paths" class="level3">
+<h3 class="anchored" data-anchor-id="set-paths">Set paths</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages(library(glue))</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># chrom &lt;- 1</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># snp_annot_file &lt;- glue("/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormTRUE_beforeTRUE_scale1/work/f4/d22672a23ca1dffefd3d786b20333b/snp_file")</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># gene_annot_file &lt;- "/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormTRUE_beforeTRUE_scale1/work/f4/d22672a23ca1dffefd3d786b20333b/gene_annot.parsed.txt"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># genotype_file &lt;- glue("/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormTRUE_beforeTRUE_scale1/work/f4/d22672a23ca1dffefd3d786b20333b/genotype_file")</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># expression_file &lt;- "/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormTRUE_beforeTRUE_scale1/work/f4/d22672a23ca1dffefd3d786b20333b/transposed_gene_exp.txt"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># covariates_file &lt;- NULL</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># n_k_folds &lt;- 10</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages(library(dplyr))</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages(library(glmnet))</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages((library(reshape2)))</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages(library(methods))</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages(library(tools))</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># "%&amp;%" &lt;- function(a,b) paste(a,b, sep = "")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="test-main" class="level2">
+<h2 class="anchored" data-anchor-id="test-main">Test MAIN</h2>
+<section id="read-gene-get_gene_annotation" class="level3">
+<h3 class="anchored" data-anchor-id="read-gene-get_gene_annotation">read gene get_gene_annotation</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gene_annot &lt;- get_gene_annotation(gene_annot_file, chrom)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># expr_df &lt;- get_gene_expression(expression_file, gene_annot)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># samples &lt;- rownames(expr_df)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># n_samples &lt;- length(samples)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># genes &lt;- colnames(expr_df)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># n_genes &lt;- length(expr_df)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># snp_annot &lt;- get_filtered_snp_annot(snp_annot_file)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># maf=0.01</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># gt_df &lt;- get_maf_filtered_genotype(genotype_file, maf, samples)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># print(dim(gene_annot))</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># print(dim(expr_df))</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># print(dim(gt_df))</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># print(dim(snp_annot))</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># print(intersect(rownames(gt_df), rownames(expr_df)))</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># print(length(intersect(rownames(gt_df), rownames(expr_df))))</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># prefix &lt;- "/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2024-02-26-write_predict_db_checks"</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># seed &lt;- 1</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># n_times &lt;- 3</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># cis_window &lt;- 1e6</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha &lt;- 0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="set-seed-and-cv-fold_idxs" class="level3">
+<h3 class="anchored" data-anchor-id="set-seed-and-cv-fold_idxs">Set seed and cv fold_idxs</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Set seed and cross-validation fold ids----</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># seed &lt;- ifelse(is.na(seed), sample(1:1000000, 1), seed)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(seed)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># cv_fold_ids &lt;- matrix(nrow = n_samples, ncol = n_times)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># for (j in 1:n_times)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   cv_fold_ids[,j] &lt;- sample(1:n_k_folds, n_samples, replace = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="start-training-models" class="level3">
+<h3 class="anchored" data-anchor-id="start-training-models">Start training models</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Prepare output data----</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># for (i in 1:5) {</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     cat(i, "/", n_genes, "\n")</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     gene &lt;- genes[i]</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     gene_name &lt;- gene_annot$gene_name[gene_annot$gene_id == gene]</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     gene_type &lt;- get_gene_type(gene_annot, gene)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     coords &lt;- get_gene_coords(gene_annot, gene)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     cis_gt &lt;- get_cis_genotype(gt_df, snp_annot, coords, cis_window)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     if (ncol(cis_gt) &gt;= 2) {</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#       expression_vec &lt;- expr_df[,i]</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#       if (is.null(NULL)) {</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#         adj_expression &lt;- as.matrix(expression_vec)</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#         rownames(adj_expression) &lt;- rownames(expr_df)</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#       } else {</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#         adj_expression &lt;- adjust_for_covariates(expression_vec, covariates_df)</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#       }</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#       # Filter out samples that are in both expression and genotype data.</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#       adj_expression &lt;- as.matrix(adj_expression[(rownames(adj_expression) %in% rownames(cis_gt)),])</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#       # sort row names to be in the same order for X and y</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#       cis_gt = cis_gt[match(rownames(adj_expression), rownames(cis_gt)),]</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#       elnet_out &lt;- do_elastic_net(cis_gt, adj_expression, n_k_folds, cv_fold_ids, n_times, alpha)</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">#       if (length(elnet_out) &gt; 0) {</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">#         eval &lt;- evaluate_performance(cis_gt, adj_expression, elnet_out$cv_fit, </span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">#         elnet_out$best_lam_ind, elnet_out$best_lambda, cv_fold_ids, n_k_folds)</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co">#         model_summary &lt;- c(gene, gene_name, gene_type, alpha, ncol(cis_gt),           elnet_out$min_avg_cvm, elnet_out$best_lam_ind,</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">#                            elnet_out$best_lambda, eval$n_weights, eval$R2_mean, eval$R2_sd, eval$inR2,</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">#                            eval$pval_est, eval$rho_avg, eval$rho_se, eval$rho_zscore, eval$rho_avg_squared, eval$zscore_pval)</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co">#         print(model_summary)</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co">#         print(eval)</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co">#         print(length(model_summary))</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     }</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co">#   }</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="prechecks" class="level2">
+<h2 class="anchored" data-anchor-id="prechecks">Prechecks</h2>
+<p>Prechecks should be:</p>
+<p>1.) Gene overlap between expression data and gene annotations should be high relative to the number of genes in the expression data.</p>
+<p>2.) Sample overlap between expression data and genotype data should be high relative to the number of samples in the expression data.</p>
+<p>3.) SNP overlap between genotype data and SNP annotations should be high relative to the number of SNPs in the genotype data.</p>
+<p>4.) Formatting of each file should match documentation</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summ &lt;- read.table("/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormTRUE_beforeTRUE_scale1/work/f4/d22672a23ca1dffefd3d786b20333b/summary/Model_training_chr1_model_summaries.txt")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summ</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "write_predict_db_checks"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Saideep Gona"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2024-02-26"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: "Show the code"</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">  freeze: true</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu"># Context</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>We have been having some difficulties running Predict-DB, so here I am going to debug my latest issues and make a more formal set of pre-checks everyone can use.</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">### Functions</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>get_filtered_snp_annot <span class="ot">&lt;-</span> <span class="cf">function</span>(snp_annot_file_name) {</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  snp_annot <span class="ot">&lt;-</span> <span class="fu">read.table</span>(snp_annot_file_name, <span class="at">header =</span> T, <span class="at">stringsAsFactors =</span> F) </span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="st">"refAllele"</span> <span class="sc">%in%</span> <span class="fu">names</span>(snp_annot)) {snp_annot <span class="ot">&lt;-</span> snp_annot <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">ref_vcf =</span> refAllele)}</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="st">"effectAllele"</span> <span class="sc">%in%</span> <span class="fu">names</span>(snp_annot)) {snp_annot <span class="ot">&lt;-</span> snp_annot <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">alt_vcf =</span> effectAllele)}</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  snp_annot <span class="ot">&lt;-</span> snp_annot <span class="sc">%&gt;%</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>((ref_vcf <span class="sc">==</span> <span class="st">'A'</span> <span class="sc">&amp;</span> alt_vcf <span class="sc">==</span> <span class="st">'T'</span>) <span class="sc">|</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>               (ref_vcf <span class="sc">==</span> <span class="st">'T'</span> <span class="sc">&amp;</span> alt_vcf <span class="sc">==</span> <span class="st">'A'</span>) <span class="sc">|</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>               (ref_vcf <span class="sc">==</span> <span class="st">'C'</span> <span class="sc">&amp;</span> alt_vcf <span class="sc">==</span> <span class="st">'G'</span>) <span class="sc">|</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>               (ref_vcf <span class="sc">==</span> <span class="st">'G'</span> <span class="sc">&amp;</span> alt_vcf <span class="sc">==</span> <span class="st">'C'</span>)) <span class="sc">&amp;</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>             <span class="sc">!</span>(<span class="fu">is.na</span>(rsid))) <span class="sc">%&gt;%</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>(varID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  snp_annot</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>get_maf_filtered_genotype <span class="ot">&lt;-</span> <span class="cf">function</span>(genotype_file_name,  maf, samples) {</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>  gt_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(genotype_file_name, <span class="at">header =</span> T, <span class="at">stringsAsFactors =</span> F, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>  gt_df <span class="ot">&lt;-</span> gt_df[,(<span class="fu">colnames</span>(gt_df) <span class="sc">%in%</span> samples )] <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>  effect_allele_freqs <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(gt_df) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>  gt_df <span class="ot">&lt;-</span> gt_df[,<span class="fu">which</span>((effect_allele_freqs <span class="sc">&gt;=</span> maf) <span class="sc">&amp;</span> (effect_allele_freqs <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">-</span> maf))]</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>  gt_df</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>get_gene_annotation <span class="ot">&lt;-</span> <span class="cf">function</span>(gene_annot_file_name, chrom, <span class="at">gene_types=</span><span class="fu">c</span>(<span class="st">'protein_coding'</span>, <span class="st">'pseudogene'</span>, <span class="st">'lincRNA'</span>)){</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>  gene_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(gene_annot_file_name, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>((chr <span class="sc">==</span> chrom) <span class="sc">&amp;</span> gene_type <span class="sc">%in%</span> gene_types) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">gene_id =</span> <span class="fu">file_path_sans_ext</span>(gene_id))  <span class="co"># remove gene ver from gene names</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>  gene_df</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>get_gene_type <span class="ot">&lt;-</span> <span class="cf">function</span>(gene_annot, gene) {</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>  gene_annot <span class="ot">&lt;-</span> gene_annot <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">gene_id =</span> <span class="fu">file_path_sans_ext</span>(gene_id))</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene_annot, gene_id <span class="sc">==</span> gene)<span class="sc">$</span>gene_type</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>get_gene_expression <span class="ot">&lt;-</span> <span class="cf">function</span>(gene_expression_file_name, gene_annot) {</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>  expr_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">t</span>(<span class="fu">read.table</span>(gene_expression_file_name, <span class="at">header =</span> T, <span class="at">stringsAsFactors =</span> F, <span class="at">row.names =</span> <span class="dv">1</span>)))</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>  expr_df <span class="ot">&lt;-</span> expr_df <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(expr_df) <span class="ot">&lt;-</span> <span class="fu">file_path_sans_ext</span>(<span class="fu">colnames</span>(expr_df)) <span class="co"># remove gene version number</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>  expr_df <span class="ot">&lt;-</span> expr_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">intersect</span>(gene_annot<span class="sc">$</span>gene_id, <span class="fu">colnames</span>(expr_df))))</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>  expr_df</span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>get_gene_coords <span class="ot">&lt;-</span> <span class="cf">function</span>(gene_annot, gene) {</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>  row <span class="ot">&lt;-</span> gene_annot[<span class="fu">which</span>(gene_annot<span class="sc">$</span>gene_id <span class="sc">==</span> gene),]</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(row<span class="sc">$</span>start, row<span class="sc">$</span>end)</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>get_cis_genotype <span class="ot">&lt;-</span> <span class="cf">function</span>(gt_df, snp_annot, coords, cis_window) {</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>  snp_info <span class="ot">&lt;-</span> snp_annot <span class="sc">%&gt;%</span> <span class="fu">filter</span>((pos <span class="sc">&gt;=</span> (coords[<span class="dv">1</span>] <span class="sc">-</span> cis_window) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(rsid)) <span class="sc">&amp;</span> (pos <span class="sc">&lt;=</span> (coords[<span class="dv">2</span>] <span class="sc">+</span> cis_window)))</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(snp_info) <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Check of the varID exist in the data</span></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="cn">TRUE</span> <span class="sc">%in%</span> (snp_info<span class="sc">$</span>varID <span class="sc">%in%</span> <span class="fu">names</span>(gt_df))) {</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>    cis_gt <span class="ot">&lt;-</span> gt_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">intersect</span>(snp_info<span class="sc">$</span>varID, <span class="fu">colnames</span>(gt_df))))</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">NA</span>) <span class="co"># the varID doesn't exist in the gt_df dataset</span></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>  column_labels <span class="ot">&lt;-</span> <span class="fu">colnames</span>(cis_gt)</span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>  row_labels <span class="ot">&lt;-</span> <span class="fu">rownames</span>(cis_gt)</span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert cis_gt to a matrix for glmnet</span></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>  cis_gt <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">as.matrix</span>(cis_gt), <span class="at">ncol=</span><span class="fu">ncol</span>(cis_gt)) <span class="co"># R is such a bad language.</span></span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(cis_gt) <span class="ot">&lt;-</span> column_labels</span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(cis_gt) <span class="ot">&lt;-</span> row_labels</span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>  cis_gt</span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a>get_covariates <span class="ot">&lt;-</span> <span class="cf">function</span>(covariate_file_name, samples) {</span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a>  cov_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(covariate_file_name, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a>  cov_df <span class="ot">&lt;-</span> cov_df[,(<span class="fu">names</span>(cov_df) <span class="sc">%in%</span> samples )] <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a>  cov_df</span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>adjust_for_covariates <span class="ot">&lt;-</span> <span class="cf">function</span>(expression_vec, cov_df) {</span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>  combined_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(expression_vec, cov_df)</span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a>  expr_resid <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">lm</span>(expression_vec <span class="sc">~</span> ., <span class="at">data=</span>combined_df))<span class="sc">$</span>residuals</span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a>  expr_resid <span class="ot">&lt;-</span> <span class="fu">scale</span>(expr_resid, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>  expr_resid</span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>do_elastic_net <span class="ot">&lt;-</span> <span class="cf">function</span>(cis_gt, expr_adj, n_folds, cv_fold_ids, n_times, alpha) {</span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a>  <span class="co">#tryCatch({</span></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a>    cis_gt <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(cis_gt)</span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(cis_gt, expr_adj, <span class="at">nfolds =</span> n_folds, <span class="at">alpha =</span> alpha, <span class="at">keep =</span> <span class="cn">TRUE</span>, <span class="at">type.measure=</span><span class="st">'mse'</span>, <span class="at">foldid =</span> cv_fold_ids[,<span class="dv">1</span>], <span class="at">parallel =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a>    lambda_seq <span class="ot">&lt;-</span> fit<span class="sc">$</span>lambda</span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a>    cvms <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow=</span><span class="fu">length</span>(lambda_seq), <span class="at">ncol=</span>n_times)</span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a>    fits <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a>    fits[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> fit</span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a>    cvms <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">100</span>, <span class="at">ncol =</span> n_times)</span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a>    cvms[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fit<span class="sc">$</span>cvm),<span class="dv">1</span>] <span class="ot">&lt;-</span> fit<span class="sc">$</span>cvm</span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>(n_times)) {</span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a>      fit <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(cis_gt, expr_adj, <span class="at">lambda =</span> lambda_seq, <span class="at">nfolds =</span> n_folds, <span class="at">alpha =</span> alpha, <span class="at">keep =</span> <span class="cn">FALSE</span>, <span class="at">foldid =</span> cv_fold_ids[,i], <span class="at">parallel =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a>      fits[[i]] <span class="ot">&lt;-</span> fit</span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a>      cvms[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fit<span class="sc">$</span>cvm),i] <span class="ot">&lt;-</span> fit<span class="sc">$</span>cvm</span>
+<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a>    avg_cvm <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(cvms)</span>
+<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a>    best_lam_ind <span class="ot">&lt;-</span> <span class="fu">which.min</span>(avg_cvm)</span>
+<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a>    best_lambda <span class="ot">&lt;-</span> lambda_seq[best_lam_ind]</span>
+<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">cv_fit =</span> fits[[<span class="dv">1</span>]], <span class="at">min_avg_cvm =</span> <span class="fu">min</span>(avg_cvm, <span class="at">na.rm =</span> T), <span class="at">best_lam_ind =</span> best_lam_ind, <span class="at">best_lambda =</span> best_lambda)</span>
+<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  out</span></span>
+<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a>  <span class="co">#},error = function(cond) {</span></span>
+<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  message('Error')</span></span>
+<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  message(geterrmessage())</span></span>
+<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  out &lt;- list()</span></span>
+<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  out</span></span>
+<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>  <span class="co">#}</span></span>
+<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a>  <span class="co">#)</span></span>
+<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a>evaluate_performance <span class="ot">&lt;-</span> <span class="cf">function</span>(cis_gt, expr_adj, fit, best_lam_ind, best_lambda, cv_fold_ids, n_folds) {</span>
+<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>  n_nonzero <span class="ot">&lt;-</span> fit<span class="sc">$</span>nzero[best_lam_ind]</span>
+<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"Num-nonzero: {n_nonzero}"</span>))</span>
+<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (n_nonzero <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a>    R2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_folds)</span>
+<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a>    corr_folds <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_folds)</span>
+<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>    pval_folds <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_folds)</span>
+<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a>    zscore_folds <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_folds)</span>
+<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> (<span class="dv">1</span><span class="sc">:</span>n_folds)) {</span>
+<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>      fold_idxs <span class="ot">&lt;-</span> <span class="fu">which</span>(cv_fold_ids[,<span class="dv">1</span>] <span class="sc">==</span> j)</span>
+<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a>      fitted_y <span class="ot">&lt;-</span> fit<span class="sc">$</span>fit.preval[, best_lam_ind]</span>
+<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a>      tss <span class="ot">&lt;-</span> <span class="fu">sum</span>(expr_adj[fold_idxs]<span class="sc">**</span><span class="dv">2</span>)</span>
+<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a>      rss <span class="ot">&lt;-</span> <span class="fu">sum</span>((expr_adj[fold_idxs] <span class="sc">-</span> fitted_y[fold_idxs])<span class="sc">**</span><span class="dv">2</span>)</span>
+<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a>      R2[j] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (rss<span class="sc">/</span>tss)</span>
+<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a>      corr_folds[j] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">sd</span>(fitted_y[fold_idxs]) <span class="sc">!=</span> <span class="dv">0</span>,</span>
+<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">cor</span>(expr_adj[fold_idxs], fitted_y[fold_idxs]), <span class="dv">0</span>)</span>
+<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a>      pval_folds[j] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">sd</span>(fitted_y[fold_idxs]) <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">length</span>(expr_adj[fold_idxs]) <span class="sc">&gt;</span> <span class="dv">3</span>,</span>
+<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">cor.test</span>(expr_adj[fold_idxs],fitted_y[fold_idxs])<span class="sc">$</span>p.value, <span class="dv">1</span>)</span>
+<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a>      zscore_folds[j] <span class="ot">&lt;-</span> <span class="fu">atanh</span>(corr_folds[j]) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(expr_adj[fold_idxs]) <span class="sc">-</span> <span class="dv">3</span>) <span class="co"># Fisher transformation</span></span>
+<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a>    best_fit <span class="ot">&lt;-</span> fit<span class="sc">$</span>glmnet.fit</span>
+<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a>    expr_adj_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(best_fit, <span class="fu">as.matrix</span>(cis_gt), <span class="at">s =</span> best_lambda)</span>
+<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a>    tss <span class="ot">&lt;-</span> <span class="fu">sum</span>(expr_adj<span class="sc">**</span><span class="dv">2</span>)</span>
+<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a>    rss <span class="ot">&lt;-</span> <span class="fu">sum</span>((expr_adj <span class="sc">-</span> expr_adj_pred)<span class="sc">**</span><span class="dv">2</span>)</span>
+<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a>    n_samp <span class="ot">&lt;-</span> <span class="fu">length</span>(expr_adj)</span>
+<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a>    <span class="co">#f_stat &lt;- ((tss - rss) / n_nonzero) / (rss / (n_samp - ncol(cis_gt) - 1))</span></span>
+<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a>    <span class="co">#p_val &lt;- pf(f_stat, n_samp - 1, n_samp - ncol(cis_gt) - 1, lower.tail = FALSE)</span></span>
+<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> best_fit<span class="sc">$</span>beta[<span class="fu">which</span>(best_fit<span class="sc">$</span>beta[,best_lam_ind] <span class="sc">!=</span> <span class="dv">0</span>), best_lam_ind]</span>
+<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a>    weighted_snps <span class="ot">&lt;-</span> <span class="fu">names</span>(best_fit<span class="sc">$</span>beta[,best_lam_ind])[<span class="fu">which</span>(best_fit<span class="sc">$</span>beta[,best_lam_ind] <span class="sc">!=</span> <span class="dv">0</span>)]</span>
+<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a>    R2_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(R2)</span>
+<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a>    R2_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(R2)</span>
+<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a>    inR2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (rss<span class="sc">/</span>tss)</span>
+<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a>    rho_avg <span class="ot">&lt;-</span> <span class="fu">mean</span>(corr_folds)</span>
+<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a>    rho_se <span class="ot">&lt;-</span> <span class="fu">sd</span>(corr_folds)</span>
+<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a>    rho_avg_squared <span class="ot">&lt;-</span> rho_avg<span class="sc">**</span><span class="dv">2</span></span>
+<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Stouffer's method for combining z scores.</span></span>
+<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a>    zscore_est <span class="ot">&lt;-</span> <span class="fu">sum</span>(zscore_folds) <span class="sc">/</span> <span class="fu">sqrt</span>(n_folds)</span>
+<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a>    zscore_pval <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="fu">abs</span>(zscore_est), <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fisher's method for combining p-values: https://en.wikipedia.org/wiki/Fisher%27s_method</span></span>
+<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a>    pval_est <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">log</span>(pval_folds)), <span class="dv">2</span><span class="sc">*</span>n_folds, <span class="at">lower.tail =</span> F)</span>
+<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Old way</span></span>
+<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a>    pred_perf <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">lm</span>(expr_adj <span class="sc">~</span> fit<span class="sc">$</span>fit.preval[,best_lam_ind]))</span>
+<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a>    pred_perf_rsq <span class="ot">&lt;-</span> pred_perf<span class="sc">$</span>r.squared</span>
+<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a>    <span class="co">#one_sided_pval &lt;- cor.test(expr_adj, fit$fit.preval[,best_lam_ind], alternative = 'greater')$p.value</span></span>
+<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">weights =</span> weights, <span class="at">n_weights =</span> n_nonzero, <span class="at">weighted_snps =</span> weighted_snps, <span class="at">R2_mean =</span> R2_mean, <span class="at">R2_sd =</span> R2_sd,</span>
+<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a>                <span class="at">inR2 =</span> inR2, <span class="at">pval_est=</span>pval_est, <span class="at">rho_avg=</span>rho_avg, <span class="at">rho_se=</span>rho_se, </span>
+<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a>                <span class="at">rho_zscore=</span>zscore_est, <span class="at">rho_avg_squared=</span>rho_avg_squared, <span class="at">zscore_pval=</span>zscore_pval)</span>
+<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">weights =</span> <span class="cn">NA</span>, <span class="at">n_weights =</span> n_nonzero, <span class="at">weighted_snps =</span> <span class="cn">NA</span>, <span class="at">R2_mean =</span> <span class="cn">NA</span>, <span class="at">R2_sd =</span> <span class="cn">NA</span>,</span>
+<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a>                <span class="at">inR2 =</span> <span class="cn">NA</span>, <span class="at">pval_est =</span> <span class="cn">NA</span>, <span class="at">rho_avg =</span> <span class="cn">NA</span>, <span class="at">rho_se=</span> <span class="cn">NA</span>, </span>
+<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a>                <span class="at">rho_zscore=</span> <span class="cn">NA</span>, <span class="at">rho_avg_squared=</span> <span class="cn">NA</span>, <span class="at">zscore_pval=</span> <span class="cn">NA</span>)</span>
+<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a>do_covariance <span class="ot">&lt;-</span> <span class="cf">function</span>(gene_id, cis_gt, rsids, varIDs, out_file) {</span>
+<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a>  model_gt <span class="ot">&lt;-</span> cis_gt[,varIDs, drop<span class="ot">=</span><span class="cn">FALSE</span>]</span>
+<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a>  geno_cov <span class="ot">&lt;-</span> <span class="fu">cov</span>(model_gt)</span>
+<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(dim(geno_cov))</span></span>
+<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a>  cov_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">gene=</span><span class="fu">character</span>(),<span class="at">rsid1=</span><span class="fu">character</span>(),<span class="at">rsid2=</span><span class="fu">character</span>(), <span class="at">covariance=</span><span class="fu">double</span>())</span>
+<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(rsids)) {</span>
+<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> i<span class="sc">:</span><span class="fu">length</span>(rsids)) {</span>
+<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a>      <span class="co">#print(c(i, j))</span></span>
+<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a>      cov_df <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">rbind</span>(cov_df, <span class="fu">data.frame</span>(<span class="at">gene=</span>gene_id,<span class="at">rsid1=</span>rsids[i], <span class="at">rsid2=</span>rsids[j], <span class="at">covariance=</span>geno_cov[i,j])),</span>
+<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a>                         <span class="at">error =</span> <span class="cf">function</span>(cond) <span class="fu">browser</span>())</span>
+<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.table</span>(cov_df, <span class="at">file =</span> out_file, <span class="at">append =</span> <span class="cn">TRUE</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">sep =</span> <span class="st">" "</span>)</span>
+<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a><span class="fu">### Set paths</span></span>
+<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages(library(glue))</span></span>
+<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a><span class="co"># chrom &lt;- 1</span></span>
+<span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a><span class="co"># snp_annot_file &lt;- glue("/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormTRUE_beforeTRUE_scale1/work/f4/d22672a23ca1dffefd3d786b20333b/snp_file")</span></span>
+<span id="cb8-228"><a href="#cb8-228" aria-hidden="true" tabindex="-1"></a><span class="co"># gene_annot_file &lt;- "/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormTRUE_beforeTRUE_scale1/work/f4/d22672a23ca1dffefd3d786b20333b/gene_annot.parsed.txt"</span></span>
+<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a><span class="co"># genotype_file &lt;- glue("/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormTRUE_beforeTRUE_scale1/work/f4/d22672a23ca1dffefd3d786b20333b/genotype_file")</span></span>
+<span id="cb8-230"><a href="#cb8-230" aria-hidden="true" tabindex="-1"></a><span class="co"># expression_file &lt;- "/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormTRUE_beforeTRUE_scale1/work/f4/d22672a23ca1dffefd3d786b20333b/transposed_gene_exp.txt"</span></span>
+<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a><span class="co"># covariates_file &lt;- NULL</span></span>
+<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a><span class="co"># n_k_folds &lt;- 10</span></span>
+<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages(library(dplyr))</span></span>
+<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages(library(glmnet))</span></span>
+<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages((library(reshape2)))</span></span>
+<span id="cb8-238"><a href="#cb8-238" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages(library(methods))</span></span>
+<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a><span class="co"># suppressMessages(library(tools))</span></span>
+<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a><span class="co"># "%&amp;%" &lt;- function(a,b) paste(a,b, sep = "")</span></span>
+<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-243"><a href="#cb8-243" aria-hidden="true" tabindex="-1"></a><span class="fu">## Test MAIN</span></span>
+<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-245"><a href="#cb8-245" aria-hidden="true" tabindex="-1"></a><span class="fu">### read gene get_gene_annotation</span></span>
+<span id="cb8-246"><a href="#cb8-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-249"><a href="#cb8-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-250"><a href="#cb8-250" aria-hidden="true" tabindex="-1"></a><span class="co"># gene_annot &lt;- get_gene_annotation(gene_annot_file, chrom)</span></span>
+<span id="cb8-251"><a href="#cb8-251" aria-hidden="true" tabindex="-1"></a><span class="co"># expr_df &lt;- get_gene_expression(expression_file, gene_annot)</span></span>
+<span id="cb8-252"><a href="#cb8-252" aria-hidden="true" tabindex="-1"></a><span class="co"># samples &lt;- rownames(expr_df)</span></span>
+<span id="cb8-253"><a href="#cb8-253" aria-hidden="true" tabindex="-1"></a><span class="co"># n_samples &lt;- length(samples)</span></span>
+<span id="cb8-254"><a href="#cb8-254" aria-hidden="true" tabindex="-1"></a><span class="co"># genes &lt;- colnames(expr_df)</span></span>
+<span id="cb8-255"><a href="#cb8-255" aria-hidden="true" tabindex="-1"></a><span class="co"># n_genes &lt;- length(expr_df)</span></span>
+<span id="cb8-256"><a href="#cb8-256" aria-hidden="true" tabindex="-1"></a><span class="co"># snp_annot &lt;- get_filtered_snp_annot(snp_annot_file)</span></span>
+<span id="cb8-257"><a href="#cb8-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-258"><a href="#cb8-258" aria-hidden="true" tabindex="-1"></a><span class="co"># maf=0.01</span></span>
+<span id="cb8-259"><a href="#cb8-259" aria-hidden="true" tabindex="-1"></a><span class="co"># gt_df &lt;- get_maf_filtered_genotype(genotype_file, maf, samples)</span></span>
+<span id="cb8-260"><a href="#cb8-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-261"><a href="#cb8-261" aria-hidden="true" tabindex="-1"></a><span class="co"># print(dim(gene_annot))</span></span>
+<span id="cb8-262"><a href="#cb8-262" aria-hidden="true" tabindex="-1"></a><span class="co"># print(dim(expr_df))</span></span>
+<span id="cb8-263"><a href="#cb8-263" aria-hidden="true" tabindex="-1"></a><span class="co"># print(dim(gt_df))</span></span>
+<span id="cb8-264"><a href="#cb8-264" aria-hidden="true" tabindex="-1"></a><span class="co"># print(dim(snp_annot))</span></span>
+<span id="cb8-265"><a href="#cb8-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-266"><a href="#cb8-266" aria-hidden="true" tabindex="-1"></a><span class="co"># print(intersect(rownames(gt_df), rownames(expr_df)))</span></span>
+<span id="cb8-267"><a href="#cb8-267" aria-hidden="true" tabindex="-1"></a><span class="co"># print(length(intersect(rownames(gt_df), rownames(expr_df))))</span></span>
+<span id="cb8-268"><a href="#cb8-268" aria-hidden="true" tabindex="-1"></a><span class="co"># prefix &lt;- "/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2024-02-26-write_predict_db_checks"</span></span>
+<span id="cb8-269"><a href="#cb8-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-270"><a href="#cb8-270" aria-hidden="true" tabindex="-1"></a><span class="co"># seed &lt;- 1</span></span>
+<span id="cb8-271"><a href="#cb8-271" aria-hidden="true" tabindex="-1"></a><span class="co"># n_times &lt;- 3</span></span>
+<span id="cb8-272"><a href="#cb8-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-273"><a href="#cb8-273" aria-hidden="true" tabindex="-1"></a><span class="co"># cis_window &lt;- 1e6</span></span>
+<span id="cb8-274"><a href="#cb8-274" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha &lt;- 0.5</span></span>
+<span id="cb8-275"><a href="#cb8-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-276"><a href="#cb8-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-277"><a href="#cb8-277" aria-hidden="true" tabindex="-1"></a><span class="fu">### Set seed and cv fold_idxs</span></span>
+<span id="cb8-278"><a href="#cb8-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-281"><a href="#cb8-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-282"><a href="#cb8-282" aria-hidden="true" tabindex="-1"></a><span class="co"># # Set seed and cross-validation fold ids----</span></span>
+<span id="cb8-283"><a href="#cb8-283" aria-hidden="true" tabindex="-1"></a><span class="co"># seed &lt;- ifelse(is.na(seed), sample(1:1000000, 1), seed)</span></span>
+<span id="cb8-284"><a href="#cb8-284" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(seed)</span></span>
+<span id="cb8-285"><a href="#cb8-285" aria-hidden="true" tabindex="-1"></a><span class="co"># cv_fold_ids &lt;- matrix(nrow = n_samples, ncol = n_times)</span></span>
+<span id="cb8-286"><a href="#cb8-286" aria-hidden="true" tabindex="-1"></a><span class="co"># for (j in 1:n_times)</span></span>
+<span id="cb8-287"><a href="#cb8-287" aria-hidden="true" tabindex="-1"></a><span class="co">#   cv_fold_ids[,j] &lt;- sample(1:n_k_folds, n_samples, replace = TRUE)</span></span>
+<span id="cb8-288"><a href="#cb8-288" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-289"><a href="#cb8-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-290"><a href="#cb8-290" aria-hidden="true" tabindex="-1"></a><span class="fu">### Start training models</span></span>
+<span id="cb8-293"><a href="#cb8-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-294"><a href="#cb8-294" aria-hidden="true" tabindex="-1"></a><span class="co"># # Prepare output data----</span></span>
+<span id="cb8-295"><a href="#cb8-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-296"><a href="#cb8-296" aria-hidden="true" tabindex="-1"></a><span class="co"># for (i in 1:5) {</span></span>
+<span id="cb8-297"><a href="#cb8-297" aria-hidden="true" tabindex="-1"></a><span class="co">#     cat(i, "/", n_genes, "\n")</span></span>
+<span id="cb8-298"><a href="#cb8-298" aria-hidden="true" tabindex="-1"></a><span class="co">#     gene &lt;- genes[i]</span></span>
+<span id="cb8-299"><a href="#cb8-299" aria-hidden="true" tabindex="-1"></a><span class="co">#     gene_name &lt;- gene_annot$gene_name[gene_annot$gene_id == gene]</span></span>
+<span id="cb8-300"><a href="#cb8-300" aria-hidden="true" tabindex="-1"></a><span class="co">#     gene_type &lt;- get_gene_type(gene_annot, gene)</span></span>
+<span id="cb8-301"><a href="#cb8-301" aria-hidden="true" tabindex="-1"></a><span class="co">#     coords &lt;- get_gene_coords(gene_annot, gene)</span></span>
+<span id="cb8-302"><a href="#cb8-302" aria-hidden="true" tabindex="-1"></a><span class="co">#     cis_gt &lt;- get_cis_genotype(gt_df, snp_annot, coords, cis_window)</span></span>
+<span id="cb8-303"><a href="#cb8-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-304"><a href="#cb8-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-305"><a href="#cb8-305" aria-hidden="true" tabindex="-1"></a><span class="co">#     if (ncol(cis_gt) &gt;= 2) {</span></span>
+<span id="cb8-306"><a href="#cb8-306" aria-hidden="true" tabindex="-1"></a><span class="co">#       expression_vec &lt;- expr_df[,i]</span></span>
+<span id="cb8-307"><a href="#cb8-307" aria-hidden="true" tabindex="-1"></a><span class="co">#       if (is.null(NULL)) {</span></span>
+<span id="cb8-308"><a href="#cb8-308" aria-hidden="true" tabindex="-1"></a><span class="co">#         adj_expression &lt;- as.matrix(expression_vec)</span></span>
+<span id="cb8-309"><a href="#cb8-309" aria-hidden="true" tabindex="-1"></a><span class="co">#         rownames(adj_expression) &lt;- rownames(expr_df)</span></span>
+<span id="cb8-310"><a href="#cb8-310" aria-hidden="true" tabindex="-1"></a><span class="co">#       } else {</span></span>
+<span id="cb8-311"><a href="#cb8-311" aria-hidden="true" tabindex="-1"></a><span class="co">#         adj_expression &lt;- adjust_for_covariates(expression_vec, covariates_df)</span></span>
+<span id="cb8-312"><a href="#cb8-312" aria-hidden="true" tabindex="-1"></a><span class="co">#       }</span></span>
+<span id="cb8-313"><a href="#cb8-313" aria-hidden="true" tabindex="-1"></a><span class="co">#       # Filter out samples that are in both expression and genotype data.</span></span>
+<span id="cb8-314"><a href="#cb8-314" aria-hidden="true" tabindex="-1"></a><span class="co">#       adj_expression &lt;- as.matrix(adj_expression[(rownames(adj_expression) %in% rownames(cis_gt)),])</span></span>
+<span id="cb8-315"><a href="#cb8-315" aria-hidden="true" tabindex="-1"></a><span class="co">#       # sort row names to be in the same order for X and y</span></span>
+<span id="cb8-316"><a href="#cb8-316" aria-hidden="true" tabindex="-1"></a><span class="co">#       cis_gt = cis_gt[match(rownames(adj_expression), rownames(cis_gt)),]</span></span>
+<span id="cb8-317"><a href="#cb8-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-318"><a href="#cb8-318" aria-hidden="true" tabindex="-1"></a><span class="co">#       elnet_out &lt;- do_elastic_net(cis_gt, adj_expression, n_k_folds, cv_fold_ids, n_times, alpha)</span></span>
+<span id="cb8-319"><a href="#cb8-319" aria-hidden="true" tabindex="-1"></a><span class="co">#       if (length(elnet_out) &gt; 0) {</span></span>
+<span id="cb8-320"><a href="#cb8-320" aria-hidden="true" tabindex="-1"></a><span class="co">#         eval &lt;- evaluate_performance(cis_gt, adj_expression, elnet_out$cv_fit, </span></span>
+<span id="cb8-321"><a href="#cb8-321" aria-hidden="true" tabindex="-1"></a><span class="co">#         elnet_out$best_lam_ind, elnet_out$best_lambda, cv_fold_ids, n_k_folds)</span></span>
+<span id="cb8-322"><a href="#cb8-322" aria-hidden="true" tabindex="-1"></a><span class="co">#         model_summary &lt;- c(gene, gene_name, gene_type, alpha, ncol(cis_gt),           elnet_out$min_avg_cvm, elnet_out$best_lam_ind,</span></span>
+<span id="cb8-323"><a href="#cb8-323" aria-hidden="true" tabindex="-1"></a><span class="co">#                            elnet_out$best_lambda, eval$n_weights, eval$R2_mean, eval$R2_sd, eval$inR2,</span></span>
+<span id="cb8-324"><a href="#cb8-324" aria-hidden="true" tabindex="-1"></a><span class="co">#                            eval$pval_est, eval$rho_avg, eval$rho_se, eval$rho_zscore, eval$rho_avg_squared, eval$zscore_pval)</span></span>
+<span id="cb8-325"><a href="#cb8-325" aria-hidden="true" tabindex="-1"></a><span class="co">#         print(model_summary)</span></span>
+<span id="cb8-326"><a href="#cb8-326" aria-hidden="true" tabindex="-1"></a><span class="co">#         print(eval)</span></span>
+<span id="cb8-327"><a href="#cb8-327" aria-hidden="true" tabindex="-1"></a><span class="co">#         print(length(model_summary))</span></span>
+<span id="cb8-328"><a href="#cb8-328" aria-hidden="true" tabindex="-1"></a><span class="co">#     }</span></span>
+<span id="cb8-329"><a href="#cb8-329" aria-hidden="true" tabindex="-1"></a><span class="co">#   }</span></span>
+<span id="cb8-330"><a href="#cb8-330" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb8-331"><a href="#cb8-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-332"><a href="#cb8-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-333"><a href="#cb8-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-334"><a href="#cb8-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-335"><a href="#cb8-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-336"><a href="#cb8-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-337"><a href="#cb8-337" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prechecks</span></span>
+<span id="cb8-338"><a href="#cb8-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-339"><a href="#cb8-339" aria-hidden="true" tabindex="-1"></a>Prechecks should be:</span>
+<span id="cb8-340"><a href="#cb8-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-341"><a href="#cb8-341" aria-hidden="true" tabindex="-1"></a>1.) Gene overlap between expression data and gene annotations should be high relative to the number of genes in the expression data.</span>
+<span id="cb8-342"><a href="#cb8-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-343"><a href="#cb8-343" aria-hidden="true" tabindex="-1"></a>2.) Sample overlap between expression data and genotype data should be high relative to the number of samples in the expression data.</span>
+<span id="cb8-344"><a href="#cb8-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-345"><a href="#cb8-345" aria-hidden="true" tabindex="-1"></a>3.) SNP overlap between genotype data and SNP annotations should be high relative to the number of SNPs in the genotype data.</span>
+<span id="cb8-346"><a href="#cb8-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-347"><a href="#cb8-347" aria-hidden="true" tabindex="-1"></a>4.) Formatting of each file should match documentation</span>
+<span id="cb8-348"><a href="#cb8-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-349"><a href="#cb8-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-352"><a href="#cb8-352" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-353"><a href="#cb8-353" aria-hidden="true" tabindex="-1"></a><span class="co"># summ &lt;- read.table("/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormTRUE_beforeTRUE_scale1/work/f4/d22672a23ca1dffefd3d786b20333b/summary/Model_training_chr1_model_summaries.txt")</span></span>
+<span id="cb8-354"><a href="#cb8-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-355"><a href="#cb8-355" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-356"><a href="#cb8-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-357"><a href="#cb8-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-360"><a href="#cb8-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-361"><a href="#cb8-361" aria-hidden="true" tabindex="-1"></a><span class="co"># summ</span></span>
+<span id="cb8-362"><a href="#cb8-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

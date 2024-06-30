@@ -333,6 +333,13 @@ https://www.tooplate.com/view/2120-ben-resume
     color: var(--white-color);
   }
 
+  /* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
 
   /*---------------------------------------
      ABOUT                
@@ -621,4 +628,5 @@ https://www.tooplate.com/view/2120-ben-resume
       font-size: 20px;
       padding: 0.3rem 2rem 0.6rem 2rem;
     }
+
   }

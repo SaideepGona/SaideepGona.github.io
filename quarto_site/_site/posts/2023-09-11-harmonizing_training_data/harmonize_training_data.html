@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saideep Gona">
+<meta name="dcterms.date" content="2023-09-11">
+
+<title>Daily-Blog-Sai - harmonizing_training_data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daily-Blog-Sai</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">harmonizing_training_data</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saideep Gona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 11, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os,sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> updated_reindexed_dictionary(regions, h5_path, individual, dictionary):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Re-index individual</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.exists(h5_path):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(h5_path, "does not exist")</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> h5py.File(h5_path, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        stored_regions_raw <span class="op">=</span> f[<span class="st">'regions'</span>][:]</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    stored_regions <span class="op">=</span> []</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(stored_regions_raw.shape[<span class="op">-</span><span class="dv">1</span>]):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        stored_regions.append(<span class="st">"_"</span>.join(<span class="bu">list</span>(stored_regions_raw[<span class="dv">0</span>,:,i].astype(<span class="bu">str</span>))))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    stored_region_index <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, region <span class="kw">in</span> <span class="bu">enumerate</span>(regions):</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> region <span class="op">==</span> stored_regions[stored_region_index]:</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print("Matched", region, stored_regions[stored_region_index])</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            dictionary[region][individual] <span class="op">=</span> stored_region_index</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            stored_region_index <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sequences_bed <span class="op">=</span> <span class="st">"/project2/haky/saideep/aracena_data_preprocessing/test_conversion/sequences_chunked.bed"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>hdf5_files_path <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> [<span class="st">'EU03_NI'</span>, <span class="st">'AF30_NI'</span>, <span class="st">'AF36_NI'</span>, <span class="st">'AF20_Flu'</span>, <span class="st">'EU13_NI'</span>, <span class="st">'EU47_NI'</span>, <span class="st">'EU41_NI'</span>, <span class="st">'EU27_NI'</span>, <span class="st">'AF18_Flu'</span>, <span class="st">'AF22_NI'</span>, <span class="st">'EU21_NI'</span>, <span class="st">'EU15_Flu'</span>, <span class="st">'EU25_Flu'</span>, <span class="st">'AF22_Flu'</span>, <span class="st">'EU25_NI'</span>, <span class="st">'EU05_NI'</span>, <span class="st">'EU15_NI'</span>, <span class="st">'AF34_Flu'</span>, <span class="st">'EU05_Flu'</span>, <span class="st">'EU03_Flu'</span>, <span class="st">'EU07_NI'</span>, <span class="st">'EU07_Flu'</span>, <span class="st">'AF24_NI'</span>, <span class="st">'EU41_Flu'</span>, <span class="st">'EU19_NI'</span>, <span class="st">'EU19_Flu'</span>, <span class="st">'AF16_Flu'</span>, <span class="st">'EU27_Flu'</span>, <span class="st">'EU21_Flu'</span>, <span class="st">'EU09_NI'</span>, <span class="st">'AF24_Flu'</span>, <span class="st">'AF08_NI'</span>, <span class="st">'AF26_Flu'</span>, <span class="st">'AF38_Flu'</span>, <span class="st">'AF34_NI'</span>, <span class="st">'AF08_Flu'</span>, <span class="st">'EU33_NI'</span>, <span class="st">'EU13_Flu'</span>, <span class="st">'AF26_NI'</span>, <span class="st">'EU39_NI'</span>, <span class="st">'AF20_NI'</span>, <span class="st">'AF28_NI'</span>, <span class="st">'AF12_Flu'</span>, <span class="st">'AF18_NI'</span>, <span class="st">'AF30_Flu'</span>, <span class="st">'AF38_NI'</span>, <span class="st">'AF12_NI'</span>, <span class="st">'AF16_NI'</span>, <span class="st">'EU47_Flu'</span>, <span class="st">'EU33_Flu'</span>, <span class="st">'AF36_Flu'</span>, <span class="st">'EU09_Flu'</span>, <span class="st">'AF28_Flu'</span>, <span class="st">'EU39_Flu'</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>individuals <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>([x.split(<span class="st">"_"</span>)[<span class="dv">0</span>] <span class="cf">for</span> x <span class="kw">in</span> samples]))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>individuals.append(<span class="st">"ref-epigenome"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>individuals.append(<span class="st">"group"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>groups <span class="op">=</span> [<span class="st">"train"</span><span class="op">+</span><span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">19</span>)]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>groups.append(<span class="st">"test"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>groups.append(<span class="st">"valid"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(groups)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>grouped_regions <span class="op">=</span> {}</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> group <span class="kw">in</span> groups:</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    grouped_regions[group] <span class="op">=</span> []</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>regions <span class="op">=</span> []</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>chrom_counts_full <span class="op">=</span> {}</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(sequences_bed, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        p_line <span class="op">=</span> line.strip().split(<span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p_line[<span class="dv">0</span>] <span class="kw">not</span> <span class="kw">in</span> chrom_counts_full:</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>            chrom_counts_full[p_line[<span class="dv">0</span>]] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        chrom_counts_full[p_line[<span class="dv">0</span>]] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        region <span class="op">=</span> <span class="st">"_"</span>.join(p_line[<span class="dv">0</span>:<span class="dv">3</span>])</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>        regions.append(region.strip(<span class="st">"chr"</span>))</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        group <span class="op">=</span> p_line[<span class="dv">3</span>]</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        grouped_regions[group].append(region)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>remapped_table_dict <span class="op">=</span> {}</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> region <span class="kw">in</span> regions:</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        remapped_table_dict[region] <span class="op">=</span> {}</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> individual <span class="kw">in</span> individuals:</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>            remapped_table_dict[region][individual] <span class="op">=</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>['train1', 'train2', 'train3', 'train4', 'train5', 'train6', 'train7', 'train8', 'train9', 'train10', 'train11', 'train12', 'train13', 'train14', 'train15', 'train16', 'train17', 'train18', 'test', 'valid']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(groups)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(individuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>['train1', 'train2', 'train3', 'train4', 'train5', 'train6', 'train7', 'train8', 'train9', 'train10', 'train11', 'train12', 'train13', 'train14', 'train15', 'train16', 'train17', 'train18', 'test', 'valid']
+['AF22', 'AF38', 'EU13', 'EU47', 'EU27', 'AF26', 'AF08', 'EU41', 'EU39', 'AF12', 'AF36', 'AF34', 'EU09', 'EU19', 'EU33', 'AF28', 'EU15', 'EU05', 'AF20', 'AF24', 'AF18', 'EU07', 'AF30', 'EU21', 'EU03', 'EU25', 'AF16', 'ref-epigenome', 'group']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>regions_set <span class="op">=</span> <span class="bu">set</span>(regions)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> group <span class="kw">in</span> groups:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if group != "train1":</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     continue</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(group)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ind <span class="kw">in</span> individuals:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        h5_path <span class="op">=</span> os.path.join(hdf5_files_path,ind<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>group<span class="op">+</span><span class="st">"_aracena.h5"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> os.path.exists(h5_path):</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print(h5_path, "does not exist")</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> h5py.File(h5_path, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>            stored_regions_raw <span class="op">=</span> f[<span class="st">'regions'</span>][:]</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        stored_regions <span class="op">=</span> []</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(stored_regions_raw.shape[<span class="op">-</span><span class="dv">1</span>]):</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>            stored_regions.append(<span class="st">"_"</span>.join(<span class="bu">list</span>(stored_regions_raw[<span class="dv">0</span>,:,i].astype(<span class="bu">str</span>))))</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        cur_stored_region_count <span class="op">=</span> <span class="bu">len</span>(stored_regions)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(cur_stored_region_count, group, ind)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># continue</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check if stored region is in the regions superset, and add the index to the full table</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>        stored_region_index <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, stored_region <span class="kw">in</span> <span class="bu">enumerate</span>(stored_regions):</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> stored_region <span class="kw">in</span> regions_set:</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>                remapped_table_dict[stored_region][ind] <span class="op">=</span> <span class="bu">int</span>(i)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>                remapped_table_dict[stored_region][<span class="st">"group"</span>] <span class="op">=</span> group</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(os.path.join(hdf5_files_path,ind+"_"+group+"_aracena.h5"))</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># updated_reindexed_dictionary(grouped_regions[group], os.path.join(hdf5_files_path,ind+"_"+group+"_aracena.h5"), ind, remapped_table_dict)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1979 train1 EU47
+1979 train1 EU33
+1979 train1 AF28
+1979 train1 EU05
+1998 train1 AF20
+1979 train1 AF30
+1979 train1 AF16
+1594 train1 ref-epigenome
+1985 train2 EU47
+1985 train2 EU33
+1985 train2 AF28
+1985 train2 EU05
+1999 train2 AF20
+1985 train2 AF30
+1985 train2 AF16
+1601 train2 ref-epigenome
+1977 train3 EU47
+1977 train3 EU33
+1977 train3 AF28
+1977 train3 EU05
+1997 train3 AF20
+1977 train3 AF30
+1977 train3 AF16
+1626 train3 ref-epigenome
+1979 train4 EU47
+1979 train4 EU33
+1979 train4 AF28
+1979 train4 EU05
+1997 train4 AF20
+1979 train4 AF30
+1979 train4 AF16
+1584 train4 ref-epigenome
+1987 train5 EU47
+1987 train5 EU33
+1987 train5 AF28
+1987 train5 EU05
+1994 train5 AF20
+1987 train5 AF30
+1987 train5 AF16
+1600 train5 ref-epigenome
+1980 train6 EU47
+1980 train6 EU33
+1980 train6 AF28
+1997 train6 AF20
+1980 train6 AF30
+1980 train6 AF16
+1609 train6 ref-epigenome
+1980 train7 EU47
+1980 train7 EU33
+1980 train7 AF28
+1996 train7 AF20
+1980 train7 AF30
+1980 train7 AF16
+1569 train7 ref-epigenome
+1987 train8 EU47
+1987 train8 EU33
+1987 train8 AF28
+1987 train8 EU05
+1997 train8 AF20
+1987 train8 AF30
+1987 train8 AF16
+1582 train8 ref-epigenome
+1992 train9 EU47
+1992 train9 EU33
+1992 train9 AF28
+1992 train9 EU05
+1993 train9 AF20
+1992 train9 AF30
+1992 train9 AF16
+1574 train9 ref-epigenome
+1981 train10 EU47
+1981 train10 EU33
+1981 train10 AF28
+1981 train10 EU05
+2000 train10 AF20
+1981 train10 AF30
+1981 train10 AF16
+1602 train10 ref-epigenome
+1989 train11 EU47
+1989 train11 EU33
+1989 train11 AF28
+1989 train11 EU05
+1996 train11 AF20
+1989 train11 AF30
+1989 train11 AF16
+1582 train11 ref-epigenome
+1981 train12 EU47
+1981 train12 EU33
+1981 train12 AF28
+1981 train12 EU05
+1992 train12 AF20
+1981 train12 AF30
+1981 train12 AF16
+1591 train12 ref-epigenome
+1987 train13 EU47
+1987 train13 EU33
+1987 train13 AF28
+1987 train13 EU05
+1998 train13 AF20
+1987 train13 AF30
+1987 train13 AF16
+1588 train13 ref-epigenome
+1984 train14 EU47
+1984 train14 EU33
+1984 train14 AF28
+1984 train14 EU05
+1998 train14 AF20
+1984 train14 AF30
+1984 train14 AF16
+1592 train14 ref-epigenome
+1980 train15 EU47
+1980 train15 EU33
+1980 train15 AF28
+1980 train15 EU05
+1995 train15 AF20
+1980 train15 AF30
+1980 train15 AF16
+1568 train15 ref-epigenome
+1977 train16 EU47
+1977 train16 EU33
+1977 train16 AF28
+1977 train16 EU05
+1997 train16 AF20
+1977 train16 AF30
+1977 train16 AF16
+1627 train16 ref-epigenome
+1986 train17 EU47
+1986 train17 EU33
+1986 train17 AF28
+1986 train17 EU05
+1997 train17 AF20
+1986 train17 AF30
+1986 train17 AF16
+1606 train17 ref-epigenome
+21 train18 EU47
+21 train18 EU33
+21 train18 AF28
+21 train18 EU05
+21 train18 AF20
+21 train18 AF30
+21 train18 AF16
+17 train18 ref-epigenome
+1912 test EU47
+1912 test EU33
+1912 test AF28
+1912 test EU05
+1933 test AF20
+1912 test AF30
+1912 test AF16
+1923 test ref-epigenome
+2173 valid EU47
+2173 valid EU33
+2173 valid AF28
+2173 valid EU05
+2209 valid AF20
+2173 valid AF30
+2173 valid AF16
+1915 valid ref-epigenome</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>remapped_table <span class="op">=</span> pd.DataFrame.from_dict(remapped_table_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(remapped_table.shape)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>remapped_table.to_csv(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/index_files/remapped_table_full.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(29, 38171)</code></pre>
+</div>
+</div>
+<p>Ok cool, this table contains the indeces for each individual/window combo in their corresponding training dataset. We can subsequently filter out regions, individuals for which data is not present in all intended training subsets. This filtered table can be used to guide the training so that there is no missing data being iterated over, and so the dataloader can find the correct data at each iteration.</p>
+<p>Let’s start by including only individuals with a significant amount of data</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>remapped_table_filt <span class="op">=</span> remapped_table.dropna(thresh<span class="op">=</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>remapped_table_filt <span class="op">=</span> remapped_table_filt.dropna(axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(remapped_table_filt.shape)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>remapped_table_filt.to_csv(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/hdf5_training/index_files/remapped_table_filt.csv"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>remapped_table_filt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(9, 26280)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">18_928386_1059458</th>
+<th data-quarto-table-cell-role="th">4_113630947_113762019</th>
+<th data-quarto-table-cell-role="th">11_18427720_18558792</th>
+<th data-quarto-table-cell-role="th">16_85805681_85936753</th>
+<th data-quarto-table-cell-role="th">3_158386188_158517260</th>
+<th data-quarto-table-cell-role="th">8_132158314_132289386</th>
+<th data-quarto-table-cell-role="th">21_35639003_35770075</th>
+<th data-quarto-table-cell-role="th">16_24521594_24652666</th>
+<th data-quarto-table-cell-role="th">8_18647448_18778520</th>
+<th data-quarto-table-cell-role="th">4_133441845_133572917</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">14_30965924_31096996</th>
+<th data-quarto-table-cell-role="th">11_29225411_29356483</th>
+<th data-quarto-table-cell-role="th">14_82805352_82936424</th>
+<th data-quarto-table-cell-role="th">14_44040470_44171542</th>
+<th data-quarto-table-cell-role="th">15_25685343_25816415</th>
+<th data-quarto-table-cell-role="th">19_33204702_33335774</th>
+<th data-quarto-table-cell-role="th">14_41861379_41992451</th>
+<th data-quarto-table-cell-role="th">19_30681544_30812616</th>
+<th data-quarto-table-cell-role="th">14_61473198_61604270</th>
+<th data-quarto-table-cell-role="th">2_129664471_129795543</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">EU47</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>...</td>
+<td>1899</td>
+<td>1902</td>
+<td>1903</td>
+<td>1905</td>
+<td>1906</td>
+<td>1907</td>
+<td>1908</td>
+<td>1909</td>
+<td>1910</td>
+<td>1911</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">EU33</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>...</td>
+<td>1899</td>
+<td>1902</td>
+<td>1903</td>
+<td>1905</td>
+<td>1906</td>
+<td>1907</td>
+<td>1908</td>
+<td>1909</td>
+<td>1910</td>
+<td>1911</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">AF28</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>...</td>
+<td>1899</td>
+<td>1902</td>
+<td>1903</td>
+<td>1905</td>
+<td>1906</td>
+<td>1907</td>
+<td>1908</td>
+<td>1909</td>
+<td>1910</td>
+<td>1911</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">EU05</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>...</td>
+<td>1899</td>
+<td>1902</td>
+<td>1903</td>
+<td>1905</td>
+<td>1906</td>
+<td>1907</td>
+<td>1908</td>
+<td>1909</td>
+<td>1910</td>
+<td>1911</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">AF20</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>...</td>
+<td>1919</td>
+<td>1922</td>
+<td>1923</td>
+<td>1925</td>
+<td>1926</td>
+<td>1928</td>
+<td>1929</td>
+<td>1930</td>
+<td>1931</td>
+<td>1932</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">AF30</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>...</td>
+<td>1899</td>
+<td>1902</td>
+<td>1903</td>
+<td>1905</td>
+<td>1906</td>
+<td>1907</td>
+<td>1908</td>
+<td>1909</td>
+<td>1910</td>
+<td>1911</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">AF16</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>...</td>
+<td>1899</td>
+<td>1902</td>
+<td>1903</td>
+<td>1905</td>
+<td>1906</td>
+<td>1907</td>
+<td>1908</td>
+<td>1909</td>
+<td>1910</td>
+<td>1911</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">ref-epigenome</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>...</td>
+<td>1909</td>
+<td>1912</td>
+<td>1913</td>
+<td>1915</td>
+<td>1916</td>
+<td>1918</td>
+<td>1919</td>
+<td>1920</td>
+<td>1921</td>
+<td>1922</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">group</td>
+<td>train1</td>
+<td>train1</td>
+<td>train1</td>
+<td>train1</td>
+<td>train1</td>
+<td>train1</td>
+<td>train1</td>
+<td>train1</td>
+<td>train1</td>
+<td>train1</td>
+<td>...</td>
+<td>test</td>
+<td>test</td>
+<td>test</td>
+<td>test</td>
+<td>test</td>
+<td>test</td>
+<td>test</td>
+<td>test</td>
+<td>test</td>
+<td>test</td>
+</tr>
+</tbody>
+</table>
+
+<p>9 rows × 26280 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="26">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ref_epi_nonna <span class="op">=</span> remapped_table.loc[<span class="st">"ref-epigenome"</span>].dropna()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ref_epi_nonna_list <span class="op">=</span> <span class="bu">list</span>(ref_epi_nonna.index)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>chrom_counts <span class="op">=</span> {}</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">23</span>):</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    chrom_counts[<span class="bu">str</span>(x)] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> region <span class="kw">in</span> ref_epi_nonna_list:</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> region.split(<span class="st">"_"</span>)[<span class="dv">0</span>] <span class="kw">not</span> <span class="kw">in</span> chrom_counts:</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        chrom_counts[region.split(<span class="st">"_"</span>)[<span class="dv">0</span>]] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    chrom_counts[region.split(<span class="st">"_"</span>)[<span class="dv">0</span>]] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># print(chrom_counts_full)</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># print(chrom_counts)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="27">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">23</span>):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    full_count <span class="op">=</span> chrom_counts_full[<span class="st">"chr"</span><span class="op">+</span><span class="bu">str</span>(x)]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    filt_count <span class="op">=</span> chrom_counts[<span class="bu">str</span>(x)]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"chr"</span><span class="op">+</span><span class="bu">str</span>(x), full_count, filt_count, filt_count<span class="op">/</span>full_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>chr1 3259 168 0.05154955507824486
+chr2 3102 151 0.0486782720825274
+chr3 2798 172 0.061472480343102216
+chr4 2805 169 0.060249554367201426
+chr5 2582 0 0.0
+chr6 2380 0 0.0
+chr7 2143 0 0.0
+chr8 2090 125 0.05980861244019139
+chr9 1637 103 0.06291997556505803
+chr10 1906 129 0.0676810073452256
+chr11 1740 84 0.04827586206896552
+chr12 1929 109 0.05650596163815448
+chr13 1324 56 0.04229607250755287
+chr14 753 0 0.0
+chr15 1106 40 0.03616636528028933
+chr16 1063 63 0.059266227657572904
+chr17 1099 54 0.04913557779799818
+chr18 1052 75 0.07129277566539924
+chr19 577 16 0.02772963604852686
+chr20 669 26 0.03886397608370702
+chr21 480 33 0.06875
+chr22 467 21 0.044967880085653104</code></pre>
+</div>
+</div>
+<p>Great, in this case (9/12/23) we are left with 8 individuals and ~23k regions. This is plenty for training purposes for now.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

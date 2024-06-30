@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saideep Gona">
+<meta name="dcterms.date" content="2024-04-22">
+
+<title>Daily-Blog-Sai - Analyze_personalized_peak_predictions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daily-Blog-Sai</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a>
+  <ul class="collapse">
+  <li><a href="#personalized-prediction-plots-per-enpact-model" id="toc-personalized-prediction-plots-per-enpact-model" class="nav-link" data-scroll-target="#personalized-prediction-plots-per-enpact-model">Personalized prediction plots per EnPACT model</a></li>
+  <li><a href="#personalized-prediction-model-summaries-across-enpact-models" id="toc-personalized-prediction-model-summaries-across-enpact-models" class="nav-link" data-scroll-target="#personalized-prediction-model-summaries-across-enpact-models">Personalized prediction model summaries across EnPACT models</a></li>
+  <li><a href="#plot-correlation-distributions" id="toc-plot-correlation-distributions" class="nav-link" data-scroll-target="#plot-correlation-distributions">Plot correlation distributions</a></li>
+  <li><a href="#plot-mean-personalized-prediction-correlation-across-peaks-in-different-enpact-models" id="toc-plot-mean-personalized-prediction-correlation-across-peaks-in-different-enpact-models" class="nav-link" data-scroll-target="#plot-mean-personalized-prediction-correlation-across-peaks-in-different-enpact-models">Plot mean personalized prediction correlation across peaks in different EnPACT models</a></li>
+  <li><a href="#plot-variance-of-personalized-prediction-correlations-across-peaks-in-different-enpact-models" id="toc-plot-variance-of-personalized-prediction-correlations-across-peaks-in-different-enpact-models" class="nav-link" data-scroll-target="#plot-variance-of-personalized-prediction-correlations-across-peaks-in-different-enpact-models">Plot variance of personalized prediction correlations across peaks in different EnPACT models</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Analyze_personalized_peak_predictions</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saideep Gona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 22, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="context" class="level2">
+<h2 class="anchored" data-anchor-id="context">Context</h2>
+<p>Having developed a repo to automatically train EnPACT models and having run on a series of peak-based epigenetic marks, here I collect the results of personalized prediction accuracy and analyze them.</p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Analysis shows that relative to gene expression, epigenetic marks are much better predicted by EnPACT approach, boasting much higher rates of “positive” prediction correlations across individuals. Notably, in peaks which are well-predicted with standard linear expression models, there is a kind of bimodal prediction distribution with accuracy for some peaks correlating well with standard predictors, while the others much more closely resemble null correlation distribution. In genes which are poorly predicted by standard linear models, EnPACT models show some enrichment over the null, with the amount varying by mark.</p>
+<p>#TODO Internal CV across all genes for PredictDB - QQplot #TODO R2 scatterplots #TODO Also plot internal cv for non-predictDB genes #TODO AAdd permuted null</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os,sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle <span class="im">as</span> pkl</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyliftover</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn_image <span class="im">as</span> isns</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>path_to_config_template <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Con-EnPACT/example_json/example_config_with_twas.json"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>path_to_run_template <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Con-EnPACT/run_training.sbatch"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>path_to_project_dir <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/Con_EnPACT/models"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>path_to_count_table <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/normalized_peak_data/"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>path_to_annotations <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/annotations/"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>optimal_window_sizes <span class="op">=</span> {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27ac"</span>:<span class="dv">8</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27me3"</span>:<span class="dv">64</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me1"</span>:<span class="dv">32</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me3"</span>:<span class="dv">8</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ATAC"</span>:<span class="dv">8</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>husl5 <span class="op">=</span> sns.color_palette(<span class="st">"husl"</span>, <span class="dv">5</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>color_mods <span class="op">=</span> {</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27ac"</span>:husl5[<span class="dv">0</span>],</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27me3"</span>:husl5[<span class="dv">1</span>],</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me1"</span>:husl5[<span class="dv">2</span>],</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me3"</span>:husl5[<span class="dv">3</span>],</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ATAC"</span>:husl5[<span class="dv">4</span>]</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>color_palette_json_path <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Con-EnPACT/color_palettes/color_palette.json"</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>color_palette <span class="op">=</span> json.load(<span class="bu">open</span>(color_palette_json_path))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="personalized-prediction-plots-per-enpact-model" class="level3">
+<h3 class="anchored" data-anchor-id="personalized-prediction-plots-per-enpact-model">Personalized prediction plots per EnPACT model</h3>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> modality <span class="kw">in</span> optimal_window_sizes.keys():</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> context <span class="kw">in</span> [<span class="st">"Flu"</span>,<span class="st">"NI"</span>]:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        cur_window_size <span class="op">=</span> optimal_window_sizes[modality]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        cur_proj_dir <span class="op">=</span> os.path.join(path_to_project_dir,context<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>modality<span class="op">+</span><span class="st">"_ws"</span><span class="op">+</span><span class="bu">str</span>(cur_window_size))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        cur_plot_dir <span class="op">=</span> os.path.join(cur_proj_dir,<span class="st">"intermediates"</span>,<span class="st">"personalized_prediction"</span>,<span class="st">"personalized_prediction_accuracy"</span>,<span class="st">"plots"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"************************************************************************************************"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Modality: "</span>,modality)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Context: "</span>,context)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"************************************************************************************************"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        cur_images_suffixes <span class="op">=</span> [</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"EnPACT_PredictDB_cv_pearson_correlation_plot_kde.png"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"EnPACT_PredictDB_cv_pearson_abscorrelation_plot_kde.png"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PredictDB_cv_qqplot_pearsonR2.png"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"EnPACT_qqplot_pearsonR2.png"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"EnPACT_nonpd_qqplot_pearsonR2.png"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"EnPACT_PredictDB_cv_pearsonR_hist.png"</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        cur_images_paths <span class="op">=</span> [os.path.join(cur_plot_dir,cur_image) <span class="cf">for</span> cur_image <span class="kw">in</span> cur_images_suffixes]</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        all_images <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> ci <span class="kw">in</span> cur_images_paths:</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> os.path.exists(ci):</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="st">"Missing: "</span>,ci)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>                all_images <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> all_images:</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        cur_images <span class="op">=</span> [np.asarray(Image.<span class="bu">open</span>(ci)) <span class="cf">for</span> ci <span class="kw">in</span> cur_images_paths]</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        imgrid <span class="op">=</span> isns.ImageGrid(cur_images, col_wrap<span class="op">=</span><span class="dv">2</span>, cbar<span class="op">=</span><span class="va">False</span>, height<span class="op">=</span><span class="fl">4.5</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        imgrid.fig.suptitle(context<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>modality<span class="op">+</span><span class="st">"_ws"</span><span class="op">+</span><span class="bu">str</span>(cur_window_size), fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>        plt.show()</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>        plt.clf()</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>************************************************************************************************
+Modality:  H3K27ac
+Context:  Flu
+************************************************************************************************
+************************************************************************************************
+Modality:  H3K27ac
+Context:  NI
+************************************************************************************************
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27ac_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearson_correlation_plot_kde.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27ac_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearson_abscorrelation_plot_kde.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27ac_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/PredictDB_cv_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27ac_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27ac_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_nonpd_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27ac_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearsonR_hist.png
+************************************************************************************************
+Modality:  H3K27me3
+Context:  Flu
+************************************************************************************************
+************************************************************************************************
+Modality:  H3K27me3
+Context:  NI
+************************************************************************************************
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27me3_ws64/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearson_correlation_plot_kde.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27me3_ws64/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearson_abscorrelation_plot_kde.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27me3_ws64/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/PredictDB_cv_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27me3_ws64/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27me3_ws64/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_nonpd_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27me3_ws64/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearsonR_hist.png
+************************************************************************************************
+Modality:  H3K4me1
+Context:  Flu
+************************************************************************************************
+************************************************************************************************
+Modality:  H3K4me1
+Context:  NI
+************************************************************************************************
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me1_ws32/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearson_correlation_plot_kde.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me1_ws32/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearson_abscorrelation_plot_kde.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me1_ws32/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/PredictDB_cv_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me1_ws32/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me1_ws32/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_nonpd_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me1_ws32/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearsonR_hist.png
+************************************************************************************************
+Modality:  H3K4me3
+Context:  Flu
+************************************************************************************************
+************************************************************************************************
+Modality:  H3K4me3
+Context:  NI
+************************************************************************************************
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me3_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearson_correlation_plot_kde.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me3_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearson_abscorrelation_plot_kde.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me3_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/PredictDB_cv_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me3_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me3_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_nonpd_qqplot_pearsonR2.png
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me3_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/plots/EnPACT_PredictDB_cv_pearsonR_hist.png
+************************************************************************************************
+Modality:  ATAC
+Context:  Flu
+************************************************************************************************
+************************************************************************************************
+Modality:  ATAC
+Context:  NI
+************************************************************************************************</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-4-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-4-output-4.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-4-output-6.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-4-output-8.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-4-output-10.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-4-output-12.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="personalized-prediction-model-summaries-across-enpact-models" class="level3">
+<h3 class="anchored" data-anchor-id="personalized-prediction-model-summaries-across-enpact-models">Personalized prediction model summaries across EnPACT models</h3>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>correlations_summary_dict <span class="op">=</span> {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Condition"</span>:[],</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Modality"</span>:[],</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Correlation Set"</span>:[],</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean Correlation"</span>:[],</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Correlation Variance"</span>:[],</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Correlation SD"</span>: [],</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Correlation Type"</span>:[],</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Num features"</span>:[]</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>all_corrs <span class="op">=</span> []</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> modality <span class="kw">in</span> optimal_window_sizes.keys():</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> context <span class="kw">in</span> [<span class="st">"Flu"</span>,<span class="st">"NI"</span>]:</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        cur_window_size <span class="op">=</span> optimal_window_sizes[modality]</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>        cur_proj_dir <span class="op">=</span> os.path.join(path_to_project_dir,context<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>modality<span class="op">+</span><span class="st">"_ws"</span><span class="op">+</span><span class="bu">str</span>(cur_window_size))</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>        pp_analysis_dir <span class="op">=</span> os.path.join(cur_proj_dir,<span class="st">"intermediates"</span>,<span class="st">"personalized_prediction"</span>,<span class="st">"personalized_prediction_accuracy"</span>)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        correlation_set_pkl_path <span class="op">=</span> os.path.join(pp_analysis_dir, <span class="st">"correlation_sets.pkl"</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> os.path.exists(correlation_set_pkl_path):</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(correlation_set_pkl_path,<span class="st">"rb"</span>) <span class="im">as</span> f:</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>                correlation_sets_loaded <span class="op">=</span> pkl.load(f)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Missing: "</span>,correlation_set_pkl_path)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> cur_set <span class="kw">in</span> correlation_sets_loaded.keys():</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> cur_set <span class="op">==</span> <span class="st">"PredictDB"</span>:</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> cur_set <span class="op">==</span> <span class="st">"PredictDB_cv_all"</span>:</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> corr_type <span class="kw">in</span> correlation_sets_loaded[cur_set].keys():</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>                cur_corr_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"model_type"</span>: cur_set,</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"corr"</span>:<span class="bu">list</span>(correlation_sets_loaded[cur_set][corr_type]),</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"corr_type"</span>:corr_type,</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"modality"</span>:modality,</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"context"</span>:context,</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>                    })</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>                all_corrs.append(cur_corr_df)</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>                correlations_summary_dict[<span class="st">"Condition"</span>].append(context)</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>                correlations_summary_dict[<span class="st">"Modality"</span>].append(modality)</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>                correlations_summary_dict[<span class="st">"Correlation Set"</span>].append(cur_set)</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>                correlations_summary_dict[<span class="st">"Mean Correlation"</span>].append(np.mean(correlation_sets_loaded[cur_set][corr_type]))</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>                correlations_summary_dict[<span class="st">"Correlation Variance"</span>].append(np.var(correlation_sets_loaded[cur_set][corr_type]))</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>                correlations_summary_dict[<span class="st">"Correlation SD"</span>].append(np.sqrt(np.var(correlation_sets_loaded[cur_set][corr_type])))</span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>                correlations_summary_dict[<span class="st">"Correlation Type"</span>].append(corr_type)</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>                correlations_summary_dict[<span class="st">"Num features"</span>].append(<span class="bu">len</span>(correlation_sets_loaded[cur_set][corr_type]))</span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>correlation_summary_df <span class="op">=</span> pd.DataFrame(correlations_summary_dict)</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(correlation_summary_df.head())      </span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>correlation_summary_df[<span class="st">"max_err_bar"</span>] <span class="op">=</span> correlation_summary_df[<span class="st">"Mean Correlation"</span>] <span class="op">+</span> correlation_summary_df[<span class="st">"Correlation SD"</span>]</span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>correlation_summary_df[<span class="st">"min_err_bar"</span>] <span class="op">=</span> correlation_summary_df[<span class="st">"Mean Correlation"</span>] <span class="op">-</span> correlation_summary_df[<span class="st">"Correlation SD"</span>]</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>correlation_summary_df.to_csv(<span class="st">"correlation_summary_df.csv"</span>,index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>all_corrs_df <span class="op">=</span> pd.concat(all_corrs)</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>all_corrs_df[<span class="st">"abs_corr"</span>] <span class="op">=</span> np.<span class="bu">abs</span>(all_corrs_df[<span class="st">"corr"</span>])</span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27ac_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/correlation_sets.pkl
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K27me3_ws64/intermediates/personalized_prediction/personalized_prediction_accuracy/correlation_sets.pkl
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me1_ws32/intermediates/personalized_prediction/personalized_prediction_accuracy/correlation_sets.pkl
+Missing:  /beagle3/haky/users/saideep/projects/Con_EnPACT/models/NI_H3K4me3_ws8/intermediates/personalized_prediction/personalized_prediction_accuracy/correlation_sets.pkl
+  Condition Modality Correlation Set  Mean Correlation  Correlation Variance  \
+0       Flu  H3K27ac          EnPACT          0.190063              0.134924   
+1       Flu  H3K27ac          EnPACT          0.171426              0.118806   
+2       Flu  H3K27ac          EnPACT          0.190063              0.134924   
+3       Flu  H3K27ac          EnPACT          0.171426              0.118806   
+4       Flu  H3K27ac          EnPACT          0.001809              0.036782   
+
+   Correlation SD   Correlation Type  Num features  
+0        0.367320            pearson           499  
+1        0.344682           spearman           499  
+2        0.367320   emp_null_pearson           499  
+3        0.344682  emp_null_spearman           499  
+4        0.191787  anal_null_pearson           499  </code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(all_corrs_df.head())</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(all_corrs_df[<span class="st">"context"</span>].value_counts())</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(all_corrs_df[<span class="st">"modality"</span>].value_counts())</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(all_corrs_df[<span class="st">"corr_type"</span>].value_counts())</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>mean_all_corrs <span class="op">=</span> all_corrs_df.groupby([<span class="st">"context"</span>,<span class="st">"modality"</span>,<span class="st">"corr_type"</span>]).mean()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>median_all_corrs <span class="op">=</span> all_corrs_df.groupby([<span class="st">"context"</span>,<span class="st">"modality"</span>,<span class="st">"corr_type"</span>]).median()</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>mean_all_corrs.to_csv(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2024-04-22-analyze_peak_personalized_prediction/mean_all_corrs.csv"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>median_all_corrs.to_csv(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2024-04-22-analyze_peak_personalized_prediction/median_all_corrs.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  model_type      corr corr_type modality context  abs_corr
+0     EnPACT  0.039334   pearson  H3K27ac     Flu  0.039334
+1     EnPACT  0.423434   pearson  H3K27ac     Flu  0.423434
+2     EnPACT  0.709962   pearson  H3K27ac     Flu  0.709962
+3     EnPACT  0.155284   pearson  H3K27ac     Flu  0.155284
+4     EnPACT -0.005329   pearson  H3K27ac     Flu  0.005329
+Flu    27509
+NI      5359
+Name: context, dtype: int64
+ATAC        14426
+H3K4me1      5445
+H3K27ac      5389
+H3K4me3      4225
+H3K27me3     3383
+Name: modality, dtype: int64
+pearson              8988
+spearman             5970
+emp_null_pearson     5970
+emp_null_spearman    5970
+anal_null_pearson    5970
+Name: corr_type, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-correlation-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="plot-correlation-distributions">Plot correlation distributions</h3>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(all_corrs_df, row<span class="op">=</span><span class="st">"model_type"</span>, col<span class="op">=</span><span class="st">"corr_type"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span>, margin_titles<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>g.map_dataframe(sns.violinplot, x<span class="op">=</span><span class="st">"modality"</span>,y<span class="op">=</span><span class="st">"corr"</span>,hue<span class="op">=</span><span class="st">"context"</span>, palette<span class="op">=</span>{<span class="st">"Flu"</span>:<span class="st">"#FF0000"</span>,<span class="st">"NI"</span>:<span class="st">"#0000FF"</span>})</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g.axes.flatten():</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(labelbottom<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>plt.clf()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>all_corrs_df_Flu <span class="op">=</span> all_corrs_df[all_corrs_df[<span class="st">"context"</span>]<span class="op">==</span><span class="st">"Flu"</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>hue_col <span class="op">=</span> []</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> all_corrs_df_Flu.iterrows():</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    hue_col.append(row[<span class="st">"model_type"</span>]<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>row[<span class="st">"corr_type"</span>])</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>all_corrs_df_Flu[<span class="st">"hue_col"</span>] <span class="op">=</span> hue_col</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(all_corrs_df_Flu[<span class="st">"hue_col"</span>].value_counts())</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>color_palette_models <span class="op">=</span> {</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EnPACT_pearson"</span>:<span class="st">"red"</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EnPACT_anal_null_pearson"</span>:<span class="st">"white"</span>,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EnPACT_nonpd_pearson"</span>:<span class="st">"lightcoral"</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EnPACT_nonpd_emp_null_pearson"</span>:<span class="st">"white"</span>,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PredictDB_cv_pearson"</span>:<span class="st">"green"</span>,</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EnPACT"</span>:<span class="st">"red"</span>,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"null"</span>:<span class="st">"white"</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>all_corrs_df_Flu_for_plot <span class="op">=</span> all_corrs_df_Flu[all_corrs_df_Flu[<span class="st">"hue_col"</span>].isin(color_palette_models.keys())]</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(all_corrs_df_Flu_for_plot[<span class="st">"hue_col"</span>].value_counts())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>EnPACT_pearson                    2519
+EnPACT_spearman                   2519
+EnPACT_emp_null_pearson           2519
+EnPACT_emp_null_spearman          2519
+EnPACT_anal_null_pearson          2519
+PredictDB_cv_pearson              2519
+EnPACT_nonpd_pearson              2479
+EnPACT_nonpd_spearman             2479
+EnPACT_nonpd_emp_null_pearson     2479
+EnPACT_nonpd_emp_null_spearman    2479
+EnPACT_nonpd_anal_null_pearson    2479
+Name: hue_col, dtype: int64
+EnPACT_pearson                   2519
+EnPACT_anal_null_pearson         2519
+PredictDB_cv_pearson             2519
+EnPACT_nonpd_pearson             2479
+EnPACT_nonpd_emp_null_pearson    2479
+Name: hue_col, dtype: int64</code></pre>
+</div>
+</div>
+<p>The RNAseq data was analyzed prior in slightly different manner. Let’s add it to our current dataset:</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>path_to_rnaseq_corrs <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-22-retrain_expression_predictor/expression_personalized_corrs_flu_RNAseq.csv"</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs <span class="op">=</span> pd.read_csv(path_to_rnaseq_corrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>path_to_predictdb_rnaseq_flu_results <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/linearization/standard_predictDB_aracena_Flu_singlenested_3_7_lnormFALSE_beforeFALSE_scale1_sourcekallisto/filtered_db/predict_db_Model_training_filtered.db"</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_from_sqlite(db, query):</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(db)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> conn.cursor()</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    c.execute(query)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c.fetchall()</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"SELECT gene FROM extra"</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> read_from_sqlite(path_to_predictdb_rnaseq_flu_results, query)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>features_list <span class="op">=</span> [x[<span class="dv">0</span>] <span class="cf">for</span> x <span class="kw">in</span> features]</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Unnamed: 0</th>
+<th data-quarto-table-cell-role="th">0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ENSG00000169299</td>
+<td>0.359111</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>ENSG00000257923</td>
+<td>0.049801</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ENSG00000103415</td>
+<td>0.138249</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>ENSG00000266967</td>
+<td>-0.336405</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>ENSG00000184056</td>
+<td>-0.454364</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8802</td>
+<td>ENSG00000138756</td>
+<td>0.076117</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8803</td>
+<td>ENSG00000174437</td>
+<td>-0.383792</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8804</td>
+<td>ENSG00000051108</td>
+<td>0.084407</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8805</td>
+<td>ENSG00000256683</td>
+<td>0.136676</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8806</td>
+<td>ENSG00000010017</td>
+<td>0.147759</td>
+</tr>
+</tbody>
+</table>
+
+<p>8807 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs.columns <span class="op">=</span> [<span class="st">"gene"</span>,<span class="st">"corr"</span>]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs[<span class="st">"model_type"</span>] <span class="op">=</span> <span class="st">"EnPACT"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs[<span class="st">"corr_type"</span>] <span class="op">=</span> <span class="st">"pearson"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs[<span class="st">"modality"</span>] <span class="op">=</span> <span class="st">"RNAseq"</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs[<span class="st">"context"</span>] <span class="op">=</span> <span class="st">"Flu"</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs[<span class="st">"abs_corr"</span>] <span class="op">=</span> np.<span class="bu">abs</span>(rnaseq_corrs[<span class="st">"corr"</span>])</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs[<span class="st">"hue_col"</span>] <span class="op">=</span> [<span class="st">"EnPACT_pearson"</span> <span class="cf">if</span> gene <span class="kw">in</span> features_list <span class="cf">else</span> <span class="st">"EnPACT_nonpd_pearson"</span> <span class="cf">for</span> gene <span class="kw">in</span> rnaseq_corrs[<span class="st">"gene"</span>]]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>nn<span class="op">=</span><span class="dv">30</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>null_corrvec <span class="op">=</span> np.tanh(np.random.normal(size<span class="op">=</span>rnaseq_corrs.shape[<span class="dv">0</span>])<span class="op">/</span>np.sqrt(nn<span class="op">-</span><span class="dv">3</span>))</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>null_corrs <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"corr"</span>:null_corrvec,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model_type"</span>:<span class="st">"EnPACT"</span>,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"corr_type"</span>:<span class="st">"pearson"</span>,</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"modality"</span>:<span class="st">"RNAseq"</span>,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"context"</span>:<span class="st">"Flu"</span>,</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"abs_corr"</span>:np.<span class="bu">abs</span>(null_corrvec),</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"hue_col"</span>:<span class="st">"EnPACT_anal_null_pearson"</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(all_corrs_df_Flu_for_plot[<span class="st">"hue_col"</span>].value_counts())</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rnaseq_corrs[<span class="st">"hue_col"</span>].value_counts())</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(null_corrs[<span class="st">"hue_col"</span>].value_counts())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>EnPACT_pearson                   2519
+EnPACT_anal_null_pearson         2519
+PredictDB_cv_pearson             2519
+EnPACT_nonpd_pearson             2479
+EnPACT_nonpd_emp_null_pearson    2479
+Name: hue_col, dtype: int64
+EnPACT_nonpd_pearson    7695
+EnPACT_pearson          1112
+Name: hue_col, dtype: int64
+EnPACT_anal_null_pearson    8807
+Name: hue_col, dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(all_corrs_df_Flu_for_plot.columns))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(rnaseq_corrs.columns))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs_for_stack <span class="op">=</span> rnaseq_corrs.copy()</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs_for_stack.drop(columns<span class="op">=</span>[<span class="st">"gene"</span>],inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(rnaseq_corrs_for_stack.columns))</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>rnaseq_corrs_for_stack <span class="op">=</span> rnaseq_corrs_for_stack[<span class="bu">list</span>(all_corrs_df_Flu_for_plot.columns)]</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>rnaseq_null_corrs_for_stack <span class="op">=</span> null_corrs[<span class="bu">list</span>(all_corrs_df_Flu_for_plot.columns)]</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(all_corrs_df_Flu_for_plot.columns))</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(rnaseq_corrs_for_stack.columns))</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>all_corrs_df_Flu_for_plot_wrnaseq <span class="op">=</span> pd.concat([all_corrs_df_Flu_for_plot,rnaseq_corrs_for_stack, rnaseq_null_corrs_for_stack])</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(all_corrs_df_Flu_for_plot_wrnaseq.shape)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>all_corrs_df_Flu_for_plot_wrnaseq <span class="op">=</span> all_corrs_df_Flu_for_plot_wrnaseq[all_corrs_df_Flu_for_plot_wrnaseq[<span class="st">"hue_col"</span>].isin([<span class="st">"EnPACT_pearson"</span>, <span class="st">"EnPACT_nonpd_pearson"</span>, <span class="st">"EnPACT_anal_null_pearson"</span>])]</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(all_corrs_df_Flu_for_plot_wrnaseq[<span class="st">"hue_col"</span>].value_counts())</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>all_corrs_df_Flu_for_plot_wrnaseq[<span class="st">"is_null"</span>] <span class="op">=</span> [<span class="st">"null"</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">"EnPACT_anal_null_pearson"</span> <span class="cf">else</span> <span class="st">"EnPACT"</span> <span class="cf">for</span> x <span class="kw">in</span> all_corrs_df_Flu_for_plot_wrnaseq[<span class="st">"hue_col"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>['model_type', 'corr', 'corr_type', 'modality', 'context', 'abs_corr', 'hue_col']
+['gene', 'corr', 'model_type', 'corr_type', 'modality', 'context', 'abs_corr', 'hue_col']
+['corr', 'model_type', 'corr_type', 'modality', 'context', 'abs_corr', 'hue_col']
+['model_type', 'corr', 'corr_type', 'modality', 'context', 'abs_corr', 'hue_col']
+['model_type', 'corr', 'corr_type', 'modality', 'context', 'abs_corr', 'hue_col']
+(30129, 7)
+EnPACT_anal_null_pearson    11326
+EnPACT_nonpd_pearson        10174
+EnPACT_pearson               3631
+Name: hue_col, dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>all_corrs_df_Flu_for_plot_wrnaseq[<span class="st">"hue_col"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>EnPACT_anal_null_pearson    11326
+EnPACT_nonpd_pearson        10174
+EnPACT_pearson               3631
+Name: hue_col, dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>,<span class="dv">6</span>))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.violinplot(x<span class="op">=</span><span class="st">"modality"</span>,y<span class="op">=</span><span class="st">"corr"</span>,hue<span class="op">=</span><span class="st">"hue_col"</span>,data<span class="op">=</span>all_corrs_df_Flu_for_plot_wrnaseq, </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                   palette<span class="op">=</span>color_palette_models, height<span class="op">=</span><span class="dv">30</span>, aspect <span class="op">=</span> <span class="dv">4</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                   order <span class="op">=</span> [<span class="st">"RNAseq"</span>,<span class="st">"ATAC"</span>,<span class="st">"H3K27ac"</span>,<span class="st">"H3K27me3"</span>,<span class="st">"H3K4me1"</span>,<span class="st">"H3K4me3"</span>], </span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                   hue_order<span class="op">=</span>[<span class="st">"EnPACT_pearson"</span>, <span class="st">"EnPACT_nonpd_pearson"</span>, <span class="st">"EnPACT_anal_null_pearson"</span>])</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>g.legend(loc<span class="op">=</span><span class="st">'center left'</span>, bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>plt.clf()</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>,<span class="dv">6</span>))</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.violinplot(x<span class="op">=</span><span class="st">"modality"</span>,y<span class="op">=</span><span class="st">"corr"</span>,hue<span class="op">=</span><span class="st">"is_null"</span>,data<span class="op">=</span>all_corrs_df_Flu_for_plot_wrnaseq, </span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>                   palette<span class="op">=</span>color_palette_models, height<span class="op">=</span><span class="dv">30</span>, aspect <span class="op">=</span> <span class="dv">4</span>,</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>                   order <span class="op">=</span> [<span class="st">"RNAseq"</span>,<span class="st">"ATAC"</span>,<span class="st">"H3K27ac"</span>,<span class="st">"H3K27me3"</span>,<span class="st">"H3K4me1"</span>,<span class="st">"H3K4me3"</span>], </span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>                   hue_order<span class="op">=</span>[<span class="st">"EnPACT"</span>,<span class="st">"null"</span>])</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>g.legend(loc<span class="op">=</span><span class="st">'center left'</span>, bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>plt.clf()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-16-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>all_corrs_df_Flu_for_plot_wrnaseq.groupby([<span class="st">"modality"</span>,<span class="st">"is_null"</span>]).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">corr</th>
+<th data-quarto-table-cell-role="th">abs_corr</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">modality</th>
+<th data-quarto-table-cell-role="th">is_null</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">ATAC</td>
+<td data-quarto-table-cell-role="th">EnPACT</td>
+<td>0.124901</td>
+<td>0.253619</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">null</td>
+<td>0.001953</td>
+<td>0.144324</td>
+</tr>
+<tr class="odd">
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">H3K27ac</td>
+<td data-quarto-table-cell-role="th">EnPACT</td>
+<td>0.139213</td>
+<td>0.269129</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">null</td>
+<td>0.001809</td>
+<td>0.155564</td>
+</tr>
+<tr class="odd">
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">H3K27me3</td>
+<td data-quarto-table-cell-role="th">EnPACT</td>
+<td>0.046467</td>
+<td>0.234607</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">null</td>
+<td>0.004365</td>
+<td>0.154137</td>
+</tr>
+<tr class="odd">
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">H3K4me1</td>
+<td data-quarto-table-cell-role="th">EnPACT</td>
+<td>0.186094</td>
+<td>0.287789</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">null</td>
+<td>-0.006726</td>
+<td>0.156578</td>
+</tr>
+<tr class="odd">
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">H3K4me3</td>
+<td data-quarto-table-cell-role="th">EnPACT</td>
+<td>0.086590</td>
+<td>0.283900</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">null</td>
+<td>0.012693</td>
+<td>0.182760</td>
+</tr>
+<tr class="odd">
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">RNAseq</td>
+<td data-quarto-table-cell-role="th">EnPACT</td>
+<td>0.024426</td>
+<td>0.190559</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">null</td>
+<td>-0.000408</td>
+<td>0.151141</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="plot-mean-personalized-prediction-correlation-across-peaks-in-different-enpact-models" class="level3">
+<h3 class="anchored" data-anchor-id="plot-mean-personalized-prediction-correlation-across-peaks-in-different-enpact-models">Plot mean personalized prediction correlation across peaks in different EnPACT models</h3>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(correlation_summary_df, row<span class="op">=</span><span class="st">"Correlation Set"</span>, col<span class="op">=</span><span class="st">"Correlation Type"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span>, margin_titles<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>g.map_dataframe(sns.barplot, x<span class="op">=</span><span class="st">"Modality"</span>,y<span class="op">=</span><span class="st">"Mean Correlation"</span>,hue<span class="op">=</span><span class="st">"Condition"</span>, palette<span class="op">=</span>{<span class="st">"Flu"</span>:<span class="st">"#FF0000"</span>,<span class="st">"NI"</span>:<span class="st">"#0000FF"</span>})</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g.axes.flatten():</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(labelbottom<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>plt.clf()</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(correlation_summary_df, row<span class="op">=</span><span class="st">"Correlation Set"</span>, col<span class="op">=</span><span class="st">"Correlation Type"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span>, margin_titles<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>g.map_dataframe(sns.barplot, x<span class="op">=</span><span class="st">"Modality"</span>,y<span class="op">=</span><span class="st">"Correlation Variance"</span>,hue<span class="op">=</span><span class="st">"Condition"</span>, palette<span class="op">=</span>{<span class="st">"Flu"</span>:<span class="st">"#FF0000"</span>,<span class="st">"NI"</span>:<span class="st">"#0000FF"</span>})</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g.axes.flatten():</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(labelbottom<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>plt.clf()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-18-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-variance-of-personalized-prediction-correlations-across-peaks-in-different-enpact-models" class="level3">
+<h3 class="anchored" data-anchor-id="plot-variance-of-personalized-prediction-correlations-across-peaks-in-different-enpact-models">Plot variance of personalized prediction correlations across peaks in different EnPACT models</h3>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sns.scatterplot(data=correlation_summary_df,x="Mean Correlation",y="Correlation Variance",hue="Correlation Type",style="Condition")</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(correlation_summary_df, row<span class="op">=</span><span class="st">"Condition"</span>, col<span class="op">=</span><span class="st">"Correlation Type"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span>, margin_titles<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>g.map_dataframe(sns.scatterplot, x<span class="op">=</span><span class="st">"Mean Correlation"</span>,y<span class="op">=</span><span class="st">"Correlation Variance"</span>,hue<span class="op">=</span><span class="st">"Modality"</span>,style<span class="op">=</span><span class="st">"Correlation Set"</span>, palette<span class="op">=</span>color_mods,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                 size<span class="op">=</span><span class="st">"Num features"</span>,sizes<span class="op">=</span>(<span class="dv">100</span>, <span class="dv">200</span>))</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g.axes.flatten():</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(labelbottom<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>g.add_legend()</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>plt.clf()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="analyze_personalized_peak_preds_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

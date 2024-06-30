@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saideep Gona">
+<meta name="dcterms.date" content="2023-11-27">
+
+<title>Daily-Blog-Sai - 0.1_normalize_expression_GTEx</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daily-Blog-Sai</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a>
+  <ul class="collapse">
+  <li><a href="#length-normalize" id="toc-length-normalize" class="nav-link" data-scroll-target="#length-normalize">Length normalize</a></li>
+  <li><a href="#normalization---tmm-voom" id="toc-normalization---tmm-voom" class="nav-link" data-scroll-target="#normalization---tmm-voom">Normalization - TMM + Voom</a>
+  <ul class="collapse">
+  <li><a href="#covariates---genotype-pcs" id="toc-covariates---genotype-pcs" class="nav-link" data-scroll-target="#covariates---genotype-pcs">Covariates - genotype PCs</a></li>
+  </ul></li>
+  <li><a href="#covariates---non-admixture-covariates-genotype-pcs" id="toc-covariates---non-admixture-covariates-genotype-pcs" class="nav-link" data-scroll-target="#covariates---non-admixture-covariates-genotype-pcs">Covariates - non-admixture covariates + genotype PCs</a></li>
+  <li><a href="#covariates---expression-pcs" id="toc-covariates---expression-pcs" class="nav-link" data-scroll-target="#covariates---expression-pcs">Covariates - expression PCs</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">0.1_normalize_expression_GTEx</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saideep Gona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 27, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="context" class="level1">
+<h1>Context</h1>
+<p>It is important when running S-PrediXcan type analyses to properly normalize the expression data. Thus far, I have employed simple log normalization, but in reality it makes more downstream sense to normalize akin to GTEx because PrediXcan itself was developed using GTEx data and these methods are consistent with the state of the art.</p>
+<p>According to GTEx (https://www.nature.com/articles/nature24277#Sec11) the normalization steps are as follows:</p>
+<ol type="1">
+<li>TPM expression</li>
+<li>TMM normalization using edgeR</li>
+<li>Inverse normal transformation</li>
+</ol>
+<p>In addition, covariates were calculated as follows:</p>
+<ol type="1">
+<li>Top 5 genotyping PCs</li>
+<li>15 Peer factors for samples size less than 150</li>
+<li>Other covariates</li>
+</ol>
+<p>This offers a general guideline for performing the normalization up to standards. However, in the Aracena paper empirical observation of the data led to some differing choices, and the authors also performed a more thorough analysis of the covariates and slightly differing normalization techniques. They introduced the following additional normalization steps:</p>
+<ol type="1">
+<li>Voom normalization for mean-variance correction of counts</li>
+</ol>
+<p>In terms of convariate correction:</p>
+<ol type="1">
+<li>Just 1 genotyping PCs (based on observed variance explained across individuals)</li>
+<li>4 expression PCs</li>
+<li>Batch correction using ComBat</li>
+<li>Regress out age and admixture, etc.</li>
+</ol>
+<p>They did not normalize by exon length because it was not necessary for their analysis, and they did not inverse quantile normalize. For the purpose of training the DL model, it is important to normalize this way. Also, peer factors are clunky and support has reduced for their use. Therefore, my final normalization scheme is:</p>
+<ol type="1">
+<li>TPM expression</li>
+<li>TMM normalization using edgeR</li>
+<li>Voom normalization for mean-variance correction of counts</li>
+</ol>
+<p>and convariate correction:</p>
+<ol type="1">
+<li>Just 1 genotyping PCs (based on observed variance explained across individuals)</li>
+<li>4 expression PCs</li>
+<li>Batch correction using ComBat</li>
+<li>Regress out age and admixture, etc.</li>
+</ol>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(edgeR)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Load libraries</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(preprocessCore)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(limma)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(edgeR)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statmod)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sva)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SNPRelate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>expression_mat <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/counts_matrices/RNAseq_filtered.counts.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="length-normalize" class="level3">
+<h3 class="anchored" data-anchor-id="length-normalize">Length normalize</h3>
+<p>We need the genes to also be length normalized, otherwise we are predicting arbitrary units of expression based purely on promoter epigenetic profile.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># wget "ftp://ftp.ensembl.org/pub/release-84/gtf/homo_sapiens/Homo_sapiens.GRCh38.84.gtf.gz"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># zcat Homo_sapiens.GRCh38.84.gtf.gz | awk '{if($3=="exon") print $10"\t"$5-$4}' | sed -e 's/"//g' -e 's/;//' | /beagle3/haky/users/saideep/software/bedtools2/bin/bedtools groupby -i - -g 1 -c 2 -o sum &gt; Exon_lengths.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>exon_lengths_file <span class="ot">&lt;-</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-27-normalize_expression_GTEx/Exon_lengths.txt"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>exon_lengths <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">read.table</span>(exon_lengths_file, <span class="at">row.names=</span><span class="dv">1</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>exon_lengths<span class="sc">$</span>genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(exon_lengths)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>geneset <span class="ot">&lt;-</span> <span class="fu">rownames</span>(expression_mat)[<span class="fu">rownames</span>(expression_mat) <span class="sc">%in%</span> <span class="fu">rownames</span>(exon_lengths)]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>expression_subset <span class="ot">&lt;-</span> expression_mat[geneset,]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>exon_lengths_subset <span class="ot">&lt;-</span> exon_lengths[geneset,]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>length_norm_expression <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(expression_subset)<span class="sc">/</span><span class="fu">as.numeric</span>(exon_lengths_subset[,<span class="dv">1</span>]))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>gene_annotation_file <span class="ot">&lt;-</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-21-aracena_predixcan/canonical_TSS_full_metadata.txt"</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>gene_annotation_table <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(gene_annotation_file, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">","</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-27-normalize_expression_GTEx/length.png"</span>, <span class="at">width =</span> <span class="dv">1000</span>, <span class="at">height =</span> <span class="dv">1000</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">log2</span>(length_norm_expression))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>svg 
+  2 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">log2</span>(length_norm_expression))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="0.1_normalize_expression_GTEx_files/figure-html/unnamed-chunk-4-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<!-- ### TMM normalize  -->
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dgelist &lt;- DGEList(counts = length_norm_expression)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># dgelist &lt;- calcNormFactors(dgelist)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># logcpms &lt;- as.data.frame(cpm(dgelist, log = TRUE, prior.count = 1))</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># sum(is.na(logcpms))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># png("/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-27-normalize_expression_GTEx/logcpm_boxplot.png", width = 1000, height = 1000)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot(logcpms)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># dev.off()</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot(logcpms)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># logcpms_file &lt;- "/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/counts_matrices/RNAseq_filtered_counts_length_norm_logcpm_tmm.txt"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># write.table(logcpms, file = logcpms_file)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inv_norm_cpms &lt;- qnorm((rank(logcpms,na.last="keep"))/sum(!is.na(logcpms)))</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># dim(inv_norm_cpms)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot(qnorm((rank(logcpms,na.last="keep")-0.5)/sum(!is.na(logcpms))))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="normalization---tmm-voom" class="level2">
+<h2 class="anchored" data-anchor-id="normalization---tmm-voom">Normalization - TMM + Voom</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set some functions</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This function mean centers the data.</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>mean_center_clean<span class="ot">=</span><span class="cf">function</span>(cols_local,column){</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  index<span class="ot">=</span><span class="fu">which</span>(<span class="fu">colnames</span>(cols_local)<span class="sc">==</span>column)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  cols_local[,index]<span class="ot">=</span>cols_local[,index]<span class="sc">-</span><span class="fu">mean</span>(cols_local[,index])</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cols_local)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># This function applies mean centers function to desired metadata column. Here we apply it to age.</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>pretty_up_cols<span class="ot">=</span><span class="cf">function</span>(cols){</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  cols<span class="ot">=</span><span class="fu">refactorize</span>(cols)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  cols<span class="ot">=</span><span class="fu">mean_center_clean</span>(cols,<span class="st">"Age"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cols)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># This function makes sure that desired metadata columns are factors.</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>refactorize<span class="ot">=</span><span class="cf">function</span>(cols_local){</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  cols_local<span class="sc">$</span>Genotyping_ID<span class="ot">=</span><span class="fu">factor</span>(cols_local<span class="sc">$</span>Genotyping_ID,<span class="at">levels=</span><span class="fu">unique</span>(<span class="fu">as.character</span>(cols_local<span class="sc">$</span>Genotyping_ID)))</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  cols_local<span class="sc">$</span>Sample<span class="ot">=</span><span class="fu">factor</span>(cols_local<span class="sc">$</span>Sample)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  cols_local<span class="sc">$</span>Condition<span class="ot">=</span><span class="fu">factor</span>(cols_local<span class="sc">$</span>Condition)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  cols_local<span class="sc">$</span>Batch<span class="ot">=</span><span class="fu">factor</span>(cols_local<span class="sc">$</span>Batch)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cols_local)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load metadata</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>meta_data <span class="ot">=</span> <span class="fu">read.table</span>(<span class="fu">paste0</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/metadata/RNAseq_metadata.txt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="covariates---genotype-pcs" class="level3">
+<h3 class="anchored" data-anchor-id="covariates---genotype-pcs">Covariates - genotype PCs</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate genotype PC and update metadata</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>gtypes <span class="ot">=</span> <span class="fu">read.table</span>(<span class="fu">paste0</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping/SNP_genotypes.txt"</span>),<span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>samples<span class="ot">=</span><span class="fu">colnames</span>(gtypes)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>gtypes_pca<span class="ot">=</span><span class="fu">data.frame</span>(<span class="at">snp_id=</span><span class="fu">rownames</span>(gtypes),gtypes)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">snpgdsCreateGeno</span>(<span class="fu">paste0</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping"</span>, <span class="st">"/GDS_genotypes.gds"</span>),</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">genmat =</span> <span class="fu">as.matrix</span>(gtypes_pca[, samples]),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sample.id =</span> <span class="fu">unique</span>(samples),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">snp.id =</span> gtypes_pca<span class="sc">$</span>snp_id,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">snpfirstdim=</span><span class="cn">TRUE</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="do">## This command tells you the total number of samples and SNPs in the .gds file.</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="fu">snpgdsSummary</span>(<span class="fu">paste0</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping"</span>, <span class="st">"/GDS_genotypes.gds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>The file name: /beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping/GDS_genotypes.gds 
+The total number of samples: 35 
+The total number of SNPs: 7383243 
+SNP genotypes are stored in individual-major mode (SNP X Sample).</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Load .gds file in as genofile.</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>genofile <span class="ot">&lt;-</span> <span class="fu">snpgdsOpen</span>(<span class="fu">paste0</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping"</span>, <span class="st">"/GDS_genotypes.gds"</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Perform a PCA on genofile/ genotype information. </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">snpgdsPCA</span>(genofile)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Principal Component Analysis (PCA) on genotypes:
+Excluding 0 SNP on non-autosomes
+Excluding 0 SNP (monomorphic: TRUE, MAF: NaN, missing rate: NaN)
+    # of samples: 35
+    # of SNPs: 7,383,243
+    using 1 thread
+    # of principal components: 32
+PCA:    the sum of all selected genotypes (0,1,2) = 112546328
+CPU capabilities: Double-Precision SSE2
+Tue Dec  5 10:43:56 2023    (internal increment: 130016)
+
+[..................................................]  0%, ETC: ---        
+[==================================================] 100%, completed, 5s
+Tue Dec  5 10:44:01 2023    Begin (eigenvalues and eigenvectors)
+Tue Dec  5 10:44:01 2023    Done.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Subset the first PC</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sample.id =</span> pca<span class="sc">$</span>sample.id,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">PC1 =</span> pca<span class="sc">$</span>eigenvect[,<span class="dv">1</span>],    <span class="co"># the first eigenvector</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>samples_with_gtype_pc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(tab<span class="sc">$</span>sample.id, <span class="st">"_Flu"</span>),<span class="fu">paste0</span>(tab<span class="sc">$</span>sample.id, <span class="st">"_NI"</span>))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>gtype_pc <span class="ot">&lt;-</span> <span class="fu">c</span>(tab<span class="sc">$</span>PC1,tab<span class="sc">$</span>PC1)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Include only samples with genotype PCs</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>meta_data_with_gtype_pc <span class="ot">&lt;-</span> meta_data[samples_with_gtype_pc,]</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(meta_data_with_gtype_pc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 70 16</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>meta_data_with_gtype_pc<span class="sc">$</span>gtype_PC1 <span class="ot">&lt;-</span> gtype_pc</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>reads  <span class="ot">&lt;-</span> length_norm_expression[,samples_with_gtype_pc]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>meta_data <span class="ot">&lt;-</span> meta_data_with_gtype_pc</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(reads)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13716    70</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(meta_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 70 17</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">########################################</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Format reads matrices &amp; metadata </span><span class="al">###</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">########################################</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#subset to only include those samples for which there is a 1 in the "PopDEset" &amp; "EQTL_set" column.</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>meta_data<span class="ot">=</span>meta_data[<span class="fu">which</span>(meta_data<span class="sc">$</span>PopDE_set<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> meta_data<span class="sc">$</span>EQTL_set<span class="sc">==</span><span class="dv">1</span>),]</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ensure that the Sample_ID are the rownames of the meta_data dataframe</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(meta_data)<span class="ot">=</span>meta_data<span class="sc">$</span>Sample</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ensure that the meta_data dataframe is ordered alphabetically (based on sample_id)</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>meta_data<span class="ot">=</span>meta_data[<span class="fu">order</span>(<span class="fu">rownames</span>(meta_data)),]</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">#make sure that all the columns of the meta data are also in the read counts matrix.</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>reads<span class="ot">=</span>reads[,<span class="fu">which</span>(<span class="fu">colnames</span>(reads) <span class="sc">%in%</span> <span class="fu">rownames</span>(meta_data))]</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co">#order the reads count matrix.</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>reads<span class="ot">=</span>reads[,<span class="fu">order</span>(<span class="fu">colnames</span>(reads))]</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="co">#this should be 0. It is a check to ensure that all the metadata and read counts matrix have all the same samples.</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(<span class="fu">rownames</span>(meta_data)<span class="sc">!=</span><span class="fu">colnames</span>(reads)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Are metadata and reads the same dimensions?</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(meta_data)[<span class="dv">1</span>]<span class="sc">==</span><span class="fu">dim</span>(reads)[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean center age</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>meta_data<span class="ot">=</span><span class="fu">pretty_up_cols</span>(meta_data)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="do">### Get condition-specific reads matrices</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="do">##subset the NI samples only)</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>reads_NI<span class="ot">=</span>reads[,<span class="fu">which</span>(meta_data<span class="sc">$</span>Condition<span class="sc">==</span><span class="st">"NI"</span>)]</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="do">##subset the Flu samples only)</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>reads_FLU<span class="ot">=</span>reads[,<span class="fu">which</span>(meta_data<span class="sc">$</span>Condition<span class="sc">==</span><span class="st">"Flu"</span>)]</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="do">### Get condition-specific metadata tables</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>meta_data_NI<span class="ot">=</span><span class="fu">refactorize</span>(meta_data[<span class="fu">which</span>(meta_data<span class="sc">$</span>Condition<span class="sc">==</span><span class="st">"NI"</span>),])</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>meta_data_FLU<span class="ot">=</span><span class="fu">refactorize</span>(meta_data[<span class="fu">which</span>(meta_data<span class="sc">$</span>Condition<span class="sc">==</span><span class="st">"Flu"</span>),])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="do">######################################################</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Voom normalize reads, remove batch with Combat </span><span class="al">###</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="do">######################################################</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>COR<span class="ot">=</span><span class="cf">function</span>(reads,meta_data){</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  dge <span class="ot">&lt;-</span> <span class="fu">DGEList</span>(<span class="at">counts=</span>reads)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  dge <span class="ot">&lt;-</span> <span class="fu">calcNormFactors</span>(dge)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  design<span class="ot">=</span><span class="fu">model.matrix</span>(<span class="sc">~</span>Age<span class="sc">+</span>Admixture,<span class="at">data=</span>meta_data)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> <span class="fu">voom</span>(dge,design,<span class="at">plot=</span><span class="cn">FALSE</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  v_combat <span class="ot">=</span> <span class="fu">ComBat</span>(<span class="at">dat=</span><span class="fu">as.matrix</span>(v<span class="sc">$</span>E), <span class="at">batch=</span>meta_data<span class="sc">$</span>Batch, <span class="at">mod=</span>design, <span class="at">par.prior=</span><span class="cn">TRUE</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  v<span class="sc">$</span>E<span class="ot">=</span>v_combat</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span><span class="fu">lmFit</span>(v,design)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">eBayes</span>(fit)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(fit,v))</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Correct for batch within each condition.</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>COR_NI<span class="ot">=</span><span class="fu">COR</span>(<span class="at">reads=</span>reads_NI,<span class="at">meta_data=</span>meta_data_NI)</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>fit_NI<span class="ot">=</span>COR_NI[[<span class="dv">1</span>]]</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>v_NI<span class="ot">=</span>COR_NI[[<span class="dv">2</span>]]</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>COR_FLU<span class="ot">=</span><span class="fu">COR</span>(<span class="at">reads=</span>reads_FLU,<span class="at">meta_data=</span>meta_data_FLU)</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>fit_FLU<span class="ot">=</span>COR_FLU[[<span class="dv">1</span>]]</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>v_FLU<span class="ot">=</span>COR_FLU[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-27-normalize_expression_GTEx/length_library_batch.png"</span>, <span class="at">width =</span> <span class="dv">1000</span>, <span class="at">height =</span> <span class="dv">1000</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(v_FLU<span class="sc">$</span>E)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>svg 
+  2 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(v_FLU<span class="sc">$</span>E)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="0.1_normalize_expression_GTEx_files/figure-html/unnamed-chunk-14-1.svg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="covariates---non-admixture-covariates-genotype-pcs" class="level2">
+<h2 class="anchored" data-anchor-id="covariates---non-admixture-covariates-genotype-pcs">Covariates - non-admixture covariates + genotype PCs</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Regress out effects of non-admixture covariates within condition</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>correct_exp<span class="ot">=</span><span class="cf">function</span>(v,fit){</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  corrected_exp<span class="ot">=</span>v<span class="sc">$</span>E</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="do">## regress out second column in the design matrix which is age</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## the first is intercept and third is admixture</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  indexes<span class="ot">=</span><span class="fu">c</span>(<span class="dv">2</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> indexes){</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    corrected_exp <span class="ot">&lt;-</span> corrected_exp <span class="sc">-</span> fit<span class="sc">$</span>coefficients[,i]<span class="sc">%*%</span><span class="fu">t</span>(fit<span class="sc">$</span>design[,i])</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(corrected_exp)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>corrected_exp_NI<span class="ot">=</span><span class="fu">correct_exp</span>(v_NI,fit_NI)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>corrected_exp_FLU<span class="ot">=</span><span class="fu">correct_exp</span>(v_FLU,fit_FLU)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="do">## bind corrected read counts back together</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>all_corrected_exp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(corrected_exp_NI, corrected_exp_FLU)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-27-normalize_expression_GTEx/length_library_batch_cov_1.png"</span>, <span class="at">width =</span> <span class="dv">1000</span>, <span class="at">height =</span> <span class="dv">1000</span>)</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(all_corrected_exp)</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>svg 
+  2 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(all_corrected_exp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="0.1_normalize_expression_GTEx_files/figure-html/unnamed-chunk-15-1.svg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="covariates---expression-pcs" class="level2">
+<h2 class="anchored" data-anchor-id="covariates---expression-pcs">Covariates - expression PCs</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>expPCs_reg <span class="ot">=</span> <span class="dv">4</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="do">###########################################################################</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Build matrixEQTL input: expression tables: regressing out first n PCs ##</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="do">###########################################################################</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(expPCs_reg<span class="sc">==</span><span class="dv">0</span>){</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    expression<span class="ot">=</span>all_corrected_exp</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Empirically remove PCs from the phenotype data.</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    pc_set<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>expPCs_reg)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Regress those out.</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    pca_rm <span class="ot">&lt;-</span> <span class="cf">function</span>(input_data, pc_set) {</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>        pca <span class="ot">=</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(input_data), <span class="at">na.action =</span> na.omit)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>        new <span class="ot">=</span> input_data</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>        new <span class="ot">=</span> <span class="fu">apply</span>(new, <span class="dv">1</span>, <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">return</span>(<span class="fu">lm</span>(<span class="fu">as.numeric</span>(x) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> pca<span class="sc">$</span>x[, <span class="fu">as.numeric</span>(pc_set)])<span class="sc">$</span>resid)})</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>        new <span class="ot">=</span> <span class="fu">t</span>(new)</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">colnames</span>(new) <span class="ot">=</span> <span class="fu">colnames</span>(input_data)</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rownames</span>(new) <span class="ot">=</span> <span class="fu">rownames</span>(input_data)</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(new)</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>    expression <span class="ot">=</span> <span class="fu">pca_rm</span>(all_corrected_exp, pc_set)</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-27-normalize_expression_GTEx/length_library_batch_cov_2.png"</span>, <span class="at">width =</span> <span class="dv">1000</span>, <span class="at">height =</span> <span class="dv">1000</span>)</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(expression)</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>svg 
+  2 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="0.1_normalize_expression_GTEx_files/figure-html/unnamed-chunk-16-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/counts_matrices/fully_preprocessed_expression.txt"</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(expression, <span class="at">file =</span> file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(peer)</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># model = PEER()</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># PEER_setPhenoMean(model,as.matrix(logcpms))</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># PEER_setNk(model,15)</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># PEER_getNk(model)</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="co"># PEER_update(model)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb40" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "0.1_normalize_expression_GTEx"</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Saideep Gona"</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2023-11-27"</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: "Show the code"</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">  freeze: true</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="fu"># Context</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>It is important when running S-PrediXcan type analyses to properly normalize the expression data. Thus far, I have employed simple log normalization, but in reality it makes more downstream sense to normalize akin to GTEx because PrediXcan itself was developed using GTEx data and these methods are consistent with the state of the art.</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>According to GTEx (https://www.nature.com/articles/nature24277#Sec11) the normalization steps are as follows:</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>TPM expression </span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>TMM normalization using edgeR</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Inverse normal transformation</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>In addition, covariates were calculated as follows:</span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Top 5 genotyping PCs</span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>15 Peer factors for samples size less than 150</span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Other covariates</span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>This offers a general guideline for performing the normalization up to standards. However, in the Aracena paper empirical observation of the data led to some differing choices, and the authors also performed a more thorough analysis of the covariates and slightly differing normalization techniques. They introduced the following additional normalization steps:</span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Voom normalization for mean-variance correction of counts</span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>In terms of convariate correction:</span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Just 1 genotyping PCs (based on observed variance explained across individuals)</span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>4 expression PCs</span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Batch correction using ComBat</span>
+<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Regress out age and admixture, etc.</span>
+<span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a>They did not normalize by exon length because it was not necessary for their analysis, and they did not inverse quantile normalize. For the purpose of training the DL model, it is important to normalize this way. Also, peer factors are clunky and support has reduced for their use. Therefore, my final normalization scheme is: </span>
+<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-51"><a href="#cb40-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Length normalization</span>
+<span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>TMM normalization and TPM calculation using edgeR</span>
+<span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Batch correction ComBat</span>
+<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Voom normalization for mean-variance correction of counts (includes logcpm)</span>
+<span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-57"><a href="#cb40-57" aria-hidden="true" tabindex="-1"></a>and covariate correction:</span>
+<span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Just 1 genotyping PCs (based on observed variance explained across individuals)</span>
+<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>4 expression PCs</span>
+<span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Regress out age and admixture, etc.</span>
+<span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-63"><a href="#cb40-63" aria-hidden="true" tabindex="-1"></a>It turns out the above approach is flawed. The length normalization doesn't appear to mix well with the TMM normalization. Instead, it seems reasonable to use transcript counts estimated with Kallisto directly and see if that works.</span>
+<span id="cb40-64"><a href="#cb40-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-65"><a href="#cb40-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-68"><a href="#cb40-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-69"><a href="#cb40-69" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c("edgeR","glue","tidyverse","preprocessCore","limma","edgeR","statmod","sva","reshape2","dplyr","stringr"))</span></span>
+<span id="cb40-70"><a href="#cb40-70" aria-hidden="true" tabindex="-1"></a><span class="co"># if (!require("BiocManager", quietly = TRUE))</span></span>
+<span id="cb40-71"><a href="#cb40-71" aria-hidden="true" tabindex="-1"></a><span class="co">#     install.packages("BiocManager")</span></span>
+<span id="cb40-72"><a href="#cb40-72" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install(c("SNPRelate","limma","edgeR","sva","preprocessCore","limma","edgeR","statmod","sva","reshape2","dplyr","stringr"))</span></span>
+<span id="cb40-73"><a href="#cb40-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-74"><a href="#cb40-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-77"><a href="#cb40-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-78"><a href="#cb40-78" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(edgeR)</span>
+<span id="cb40-79"><a href="#cb40-79" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb40-80"><a href="#cb40-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb40-81"><a href="#cb40-81" aria-hidden="true" tabindex="-1"></a><span class="do">## Load libraries</span></span>
+<span id="cb40-82"><a href="#cb40-82" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(preprocessCore)</span>
+<span id="cb40-83"><a href="#cb40-83" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(limma)</span>
+<span id="cb40-84"><a href="#cb40-84" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(edgeR)</span>
+<span id="cb40-85"><a href="#cb40-85" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statmod)</span>
+<span id="cb40-86"><a href="#cb40-86" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sva)</span>
+<span id="cb40-87"><a href="#cb40-87" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb40-88"><a href="#cb40-88" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb40-89"><a href="#cb40-89" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb40-90"><a href="#cb40-90" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SNPRelate)</span>
+<span id="cb40-91"><a href="#cb40-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-92"><a href="#cb40-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-93"><a href="#cb40-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-94"><a href="#cb40-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-95"><a href="#cb40-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-96"><a href="#cb40-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-97"><a href="#cb40-97" aria-hidden="true" tabindex="-1"></a><span class="fu">### Length normalize, compute gene exon lengths</span></span>
+<span id="cb40-98"><a href="#cb40-98" aria-hidden="true" tabindex="-1"></a>We need the genes to also be length normalized, otherwise we are predicting arbitrary units of expression based purely on promoter epigenetic profile.</span>
+<span id="cb40-99"><a href="#cb40-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-102"><a href="#cb40-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb40-103"><a href="#cb40-103" aria-hidden="true" tabindex="-1"></a><span class="co"># wget "ftp://ftp.ensembl.org/pub/release-84/gtf/homo_sapiens/Homo_sapiens.GRCh38.84.gtf.gz"</span></span>
+<span id="cb40-104"><a href="#cb40-104" aria-hidden="true" tabindex="-1"></a><span class="co"># zcat Homo_sapiens.GRCh38.84.gtf.gz | awk '{if($3=="exon") print $10"\t"$5-$4}' | sed -e 's/"//g' -e 's/;//' | /beagle3/haky/users/saideep/software/bedtools2/bin/bedtools groupby -i - -g 1 -c 2 -o sum &gt; Exon_lengths.txt</span></span>
+<span id="cb40-105"><a href="#cb40-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-106"><a href="#cb40-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-107"><a href="#cb40-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-110"><a href="#cb40-110" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-111"><a href="#cb40-111" aria-hidden="true" tabindex="-1"></a>length_norm_before <span class="ot">=</span> <span class="cn">FALSE</span></span>
+<span id="cb40-112"><a href="#cb40-112" aria-hidden="true" tabindex="-1"></a>length_norm_bool <span class="ot">=</span> <span class="cn">FALSE</span></span>
+<span id="cb40-113"><a href="#cb40-113" aria-hidden="true" tabindex="-1"></a>scale <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb40-114"><a href="#cb40-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-115"><a href="#cb40-115" aria-hidden="true" tabindex="-1"></a>expPCs_reg_flu <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb40-116"><a href="#cb40-116" aria-hidden="true" tabindex="-1"></a>expPCs_reg_ni <span class="ot">=</span> <span class="dv">7</span></span>
+<span id="cb40-117"><a href="#cb40-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-118"><a href="#cb40-118" aria-hidden="true" tabindex="-1"></a>source <span class="ot">=</span> <span class="st">"kallisto"</span></span>
+<span id="cb40-119"><a href="#cb40-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-120"><a href="#cb40-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-121"><a href="#cb40-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-124"><a href="#cb40-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-125"><a href="#cb40-125" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (source <span class="sc">==</span> <span class="st">"kallisto"</span>) {</span>
+<span id="cb40-126"><a href="#cb40-126" aria-hidden="true" tabindex="-1"></a>  expression_mat <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/counts_matrices/kallisto_counts.tsv"</span>)</span>
+<span id="cb40-127"><a href="#cb40-127" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb40-128"><a href="#cb40-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-129"><a href="#cb40-129" aria-hidden="true" tabindex="-1"></a>  expression_mat <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/counts_matrices/RNAseq_filtered.counts.txt"</span>)</span>
+<span id="cb40-130"><a href="#cb40-130" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-131"><a href="#cb40-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-132"><a href="#cb40-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-133"><a href="#cb40-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-134"><a href="#cb40-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-137"><a href="#cb40-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-138"><a href="#cb40-138" aria-hidden="true" tabindex="-1"></a>exon_lengths_file <span class="ot">&lt;-</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-27-normalize_expression_GTEx/Exon_lengths.txt"</span></span>
+<span id="cb40-139"><a href="#cb40-139" aria-hidden="true" tabindex="-1"></a>exon_lengths <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">read.table</span>(exon_lengths_file, <span class="at">row.names=</span><span class="dv">1</span>))</span>
+<span id="cb40-140"><a href="#cb40-140" aria-hidden="true" tabindex="-1"></a>exon_lengths<span class="sc">$</span>genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(exon_lengths)</span>
+<span id="cb40-141"><a href="#cb40-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-142"><a href="#cb40-142" aria-hidden="true" tabindex="-1"></a>geneset <span class="ot">&lt;-</span> <span class="fu">rownames</span>(expression_mat)[<span class="fu">rownames</span>(expression_mat) <span class="sc">%in%</span> <span class="fu">rownames</span>(exon_lengths)]</span>
+<span id="cb40-143"><a href="#cb40-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-144"><a href="#cb40-144" aria-hidden="true" tabindex="-1"></a>expression_subset <span class="ot">&lt;-</span> expression_mat[geneset,]</span>
+<span id="cb40-145"><a href="#cb40-145" aria-hidden="true" tabindex="-1"></a>exon_lengths_subset <span class="ot">&lt;-</span> exon_lengths[geneset,]</span>
+<span id="cb40-146"><a href="#cb40-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-147"><a href="#cb40-147" aria-hidden="true" tabindex="-1"></a>exon_length_gene_names <span class="ot">&lt;-</span> <span class="fu">rownames</span>(exon_lengths_subset)</span>
+<span id="cb40-148"><a href="#cb40-148" aria-hidden="true" tabindex="-1"></a>exon_lengths <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(exon_lengths_subset[,<span class="dv">1</span>])<span class="sc">/</span>scale</span>
+<span id="cb40-149"><a href="#cb40-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-150"><a href="#cb40-150" aria-hidden="true" tabindex="-1"></a>gene_annotation_file <span class="ot">&lt;-</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-21-aracena_predixcan/canonical_TSS_full_metadata.txt"</span></span>
+<span id="cb40-151"><a href="#cb40-151" aria-hidden="true" tabindex="-1"></a>gene_annotation_table <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(gene_annotation_file, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep=</span><span class="st">","</span>)</span>
+<span id="cb40-152"><a href="#cb40-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-153"><a href="#cb40-153" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-27-normalize_expression_GTEx/length.png"</span>, <span class="at">width =</span> <span class="dv">1000</span>, <span class="at">height =</span> <span class="dv">1000</span>)</span>
+<span id="cb40-154"><a href="#cb40-154" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">log2</span>(length_norm_expression))</span>
+<span id="cb40-155"><a href="#cb40-155" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb40-156"><a href="#cb40-156" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">log2</span>(length_norm_expression))</span>
+<span id="cb40-157"><a href="#cb40-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-158"><a href="#cb40-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-159"><a href="#cb40-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-160"><a href="#cb40-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-161"><a href="#cb40-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## Format metadata and collect covariates</span></span>
+<span id="cb40-162"><a href="#cb40-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-163"><a href="#cb40-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-166"><a href="#cb40-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-167"><a href="#cb40-167" aria-hidden="true" tabindex="-1"></a><span class="co"># Set some functions</span></span>
+<span id="cb40-168"><a href="#cb40-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-169"><a href="#cb40-169" aria-hidden="true" tabindex="-1"></a><span class="co"># This function mean centers the data.</span></span>
+<span id="cb40-170"><a href="#cb40-170" aria-hidden="true" tabindex="-1"></a>mean_center_clean<span class="ot">=</span><span class="cf">function</span>(cols_local,column){</span>
+<span id="cb40-171"><a href="#cb40-171" aria-hidden="true" tabindex="-1"></a>  index<span class="ot">=</span><span class="fu">which</span>(<span class="fu">colnames</span>(cols_local)<span class="sc">==</span>column)</span>
+<span id="cb40-172"><a href="#cb40-172" aria-hidden="true" tabindex="-1"></a>  cols_local[,index]<span class="ot">=</span>cols_local[,index]<span class="sc">-</span><span class="fu">mean</span>(cols_local[,index])</span>
+<span id="cb40-173"><a href="#cb40-173" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cols_local)</span>
+<span id="cb40-174"><a href="#cb40-174" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-175"><a href="#cb40-175" aria-hidden="true" tabindex="-1"></a><span class="co"># This function applies mean centers function to desired metadata column. Here we apply it to age.</span></span>
+<span id="cb40-176"><a href="#cb40-176" aria-hidden="true" tabindex="-1"></a>pretty_up_cols<span class="ot">=</span><span class="cf">function</span>(cols){</span>
+<span id="cb40-177"><a href="#cb40-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-178"><a href="#cb40-178" aria-hidden="true" tabindex="-1"></a>  cols<span class="ot">=</span><span class="fu">refactorize</span>(cols)</span>
+<span id="cb40-179"><a href="#cb40-179" aria-hidden="true" tabindex="-1"></a>  cols<span class="ot">=</span><span class="fu">mean_center_clean</span>(cols,<span class="st">"Age"</span>)</span>
+<span id="cb40-180"><a href="#cb40-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cols)</span>
+<span id="cb40-181"><a href="#cb40-181" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-182"><a href="#cb40-182" aria-hidden="true" tabindex="-1"></a><span class="co"># This function makes sure that desired metadata columns are factors.</span></span>
+<span id="cb40-183"><a href="#cb40-183" aria-hidden="true" tabindex="-1"></a>refactorize<span class="ot">=</span><span class="cf">function</span>(cols_local){</span>
+<span id="cb40-184"><a href="#cb40-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-185"><a href="#cb40-185" aria-hidden="true" tabindex="-1"></a>  cols_local<span class="sc">$</span>Genotyping_ID<span class="ot">=</span><span class="fu">factor</span>(cols_local<span class="sc">$</span>Genotyping_ID,<span class="at">levels=</span><span class="fu">unique</span>(<span class="fu">as.character</span>(cols_local<span class="sc">$</span>Genotyping_ID)))</span>
+<span id="cb40-186"><a href="#cb40-186" aria-hidden="true" tabindex="-1"></a>  cols_local<span class="sc">$</span>Sample<span class="ot">=</span><span class="fu">factor</span>(cols_local<span class="sc">$</span>Sample)</span>
+<span id="cb40-187"><a href="#cb40-187" aria-hidden="true" tabindex="-1"></a>  cols_local<span class="sc">$</span>Condition<span class="ot">=</span><span class="fu">factor</span>(cols_local<span class="sc">$</span>Condition)</span>
+<span id="cb40-188"><a href="#cb40-188" aria-hidden="true" tabindex="-1"></a>  cols_local<span class="sc">$</span>Batch<span class="ot">=</span><span class="fu">factor</span>(cols_local<span class="sc">$</span>Batch)</span>
+<span id="cb40-189"><a href="#cb40-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cols_local)</span>
+<span id="cb40-190"><a href="#cb40-190" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-191"><a href="#cb40-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-192"><a href="#cb40-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-193"><a href="#cb40-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-196"><a href="#cb40-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-197"><a href="#cb40-197" aria-hidden="true" tabindex="-1"></a><span class="co">#Load metadata</span></span>
+<span id="cb40-198"><a href="#cb40-198" aria-hidden="true" tabindex="-1"></a>meta_data <span class="ot">=</span> <span class="fu">read.table</span>(<span class="fu">paste0</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/metadata/RNAseq_metadata.txt"</span>))</span>
+<span id="cb40-199"><a href="#cb40-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-200"><a href="#cb40-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-201"><a href="#cb40-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-202"><a href="#cb40-202" aria-hidden="true" tabindex="-1"></a><span class="fu">### Covariates - genotype PCs</span></span>
+<span id="cb40-203"><a href="#cb40-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-206"><a href="#cb40-206" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-207"><a href="#cb40-207" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate genotype PC and update metadata</span></span>
+<span id="cb40-208"><a href="#cb40-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-209"><a href="#cb40-209" aria-hidden="true" tabindex="-1"></a>gtypes <span class="ot">=</span> <span class="fu">read.table</span>(<span class="fu">paste0</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping/SNP_genotypes.txt"</span>),<span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb40-210"><a href="#cb40-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-211"><a href="#cb40-211" aria-hidden="true" tabindex="-1"></a>samples<span class="ot">=</span><span class="fu">colnames</span>(gtypes)</span>
+<span id="cb40-212"><a href="#cb40-212" aria-hidden="true" tabindex="-1"></a>gtypes_pca<span class="ot">=</span><span class="fu">data.frame</span>(<span class="at">snp_id=</span><span class="fu">rownames</span>(gtypes),gtypes)</span>
+<span id="cb40-213"><a href="#cb40-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-214"><a href="#cb40-214" aria-hidden="true" tabindex="-1"></a><span class="fu">snpgdsCreateGeno</span>(<span class="fu">paste0</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping"</span>, <span class="st">"/GDS_genotypes.gds"</span>),</span>
+<span id="cb40-215"><a href="#cb40-215" aria-hidden="true" tabindex="-1"></a>                 <span class="at">genmat =</span> <span class="fu">as.matrix</span>(gtypes_pca[, samples]),</span>
+<span id="cb40-216"><a href="#cb40-216" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sample.id =</span> <span class="fu">unique</span>(samples),</span>
+<span id="cb40-217"><a href="#cb40-217" aria-hidden="true" tabindex="-1"></a>                 <span class="at">snp.id =</span> gtypes_pca<span class="sc">$</span>snp_id,</span>
+<span id="cb40-218"><a href="#cb40-218" aria-hidden="true" tabindex="-1"></a>                 <span class="at">snpfirstdim=</span><span class="cn">TRUE</span>)</span>
+<span id="cb40-219"><a href="#cb40-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-220"><a href="#cb40-220" aria-hidden="true" tabindex="-1"></a><span class="do">## This command tells you the total number of samples and SNPs in the .gds file.</span></span>
+<span id="cb40-221"><a href="#cb40-221" aria-hidden="true" tabindex="-1"></a><span class="fu">snpgdsSummary</span>(<span class="fu">paste0</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping"</span>, <span class="st">"/GDS_genotypes.gds"</span>))</span>
+<span id="cb40-222"><a href="#cb40-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-223"><a href="#cb40-223" aria-hidden="true" tabindex="-1"></a><span class="do">## Load .gds file in as genofile.</span></span>
+<span id="cb40-224"><a href="#cb40-224" aria-hidden="true" tabindex="-1"></a>genofile <span class="ot">&lt;-</span> <span class="fu">snpgdsOpen</span>(<span class="fu">paste0</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping"</span>, <span class="st">"/GDS_genotypes.gds"</span>))</span>
+<span id="cb40-225"><a href="#cb40-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-226"><a href="#cb40-226" aria-hidden="true" tabindex="-1"></a><span class="do">## Perform a PCA on genofile/ genotype information. </span></span>
+<span id="cb40-227"><a href="#cb40-227" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">snpgdsPCA</span>(genofile)</span>
+<span id="cb40-228"><a href="#cb40-228" aria-hidden="true" tabindex="-1"></a><span class="do">## Subset the first PC</span></span>
+<span id="cb40-229"><a href="#cb40-229" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sample.id =</span> pca<span class="sc">$</span>sample.id,</span>
+<span id="cb40-230"><a href="#cb40-230" aria-hidden="true" tabindex="-1"></a>                  <span class="at">PC1 =</span> pca<span class="sc">$</span>eigenvect[,<span class="dv">1</span>],    <span class="co"># the first eigenvector</span></span>
+<span id="cb40-231"><a href="#cb40-231" aria-hidden="true" tabindex="-1"></a>                  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb40-232"><a href="#cb40-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-233"><a href="#cb40-233" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tab) <span class="ot">&lt;-</span> tab<span class="sc">$</span>sample.id</span>
+<span id="cb40-234"><a href="#cb40-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-235"><a href="#cb40-235" aria-hidden="true" tabindex="-1"></a><span class="co"># individuals &lt;- strsplit(colnames(expression_subset), split="_")[0]</span></span>
+<span id="cb40-236"><a href="#cb40-236" aria-hidden="true" tabindex="-1"></a>individuals <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"_.*"</span>, <span class="st">""</span>, <span class="fu">colnames</span>(expression_subset))</span>
+<span id="cb40-237"><a href="#cb40-237" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> tab[tab<span class="sc">$</span>sample.id <span class="sc">%in%</span> individuals,]</span>
+<span id="cb40-238"><a href="#cb40-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-239"><a href="#cb40-239" aria-hidden="true" tabindex="-1"></a>samples_with_gtype_pc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(tab<span class="sc">$</span>sample.id, <span class="st">"_Flu"</span>),<span class="fu">paste0</span>(tab<span class="sc">$</span>sample.id, <span class="st">"_NI"</span>))</span>
+<span id="cb40-240"><a href="#cb40-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-241"><a href="#cb40-241" aria-hidden="true" tabindex="-1"></a>gtype_pc <span class="ot">&lt;-</span> <span class="fu">c</span>(tab<span class="sc">$</span>PC1,tab<span class="sc">$</span>PC1)</span>
+<span id="cb40-242"><a href="#cb40-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-243"><a href="#cb40-243" aria-hidden="true" tabindex="-1"></a><span class="co"># Include only samples with genotype PCs</span></span>
+<span id="cb40-244"><a href="#cb40-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-245"><a href="#cb40-245" aria-hidden="true" tabindex="-1"></a>meta_data_with_gtype_pc <span class="ot">&lt;-</span> meta_data[samples_with_gtype_pc,]</span>
+<span id="cb40-246"><a href="#cb40-246" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(meta_data_with_gtype_pc)</span>
+<span id="cb40-247"><a href="#cb40-247" aria-hidden="true" tabindex="-1"></a>meta_data_with_gtype_pc<span class="sc">$</span>gtype_PC1 <span class="ot">&lt;-</span> gtype_pc</span>
+<span id="cb40-248"><a href="#cb40-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-249"><a href="#cb40-249" aria-hidden="true" tabindex="-1"></a>meta_data <span class="ot">&lt;-</span> meta_data_with_gtype_pc</span>
+<span id="cb40-250"><a href="#cb40-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-251"><a href="#cb40-251" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(reads)</span>
+<span id="cb40-252"><a href="#cb40-252" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(meta_data)</span>
+<span id="cb40-253"><a href="#cb40-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-254"><a href="#cb40-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-255"><a href="#cb40-255" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prepare data for normalization</span></span>
+<span id="cb40-256"><a href="#cb40-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-259"><a href="#cb40-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-260"><a href="#cb40-260" aria-hidden="true" tabindex="-1"></a><span class="do">########################################</span></span>
+<span id="cb40-261"><a href="#cb40-261" aria-hidden="true" tabindex="-1"></a><span class="do">### Format reads matrices &amp; metadata </span><span class="al">###</span></span>
+<span id="cb40-262"><a href="#cb40-262" aria-hidden="true" tabindex="-1"></a><span class="do">########################################</span></span>
+<span id="cb40-263"><a href="#cb40-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-264"><a href="#cb40-264" aria-hidden="true" tabindex="-1"></a>reads  <span class="ot">&lt;-</span> expression_subset[,samples_with_gtype_pc]</span>
+<span id="cb40-265"><a href="#cb40-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-266"><a href="#cb40-266" aria-hidden="true" tabindex="-1"></a><span class="co">#subset to only include those samples for which there is a 1 in the "PopDEset" &amp; "EQTL_set" column.</span></span>
+<span id="cb40-267"><a href="#cb40-267" aria-hidden="true" tabindex="-1"></a>meta_data<span class="ot">=</span>meta_data[<span class="fu">which</span>(meta_data<span class="sc">$</span>PopDE_set<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> meta_data<span class="sc">$</span>EQTL_set<span class="sc">==</span><span class="dv">1</span>),]</span>
+<span id="cb40-268"><a href="#cb40-268" aria-hidden="true" tabindex="-1"></a><span class="co">#ensure that the Sample_ID are the rownames of the meta_data dataframe</span></span>
+<span id="cb40-269"><a href="#cb40-269" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(meta_data)<span class="ot">=</span>meta_data<span class="sc">$</span>Sample</span>
+<span id="cb40-270"><a href="#cb40-270" aria-hidden="true" tabindex="-1"></a><span class="co">#ensure that the meta_data dataframe is ordered alphabetically (based on sample_id)</span></span>
+<span id="cb40-271"><a href="#cb40-271" aria-hidden="true" tabindex="-1"></a>meta_data<span class="ot">=</span>meta_data[<span class="fu">order</span>(<span class="fu">rownames</span>(meta_data)),]</span>
+<span id="cb40-272"><a href="#cb40-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-273"><a href="#cb40-273" aria-hidden="true" tabindex="-1"></a><span class="co">#make sure that all the columns of the meta data are also in the read counts matrix.</span></span>
+<span id="cb40-274"><a href="#cb40-274" aria-hidden="true" tabindex="-1"></a>reads<span class="ot">=</span>reads[,<span class="fu">which</span>(<span class="fu">colnames</span>(reads) <span class="sc">%in%</span> <span class="fu">rownames</span>(meta_data))]</span>
+<span id="cb40-275"><a href="#cb40-275" aria-hidden="true" tabindex="-1"></a><span class="co">#order the reads count matrix.</span></span>
+<span id="cb40-276"><a href="#cb40-276" aria-hidden="true" tabindex="-1"></a>reads<span class="ot">=</span>reads[,<span class="fu">order</span>(<span class="fu">colnames</span>(reads))]</span>
+<span id="cb40-277"><a href="#cb40-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-278"><a href="#cb40-278" aria-hidden="true" tabindex="-1"></a><span class="co">#this should be 0. It is a check to ensure that all the metadata and read counts matrix have all the same samples.</span></span>
+<span id="cb40-279"><a href="#cb40-279" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(<span class="fu">rownames</span>(meta_data)<span class="sc">!=</span><span class="fu">colnames</span>(reads)))</span>
+<span id="cb40-280"><a href="#cb40-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-281"><a href="#cb40-281" aria-hidden="true" tabindex="-1"></a><span class="co"># Are metadata and reads the same dimensions?</span></span>
+<span id="cb40-282"><a href="#cb40-282" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(meta_data)[<span class="dv">1</span>]<span class="sc">==</span><span class="fu">dim</span>(reads)[<span class="dv">2</span>]</span>
+<span id="cb40-283"><a href="#cb40-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-284"><a href="#cb40-284" aria-hidden="true" tabindex="-1"></a><span class="co"># mean center age</span></span>
+<span id="cb40-285"><a href="#cb40-285" aria-hidden="true" tabindex="-1"></a>meta_data<span class="ot">=</span><span class="fu">pretty_up_cols</span>(meta_data)</span>
+<span id="cb40-286"><a href="#cb40-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-287"><a href="#cb40-287" aria-hidden="true" tabindex="-1"></a><span class="do">### Get condition-specific reads matrices</span></span>
+<span id="cb40-288"><a href="#cb40-288" aria-hidden="true" tabindex="-1"></a><span class="do">##subset the NI samples only)</span></span>
+<span id="cb40-289"><a href="#cb40-289" aria-hidden="true" tabindex="-1"></a>reads_NI<span class="ot">=</span>reads[,<span class="fu">which</span>(meta_data<span class="sc">$</span>Condition<span class="sc">==</span><span class="st">"NI"</span>)]</span>
+<span id="cb40-290"><a href="#cb40-290" aria-hidden="true" tabindex="-1"></a><span class="do">##subset the Flu samples only)</span></span>
+<span id="cb40-291"><a href="#cb40-291" aria-hidden="true" tabindex="-1"></a>reads_FLU<span class="ot">=</span>reads[,<span class="fu">which</span>(meta_data<span class="sc">$</span>Condition<span class="sc">==</span><span class="st">"Flu"</span>)]</span>
+<span id="cb40-292"><a href="#cb40-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-293"><a href="#cb40-293" aria-hidden="true" tabindex="-1"></a><span class="do">### Get condition-specific metadata tables</span></span>
+<span id="cb40-294"><a href="#cb40-294" aria-hidden="true" tabindex="-1"></a>meta_data_NI<span class="ot">=</span><span class="fu">refactorize</span>(meta_data[<span class="fu">which</span>(meta_data<span class="sc">$</span>Condition<span class="sc">==</span><span class="st">"NI"</span>),])</span>
+<span id="cb40-295"><a href="#cb40-295" aria-hidden="true" tabindex="-1"></a>meta_data_FLU<span class="ot">=</span><span class="fu">refactorize</span>(meta_data[<span class="fu">which</span>(meta_data<span class="sc">$</span>Condition<span class="sc">==</span><span class="st">"Flu"</span>),])</span>
+<span id="cb40-296"><a href="#cb40-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-297"><a href="#cb40-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-298"><a href="#cb40-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-299"><a href="#cb40-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-300"><a href="#cb40-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## Normalization - TMM + Voom </span></span>
+<span id="cb40-301"><a href="#cb40-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-304"><a href="#cb40-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-305"><a href="#cb40-305" aria-hidden="true" tabindex="-1"></a><span class="do">######################################################</span></span>
+<span id="cb40-306"><a href="#cb40-306" aria-hidden="true" tabindex="-1"></a><span class="do">### Voom normalize reads, remove batch with Combat </span><span class="al">###</span></span>
+<span id="cb40-307"><a href="#cb40-307" aria-hidden="true" tabindex="-1"></a><span class="do">######################################################</span></span>
+<span id="cb40-308"><a href="#cb40-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-309"><a href="#cb40-309" aria-hidden="true" tabindex="-1"></a>COR<span class="ot">=</span><span class="cf">function</span>(reads,meta_data, <span class="at">gene_lengths_norm=</span><span class="fu">c</span>(<span class="dv">1</span>), <span class="at">no_voom=</span><span class="cn">FALSE</span>){</span>
+<span id="cb40-310"><a href="#cb40-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-311"><a href="#cb40-311" aria-hidden="true" tabindex="-1"></a>  dge <span class="ot">&lt;-</span> <span class="fu">DGEList</span>(<span class="at">counts=</span>reads)</span>
+<span id="cb40-312"><a href="#cb40-312" aria-hidden="true" tabindex="-1"></a>  dge <span class="ot">&lt;-</span> <span class="fu">calcNormFactors</span>(dge)</span>
+<span id="cb40-313"><a href="#cb40-313" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cpm_tmm &lt;- cpm(dge,log=TRUE,prior.count=1)</span></span>
+<span id="cb40-314"><a href="#cb40-314" aria-hidden="true" tabindex="-1"></a>  design<span class="ot">=</span><span class="fu">model.matrix</span>(<span class="sc">~</span>Age<span class="sc">+</span>Admixture,<span class="at">data=</span>meta_data)</span>
+<span id="cb40-315"><a href="#cb40-315" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> <span class="fu">voom</span>(dge,design,<span class="at">plot=</span><span class="cn">FALSE</span>)</span>
+<span id="cb40-316"><a href="#cb40-316" aria-hidden="true" tabindex="-1"></a>  v_no_comb <span class="ot">&lt;-</span> <span class="fu">voom</span>(dge,design,<span class="at">plot=</span><span class="cn">FALSE</span>)</span>
+<span id="cb40-317"><a href="#cb40-317" aria-hidden="true" tabindex="-1"></a>  v_combat <span class="ot">=</span> <span class="fu">ComBat</span>(<span class="at">dat=</span><span class="fu">as.matrix</span>(v<span class="sc">$</span>E), <span class="at">batch=</span>meta_data<span class="sc">$</span>Batch, <span class="at">mod=</span>design, <span class="at">par.prior=</span><span class="cn">TRUE</span>)</span>
+<span id="cb40-318"><a href="#cb40-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-319"><a href="#cb40-319" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(gene_lengths_norm) <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb40-320"><a href="#cb40-320" aria-hidden="true" tabindex="-1"></a>    v<span class="sc">$</span>E<span class="ot">=</span>v_combat</span>
+<span id="cb40-321"><a href="#cb40-321" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span><span class="fu">lmFit</span>(v,design)</span>
+<span id="cb40-322"><a href="#cb40-322" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">eBayes</span>(fit)</span>
+<span id="cb40-323"><a href="#cb40-323" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb40-324"><a href="#cb40-324" aria-hidden="true" tabindex="-1"></a>    lnorm_c_combat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(v_combat)</span>
+<span id="cb40-325"><a href="#cb40-325" aria-hidden="true" tabindex="-1"></a>    lnorm_c_combat <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">**</span>lnorm_c_combat <span class="sc">-</span> <span class="fl">0.5</span></span>
+<span id="cb40-326"><a href="#cb40-326" aria-hidden="true" tabindex="-1"></a>    lnorm_c_combat <span class="ot">&lt;-</span> lnorm_c_combat<span class="sc">/</span>gene_lengths_norm</span>
+<span id="cb40-327"><a href="#cb40-327" aria-hidden="true" tabindex="-1"></a>    lnorm_c_combat <span class="ot">&lt;-</span> <span class="fu">log2</span>(lnorm_c_combat <span class="sc">+</span> <span class="fl">0.5</span>)</span>
+<span id="cb40-328"><a href="#cb40-328" aria-hidden="true" tabindex="-1"></a>    v<span class="sc">$</span>E <span class="ot">&lt;-</span> lnorm_c_combat</span>
+<span id="cb40-329"><a href="#cb40-329" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span><span class="fu">lmFit</span>(v,design)</span>
+<span id="cb40-330"><a href="#cb40-330" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">eBayes</span>(fit)</span>
+<span id="cb40-331"><a href="#cb40-331" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb40-332"><a href="#cb40-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-333"><a href="#cb40-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(fit, v, v_no_comb))</span>
+<span id="cb40-334"><a href="#cb40-334" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-335"><a href="#cb40-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-336"><a href="#cb40-336" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (length_norm_bool) {</span>
+<span id="cb40-337"><a href="#cb40-337" aria-hidden="true" tabindex="-1"></a>  <span class="co"># If length normalization is true then check if normalize before TMM</span></span>
+<span id="cb40-338"><a href="#cb40-338" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (length_norm_before) {</span>
+<span id="cb40-339"><a href="#cb40-339" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If so then normalize first</span></span>
+<span id="cb40-340"><a href="#cb40-340" aria-hidden="true" tabindex="-1"></a>    reads_NI <span class="ot">=</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(reads_NI)<span class="sc">/</span>exon_lengths)</span>
+<span id="cb40-341"><a href="#cb40-341" aria-hidden="true" tabindex="-1"></a>    reads_FLU <span class="ot">=</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(reads_FLU)<span class="sc">/</span>exon_lengths)</span>
+<span id="cb40-342"><a href="#cb40-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-343"><a href="#cb40-343" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Correct for batch within each condition.</span></span>
+<span id="cb40-344"><a href="#cb40-344" aria-hidden="true" tabindex="-1"></a>    COR_NI<span class="ot">=</span><span class="fu">COR</span>(<span class="at">reads=</span>reads_NI,<span class="at">gene_lengths=</span><span class="fu">c</span>(<span class="dv">1</span>),<span class="at">meta_data=</span>meta_data_NI)</span>
+<span id="cb40-345"><a href="#cb40-345" aria-hidden="true" tabindex="-1"></a>    fit_NI<span class="ot">=</span>COR_NI[[<span class="dv">1</span>]]</span>
+<span id="cb40-346"><a href="#cb40-346" aria-hidden="true" tabindex="-1"></a>    v_NI<span class="ot">=</span>COR_NI[[<span class="dv">2</span>]]</span>
+<span id="cb40-347"><a href="#cb40-347" aria-hidden="true" tabindex="-1"></a>    v_NI_no_comb<span class="ot">=</span>COR_NI[[<span class="dv">3</span>]]</span>
+<span id="cb40-348"><a href="#cb40-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-349"><a href="#cb40-349" aria-hidden="true" tabindex="-1"></a>    COR_FLU<span class="ot">=</span><span class="fu">COR</span>(<span class="at">reads=</span>reads_FLU,<span class="at">gene_lengths=</span><span class="fu">c</span>(<span class="dv">1</span>), <span class="at">meta_data=</span>meta_data_FLU)</span>
+<span id="cb40-350"><a href="#cb40-350" aria-hidden="true" tabindex="-1"></a>    fit_FLU<span class="ot">=</span>COR_FLU[[<span class="dv">1</span>]]</span>
+<span id="cb40-351"><a href="#cb40-351" aria-hidden="true" tabindex="-1"></a>    v_FLU<span class="ot">=</span>COR_FLU[[<span class="dv">2</span>]]</span>
+<span id="cb40-352"><a href="#cb40-352" aria-hidden="true" tabindex="-1"></a>    v_FLU_no_comb<span class="ot">=</span>COR_FLU[[<span class="dv">3</span>]]</span>
+<span id="cb40-353"><a href="#cb40-353" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb40-354"><a href="#cb40-354" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Otherwise provide exon lengths to COR function</span></span>
+<span id="cb40-355"><a href="#cb40-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-356"><a href="#cb40-356" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Correct for batch within each condition.</span></span>
+<span id="cb40-357"><a href="#cb40-357" aria-hidden="true" tabindex="-1"></a>    COR_NI<span class="ot">=</span><span class="fu">COR</span>(<span class="at">reads=</span>reads_NI,<span class="at">gene_lengths=</span>exon_lengths,<span class="at">meta_data=</span>meta_data_NI)</span>
+<span id="cb40-358"><a href="#cb40-358" aria-hidden="true" tabindex="-1"></a>    fit_NI<span class="ot">=</span>COR_NI[[<span class="dv">1</span>]]</span>
+<span id="cb40-359"><a href="#cb40-359" aria-hidden="true" tabindex="-1"></a>    v_NI<span class="ot">=</span>COR_NI[[<span class="dv">2</span>]]</span>
+<span id="cb40-360"><a href="#cb40-360" aria-hidden="true" tabindex="-1"></a>    v_NI_no_comb<span class="ot">=</span>COR_NI[[<span class="dv">3</span>]]</span>
+<span id="cb40-361"><a href="#cb40-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-362"><a href="#cb40-362" aria-hidden="true" tabindex="-1"></a>    COR_FLU<span class="ot">=</span><span class="fu">COR</span>(<span class="at">reads=</span>reads_FLU,<span class="at">gene_lengths=</span>exon_lengths, <span class="at">meta_data=</span>meta_data_FLU)</span>
+<span id="cb40-363"><a href="#cb40-363" aria-hidden="true" tabindex="-1"></a>    fit_FLU<span class="ot">=</span>COR_FLU[[<span class="dv">1</span>]]</span>
+<span id="cb40-364"><a href="#cb40-364" aria-hidden="true" tabindex="-1"></a>    v_FLU<span class="ot">=</span>COR_FLU[[<span class="dv">2</span>]]</span>
+<span id="cb40-365"><a href="#cb40-365" aria-hidden="true" tabindex="-1"></a>    v_FLU_no_comb<span class="ot">=</span>COR_FLU[[<span class="dv">3</span>]]</span>
+<span id="cb40-366"><a href="#cb40-366" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb40-367"><a href="#cb40-367" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb40-368"><a href="#cb40-368" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Otherwise just skip gene length normalization</span></span>
+<span id="cb40-369"><a href="#cb40-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-370"><a href="#cb40-370" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Correct for batch within each condition.</span></span>
+<span id="cb40-371"><a href="#cb40-371" aria-hidden="true" tabindex="-1"></a>  COR_NI<span class="ot">=</span><span class="fu">COR</span>(<span class="at">reads=</span>reads_NI,<span class="at">gene_lengths=</span><span class="fu">c</span>(<span class="dv">1</span>),<span class="at">meta_data=</span>meta_data_NI)</span>
+<span id="cb40-372"><a href="#cb40-372" aria-hidden="true" tabindex="-1"></a>  fit_NI<span class="ot">=</span>COR_NI[[<span class="dv">1</span>]]</span>
+<span id="cb40-373"><a href="#cb40-373" aria-hidden="true" tabindex="-1"></a>  v_NI<span class="ot">=</span>COR_NI[[<span class="dv">2</span>]]</span>
+<span id="cb40-374"><a href="#cb40-374" aria-hidden="true" tabindex="-1"></a>  v_NI_no_comb<span class="ot">=</span>COR_NI[[<span class="dv">3</span>]]</span>
+<span id="cb40-375"><a href="#cb40-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-376"><a href="#cb40-376" aria-hidden="true" tabindex="-1"></a>  COR_FLU<span class="ot">=</span><span class="fu">COR</span>(<span class="at">reads=</span>reads_FLU,<span class="at">gene_lengths=</span><span class="fu">c</span>(<span class="dv">1</span>), <span class="at">meta_data=</span>meta_data_FLU)</span>
+<span id="cb40-377"><a href="#cb40-377" aria-hidden="true" tabindex="-1"></a>  fit_FLU<span class="ot">=</span>COR_FLU[[<span class="dv">1</span>]]</span>
+<span id="cb40-378"><a href="#cb40-378" aria-hidden="true" tabindex="-1"></a>  v_FLU<span class="ot">=</span>COR_FLU[[<span class="dv">2</span>]]</span>
+<span id="cb40-379"><a href="#cb40-379" aria-hidden="true" tabindex="-1"></a>  v_FLU_no_comb<span class="ot">=</span>COR_FLU[[<span class="dv">3</span>]]</span>
+<span id="cb40-380"><a href="#cb40-380" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-381"><a href="#cb40-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-382"><a href="#cb40-382" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-383"><a href="#cb40-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-384"><a href="#cb40-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-385"><a href="#cb40-385" aria-hidden="true" tabindex="-1"></a><span class="fu">## Covariates - non-admixture covariates + genotype PCs</span></span>
+<span id="cb40-386"><a href="#cb40-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-387"><a href="#cb40-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-390"><a href="#cb40-390" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-391"><a href="#cb40-391" aria-hidden="true" tabindex="-1"></a><span class="do">## Regress out effects of non-admixture covariates within condition</span></span>
+<span id="cb40-392"><a href="#cb40-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-393"><a href="#cb40-393" aria-hidden="true" tabindex="-1"></a>correct_exp<span class="ot">=</span><span class="cf">function</span>(v,fit){</span>
+<span id="cb40-394"><a href="#cb40-394" aria-hidden="true" tabindex="-1"></a>  corrected_exp<span class="ot">=</span>v<span class="sc">$</span>E</span>
+<span id="cb40-395"><a href="#cb40-395" aria-hidden="true" tabindex="-1"></a>  <span class="co"># corrected_exp=v</span></span>
+<span id="cb40-396"><a href="#cb40-396" aria-hidden="true" tabindex="-1"></a>  <span class="do">## regress out second column in the design matrix which is age</span></span>
+<span id="cb40-397"><a href="#cb40-397" aria-hidden="true" tabindex="-1"></a>  <span class="do">## the first is intercept and third is admixture</span></span>
+<span id="cb40-398"><a href="#cb40-398" aria-hidden="true" tabindex="-1"></a>  indexes<span class="ot">=</span><span class="fu">c</span>(<span class="dv">2</span>)</span>
+<span id="cb40-399"><a href="#cb40-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-400"><a href="#cb40-400" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> indexes){</span>
+<span id="cb40-401"><a href="#cb40-401" aria-hidden="true" tabindex="-1"></a>    corrected_exp <span class="ot">&lt;-</span> corrected_exp <span class="sc">-</span> fit<span class="sc">$</span>coefficients[,i]<span class="sc">%*%</span><span class="fu">t</span>(fit<span class="sc">$</span>design[,i])</span>
+<span id="cb40-402"><a href="#cb40-402" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(corrected_exp)</span>
+<span id="cb40-403"><a href="#cb40-403" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb40-404"><a href="#cb40-404" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-405"><a href="#cb40-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-406"><a href="#cb40-406" aria-hidden="true" tabindex="-1"></a>corrected_exp_NI<span class="ot">=</span><span class="fu">correct_exp</span>(v_NI,fit_NI)</span>
+<span id="cb40-407"><a href="#cb40-407" aria-hidden="true" tabindex="-1"></a>corrected_exp_FLU<span class="ot">=</span><span class="fu">correct_exp</span>(v_FLU,fit_FLU)</span>
+<span id="cb40-408"><a href="#cb40-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-409"><a href="#cb40-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-410"><a href="#cb40-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-411"><a href="#cb40-411" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-412"><a href="#cb40-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-413"><a href="#cb40-413" aria-hidden="true" tabindex="-1"></a><span class="fu">## Covariates - expression PCs</span></span>
+<span id="cb40-414"><a href="#cb40-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-417"><a href="#cb40-417" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-418"><a href="#cb40-418" aria-hidden="true" tabindex="-1"></a><span class="do">###########################################################################</span></span>
+<span id="cb40-419"><a href="#cb40-419" aria-hidden="true" tabindex="-1"></a><span class="do">## Build matrixEQTL input: expression tables: regressing out first n PCs ##</span></span>
+<span id="cb40-420"><a href="#cb40-420" aria-hidden="true" tabindex="-1"></a><span class="do">###########################################################################</span></span>
+<span id="cb40-421"><a href="#cb40-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-422"><a href="#cb40-422" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(expPCs_reg_flu<span class="sc">==</span><span class="dv">0</span>){</span>
+<span id="cb40-423"><a href="#cb40-423" aria-hidden="true" tabindex="-1"></a>    double_expression_Flu <span class="ot">=</span> corrected_exp_FLU</span>
+<span id="cb40-424"><a href="#cb40-424" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb40-425"><a href="#cb40-425" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Empirically remove PCs from the phenotype data.</span></span>
+<span id="cb40-426"><a href="#cb40-426" aria-hidden="true" tabindex="-1"></a>    pc_set_flu<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>expPCs_reg_flu)</span>
+<span id="cb40-427"><a href="#cb40-427" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Regress those out.</span></span>
+<span id="cb40-428"><a href="#cb40-428" aria-hidden="true" tabindex="-1"></a>    pca_rm <span class="ot">&lt;-</span> <span class="cf">function</span>(input_data, pc_set) {</span>
+<span id="cb40-429"><a href="#cb40-429" aria-hidden="true" tabindex="-1"></a>        pca <span class="ot">=</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(input_data), <span class="at">na.action =</span> na.omit)</span>
+<span id="cb40-430"><a href="#cb40-430" aria-hidden="true" tabindex="-1"></a>        new <span class="ot">=</span> input_data</span>
+<span id="cb40-431"><a href="#cb40-431" aria-hidden="true" tabindex="-1"></a>        new <span class="ot">=</span> <span class="fu">apply</span>(new, <span class="dv">1</span>, <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">return</span>(<span class="fu">lm</span>(<span class="fu">as.numeric</span>(x) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> pca<span class="sc">$</span>x[, <span class="fu">as.numeric</span>(pc_set)])<span class="sc">$</span>resid)})</span>
+<span id="cb40-432"><a href="#cb40-432" aria-hidden="true" tabindex="-1"></a>        new <span class="ot">=</span> <span class="fu">t</span>(new)</span>
+<span id="cb40-433"><a href="#cb40-433" aria-hidden="true" tabindex="-1"></a>        <span class="fu">colnames</span>(new) <span class="ot">=</span> <span class="fu">colnames</span>(input_data)</span>
+<span id="cb40-434"><a href="#cb40-434" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rownames</span>(new) <span class="ot">=</span> <span class="fu">rownames</span>(input_data)</span>
+<span id="cb40-435"><a href="#cb40-435" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(new)</span>
+<span id="cb40-436"><a href="#cb40-436" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb40-437"><a href="#cb40-437" aria-hidden="true" tabindex="-1"></a>    double_expression_Flu <span class="ot">=</span> <span class="fu">pca_rm</span>(corrected_exp_FLU, pc_set_flu)</span>
+<span id="cb40-438"><a href="#cb40-438" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-439"><a href="#cb40-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-440"><a href="#cb40-440" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(expPCs_reg_ni<span class="sc">==</span><span class="dv">0</span>){</span>
+<span id="cb40-441"><a href="#cb40-441" aria-hidden="true" tabindex="-1"></a>    double_expression_NI <span class="ot">=</span> corrected_exp_NI</span>
+<span id="cb40-442"><a href="#cb40-442" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb40-443"><a href="#cb40-443" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Empirically remove PCs from the phenotype data.</span></span>
+<span id="cb40-444"><a href="#cb40-444" aria-hidden="true" tabindex="-1"></a>    pc_set_ni<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>expPCs_reg_ni)</span>
+<span id="cb40-445"><a href="#cb40-445" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Regress those out.</span></span>
+<span id="cb40-446"><a href="#cb40-446" aria-hidden="true" tabindex="-1"></a>    pca_rm <span class="ot">&lt;-</span> <span class="cf">function</span>(input_data, pc_set) {</span>
+<span id="cb40-447"><a href="#cb40-447" aria-hidden="true" tabindex="-1"></a>        pca <span class="ot">=</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(input_data), <span class="at">na.action =</span> na.omit)</span>
+<span id="cb40-448"><a href="#cb40-448" aria-hidden="true" tabindex="-1"></a>        new <span class="ot">=</span> input_data</span>
+<span id="cb40-449"><a href="#cb40-449" aria-hidden="true" tabindex="-1"></a>        new <span class="ot">=</span> <span class="fu">apply</span>(new, <span class="dv">1</span>, <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">return</span>(<span class="fu">lm</span>(<span class="fu">as.numeric</span>(x) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> pca<span class="sc">$</span>x[, <span class="fu">as.numeric</span>(pc_set)])<span class="sc">$</span>resid)})</span>
+<span id="cb40-450"><a href="#cb40-450" aria-hidden="true" tabindex="-1"></a>        new <span class="ot">=</span> <span class="fu">t</span>(new)</span>
+<span id="cb40-451"><a href="#cb40-451" aria-hidden="true" tabindex="-1"></a>        <span class="fu">colnames</span>(new) <span class="ot">=</span> <span class="fu">colnames</span>(input_data)</span>
+<span id="cb40-452"><a href="#cb40-452" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rownames</span>(new) <span class="ot">=</span> <span class="fu">rownames</span>(input_data)</span>
+<span id="cb40-453"><a href="#cb40-453" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(new)</span>
+<span id="cb40-454"><a href="#cb40-454" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb40-455"><a href="#cb40-455" aria-hidden="true" tabindex="-1"></a>    double_expression_NI <span class="ot">=</span> <span class="fu">pca_rm</span>(corrected_exp_NI, pc_set_ni)</span>
+<span id="cb40-456"><a href="#cb40-456" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-457"><a href="#cb40-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-458"><a href="#cb40-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-459"><a href="#cb40-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-460"><a href="#cb40-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-463"><a href="#cb40-463" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-464"><a href="#cb40-464" aria-hidden="true" tabindex="-1"></a><span class="do">## bind corrected read counts back together</span></span>
+<span id="cb40-465"><a href="#cb40-465" aria-hidden="true" tabindex="-1"></a>all_corrected_exp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(double_expression_NI, double_expression_Flu)</span>
+<span id="cb40-466"><a href="#cb40-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-467"><a href="#cb40-467" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2023-11-27-normalize_expression_GTEx/length_library_batch_cov_1.png"</span>, <span class="at">width =</span> <span class="dv">1000</span>, <span class="at">height =</span> <span class="dv">1000</span>)</span>
+<span id="cb40-468"><a href="#cb40-468" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(all_corrected_exp)</span>
+<span id="cb40-469"><a href="#cb40-469" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb40-470"><a href="#cb40-470" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(all_corrected_exp)</span>
+<span id="cb40-471"><a href="#cb40-471" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-472"><a href="#cb40-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-475"><a href="#cb40-475" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-476"><a href="#cb40-476" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="fu">glue</span>(<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/counts_matrices/final_testing/fully_preprocessed_expression_{expPCs_reg_flu}_{expPCs_reg_ni}_lnorm{length_norm_bool}_before{length_norm_before}_scale{scale}_source{source}.txt"</span>)</span>
+<span id="cb40-477"><a href="#cb40-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-478"><a href="#cb40-478" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(all_corrected_exp, <span class="at">file =</span> file)</span>
+<span id="cb40-479"><a href="#cb40-479" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-480"><a href="#cb40-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-481"><a href="#cb40-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-482"><a href="#cb40-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-483"><a href="#cb40-483" aria-hidden="true" tabindex="-1"></a><span class="fu">### Extra: quantile normalization code</span></span>
+<span id="cb40-484"><a href="#cb40-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-485"><a href="#cb40-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-486"><a href="#cb40-486" aria-hidden="true" tabindex="-1"></a>While the intention is to not use quantile normalization for the model training/analysis, it will be used here as a control for running SPrediXcan.</span>
+<span id="cb40-487"><a href="#cb40-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-490"><a href="#cb40-490" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-491"><a href="#cb40-491" aria-hidden="true" tabindex="-1"></a><span class="co">#Charles' python code</span></span>
+<span id="cb40-492"><a href="#cb40-492" aria-hidden="true" tabindex="-1"></a><span class="co"># for i in range(5314, data_XY.shape[1]):</span></span>
+<span id="cb40-493"><a href="#cb40-493" aria-hidden="true" tabindex="-1"></a><span class="co">#     data_XY.iloc[:, i] = data_XY.iloc[:, i].rank(pct=True)</span></span>
+<span id="cb40-494"><a href="#cb40-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-495"><a href="#cb40-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-496"><a href="#cb40-496" aria-hidden="true" tabindex="-1"></a><span class="co"># R version of above</span></span>
+<span id="cb40-497"><a href="#cb40-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-498"><a href="#cb40-498" aria-hidden="true" tabindex="-1"></a>quantile_norm_expression <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">apply</span>(length_norm_expression, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">rank</span>(x, <span class="at">na.last=</span><span class="st">"keep"</span>)<span class="sc">/</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x))))</span>
+<span id="cb40-499"><a href="#cb40-499" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(quantile_norm_expression)</span>
+<span id="cb40-500"><a href="#cb40-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-501"><a href="#cb40-501" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/counts_matrices/fully_preprocessed_expression_NO_CORRECTION_QUANTILE.txt"</span></span>
+<span id="cb40-502"><a href="#cb40-502" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(quantile_norm_expression, <span class="at">file =</span> file)</span>
+<span id="cb40-503"><a href="#cb40-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saideep Gona">
+<meta name="dcterms.date" content="2024-03-26">
+
+<title>Daily-Blog-Sai - build_peak_EnPACT</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daily-Blog-Sai</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a>
+  <ul class="collapse">
+  <li><a href="#create-peak-annotation-files" id="toc-create-peak-annotation-files" class="nav-link" data-scroll-target="#create-peak-annotation-files">Create Peak annotation files</a></li>
+  <li><a href="#reformat-normalized-count-tables-split-flu-and-ni-and-subset-to-genotype-file" id="toc-reformat-normalized-count-tables-split-flu-and-ni-and-subset-to-genotype-file" class="nav-link" data-scroll-target="#reformat-normalized-count-tables-split-flu-and-ni-and-subset-to-genotype-file">Reformat normalized count tables, split Flu and NI and subset to genotype file</a></li>
+  <li><a href="#liftover-inputs-for-predictdb" id="toc-liftover-inputs-for-predictdb" class="nav-link" data-scroll-target="#liftover-inputs-for-predictdb">Liftover inputs for PredictDB</a></li>
+  <li><a href="#train-enpact-models" id="toc-train-enpact-models" class="nav-link" data-scroll-target="#train-enpact-models">Train EnPACT models</a></li>
+  <li><a href="#personalized-prediction-evaluation" id="toc-personalized-prediction-evaluation" class="nav-link" data-scroll-target="#personalized-prediction-evaluation">Personalized prediction evaluation</a>
+  <ul class="collapse">
+  <li><a href="#prepare-vcf-files-for-personalized-prediction" id="toc-prepare-vcf-files-for-personalized-prediction" class="nav-link" data-scroll-target="#prepare-vcf-files-for-personalized-prediction">Prepare VCF files for personalized prediction</a></li>
+  <li><a href="#prepare-config-file-for-personalized-prediction-and-run-the-relevant-pipeline-step" id="toc-prepare-config-file-for-personalized-prediction-and-run-the-relevant-pipeline-step" class="nav-link" data-scroll-target="#prepare-config-file-for-personalized-prediction-and-run-the-relevant-pipeline-step">Prepare config file for personalized prediction and run the relevant pipeline step</a></li>
+  </ul></li>
+  <li><a href="#linearize-peak-enpact-models" id="toc-linearize-peak-enpact-models" class="nav-link" data-scroll-target="#linearize-peak-enpact-models">Linearize Peak EnPACT models</a>
+  <ul class="collapse">
+  <li><a href="#set-up-loci-selection" id="toc-set-up-loci-selection" class="nav-link" data-scroll-target="#set-up-loci-selection">Set up loci selection</a></li>
+  <li><a href="#peak-overlap-between-modalities" id="toc-peak-overlap-between-modalities" class="nav-link" data-scroll-target="#peak-overlap-between-modalities">Peak overlap between modalities</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">build_peak_EnPACT</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saideep Gona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 26, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="context" class="level1">
+<h1>Context</h1>
+<p>In this notebook, I build linearized Con-EnPACT models for peak data from Aracena et al.&nbsp;The peak data are as follows:</p>
+<p>ATAC - Chromatin Accessibility H3K27ac - Histone, Enhancers + TSS H3K27me3 - Repression H3K4me1 - “Active” enhancers H3K4me3 - Enhancer</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os,sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyliftover</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up modalities</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>path_to_config_template <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Con-EnPACT/example_json/example_config_with_twas.json"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>path_to_run_template <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Con-EnPACT/run_training.sbatch"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>path_to_project_dir <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/Con_EnPACT/models"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>path_to_count_table <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/normalized_peak_data/"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>path_to_annotations <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/annotations/"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>modality_pcs <span class="op">=</span> {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27ac"</span>:{</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Flu"</span>:<span class="dv">1</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NI"</span>:<span class="dv">1</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27me3"</span>:{</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Flu"</span>:<span class="dv">2</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NI"</span>:<span class="dv">1</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me1"</span>:{</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Flu"</span>:<span class="dv">4</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NI"</span>:<span class="dv">2</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me3"</span>:{</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Flu"</span>:<span class="dv">2</span>,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NI"</span>:<span class="dv">2</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ATAC"</span>:{</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Flu"</span>:<span class="dv">3</span>,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NI"</span>:<span class="dv">3</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="create-peak-annotation-files" class="level3">
+<h3 class="anchored" data-anchor-id="create-peak-annotation-files">Create Peak annotation files</h3>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> liftover_count_table(count_table, from_build<span class="op">=</span><span class="st">"hg19"</span>, to_build<span class="op">=</span><span class="st">"hg38"</span>, valid_chroms<span class="op">=</span>[<span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr3"</span>, <span class="st">"chr4"</span>, <span class="st">"chr5"</span>, <span class="st">"chr6"</span>, <span class="st">"chr7"</span>, <span class="st">"chr8"</span>, <span class="st">"chr9"</span>, <span class="st">"chr10"</span>, <span class="st">"chr11"</span>, <span class="st">"chr12"</span>, <span class="st">"chr13"</span>, <span class="st">"chr14"</span>, <span class="st">"chr15"</span>, <span class="st">"chr16"</span>, <span class="st">"chr17"</span>, <span class="st">"chr18"</span>, <span class="st">"chr19"</span>, <span class="st">"chr20"</span>, <span class="st">"chr21"</span>, <span class="st">"chr22"</span>, <span class="st">"chrX"</span>, <span class="st">"chrY"</span>]):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Liftover index of dataframe to new build, filter rows if not possible </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    lo <span class="op">=</span> pyliftover.LiftOver(from_build, to_build)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    new_regions <span class="op">=</span> []</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    new_regions_keep <span class="op">=</span> []</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> region <span class="kw">in</span> count_table.index:</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        chrom <span class="op">=</span> region.split(<span class="st">"_"</span>)[<span class="dv">0</span>]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(region.split(<span class="st">"_"</span>)) <span class="op">!=</span> <span class="dv">3</span>:</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"region length not 3"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            new_regions_keep.append(<span class="va">False</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> chrom <span class="kw">not</span> <span class="kw">in</span> valid_chroms:</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"chromosome not in valid chroms"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            new_regions_keep.append(<span class="va">False</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        start <span class="op">=</span> <span class="bu">int</span>(region.split(<span class="st">"_"</span>)[<span class="dv">1</span>])</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        end <span class="op">=</span> <span class="bu">int</span>(region.split(<span class="st">"_"</span>)[<span class="dv">2</span>])</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        new_start_coords <span class="op">=</span> lo.convert_coordinate(chrom, start)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(new_start_coords) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"No conversion"</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>            new_regions_keep.append(<span class="va">False</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        new_start <span class="op">=</span> new_start_coords[<span class="dv">0</span>][<span class="dv">1</span>]</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>                                        </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        new_end_coords <span class="op">=</span> lo.convert_coordinate(chrom, end)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(new_end_coords) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"No conversion"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>            new_regions_keep.append(<span class="va">False</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span>                                </span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        new_end <span class="op">=</span> new_end_coords[<span class="dv">0</span>][<span class="dv">1</span>]</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        new_regions.append(chrom <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> <span class="bu">str</span>(new_start) <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> <span class="bu">str</span>(new_end))</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        new_regions_keep.append(<span class="va">True</span>)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    new_count_table <span class="op">=</span> count_table[new_regions_keep]</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    new_count_table.index <span class="op">=</span> new_regions</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_count_table</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> liftover_predictdb_genotype_file(genotype_file, from_build<span class="op">=</span><span class="st">"hg19"</span>, to_build<span class="op">=</span><span class="st">"hg38"</span>):</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    lo <span class="op">=</span> pyliftover.LiftOver(from_build, to_build)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    genotypes_df <span class="op">=</span> pd.read_csv(genotype_file, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    chroms <span class="op">=</span> genotypes_df[<span class="st">"varID"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.split(<span class="st">"_"</span>)[<span class="dv">0</span>])</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    starts <span class="op">=</span> genotypes_df[<span class="st">"varID"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">int</span>(x.split(<span class="st">"_"</span>)[<span class="dv">1</span>]))</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    refs <span class="op">=</span> genotypes_df[<span class="st">"varID"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.split(<span class="st">"_"</span>)[<span class="dv">2</span>])</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    alts <span class="op">=</span> genotypes_df[<span class="st">"varID"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.split(<span class="st">"_"</span>)[<span class="dv">3</span>])</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    new_starts <span class="op">=</span> []</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    unconverted <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> chrom, start <span class="kw">in</span> <span class="bu">zip</span>(chroms, starts):</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>        new_coords <span class="op">=</span> lo.convert_coordinate(chrom, start)</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(new_coords) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>            unconverted <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>            new_starts.append(<span class="st">"UNCONVERTED"</span>)</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>            new_starts.append(new_coords[<span class="dv">0</span>][<span class="dv">1</span>])</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> to_build <span class="op">==</span> <span class="st">"hg19"</span>:</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>        build_tag <span class="op">=</span> <span class="st">"b37"</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>        from_build_tag <span class="op">=</span> <span class="st">"b38"</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> to_build <span class="op">==</span> <span class="st">"hg38"</span>:</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>        build_tag <span class="op">=</span> <span class="st">"b38"</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>        from_build_tag <span class="op">=</span> <span class="st">"b37"</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    genotypes_df[<span class="st">"varID"</span>] <span class="op">=</span> [<span class="st">"_"</span>.join([chrom,<span class="bu">str</span>(new_start),<span class="bu">str</span>(ref),<span class="bu">str</span>(alt),build_tag]) <span class="cf">for</span> chrom, new_start, ref, alt <span class="kw">in</span> <span class="bu">zip</span>(chroms, new_starts, refs, alts)]</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    genotypes_df_no_unconverted <span class="op">=</span> genotypes_df[<span class="op">~</span>genotypes_df[<span class="st">"varID"</span>].<span class="bu">str</span>.contains(<span class="st">"UNCONVERTED"</span>)]</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    genotypes_df_no_unconverted <span class="op">=</span> genotypes_df_no_unconverted.drop_duplicates(subset<span class="op">=</span>[<span class="st">'varID'</span>])</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(genotypes_df.shape)</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(genotypes_df_no_unconverted.shape)</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    out_file <span class="op">=</span> genotype_file.replace(from_build_tag, build_tag)</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    genotypes_df_no_unconverted.to_csv(out_file, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Unconverted: "</span>, unconverted)</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> liftover_snp_annotation_file(annotation_file, from_build<span class="op">=</span><span class="st">"hg19"</span>, to_build<span class="op">=</span><span class="st">"hg38"</span>):</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>    lo <span class="op">=</span> pyliftover.LiftOver(from_build, to_build)</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    annotation_df <span class="op">=</span> pd.read_csv(annotation_file, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>    chroms <span class="op">=</span> annotation_df[<span class="st">"chr"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">"chr"</span><span class="op">+</span><span class="bu">str</span>(x))</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>    starts <span class="op">=</span> annotation_df[<span class="st">"pos"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">int</span>(x))</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    refs <span class="op">=</span> annotation_df[<span class="st">"ref_vcf"</span>]</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    alts <span class="op">=</span> annotation_df[<span class="st">"alt_vcf"</span>]</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>    new_starts <span class="op">=</span> []</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>    unconverted <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> chrom, start <span class="kw">in</span> <span class="bu">zip</span>(chroms, starts):</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>        new_coords <span class="op">=</span> lo.convert_coordinate(chrom, start)</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(new_coords) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>            unconverted <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>            new_starts.append(<span class="st">"UNCONVERTED"</span>)</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>            new_starts.append(new_coords[<span class="dv">0</span>][<span class="dv">1</span>])</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> to_build <span class="op">==</span> <span class="st">"hg19"</span>:</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>        build_tag <span class="op">=</span> <span class="st">"b37"</span></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>        from_build_tag <span class="op">=</span> <span class="st">"b38"</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> to_build <span class="op">==</span> <span class="st">"hg38"</span>:</span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>        build_tag <span class="op">=</span> <span class="st">"b38"</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>        from_build_tag <span class="op">=</span> <span class="st">"b37"</span></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>    varids <span class="op">=</span> [<span class="st">"_"</span>.join([chrom,<span class="bu">str</span>(new_start),<span class="bu">str</span>(ref),<span class="bu">str</span>(alt),build_tag]) <span class="cf">for</span> chrom, new_start, ref, alt <span class="kw">in</span> <span class="bu">zip</span>(chroms, new_starts, refs, alts)]</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>    annotation_df[<span class="st">"varID"</span>] <span class="op">=</span> varids</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>    annotation_df[<span class="st">"rsid"</span>] <span class="op">=</span> varids</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>    annotation_df[<span class="st">"pos"</span>] <span class="op">=</span> new_starts</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>    annotation_df_no_unconverted <span class="op">=</span> annotation_df[<span class="op">~</span>annotation_df[<span class="st">"varID"</span>].<span class="bu">str</span>.contains(<span class="st">"UNCONVERTED"</span>)]</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(annotation_df.shape)</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(annotation_df_no_unconverted.shape)</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>    out_file <span class="op">=</span> annotation_file.replace(from_build_tag, build_tag)</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>    annotation_df.to_csv(out_file, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Unconverted: "</span>, unconverted)</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_annotation_from_count(cur_counts, modality, annotation_dir, valid_chroms):</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>    predictdb_annotation_file_dict <span class="op">=</span> {</span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>        <span class="st">"chr"</span>:[],</span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gene_id"</span>:[],</span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gene_name"</span>:[],</span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>        <span class="st">"start"</span>:[],</span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>        <span class="st">"end"</span>:[],</span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gene_type"</span>:[]</span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>    annotation_file_dict <span class="op">=</span> {<span class="st">"ensembl_gene_id"</span>:[],</span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"external_gene_name"</span>:[],</span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"chromosome_name"</span>:[],</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"transcript_biotype"</span>:[],</span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"transcript_start"</span>:[],</span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"transcript_end"</span>:[],</span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"transcription_start_site"</span>:[],</span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"transcript_is_canonical"</span>:[],</span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"transcript_count"</span>:[],</span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"target_regions"</span>:[]</span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>                            }</span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> cur_counts.iterrows():</span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a>        region <span class="op">=</span> row[<span class="dv">0</span>]</span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(region.split(<span class="st">"_"</span>)) <span class="op">!=</span> <span class="dv">3</span>:</span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"region length not 3"</span>)</span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>        chrom <span class="op">=</span> region.split(<span class="st">"_"</span>)[<span class="dv">0</span>]</span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> chrom <span class="kw">not</span> <span class="kw">in</span> valid_chroms:</span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"chromosome not in valid chroms"</span>)</span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a>        start <span class="op">=</span> <span class="bu">int</span>(region.split(<span class="st">"_"</span>)[<span class="dv">1</span>])</span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a>        end <span class="op">=</span> <span class="bu">int</span>(region.split(<span class="st">"_"</span>)[<span class="dv">2</span>])</span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>        middle <span class="op">=</span> (start <span class="op">+</span> end) <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a>        predictdb_annotation_file_dict[<span class="st">"chr"</span>].append(chrom.strip(<span class="st">"chr"</span>))</span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a>        predictdb_annotation_file_dict[<span class="st">"gene_id"</span>].append(region)</span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a>        predictdb_annotation_file_dict[<span class="st">"gene_name"</span>].append(region)</span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a>        predictdb_annotation_file_dict[<span class="st">"start"</span>].append(start)</span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a>        predictdb_annotation_file_dict[<span class="st">"end"</span>].append(end)</span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a>        predictdb_annotation_file_dict[<span class="st">"gene_type"</span>].append(<span class="st">"protein_coding"</span>)</span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a>        annotation_file_dict[<span class="st">"ensembl_gene_id"</span>].append(region)</span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>        annotation_file_dict[<span class="st">"external_gene_name"</span>].append(region)</span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>        annotation_file_dict[<span class="st">"chromosome_name"</span>].append(chrom.strip(<span class="st">"chr"</span>))</span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a>        annotation_file_dict[<span class="st">"transcript_biotype"</span>].append(<span class="st">"NA"</span>)</span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a>        annotation_file_dict[<span class="st">"transcript_start"</span>].append(start)</span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a>        annotation_file_dict[<span class="st">"transcript_end"</span>].append(end)</span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a>        annotation_file_dict[<span class="st">"transcription_start_site"</span>].append(middle)</span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a>        annotation_file_dict[<span class="st">"transcript_is_canonical"</span>].append(<span class="dv">1</span>)</span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>        annotation_file_dict[<span class="st">"transcript_count"</span>].append(<span class="st">"NA"</span>)</span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a>        annotation_file_dict[<span class="st">"target_regions"</span>].append(region)</span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>    predictdb_annotation_file <span class="op">=</span> pd.DataFrame(predictdb_annotation_file_dict)</span>
+<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(predictdb_annotation_file.shape)</span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a>    o_file <span class="op">=</span> os.path.join(annotation_dir, <span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_predictdb_annotation.txt"</span>)</span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a>    predictdb_annotation_file.to_csv(o_file, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a>    annotation_file <span class="op">=</span> pd.DataFrame(annotation_file_dict)</span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(annotation_file.shape)</span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a>    o_file <span class="op">=</span> os.path.join(annotation_dir, <span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_annotation.txt"</span>)</span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a>    annotation_file.to_csv(o_file, sep<span class="op">=</span><span class="st">","</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="reformat-normalized-count-tables-split-flu-and-ni-and-subset-to-genotype-file" class="level3">
+<h3 class="anchored" data-anchor-id="reformat-normalized-count-tables-split-flu-and-ni-and-subset-to-genotype-file">Reformat normalized count tables, split Flu and NI and subset to genotype file</h3>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Reformat normalized count tables, split Flu and NI and subset to genotype file</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># genotype_file = "/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping/SNP_genotypes_b37.txt"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># genotype_data = pd.read_csv(genotype_file, sep="\t", index_col=0)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># genotype_data.head()</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># genotype_samples = genotype_data.columns</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for modality in modality_pcs.keys():</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     cur_count_file = os.path.join(path_to_count_table,f"fully_preprocessed_{modality}_{modality_pcs[modality]['Flu']}_{modality_pcs[modality]['NI']}.txt")</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     all_expression_ori = pd.read_csv(</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#         cur_count_file,</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#          sep=" ")</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     valid_chroms = "chr1,chr2,chr3,chr4,chr5,chr6,chr9,chr10,chr11,chr16,chr17,chr18,chr19,chr20,chr21,chr7,chr15,chrX,chr12,chr14,chr8,chr22,chr13".split(",")</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     # Liftover peaks to hg38</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     all_expression= liftover_count_table(all_expression_ori, from_build="hg19", to_build="hg38", valid_chroms=valid_chroms)</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#     # Make annotation file for EnPACT</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#     make_annotation_from_count(all_expression, modality, path_to_annotations, valid_chroms)</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     print(all_expression_ori.shape)</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#     print(all_expression.shape)</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#     # samples = all_expression.columns</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#     samples = all_expression.columns</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">#     flu_samples = [x for x in samples if "Flu" in x]</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     ni_samples = [x for x in samples if "NI" in x]</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">#     flu_samples = [x for x in flu_samples if x.split("_")[0] in genotype_samples]</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">#     ni_samples = [x for x in ni_samples if x.split("_")[0] in genotype_samples]</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     flu_expression = all_expression[flu_samples]</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">#     ni_expression = all_expression[ni_samples]</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">#     flu_expression = flu_expression.rename(columns={x:x.replace("_Flu","") for x in flu_samples})</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#     ni_expression = ni_expression.rename(columns={x:x.replace("_NI","") for x in ni_samples})</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#     print(flu_expression.shape)</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">#     print(ni_expression.shape)</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co">#     # Write reformated files</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co">#     flu_expression.to_csv(cur_count_file.replace("preprocessed_", "preprocessed_Flu_"), index=True, index_label="NAME", sep="\t")</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co">#     ni_expression.to_csv(cur_count_file.replace("preprocessed_", "preprocessed_NI_"), index=True, index_label="NAME", sep="\t")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="liftover-inputs-for-predictdb" class="level3">
+<h3 class="anchored" data-anchor-id="liftover-inputs-for-predictdb">Liftover inputs for PredictDB</h3>
+<p>This isn’t always necessary if your inputs are all already in the same genome build.</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>genotype_file_to_convert <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/QTL_mapping/SNP_genotypes_b37.txt"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>annotation_file_to_convert <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/ref/rsIDs.for.predixcan_b37.txt"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>converted_genotype_file <span class="op">=</span> genotype_file_to_convert.replace(<span class="st">"b37"</span>, <span class="st">"b38"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>converted_annotation_file <span class="op">=</span> annotation_file_to_convert.replace(<span class="st">"b37"</span>, <span class="st">"b38"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert genotype file to hg38 (shared among all runs)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># liftover_predictdb_genotype_file(genotype_file_to_convert, from_build="hg19", to_build="hg38")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert SNP annotation file to hg38 (shared among all runs)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># liftover_snp_annotation_file(annotation_file_to_convert, from_build="hg19", to_build="hg38")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="train-enpact-models" class="level2">
+<h2 class="anchored" data-anchor-id="train-enpact-models">Train EnPACT models</h2>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>window_sizes <span class="op">=</span> [<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">16</span>,<span class="dv">32</span>,<span class="dv">64</span>,<span class="dv">128</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> modality <span class="kw">in</span> modality_pcs.keys():</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> context <span class="kw">in</span> [<span class="st">"Flu"</span>,<span class="st">"NI"</span>]:</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> window_size <span class="kw">in</span> window_sizes:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            cur_proj_dir <span class="op">=</span> os.path.join(path_to_project_dir,context<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>modality<span class="op">+</span><span class="st">"_ws"</span><span class="op">+</span><span class="bu">str</span>(window_size))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            os.makedirs(cur_proj_dir,exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(path_to_config_template,<span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                config <span class="op">=</span> json.load(f)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                config[<span class="st">"general_parameters"</span>][<span class="st">"project_directory"</span>] <span class="op">=</span> cur_proj_dir</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                config[<span class="st">"general_parameters"</span>][<span class="st">"context"</span>] <span class="op">=</span> context</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                config[<span class="st">"generate_enpact_training_data"</span>][<span class="st">"input_files"</span>][<span class="st">"normalized_expression_data"</span>] <span class="op">=</span> os.path.join(path_to_count_table,<span class="ss">f"fully_preprocessed_</span><span class="sc">{</span>context<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>modality_pcs[modality][<span class="st">'Flu'</span>]<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>modality_pcs[modality][<span class="st">'NI'</span>]<span class="sc">}</span><span class="ss">.txt"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                config[<span class="st">"generate_enpact_training_data"</span>][<span class="st">"reference_epigenome"</span>][<span class="st">"num_bins"</span>] <span class="op">=</span> window_size </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>                config[<span class="st">"generate_enpact_training_data"</span>][<span class="st">"input_files"</span>][<span class="st">"gene_annotations"</span>] <span class="op">=</span> os.path.join(path_to_annotations,<span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_annotation.txt"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">with</span> <span class="bu">open</span>(os.path.join(cur_proj_dir,<span class="st">"config.json"</span>),<span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>                    json.dump(config,f, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(path_to_run_template,<span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                run <span class="op">=</span> f.read()</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                run <span class="op">=</span> run.replace(<span class="st">"CONFIG_FILE"</span>,os.path.join(cur_proj_dir,<span class="st">"config.json"</span>))</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>                run <span class="op">=</span> run.replace(<span class="st">"JOBNAME"</span>,context<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>modality)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>                run <span class="op">=</span> run.replace(<span class="st">"ERROR_LOG"</span>, os.path.join(cur_proj_dir,<span class="st">"error_training.log"</span>))</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>                run <span class="op">=</span> run.replace(<span class="st">"OUTPUT_LOG"</span>, os.path.join(cur_proj_dir,<span class="st">"output_training.log"</span>))</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>                <span class="cf">with</span> <span class="bu">open</span>(os.path.join(cur_proj_dir,<span class="st">"run_training.sbatch"</span>),<span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>                    f.write(run)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>            <span class="co"># subprocess.run(["sbatch",</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>            <span class="co">#                 os.path.join(cur_proj_dir,"run_training.sbatch")],</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>            <span class="co">#                 cwd=cur_proj_dir)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="personalized-prediction-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="personalized-prediction-evaluation">Personalized prediction evaluation</h2>
+<p>Before moving on to do linearization and TWAS, it is important to examine the raw personalized prediction performance of the EnPACT model. Also, based on analyzing the window sizes during training, we can decide on the window size for personalized prediction and linearization. They are stored below:</p>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>optimal_window_sizes <span class="op">=</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27ac"</span>:<span class="dv">8</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27me3"</span>:<span class="dv">64</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me1"</span>:<span class="dv">32</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me3"</span>:<span class="dv">8</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ATAC"</span>:<span class="dv">8</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>nfolds_per_mode <span class="op">=</span> {</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27ac"</span>:<span class="dv">3</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27me3"</span>:<span class="dv">3</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me1"</span>:<span class="dv">3</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me3"</span>:<span class="dv">3</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ATAC"</span>:<span class="dv">3</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>closest_enformer_track <span class="op">=</span> {</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27ac"</span>:<span class="dv">8</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27me3"</span>:<span class="dv">64</span>,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me1"</span>:<span class="dv">32</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me3"</span>:<span class="dv">8</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ATAC"</span>:<span class="dv">517</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>max_features <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>path_to_pdb_standard_template <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Con-EnPACT/run_predictdb_standard.sbatch"</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>path_to_pp_template <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Con-EnPACT/run_personalized_predictions.sbatch"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="prepare-vcf-files-for-personalized-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-vcf-files-for-personalized-prediction">Prepare VCF files for personalized prediction</h3>
+<p>Personalized prediction requires a VCF file encoding individual’s genotypes. In this case, the existing VCF is in hg19 format, and the sample names are somewhat confusingly named relative to the the other files. Liftover is not required as long as the other input files are in hg19 format, but it will help to rename the VCFs samples for consistency.</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>vcf_dir <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/VCF/imputed"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cyvcf2</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>vcf_files <span class="op">=</span> glob.glob(os.path.join(vcf_dir,<span class="st">"*.dose.vcf.gz.chr.vcf.gz.snps.vcf.gz.noimputed.vcf.gz"</span>))</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>new_vcf_dir <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/VCF/renamed"</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>reheader_script_dir <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Daily-Blog-Sai/posts/2024-03-24-run_EnPACT_peak_data/vcf_reheader"</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>bcftools <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/software/bcftools-1.19/bcftools"</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># with open(os.path.join(reheader_script_dir,"reheader.sh"), "w") as rs:</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     for vcf_file in vcf_files:</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#         new_vcf_file = os.path.join(new_vcf_dir,os.path.basename(vcf_file).replace(".noimputed.vcf.gz",".noimputed.reheader.vcf.gz"))</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co">#         cur_samples = cyvcf2.VCF(vcf_file).samples</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">#         new_samples = [x.split("_")[1] for x in cur_samples]</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">#         new_samples_file = os.path.join(reheader_script_dir,os.path.basename(vcf_file).replace(".vcf.gz",".header"))</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co">#         with open(new_samples_file, "w") as f:</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co">#             f.write("\n".join(new_samples))</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co">#         rs.write(f"{bcftools} reheader -s {new_samples_file} -o {new_vcf_file} {vcf_file}\n")</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co">#         rs.write(f"tabix -p vcf {new_vcf_file}\n\n")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="prepare-config-file-for-personalized-prediction-and-run-the-relevant-pipeline-step" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-config-file-for-personalized-prediction-and-run-the-relevant-pipeline-step">Prepare config file for personalized prediction and run the relevant pipeline step</h3>
+<p>Personalized prediction requires running PredictDB training directly on the study population. This helps select features we will use for EnPACT personalized prediction as well as provide a model comparison. Therefore, the code below also generates the run script for standard predictDB. You should run that first, and then after the filtered db is created run the personalized prediction runscript.</p>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> modality <span class="kw">in</span> modality_pcs.keys():</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> context <span class="kw">in</span> [<span class="st">"Flu"</span>,<span class="st">"NI"</span>]:</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        cur_window_size <span class="op">=</span> optimal_window_sizes[modality]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        cur_proj_dir <span class="op">=</span> os.path.join(path_to_project_dir,context<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>modality<span class="op">+</span><span class="st">"_ws"</span><span class="op">+</span><span class="bu">str</span>(cur_window_size))</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(os.path.join(cur_proj_dir,<span class="st">"config.json"</span>),<span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>            config <span class="op">=</span> json.load(f)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"predictDB_standard"</span>][<span class="st">"genotype_file"</span>] <span class="op">=</span> converted_genotype_file</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"predictDB_standard"</span>][<span class="st">"snp_annotation_file"</span>] <span class="op">=</span> converted_annotation_file</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"predictDB_standard"</span>][<span class="st">"feature_annotation_file"</span>] <span class="op">=</span> os.path.join(path_to_annotations,<span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_predictdb_annotation.txt"</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"predictDB_standard"</span>][<span class="st">"nfolds"</span>] <span class="op">=</span> nfolds_per_mode[modality]</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"personalized_predictions"</span>][<span class="st">"max_features"</span>] <span class="op">=</span> max_features</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"personalized_predictions"</span>][<span class="st">"path_to_epigenome_prediction_pipeline"</span>] <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/shared_pipelines/enformer_pipeline"</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"personalized_predictions"</span>][<span class="st">"path_to_epigenome_config"</span>] <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/shared_pipelines/enformer_pipeline/config_files/run_on_beagle3_personalized.json"</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"personalized_predictions"</span>][<span class="st">"path_to_vcf"</span>] <span class="op">=</span> new_vcf_dir</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"personalized_predictions"</span>][<span class="st">"epigenome_config_parameters"</span>][<span class="st">"fasta_file"</span>] <span class="op">=</span> <span class="st">"/beagle3/haky/data/hg_sequences/hg19/raw/genome.fa"</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"personalized_predictions"</span>][<span class="st">"num_bins"</span>] <span class="op">=</span> optimal_window_sizes[modality]</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"personalized_predictions"</span>][<span class="st">"date"</span>] <span class="op">=</span> <span class="st">"04-16-2024"</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"personalized_predictions"</span>][<span class="st">"liftover"</span>] <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>            config[<span class="st">"personalized_predictions"</span>][<span class="st">"liftover_target"</span>] <span class="op">=</span> <span class="st">"hg19"</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(os.path.join(cur_proj_dir,<span class="st">"config.json"</span>),<span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>            json.dump(config,f, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(path_to_pdb_standard_template,<span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>            run <span class="op">=</span> f.read()</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>            run <span class="op">=</span> run.replace(<span class="st">"CONFIG_FILE"</span>,os.path.join(cur_proj_dir,<span class="st">"config.json"</span>))</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>            run <span class="op">=</span> run.replace(<span class="st">"JOBNAME"</span>,context<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>modality)</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>            run <span class="op">=</span> run.replace(<span class="st">"ERROR_LOG"</span>, os.path.join(cur_proj_dir,<span class="st">"error_pdb_standard.log"</span>))</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>            run <span class="op">=</span> run.replace(<span class="st">"OUTPUT_LOG"</span>, os.path.join(cur_proj_dir,<span class="st">"output_pdb_standard.log"</span>))</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(os.path.join(cur_proj_dir,<span class="st">"run_predictdb_standard.sbatch"</span>),<span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>                f.write(run)</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(path_to_pp_template,<span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>            run <span class="op">=</span> f.read()</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>            run <span class="op">=</span> run.replace(<span class="st">"CONFIG_FILE"</span>,os.path.join(cur_proj_dir,<span class="st">"config.json"</span>))</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>            run <span class="op">=</span> run.replace(<span class="st">"JOBNAME"</span>,context<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>modality)</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>            run <span class="op">=</span> run.replace(<span class="st">"ERROR_LOG"</span>, os.path.join(cur_proj_dir,<span class="st">"error_predictions.log"</span>))</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>            run <span class="op">=</span> run.replace(<span class="st">"OUTPUT_LOG"</span>, os.path.join(cur_proj_dir,<span class="st">"output_predictions.log"</span>))</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(os.path.join(cur_proj_dir,<span class="st">"run_personalized_predictions.sbatch"</span>),<span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>                f.write(run)</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>        subprocess.run([<span class="st">"sbatch"</span>, os.path.join(cur_proj_dir,<span class="st">"run_personalized_predictions.sbatch"</span>), <span class="st">"True"</span>], cwd<span class="op">=</span>cur_proj_dir)</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># if modality != "ATAC":</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     if context == "Flu":</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>        <span class="co">#         subprocess.run(["sbatch", os.path.join(cur_proj_dir,"intermediates","predictDB_standard",</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>        <span class="co">#                                        "run_predictDB_standard.sbatch")], </span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>        <span class="co">#                                        cwd=os.path.join(cur_proj_dir,"intermediates","predictDB_standard"))</span></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Submitted batch job 19871914
+Submitted batch job 19871915
+Submitted batch job 19871916
+Submitted batch job 19871917
+Submitted batch job 19871918
+Submitted batch job 19871919
+Submitted batch job 19871920
+Submitted batch job 19871921
+Submitted batch job 19871922
+Submitted batch job 19871923</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="linearize-peak-enpact-models" class="level2">
+<h2 class="anchored" data-anchor-id="linearize-peak-enpact-models">Linearize Peak EnPACT models</h2>
+<p>Unlike gene expression, peak data is relatively heterogenous. Different studies can have different sets of peaks, and the total number often greatly exceeds the number of genes. It makes sense, therefore, to have a selection process rather than trying to train PredictDB models for every peak available. In this case, since we are doing follow-up TWAS analysis, we can use GWAS loci to help us select peaks of interest.</p>
+<p>We can start by examining examining a few GWAS summary stats and look for strong signals. These loci can be used as target sites for linearization since they are likely to have causal signal and are the places with potential to show up in downstream TWAS analysis.</p>
+<p>Which GWAS to use?:</p>
+<ul>
+<li>Broad Allergy</li>
+<li>COVID GWAS</li>
+<li>Other infectious disease GWAS</li>
+</ul>
+<p>GPU-hour costs for Enformer inference: 5hr per 20,000 sites</p>
+<section id="set-up-loci-selection" class="level3">
+<h3 class="anchored" data-anchor-id="set-up-loci-selection">Set up loci selection</h3>
+<p>I am using Temi’s repo: https://github.com/hakyimlab/TFXcan-snakemake/tree/main, which performs fine-mapping from GWAS summary stats, selects loci of interest, and then runs Enformer predictions for these regions. Once these personalized predictions are made, they can be used in all downstream EnPACT analyses.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>path_to_tfxcan_repo <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/TFXcan-snakemake"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>summ_stats <span class="op">=</span> {</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"AE"</span>:<span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/SPrediXcan/sumstats_formatted/Asthma_eczema_farreira_FORMATTED_hg19.txt"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"COVID"</span>:<span class="st">""</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"T2D"</span>:<span class="st">""</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> modality <span class="kw">in</span> modality_pcs.keys():</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> context <span class="kw">in</span> [<span class="st">"Flu"</span>,<span class="st">"NI"</span>]:</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        cur_window_size <span class="op">=</span> optimal_window_sizes[modality]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        cur_proj_dir <span class="op">=</span> os.path.join(path_to_project_dir,context<span class="op">+</span><span class="st">"_"</span><span class="op">+</span>modality<span class="op">+</span><span class="st">"_ws"</span><span class="op">+</span><span class="bu">str</span>(cur_window_size))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(os.path.join(cur_proj_dir,<span class="st">"config.json"</span>),<span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>            config <span class="op">=</span> json.load(f)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(os.path.join(path_to_tfxcan_repo,<span class="st">"config"</span>,<span class="st">"pipeline.yaml"</span>)) <span class="im">as</span> pyml:</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="peak-overlap-between-modalities" class="level3">
+<h3 class="anchored" data-anchor-id="peak-overlap-between-modalities">Peak overlap between modalities</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pybedtools</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>path_to_annotations <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/Inputs/counts_matrices"</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> modality <span class="kw">in</span> modality_pcs.keys():</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    cur_peak_counts_file <span class="op">=</span> os.path.join(path_to_annotations, <span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_annotation.txt"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    cur_peak_counts <span class="op">=</span> pd.read_csv(cur_peak_counts_file, sep<span class="op">=</span><span class="st">","</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(os.path.join(path_to_annotations, <span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_annotation.bed"</span>),<span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> row <span class="kw">in</span> cur_peak_counts.iterrows():</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(row)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

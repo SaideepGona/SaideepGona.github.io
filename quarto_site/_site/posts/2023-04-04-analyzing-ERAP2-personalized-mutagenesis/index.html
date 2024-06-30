@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saideep Gona">
+<meta name="dcterms.date" content="2023-04-04">
+
+<title>Daily-Blog-Sai - analyzing-ERAP2-personalized-mutagenesis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daily-Blog-Sai</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a>
+  <ul class="collapse">
+  <li><a href="#load-in-relevant-metadata" id="toc-load-in-relevant-metadata" class="nav-link" data-scroll-target="#load-in-relevant-metadata">Load in relevant metadata</a></li>
+  <li><a href="#effect-size-of-reference-variants-alone" id="toc-effect-size-of-reference-variants-alone" class="nav-link" data-scroll-target="#effect-size-of-reference-variants-alone">Effect size of reference variants alone</a></li>
+  <li><a href="#personalized-mutagenesis" id="toc-personalized-mutagenesis" class="nav-link" data-scroll-target="#personalized-mutagenesis">personalized mutagenesis</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">analyzing-ERAP2-personalized-mutagenesis</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saideep Gona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 4, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(glue))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>PRE <span class="ot">=</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/Daily-Blog-Sai"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">## COPY THE DATE AND SLUG fields FROM THE HEADER</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>SLUG<span class="ot">=</span><span class="st">"analyzing-ERAP2-personalized-mutagenesis"</span> <span class="do">## copy the slug from the header</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>bDATE<span class="ot">=</span><span class="st">'2023-04-04'</span> <span class="do">## copy the date from the blog's header here</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>DATA <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{PRE}/{bDATE}-{SLUG}"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(DATA)) <span class="fu">system</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"mkdir {DATA}"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>WORK<span class="ot">=</span>DATA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>#TODO</p>
+<section id="context" class="level1">
+<h1>Context</h1>
+<p>It’s time to analyze the ERAP2 mutagenesis results from reference-based and individual mutagenesis</p>
+<section id="load-in-relevant-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="load-in-relevant-metadata">Load in relevant metadata</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>metadata_dir <span class="ot">=</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/analysis-Sai/metadata"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pop_metadata <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="fu">file.path</span>(metadata_dir,<span class="st">"relationships_w_pops.txt"</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(pop_metadata) <span class="ot">&lt;-</span> pop_metadata<span class="sc">$</span>IID</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>gene_annotations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(metadata_dir,<span class="st">"ref_local_ancestry"</span>,<span class="st">"gene_annotations.csv"</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(gene_annotations<span class="sc">$</span>...<span class="dv">1</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>gene_annotations <span class="ot">&lt;-</span> gene_annotations[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(gene_annotations)]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(gene_annotations) <span class="ot">&lt;-</span> genes</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>gene_annotations[<span class="st">"ENSG00000164308"</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+    AFR   AMR   EAS   SAS   EUR  `NA`
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0     0     0     0     0 43717</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">rowSums</span>(gene_annotations)<span class="sc">==</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rowSums</span>(gene_annotations))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Geuvadis expression</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dset_dir <span class="ot">&lt;-</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/analysis-Sai/enformer_geuvadis/enformer_portability_analysis"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>geuvadis_full <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="fu">file.path</span>(dset_dir,<span class="st">"GD462.GeneQuantRPKM.50FN.samplename.resk10.txt"</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>geuvadis_genes_symbols <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">str_split</span>(geuvadis_full<span class="sc">$</span>Gene_Symbol, <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>),<span class="st">`</span><span class="at">[</span><span class="st">`</span>,<span class="dv">1</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>geuvadis <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(geuvadis_full[,<span class="dv">5</span><span class="sc">:</span><span class="fu">ncol</span>(geuvadis_full)])</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(geuvadis) <span class="ot">&lt;-</span> geuvadis_genes_symbols</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">=</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/analysis-Sai/enformer_geuvadis/ERAP2_personalized_mutagenesis"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>genotype_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"genotypes_df.csv"</span>))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>variant_ids <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(genotype_data[,<span class="dv">1</span>])[[<span class="dv">1</span>]]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(genotype_data) <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(genotype_data[,<span class="dv">1</span>])[[<span class="dv">1</span>]]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>genotype_data[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(genotype_data) <span class="ot">&lt;-</span> variant_ids</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>allele_count_df <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(genotype_data<span class="sc">==</span><span class="st">"1|1"</span>,<span class="dv">2</span>,<span class="fu">ifelse</span>(genotype_data<span class="sc">==</span><span class="st">"0|0"</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(allele_count_df) <span class="ot">&lt;-</span> variant_ids</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>variant_metadata_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">af=</span><span class="fu">rowSums</span>(allele_count_df)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">ncol</span>(allele_count_df<span class="sc">*</span><span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="effect-size-of-reference-variants-alone" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size-of-reference-variants-alone">Effect size of reference variants alone</h2>
+<p>It will help to have the effect size of these variants when using a reference background alone. We can load these in:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">=</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/analysis-Sai/enformer_geuvadis/ERAP2_personalized_mutagenesis"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>haplo1_ref <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_REF_quantification_haplo1.csv"</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>haplo1_ref <span class="ot">&lt;-</span> haplo1_ref[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo1_ref)]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>haplo1_ref_rc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_REF_quantification_haplo1_rc.csv"</span>))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>haplo1_ref_rc<span class="ot">&lt;-</span> haplo1_ref_rc[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo1_ref_rc)]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>haplo1_ref_ave <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>((haplo1_ref_rc <span class="sc">+</span> haplo1_ref)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(haplo1_ref_ave) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"expression"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>reference_hap_expression <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(haplo1_ref_ave[<span class="dv">1</span>,<span class="dv">1</span>])</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>haplo2_ref <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_REF_quantification_haplo2.csv"</span>))</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>haplo2_ref <span class="ot">&lt;-</span> haplo2_ref[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo2_ref)]</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>haplo2_ref_rc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_REF_quantification_haplo2_rc.csv"</span>))</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>haplo2_ref_rc <span class="ot">&lt;-</span> haplo2_ref_rc[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo2_ref_rc)]</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>haplo2_ref_ave <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>((haplo2_ref_rc <span class="sc">+</span> haplo2_ref)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(haplo2_ref_ave) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"expression"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ref_dif <span class="ot">&lt;-</span> haplo2_ref_ave <span class="sc">-</span> haplo1_ref_ave</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(ref_dif) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dif"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>ref_dif<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(ref_dif)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ref_dif <span class="ot">&lt;-</span> ref_dif <span class="sc">%&gt;%</span> <span class="fu">separate</span>(ids,<span class="at">into =</span> <span class="fu">c</span>(<span class="st">"individual"</span>,<span class="st">"mutated_variant"</span>,<span class="st">"ref"</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ref_dif<span class="sc">$</span>pos <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ref_dif<span class="sc">$</span>mutated_variant)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>ref_dif<span class="sc">$</span>voi <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ref_dif<span class="sc">$</span>mutated_variant <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"96916885"</span>,<span class="st">"96916728"</span>,<span class="st">"96900192"</span>),<span class="cn">TRUE</span>,<span class="cn">FALSE</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>ref_dif<span class="sc">$</span>voi_sizes <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(ref_dif<span class="sc">$</span>mutated_variant <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"96916885"</span>,<span class="st">"96916728"</span>,<span class="st">"96900192"</span>),<span class="dv">15</span>,<span class="dv">1</span>))</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>ref_dif<span class="sc">$</span>allele_freq <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(variant_metadata_df[ref_dif<span class="sc">$</span>mutated_variant,<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ref_dif) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>pos,<span class="at">y=</span>dif, <span class="at">color =</span> allele_freq), <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">96875986-80000</span>, <span class="dv">96875986</span><span class="sc">+</span><span class="dv">80000</span>, <span class="at">by =</span> <span class="dv">20000</span>)) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">96875986</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"variant effect magnitude"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"position on chr5"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"In-silico mutagenesis of ERAP2 variants"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ref_dif) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>allele_freq, <span class="at">y=</span>dif))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Ok, let’s see how well some of these interesting variants correlate with the expression patterns we are seeing:</p>
+<p>Calculate true individual-specific expression estimates, this first requires loading the personalized expression:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>haplo1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo1.csv"</span>))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>haplo1 <span class="ot">&lt;-</span> haplo1[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo1)]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>haplo1_rc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo1_rc.csv"</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>haplo1_rc<span class="ot">&lt;-</span> haplo1_rc[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo1_rc)]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>haplo1_ave <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>((haplo1_rc <span class="sc">+</span> haplo1)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(haplo1_ave) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"expression"</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>haplo2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo2.csv"</span>))</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>haplo2 <span class="ot">&lt;-</span> haplo2[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo2)]</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>haplo2_rc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo2_rc.csv"</span>))</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>haplo2_rc <span class="ot">&lt;-</span> haplo2_rc[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo2_rc)]</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>haplo2_ave <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>((haplo2_rc <span class="sc">+</span> haplo2)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(haplo2_ave) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"expression"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>haplo1_ave<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(haplo1_ave)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>haplo1_ave <span class="ot">&lt;-</span> haplo1_ave <span class="sc">%&gt;%</span> <span class="fu">separate</span>(ids,<span class="at">into =</span> <span class="fu">c</span>(<span class="st">"individual"</span>,<span class="st">"mutated_variant"</span>,<span class="st">"mutated_genotype"</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>haplo1_ave<span class="sc">$</span>haplotype <span class="ot">&lt;-</span> <span class="st">"1"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>haplo1_ref <span class="ot">&lt;-</span> haplo1_ave[haplo1_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"REF"</span>,]</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>haplo1_alt <span class="ot">&lt;-</span> haplo1_ave[haplo1_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"ALT"</span>,]</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>haplo2_ave<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(haplo2_ave)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>haplo2_ave <span class="ot">&lt;-</span> haplo2_ave <span class="sc">%&gt;%</span> <span class="fu">separate</span>(ids,<span class="at">into =</span> <span class="fu">c</span>(<span class="st">"individual"</span>,<span class="st">"mutated_variant"</span>,<span class="st">"mutated_genotype"</span>))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>haplo2_ave<span class="sc">$</span>haplotype <span class="ot">&lt;-</span> <span class="st">"2"</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>haplo2_ref <span class="ot">&lt;-</span> haplo2_ave[haplo2_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"REF"</span>,]</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>haplo2_alt <span class="ot">&lt;-</span> haplo2_ave[haplo2_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"ALT"</span>,]</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>ref_stack <span class="ot">&lt;-</span> <span class="fu">rbind</span>(haplo1_ref,haplo2_ref)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>alt_stack <span class="ot">&lt;-</span> <span class="fu">rbind</span>(haplo1_alt,haplo2_alt)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>full_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">individual=</span>ref_stack<span class="sc">$</span>individual,<span class="at">haplotype=</span>ref_stack<span class="sc">$</span>haplotype,<span class="at">mutated_variant=</span>ref_stack<span class="sc">$</span>mutated_variant, <span class="at">ref_expression=</span>ref_stack<span class="sc">$</span>expression, <span class="at">alt_expression=</span>alt_stack<span class="sc">$</span>expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>erap2_expression <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (ind <span class="cf">in</span> <span class="fu">colnames</span>(genotype_data)) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  expression <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  cur_geno <span class="ot">=</span> <span class="fu">str_split</span>(genotype_data[<span class="st">"96916885"</span>,ind], <span class="st">"|"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (cur_geno[[<span class="dv">1</span>]][<span class="dv">2</span>] <span class="sc">==</span> <span class="st">"0"</span>) {</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    id_tag <span class="ot">=</span> <span class="fu">paste</span>(ind,<span class="st">"96916885"</span>,<span class="st">"REF"</span>, <span class="at">sep=</span><span class="st">"_"</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    expression <span class="ot">=</span> expression <span class="sc">+</span> haplo1_ave[id_tag,]<span class="sc">$</span>expression</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    id_tag <span class="ot">=</span> <span class="fu">paste</span>(ind,<span class="st">"96916885"</span>,<span class="st">"ALT"</span>, <span class="at">sep=</span><span class="st">"_"</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    expression <span class="ot">=</span> expression <span class="sc">+</span> haplo1_ave[id_tag,]<span class="sc">$</span>expression</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (cur_geno[[<span class="dv">1</span>]][<span class="dv">4</span>] <span class="sc">==</span> <span class="st">"0"</span>) {</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    id_tag <span class="ot">=</span> <span class="fu">paste</span>(ind,<span class="st">"96916885"</span>,<span class="st">"REF"</span>, <span class="at">sep=</span><span class="st">"_"</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    expression <span class="ot">=</span> expression <span class="sc">+</span> haplo2_ave[id_tag,]<span class="sc">$</span>expression</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    id_tag <span class="ot">=</span> <span class="fu">paste</span>(ind,<span class="st">"96916885"</span>,<span class="st">"ALT"</span>, <span class="at">sep=</span><span class="st">"_"</span>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    expression <span class="ot">=</span> expression <span class="sc">+</span> haplo2_ave[id_tag,]<span class="sc">$</span>expression</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  erap2_expression <span class="ot">&lt;-</span> <span class="fu">c</span>(erap2_expression, expression)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let’s also grab the large effect size variants from the reference mutagenesis:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ref_dif[ref_dif<span class="sc">$</span>dif <span class="sc">&gt;</span> <span class="dv">4</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            dif individual mutated_variant ref      pos   voi
+reference_96876409_REF 5.024243  reference        96876409 REF 96876409 FALSE
+reference_96896518_REF 9.473810  reference        96896518 REF 96896518 FALSE
+                       voi_sizes allele_freq
+reference_96876409_REF         1   0.0200000
+reference_96896518_REF         1   0.5628571</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>erap2_expression_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">enformer_predicted_whole_expression=</span>erap2_expression,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">geuvadis_expression =</span> <span class="fu">as.numeric</span>(geuvadis[<span class="st">"ENSG00000164308"</span>,<span class="fu">colnames</span>(genotype_data)]),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">fm_96916885_geno=</span>allele_count_df[<span class="st">"96916885"</span>,],</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">splice_96900192_geno=</span>allele_count_df[<span class="st">"96900192"</span>,],</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">fm_96916728_geno=</span>allele_count_df[<span class="st">"96916728"</span>,],</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">large5_96876409_geno=</span>allele_count_df[<span class="st">"96876409"</span>,],</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">large10_96896518_geno=</span>allele_count_df[<span class="st">"96896518"</span>,])</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(erap2_expression_df) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(genotype_data)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>erap2_expression_df<span class="sc">$</span>ancestry <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(pop_metadata[<span class="fu">rownames</span>(erap2_expression_df),]<span class="sc">$</span>population)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(erap2_expression_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>geuvadis_expression, <span class="at">y=</span>enformer_predicted_whole_expression, <span class="at">color=</span>ancestry)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Geuvadis Expression for ERAP2"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Enformer predicted ERAP2 expression"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Predicted vs. Observed ERAP2 expression across individuals"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(erap2_expression_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>geuvadis_expression, <span class="at">y=</span>enformer_predicted_whole_expression, <span class="at">color=</span>splice_96900192_geno, <span class="at">shape=</span>ancestry))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(erap2_expression_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>geuvadis_expression, <span class="at">y=</span>enformer_predicted_whole_expression, <span class="at">color=</span>fm_96916885_geno, <span class="at">shape=</span>ancestry))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(erap2_expression_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>geuvadis_expression, <span class="at">y=</span>enformer_predicted_whole_expression, <span class="at">color=</span>fm_96916728_geno, <span class="at">shape=</span>ancestry))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-4.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(erap2_expression_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>geuvadis_expression, <span class="at">y=</span>enformer_predicted_whole_expression, <span class="at">color=</span>large5_96876409_geno, <span class="at">shape=</span>ancestry))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-5.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(erap2_expression_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>geuvadis_expression, <span class="at">y=</span>enformer_predicted_whole_expression, <span class="at">color=</span>large10_96896518_geno, <span class="at">shape=</span>ancestry))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-6.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Let’s generate predicted personalized gene expression by summing up individual variant effects with the reference prediction as a baseline:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>allele_count_mat <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(allele_count_df)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>dif_mat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">difs =</span> ref_dif<span class="sc">$</span>dif)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(dif_mat) <span class="ot">&lt;-</span> ref_dif<span class="sc">$</span>mutated_variant</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>allele_count_mat <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(allele_count_mat[<span class="fu">rownames</span>(dif_mat),]))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>dif_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(dif_mat)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>linear_predictions <span class="ot">&lt;-</span> allele_count_mat <span class="sc">%*%</span> dif_mat <span class="sc">+</span> reference_hap_expression<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>erap2_expression_df<span class="sc">$</span>linear_pred <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(linear_predictions)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(erap2_expression_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>linear_predictions, <span class="at">y=</span> enformer_predicted_whole_expression, <span class="at">color=</span>ancestry)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Enformer predicted ERAP2 expression"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Sum of variant effects"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Enformer predicted ERAP2 expression vs. sum of individual Enformer variant </span><span class="sc">\n</span><span class="st"> effects for ERAP2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The above plot plots the individualized expression predictions</p>
+<p>Clearly, ERAP2 is well predicted as a linear sum of individual variant effects. This supports the conclusion that the large effect variant is at play here.</p>
+</section>
+<section id="personalized-mutagenesis" class="level2">
+<h2 class="anchored" data-anchor-id="personalized-mutagenesis">personalized mutagenesis</h2>
+<p>After loading in the personalized expression estimates</p>
+<p>We can also annotate each value with data for the individual, haplotype, mutated variant, and genotype of mutated variant.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>haplo1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo1.csv"</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>haplo1 <span class="ot">&lt;-</span> haplo1[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo1)]</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>haplo1_rc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo1_rc.csv"</span>))</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>haplo1_rc<span class="ot">&lt;-</span> haplo1_rc[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo1_rc)]</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>haplo1_ave <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>((haplo1_rc <span class="sc">+</span> haplo1)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(haplo1_ave) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"expression"</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>haplo2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo2.csv"</span>))</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>haplo2 <span class="ot">&lt;-</span> haplo2[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo2)]</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>haplo2_rc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo2_rc.csv"</span>))</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>haplo2_rc <span class="ot">&lt;-</span> haplo2_rc[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo2_rc)]</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>haplo2_ave <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>((haplo2_rc <span class="sc">+</span> haplo2)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(haplo2_ave) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"expression"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>haplo1_ave<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(haplo1_ave)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>haplo1_ave <span class="ot">&lt;-</span> haplo1_ave <span class="sc">%&gt;%</span> <span class="fu">separate</span>(ids,<span class="at">into =</span> <span class="fu">c</span>(<span class="st">"individual"</span>,<span class="st">"mutated_variant"</span>,<span class="st">"mutated_genotype"</span>))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>haplo1_ave<span class="sc">$</span>haplotype <span class="ot">&lt;-</span> <span class="st">"1"</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>haplo1_ref <span class="ot">&lt;-</span> haplo1_ave[haplo1_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"REF"</span>,]</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>haplo1_alt <span class="ot">&lt;-</span> haplo1_ave[haplo1_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"ALT"</span>,]</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>haplo2_ave<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(haplo2_ave)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>haplo2_ave <span class="ot">&lt;-</span> haplo2_ave <span class="sc">%&gt;%</span> <span class="fu">separate</span>(ids,<span class="at">into =</span> <span class="fu">c</span>(<span class="st">"individual"</span>,<span class="st">"mutated_variant"</span>,<span class="st">"mutated_genotype"</span>))</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>haplo2_ave<span class="sc">$</span>haplotype <span class="ot">&lt;-</span> <span class="st">"2"</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>haplo2_ref <span class="ot">&lt;-</span> haplo2_ave[haplo2_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"REF"</span>,]</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>haplo2_alt <span class="ot">&lt;-</span> haplo2_ave[haplo2_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"ALT"</span>,]</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>ref_stack <span class="ot">&lt;-</span> <span class="fu">rbind</span>(haplo1_ref,haplo2_ref)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>alt_stack <span class="ot">&lt;-</span> <span class="fu">rbind</span>(haplo1_alt,haplo2_alt)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>full_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">individual=</span>ref_stack<span class="sc">$</span>individual,<span class="at">haplotype=</span>ref_stack<span class="sc">$</span>haplotype,<span class="at">mutated_variant=</span>ref_stack<span class="sc">$</span>mutated_variant, <span class="at">ref_expression=</span>ref_stack<span class="sc">$</span>expression, <span class="at">alt_expression=</span>alt_stack<span class="sc">$</span>expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We now have collected all our estimates into a concise data frame. Next we can calculate some effect-size related estimates by comparing the alt,ref</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>full_df<span class="sc">$</span>dif <span class="ot">&lt;-</span> full_df<span class="sc">$</span>alt_expression<span class="sc">-</span>full_df<span class="sc">$</span>ref_expression</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>full_df<span class="sc">$</span>fc <span class="ot">&lt;-</span> full_df<span class="sc">$</span>alt_expression<span class="sc">/</span>full_df<span class="sc">$</span>ref_expression</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>full_df<span class="sc">$</span>logfc <span class="ot">&lt;-</span> <span class="fu">log2</span>(full_df<span class="sc">$</span>fc)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>full_df<span class="sc">$</span>log_ref <span class="ot">&lt;-</span> <span class="fu">log</span>(full_df<span class="sc">$</span>ref_expression)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>full_df<span class="sc">$</span>log_alt <span class="ot">&lt;-</span> <span class="fu">log</span>(full_df<span class="sc">$</span>alt_expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We can also annotate our results by individual ancestry</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>full_df<span class="sc">$</span>ancestry <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(pop_metadata[full_df<span class="sc">$</span>individual,]<span class="sc">$</span>population)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Plot against allele frequency</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Color by ancestry </span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(full_df) <span class="sc">+</span> <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">x=</span>mutated_variant, <span class="at">y=</span>dif, <span class="at">fill=</span>mutated_variant)) <span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">x=</span>mutated_variant, <span class="at">y=</span>dif))<span class="sc">+</span><span class="fu">geom_hline</span>(<span class="at">yintercept =</span> ref_dif[ref_dif<span class="sc">$</span>mutated_variant<span class="sc">==</span><span class="st">"96916885"</span>,<span class="st">"dif"</span>], <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> ref_dif[ref_dif<span class="sc">$</span>mutated_variant<span class="sc">==</span><span class="st">"96916728"</span>,<span class="st">"dif"</span>], <span class="at">color=</span><span class="st">"green"</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> ref_dif[ref_dif<span class="sc">$</span>mutated_variant<span class="sc">==</span><span class="st">"96900192"</span>,<span class="st">"dif"</span>], <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span><span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="st">'Personalized vs. ref mutagenesis'</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">'96916885'</span>, <span class="st">'96916728'</span>, <span class="st">'96900192'</span>),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values=</span><span class="fu">c</span>(<span class="st">'96916885'</span><span class="ot">=</span><span class="st">'red'</span>, <span class="st">'96916728'</span><span class="ot">=</span><span class="st">'blue'</span>, <span class="st">'96900192'</span><span class="ot">=</span><span class="st">'green'</span>)) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(full_df) <span class="sc">+</span> <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">x=</span>mutated_variant, <span class="at">y=</span>dif, <span class="at">fill=</span>haplotype))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(full_df) <span class="sc">+</span> <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">x=</span>mutated_variant, <span class="at">y=</span>dif, <span class="at">fill=</span>ancestry))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-18-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The distributions are certainly interesting.</p>
+<p>It would be good to try and identify if the 96916728 “positive” group is an interaction with a specific variant present more frequently in that subgroup.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>full_df_fm_96916728_pos <span class="ot">&lt;-</span> full_df[(full_df<span class="sc">$</span>dif <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">&amp;</span> (full_df<span class="sc">$</span>mutated_variant <span class="sc">==</span> <span class="dv">96916728</span>),]</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>fm_96916728_pos_individuals <span class="ot">&lt;-</span> <span class="fu">unique</span>(full_df_fm_96916728_pos<span class="sc">$</span>individual)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>allele_count_sub <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">t</span>(allele_count_df[<span class="fu">rownames</span>(dif_mat),]))</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>allele_count_sub<span class="sc">$</span>fm_96916728_pos <span class="ot">&lt;-</span> <span class="fu">rownames</span>(allele_count_sub) <span class="sc">%in%</span> fm_96916728_pos_individuals</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>fm_96916728_pos_cor <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cor</span>(allele_count_sub[,<span class="fu">colnames</span>(allele_count_sub <span class="sc">!=</span> <span class="st">"fm_96916728_pos"</span>)],allele_count_sub<span class="sc">$</span>fm_96916728_pos))</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>fm_96916728_pos_cor<span class="sc">$</span>sites <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">rownames</span>(fm_96916728_pos_cor))</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fm_96916728_pos_cor) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cor"</span>, <span class="st">"sites"</span>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>fm_96916728_pos_cor<span class="sc">$</span>allele_freq <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(variant_metadata_df[<span class="fu">rownames</span>(fm_96916728_pos_cor),<span class="dv">1</span>])</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fm_96916728_pos_cor) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>sites,<span class="at">y=</span>cor, <span class="at">col=</span>allele_freq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb33" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "analyzing-ERAP2-personalized-mutagenesis"</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Saideep Gona"</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2023-04-04"</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: "Show the code"</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">  freeze: true</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: Set up box storage directory</span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(glue))</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>PRE <span class="ot">=</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/Daily-Blog-Sai"</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a><span class="do">## COPY THE DATE AND SLUG fields FROM THE HEADER</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>SLUG<span class="ot">=</span><span class="st">"analyzing-ERAP2-personalized-mutagenesis"</span> <span class="do">## copy the slug from the header</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>bDATE<span class="ot">=</span><span class="st">'2023-04-04'</span> <span class="do">## copy the date from the blog's header here</span></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>DATA <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{PRE}/{bDATE}-{SLUG}"</span>)</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(DATA)) <span class="fu">system</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"mkdir {DATA}"</span>))</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>WORK<span class="ot">=</span>DATA</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>#TODO</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Context </span></span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>It's time to analyze the ERAP2 mutagenesis results from reference-based and individual mutagenesis</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a><span class="fu">### Load in relevant metadata</span></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>metadata_dir <span class="ot">=</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/analysis-Sai/metadata"</span></span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>pop_metadata <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="fu">file.path</span>(metadata_dir,<span class="st">"relationships_w_pops.txt"</span>))</span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(pop_metadata) <span class="ot">&lt;-</span> pop_metadata<span class="sc">$</span>IID</span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>gene_annotations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(metadata_dir,<span class="st">"ref_local_ancestry"</span>,<span class="st">"gene_annotations.csv"</span>))</span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(gene_annotations<span class="sc">$</span>...<span class="dv">1</span>)</span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>gene_annotations <span class="ot">&lt;-</span> gene_annotations[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(gene_annotations)]</span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(gene_annotations) <span class="ot">&lt;-</span> genes</span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>gene_annotations[<span class="st">"ENSG00000164308"</span>,]</span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">rowSums</span>(gene_annotations)<span class="sc">==</span><span class="dv">0</span>)</span>
+<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rowSums</span>(gene_annotations))</span>
+<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Geuvadis expression</span></span>
+<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>dset_dir <span class="ot">&lt;-</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/analysis-Sai/enformer_geuvadis/enformer_portability_analysis"</span></span>
+<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a>geuvadis_full <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="fu">file.path</span>(dset_dir,<span class="st">"GD462.GeneQuantRPKM.50FN.samplename.resk10.txt"</span>))</span>
+<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>geuvadis_genes_symbols <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">str_split</span>(geuvadis_full<span class="sc">$</span>Gene_Symbol, <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>),<span class="st">`</span><span class="at">[</span><span class="st">`</span>,<span class="dv">1</span>)</span>
+<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a>geuvadis <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(geuvadis_full[,<span class="dv">5</span><span class="sc">:</span><span class="fu">ncol</span>(geuvadis_full)])</span>
+<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(geuvadis) <span class="ot">&lt;-</span> geuvadis_genes_symbols</span>
+<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">=</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/analysis-Sai/enformer_geuvadis/ERAP2_personalized_mutagenesis"</span></span>
+<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a>genotype_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"genotypes_df.csv"</span>))</span>
+<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a>variant_ids <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(genotype_data[,<span class="dv">1</span>])[[<span class="dv">1</span>]]</span>
+<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(genotype_data) <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(genotype_data[,<span class="dv">1</span>])[[<span class="dv">1</span>]]</span>
+<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-76"><a href="#cb33-76" aria-hidden="true" tabindex="-1"></a>genotype_data[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb33-77"><a href="#cb33-77" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(genotype_data) <span class="ot">&lt;-</span> variant_ids</span>
+<span id="cb33-78"><a href="#cb33-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-79"><a href="#cb33-79" aria-hidden="true" tabindex="-1"></a>allele_count_df <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(genotype_data<span class="sc">==</span><span class="st">"1|1"</span>,<span class="dv">2</span>,<span class="fu">ifelse</span>(genotype_data<span class="sc">==</span><span class="st">"0|0"</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb33-80"><a href="#cb33-80" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(allele_count_df) <span class="ot">&lt;-</span> variant_ids</span>
+<span id="cb33-81"><a href="#cb33-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-82"><a href="#cb33-82" aria-hidden="true" tabindex="-1"></a>variant_metadata_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">af=</span><span class="fu">rowSums</span>(allele_count_df)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">ncol</span>(allele_count_df<span class="sc">*</span><span class="dv">2</span>)))</span>
+<span id="cb33-83"><a href="#cb33-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-84"><a href="#cb33-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-85"><a href="#cb33-85" aria-hidden="true" tabindex="-1"></a><span class="fu">## Effect size of reference variants alone</span></span>
+<span id="cb33-86"><a href="#cb33-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-87"><a href="#cb33-87" aria-hidden="true" tabindex="-1"></a>It will help to have the effect size of these variants when using a reference background alone. We can load these in:</span>
+<span id="cb33-88"><a href="#cb33-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-91"><a href="#cb33-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-92"><a href="#cb33-92" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">=</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/analysis-Sai/enformer_geuvadis/ERAP2_personalized_mutagenesis"</span></span>
+<span id="cb33-93"><a href="#cb33-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-94"><a href="#cb33-94" aria-hidden="true" tabindex="-1"></a>haplo1_ref <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_REF_quantification_haplo1.csv"</span>))</span>
+<span id="cb33-95"><a href="#cb33-95" aria-hidden="true" tabindex="-1"></a>haplo1_ref <span class="ot">&lt;-</span> haplo1_ref[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo1_ref)]</span>
+<span id="cb33-96"><a href="#cb33-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-97"><a href="#cb33-97" aria-hidden="true" tabindex="-1"></a>haplo1_ref_rc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_REF_quantification_haplo1_rc.csv"</span>))</span>
+<span id="cb33-98"><a href="#cb33-98" aria-hidden="true" tabindex="-1"></a>haplo1_ref_rc<span class="ot">&lt;-</span> haplo1_ref_rc[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo1_ref_rc)]</span>
+<span id="cb33-99"><a href="#cb33-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-100"><a href="#cb33-100" aria-hidden="true" tabindex="-1"></a>haplo1_ref_ave <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>((haplo1_ref_rc <span class="sc">+</span> haplo1_ref)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb33-101"><a href="#cb33-101" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(haplo1_ref_ave) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"expression"</span>)</span>
+<span id="cb33-102"><a href="#cb33-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-103"><a href="#cb33-103" aria-hidden="true" tabindex="-1"></a>reference_hap_expression <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(haplo1_ref_ave[<span class="dv">1</span>,<span class="dv">1</span>])</span>
+<span id="cb33-104"><a href="#cb33-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-105"><a href="#cb33-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-106"><a href="#cb33-106" aria-hidden="true" tabindex="-1"></a>haplo2_ref <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_REF_quantification_haplo2.csv"</span>))</span>
+<span id="cb33-107"><a href="#cb33-107" aria-hidden="true" tabindex="-1"></a>haplo2_ref <span class="ot">&lt;-</span> haplo2_ref[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo2_ref)]</span>
+<span id="cb33-108"><a href="#cb33-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-109"><a href="#cb33-109" aria-hidden="true" tabindex="-1"></a>haplo2_ref_rc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_REF_quantification_haplo2_rc.csv"</span>))</span>
+<span id="cb33-110"><a href="#cb33-110" aria-hidden="true" tabindex="-1"></a>haplo2_ref_rc <span class="ot">&lt;-</span> haplo2_ref_rc[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo2_ref_rc)]</span>
+<span id="cb33-111"><a href="#cb33-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-112"><a href="#cb33-112" aria-hidden="true" tabindex="-1"></a>haplo2_ref_ave <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>((haplo2_ref_rc <span class="sc">+</span> haplo2_ref)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb33-113"><a href="#cb33-113" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(haplo2_ref_ave) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"expression"</span>)</span>
+<span id="cb33-114"><a href="#cb33-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-115"><a href="#cb33-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-116"><a href="#cb33-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-117"><a href="#cb33-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-120"><a href="#cb33-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-121"><a href="#cb33-121" aria-hidden="true" tabindex="-1"></a>ref_dif <span class="ot">&lt;-</span> haplo2_ref_ave <span class="sc">-</span> haplo1_ref_ave</span>
+<span id="cb33-122"><a href="#cb33-122" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(ref_dif) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dif"</span>)</span>
+<span id="cb33-123"><a href="#cb33-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-124"><a href="#cb33-124" aria-hidden="true" tabindex="-1"></a>ref_dif<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(ref_dif)</span>
+<span id="cb33-125"><a href="#cb33-125" aria-hidden="true" tabindex="-1"></a>ref_dif <span class="ot">&lt;-</span> ref_dif <span class="sc">%&gt;%</span> <span class="fu">separate</span>(ids,<span class="at">into =</span> <span class="fu">c</span>(<span class="st">"individual"</span>,<span class="st">"mutated_variant"</span>,<span class="st">"ref"</span>))</span>
+<span id="cb33-126"><a href="#cb33-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-127"><a href="#cb33-127" aria-hidden="true" tabindex="-1"></a>ref_dif<span class="sc">$</span>pos <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ref_dif<span class="sc">$</span>mutated_variant)</span>
+<span id="cb33-128"><a href="#cb33-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-129"><a href="#cb33-129" aria-hidden="true" tabindex="-1"></a>ref_dif<span class="sc">$</span>voi <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ref_dif<span class="sc">$</span>mutated_variant <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"96916885"</span>,<span class="st">"96916728"</span>,<span class="st">"96900192"</span>),<span class="cn">TRUE</span>,<span class="cn">FALSE</span>)</span>
+<span id="cb33-130"><a href="#cb33-130" aria-hidden="true" tabindex="-1"></a>ref_dif<span class="sc">$</span>voi_sizes <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ifelse</span>(ref_dif<span class="sc">$</span>mutated_variant <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"96916885"</span>,<span class="st">"96916728"</span>,<span class="st">"96900192"</span>),<span class="dv">15</span>,<span class="dv">1</span>))</span>
+<span id="cb33-131"><a href="#cb33-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-132"><a href="#cb33-132" aria-hidden="true" tabindex="-1"></a>ref_dif<span class="sc">$</span>allele_freq <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(variant_metadata_df[ref_dif<span class="sc">$</span>mutated_variant,<span class="dv">1</span>])</span>
+<span id="cb33-133"><a href="#cb33-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-134"><a href="#cb33-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-135"><a href="#cb33-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-136"><a href="#cb33-136" aria-hidden="true" tabindex="-1"></a><span class="in">````{r}</span></span>
+<span id="cb33-137"><a href="#cb33-137" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ref_dif) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>pos,<span class="at">y=</span>dif, <span class="at">color =</span> allele_freq), <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">96875986-80000</span>, <span class="dv">96875986</span><span class="sc">+</span><span class="dv">80000</span>, <span class="at">by =</span> <span class="dv">20000</span>)) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">96875986</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"variant effect magnitude"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"position on chr5"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"In-silico mutagenesis of ERAP2 variants"</span>)</span>
+<span id="cb33-138"><a href="#cb33-138" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-139"><a href="#cb33-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-142"><a href="#cb33-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-143"><a href="#cb33-143" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ref_dif) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>allele_freq, <span class="at">y=</span>dif))</span>
+<span id="cb33-144"><a href="#cb33-144" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-145"><a href="#cb33-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-146"><a href="#cb33-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-147"><a href="#cb33-147" aria-hidden="true" tabindex="-1"></a><span class="at">Ok, let's see how well some of these interesting variants correlate with the expression patterns we are seeing:</span></span>
+<span id="cb33-148"><a href="#cb33-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-149"><a href="#cb33-149" aria-hidden="true" tabindex="-1"></a><span class="at">Calculate true individual-specific expression estimates, this first requires loading the personalized expression:</span></span>
+<span id="cb33-150"><a href="#cb33-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-153"><a href="#cb33-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-154"><a href="#cb33-154" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb33-155"><a href="#cb33-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-156"><a href="#cb33-156" aria-hidden="true" tabindex="-1"></a>haplo1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo1.csv"</span>))</span>
+<span id="cb33-157"><a href="#cb33-157" aria-hidden="true" tabindex="-1"></a>haplo1 <span class="ot">&lt;-</span> haplo1[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo1)]</span>
+<span id="cb33-158"><a href="#cb33-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-159"><a href="#cb33-159" aria-hidden="true" tabindex="-1"></a>haplo1_rc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo1_rc.csv"</span>))</span>
+<span id="cb33-160"><a href="#cb33-160" aria-hidden="true" tabindex="-1"></a>haplo1_rc<span class="ot">&lt;-</span> haplo1_rc[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo1_rc)]</span>
+<span id="cb33-161"><a href="#cb33-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-162"><a href="#cb33-162" aria-hidden="true" tabindex="-1"></a>haplo1_ave <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>((haplo1_rc <span class="sc">+</span> haplo1)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb33-163"><a href="#cb33-163" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(haplo1_ave) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"expression"</span>)</span>
+<span id="cb33-164"><a href="#cb33-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-165"><a href="#cb33-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-166"><a href="#cb33-166" aria-hidden="true" tabindex="-1"></a>haplo2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo2.csv"</span>))</span>
+<span id="cb33-167"><a href="#cb33-167" aria-hidden="true" tabindex="-1"></a>haplo2 <span class="ot">&lt;-</span> haplo2[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo2)]</span>
+<span id="cb33-168"><a href="#cb33-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-169"><a href="#cb33-169" aria-hidden="true" tabindex="-1"></a>haplo2_rc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(data_dir,<span class="st">"erap2_personalized_LCL_quantification_haplo2_rc.csv"</span>))</span>
+<span id="cb33-170"><a href="#cb33-170" aria-hidden="true" tabindex="-1"></a>haplo2_rc <span class="ot">&lt;-</span> haplo2_rc[,<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(haplo2_rc)]</span>
+<span id="cb33-171"><a href="#cb33-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-172"><a href="#cb33-172" aria-hidden="true" tabindex="-1"></a>haplo2_ave <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>((haplo2_rc <span class="sc">+</span> haplo2)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb33-173"><a href="#cb33-173" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(haplo2_ave) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"expression"</span>)</span>
+<span id="cb33-174"><a href="#cb33-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-175"><a href="#cb33-175" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-176"><a href="#cb33-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-179"><a href="#cb33-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-180"><a href="#cb33-180" aria-hidden="true" tabindex="-1"></a>haplo1_ave<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(haplo1_ave)</span>
+<span id="cb33-181"><a href="#cb33-181" aria-hidden="true" tabindex="-1"></a>haplo1_ave <span class="ot">&lt;-</span> haplo1_ave <span class="sc">%&gt;%</span> <span class="fu">separate</span>(ids,<span class="at">into =</span> <span class="fu">c</span>(<span class="st">"individual"</span>,<span class="st">"mutated_variant"</span>,<span class="st">"mutated_genotype"</span>))</span>
+<span id="cb33-182"><a href="#cb33-182" aria-hidden="true" tabindex="-1"></a>haplo1_ave<span class="sc">$</span>haplotype <span class="ot">&lt;-</span> <span class="st">"1"</span></span>
+<span id="cb33-183"><a href="#cb33-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-184"><a href="#cb33-184" aria-hidden="true" tabindex="-1"></a>haplo1_ref <span class="ot">&lt;-</span> haplo1_ave[haplo1_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"REF"</span>,]</span>
+<span id="cb33-185"><a href="#cb33-185" aria-hidden="true" tabindex="-1"></a>haplo1_alt <span class="ot">&lt;-</span> haplo1_ave[haplo1_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"ALT"</span>,]</span>
+<span id="cb33-186"><a href="#cb33-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-187"><a href="#cb33-187" aria-hidden="true" tabindex="-1"></a>haplo2_ave<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(haplo2_ave)</span>
+<span id="cb33-188"><a href="#cb33-188" aria-hidden="true" tabindex="-1"></a>haplo2_ave <span class="ot">&lt;-</span> haplo2_ave <span class="sc">%&gt;%</span> <span class="fu">separate</span>(ids,<span class="at">into =</span> <span class="fu">c</span>(<span class="st">"individual"</span>,<span class="st">"mutated_variant"</span>,<span class="st">"mutated_genotype"</span>))</span>
+<span id="cb33-189"><a href="#cb33-189" aria-hidden="true" tabindex="-1"></a>haplo2_ave<span class="sc">$</span>haplotype <span class="ot">&lt;-</span> <span class="st">"2"</span></span>
+<span id="cb33-190"><a href="#cb33-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-191"><a href="#cb33-191" aria-hidden="true" tabindex="-1"></a>haplo2_ref <span class="ot">&lt;-</span> haplo2_ave[haplo2_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"REF"</span>,]</span>
+<span id="cb33-192"><a href="#cb33-192" aria-hidden="true" tabindex="-1"></a>haplo2_alt <span class="ot">&lt;-</span> haplo2_ave[haplo2_ave<span class="sc">$</span>mutated_genotype <span class="sc">==</span> <span class="st">"ALT"</span>,]</span>
+<span id="cb33-193"><a href="#cb33-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-194"><a href="#cb33-194" aria-hidden="true" tabindex="-1"></a>ref_stack <span class="ot">&lt;-</span> <span class="fu">rbind</span>(haplo1_ref,haplo2_ref)</span>
+<span id="cb33-195"><a href="#cb33-195" aria-hidden="true" tabindex="-1"></a>alt_stack <span class="ot">&lt;-</span> <span class="fu">rbind</span>(haplo1_alt,haplo2_alt)</span>
+<span id="cb33-196"><a href="#cb33-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-197"><a href="#cb33-197" aria-hidden="true" tabindex="-1"></a>full_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">individual=</span>ref_stack<span class="sc">$</span>individual,<span class="at">haplotype=</span>ref_stack<span class="sc">$</span>haplotype,<span class="at">mutated_variant=</span>ref_stack<span class="sc">$</span>mutated_variant, <span class="at">ref_expression=</span>ref_stack<span class="sc">$</span>expression, <span class="at">alt_expression=</span>alt_stack<span class="sc">$</span>expression)</span>
+<span id="cb33-198"><a href="#cb33-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-199"><a href="#cb33-199" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-200"><a href="#cb33-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-203"><a href="#cb33-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-204"><a href="#cb33-204" aria-hidden="true" tabindex="-1"></a>erap2_expression <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb33-205"><a href="#cb33-205" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-206"><a href="#cb33-206" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (ind <span class="cf">in</span> <span class="fu">colnames</span>(genotype_data)) {</span>
+<span id="cb33-207"><a href="#cb33-207" aria-hidden="true" tabindex="-1"></a>  expression <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb33-208"><a href="#cb33-208" aria-hidden="true" tabindex="-1"></a>  cur_geno <span class="ot">=</span> <span class="fu">str_split</span>(genotype_data[<span class="st">"96916885"</span>,ind], <span class="st">"|"</span>)</span>
+<span id="cb33-209"><a href="#cb33-209" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-210"><a href="#cb33-210" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (cur_geno[[<span class="dv">1</span>]][<span class="dv">2</span>] <span class="sc">==</span> <span class="st">"0"</span>) {</span>
+<span id="cb33-211"><a href="#cb33-211" aria-hidden="true" tabindex="-1"></a>    id_tag <span class="ot">=</span> <span class="fu">paste</span>(ind,<span class="st">"96916885"</span>,<span class="st">"REF"</span>, <span class="at">sep=</span><span class="st">"_"</span>)</span>
+<span id="cb33-212"><a href="#cb33-212" aria-hidden="true" tabindex="-1"></a>    expression <span class="ot">=</span> expression <span class="sc">+</span> haplo1_ave[id_tag,]<span class="sc">$</span>expression</span>
+<span id="cb33-213"><a href="#cb33-213" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb33-214"><a href="#cb33-214" aria-hidden="true" tabindex="-1"></a>    id_tag <span class="ot">=</span> <span class="fu">paste</span>(ind,<span class="st">"96916885"</span>,<span class="st">"ALT"</span>, <span class="at">sep=</span><span class="st">"_"</span>)</span>
+<span id="cb33-215"><a href="#cb33-215" aria-hidden="true" tabindex="-1"></a>    expression <span class="ot">=</span> expression <span class="sc">+</span> haplo1_ave[id_tag,]<span class="sc">$</span>expression</span>
+<span id="cb33-216"><a href="#cb33-216" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb33-217"><a href="#cb33-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-218"><a href="#cb33-218" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (cur_geno[[<span class="dv">1</span>]][<span class="dv">4</span>] <span class="sc">==</span> <span class="st">"0"</span>) {</span>
+<span id="cb33-219"><a href="#cb33-219" aria-hidden="true" tabindex="-1"></a>    id_tag <span class="ot">=</span> <span class="fu">paste</span>(ind,<span class="st">"96916885"</span>,<span class="st">"REF"</span>, <span class="at">sep=</span><span class="st">"_"</span>)</span>
+<span id="cb33-220"><a href="#cb33-220" aria-hidden="true" tabindex="-1"></a>    expression <span class="ot">=</span> expression <span class="sc">+</span> haplo2_ave[id_tag,]<span class="sc">$</span>expression</span>
+<span id="cb33-221"><a href="#cb33-221" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb33-222"><a href="#cb33-222" aria-hidden="true" tabindex="-1"></a>    id_tag <span class="ot">=</span> <span class="fu">paste</span>(ind,<span class="st">"96916885"</span>,<span class="st">"ALT"</span>, <span class="at">sep=</span><span class="st">"_"</span>)</span>
+<span id="cb33-223"><a href="#cb33-223" aria-hidden="true" tabindex="-1"></a>    expression <span class="ot">=</span> expression <span class="sc">+</span> haplo2_ave[id_tag,]<span class="sc">$</span>expression</span>
+<span id="cb33-224"><a href="#cb33-224" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb33-225"><a href="#cb33-225" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-226"><a href="#cb33-226" aria-hidden="true" tabindex="-1"></a>  erap2_expression <span class="ot">&lt;-</span> <span class="fu">c</span>(erap2_expression, expression)</span>
+<span id="cb33-227"><a href="#cb33-227" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-228"><a href="#cb33-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-229"><a href="#cb33-229" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-230"><a href="#cb33-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-231"><a href="#cb33-231" aria-hidden="true" tabindex="-1"></a><span class="at">Let's also grab the large effect size variants from the reference mutagenesis:</span></span>
+<span id="cb33-232"><a href="#cb33-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-235"><a href="#cb33-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-236"><a href="#cb33-236" aria-hidden="true" tabindex="-1"></a>ref_dif[ref_dif<span class="sc">$</span>dif <span class="sc">&gt;</span> <span class="dv">4</span>,]</span>
+<span id="cb33-237"><a href="#cb33-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-238"><a href="#cb33-238" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-239"><a href="#cb33-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-240"><a href="#cb33-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-241"><a href="#cb33-241" aria-hidden="true" tabindex="-1"></a><span class="st">````</span><span class="at">{r}</span></span>
+<span id="cb33-242"><a href="#cb33-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-243"><a href="#cb33-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-244"><a href="#cb33-244" aria-hidden="true" tabindex="-1"></a><span class="at">erap2_expression_df &lt;- data.frame(enformer_predicted_whole_expression=erap2_expression,</span></span>
+<span id="cb33-245"><a href="#cb33-245" aria-hidden="true" tabindex="-1"></a><span class="at">                                  geuvadis_expression = as.numeric(geuvadis["ENSG00000164308",colnames(genotype_data)]),</span></span>
+<span id="cb33-246"><a href="#cb33-246" aria-hidden="true" tabindex="-1"></a><span class="at">                                  fm_96916885_geno=allele_count_df["96916885",],</span></span>
+<span id="cb33-247"><a href="#cb33-247" aria-hidden="true" tabindex="-1"></a><span class="at">                                  splice_96900192_geno=allele_count_df["96900192",],</span></span>
+<span id="cb33-248"><a href="#cb33-248" aria-hidden="true" tabindex="-1"></a><span class="at">                                  fm_96916728_geno=allele_count_df["96916728",],</span></span>
+<span id="cb33-249"><a href="#cb33-249" aria-hidden="true" tabindex="-1"></a><span class="at">                                  large5_96876409_geno=allele_count_df["96876409",],</span></span>
+<span id="cb33-250"><a href="#cb33-250" aria-hidden="true" tabindex="-1"></a><span class="at">                                  large10_96896518_geno=allele_count_df["96896518",])</span></span>
+<span id="cb33-251"><a href="#cb33-251" aria-hidden="true" tabindex="-1"></a><span class="at">rownames(erap2_expression_df) &lt;- colnames(genotype_data)</span></span>
+<span id="cb33-252"><a href="#cb33-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-253"><a href="#cb33-253" aria-hidden="true" tabindex="-1"></a><span class="at">erap2_expression_df$ancestry &lt;- as.vector(pop_metadata[rownames(erap2_expression_df),]$population)</span></span>
+<span id="cb33-254"><a href="#cb33-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-255"><a href="#cb33-255" aria-hidden="true" tabindex="-1"></a><span class="at">ggplot(erap2_expression_df) + geom_point(aes(x=geuvadis_expression, y=enformer_predicted_whole_expression, color=ancestry)) + xlab("Geuvadis Expression for ERAP2") + ylab("Enformer predicted ERAP2 expression") + ggtitle("Predicted vs. Observed ERAP2 expression across individuals")</span></span>
+<span id="cb33-256"><a href="#cb33-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-257"><a href="#cb33-257" aria-hidden="true" tabindex="-1"></a><span class="at">ggplot(erap2_expression_df) + geom_point(aes(x=geuvadis_expression, y=enformer_predicted_whole_expression, color=splice_96900192_geno, shape=ancestry))</span></span>
+<span id="cb33-258"><a href="#cb33-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-259"><a href="#cb33-259" aria-hidden="true" tabindex="-1"></a><span class="at">ggplot(erap2_expression_df) + geom_point(aes(x=geuvadis_expression, y=enformer_predicted_whole_expression, color=fm_96916885_geno, shape=ancestry))</span></span>
+<span id="cb33-260"><a href="#cb33-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-261"><a href="#cb33-261" aria-hidden="true" tabindex="-1"></a><span class="at">ggplot(erap2_expression_df) + geom_point(aes(x=geuvadis_expression, y=enformer_predicted_whole_expression, color=fm_96916728_geno, shape=ancestry))</span></span>
+<span id="cb33-262"><a href="#cb33-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-263"><a href="#cb33-263" aria-hidden="true" tabindex="-1"></a><span class="at">ggplot(erap2_expression_df) + geom_point(aes(x=geuvadis_expression, y=enformer_predicted_whole_expression, color=large5_96876409_geno, shape=ancestry))</span></span>
+<span id="cb33-264"><a href="#cb33-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-265"><a href="#cb33-265" aria-hidden="true" tabindex="-1"></a><span class="at">ggplot(erap2_expression_df) + geom_point(aes(x=geuvadis_expression, y=enformer_predicted_whole_expression, color=large10_96896518_geno, shape=ancestry))</span></span>
+<span id="cb33-266"><a href="#cb33-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-267"><a href="#cb33-267" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-268"><a href="#cb33-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-269"><a href="#cb33-269" aria-hidden="true" tabindex="-1"></a>Let<span class="st">'s generate predicted personalized gene expression by summing up individual variant effects with the reference prediction as a baseline:</span></span>
+<span id="cb33-270"><a href="#cb33-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-273"><a href="#cb33-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-274"><a href="#cb33-274" aria-hidden="true" tabindex="-1"></a><span class="st">allele_count_mat &lt;- as.data.frame(allele_count_df)</span></span>
+<span id="cb33-275"><a href="#cb33-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-276"><a href="#cb33-276" aria-hidden="true" tabindex="-1"></a><span class="st">dif_mat &lt;- data.frame(difs = ref_dif$dif)</span></span>
+<span id="cb33-277"><a href="#cb33-277" aria-hidden="true" tabindex="-1"></a><span class="st">rownames(dif_mat) &lt;- ref_dif$mutated_variant</span></span>
+<span id="cb33-278"><a href="#cb33-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-279"><a href="#cb33-279" aria-hidden="true" tabindex="-1"></a><span class="st">allele_count_mat &lt;- t(as.matrix(allele_count_mat[rownames(dif_mat),]))</span></span>
+<span id="cb33-280"><a href="#cb33-280" aria-hidden="true" tabindex="-1"></a><span class="st">dif_mat &lt;- as.matrix(dif_mat)</span></span>
+<span id="cb33-281"><a href="#cb33-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-282"><a href="#cb33-282" aria-hidden="true" tabindex="-1"></a><span class="st">linear_predictions &lt;- allele_count_mat %*% dif_mat + reference_hap_expression*2</span></span>
+<span id="cb33-283"><a href="#cb33-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-284"><a href="#cb33-284" aria-hidden="true" tabindex="-1"></a><span class="st">erap2_expression_df$linear_pred &lt;- as.vector(linear_predictions)</span></span>
+<span id="cb33-285"><a href="#cb33-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-286"><a href="#cb33-286" aria-hidden="true" tabindex="-1"></a><span class="st">ggplot(erap2_expression_df) + geom_point(aes(x=linear_predictions, y= enformer_predicted_whole_expression, color=ancestry)) + ylab("Enformer predicted ERAP2 expression") + xlab("Sum of variant effects") + ggtitle("Enformer predicted ERAP2 expression vs. sum of individual Enformer variant </span><span class="sc">\n</span><span class="st"> effects for ERAP2")</span></span>
+<span id="cb33-287"><a href="#cb33-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-288"><a href="#cb33-288" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-289"><a href="#cb33-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-290"><a href="#cb33-290" aria-hidden="true" tabindex="-1"></a><span class="st">The above plot plots the individualized expression predictions </span></span>
+<span id="cb33-291"><a href="#cb33-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-292"><a href="#cb33-292" aria-hidden="true" tabindex="-1"></a><span class="st">Clearly, ERAP2 is well predicted as a linear sum of individual variant effects. This supports the conclusion that the large effect variant is at play here. </span></span>
+<span id="cb33-293"><a href="#cb33-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-294"><a href="#cb33-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-295"><a href="#cb33-295" aria-hidden="true" tabindex="-1"></a><span class="st">## personalized mutagenesis</span></span>
+<span id="cb33-296"><a href="#cb33-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-297"><a href="#cb33-297" aria-hidden="true" tabindex="-1"></a><span class="st">After loading in the personalized expression estimates</span></span>
+<span id="cb33-298"><a href="#cb33-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-299"><a href="#cb33-299" aria-hidden="true" tabindex="-1"></a><span class="st">We can also annotate each value with data for the individual, haplotype, mutated variant, and genotype of mutated variant.</span></span>
+<span id="cb33-300"><a href="#cb33-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-303"><a href="#cb33-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-304"><a href="#cb33-304" aria-hidden="true" tabindex="-1"></a><span class="st">library(tidyverse)</span></span>
+<span id="cb33-305"><a href="#cb33-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-306"><a href="#cb33-306" aria-hidden="true" tabindex="-1"></a><span class="st">haplo1 &lt;- read_csv(file.path(data_dir,"erap2_personalized_LCL_quantification_haplo1.csv"))</span></span>
+<span id="cb33-307"><a href="#cb33-307" aria-hidden="true" tabindex="-1"></a><span class="st">haplo1 &lt;- haplo1[,3:ncol(haplo1)]</span></span>
+<span id="cb33-308"><a href="#cb33-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-309"><a href="#cb33-309" aria-hidden="true" tabindex="-1"></a><span class="st">haplo1_rc &lt;- read_csv(file.path(data_dir,"erap2_personalized_LCL_quantification_haplo1_rc.csv"))</span></span>
+<span id="cb33-310"><a href="#cb33-310" aria-hidden="true" tabindex="-1"></a><span class="st">haplo1_rc&lt;- haplo1_rc[,3:ncol(haplo1_rc)]</span></span>
+<span id="cb33-311"><a href="#cb33-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-312"><a href="#cb33-312" aria-hidden="true" tabindex="-1"></a><span class="st">haplo1_ave = data.frame(t((haplo1_rc + haplo1)/2))</span></span>
+<span id="cb33-313"><a href="#cb33-313" aria-hidden="true" tabindex="-1"></a><span class="st">colnames(haplo1_ave) &lt;- c("expression")</span></span>
+<span id="cb33-314"><a href="#cb33-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-315"><a href="#cb33-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-316"><a href="#cb33-316" aria-hidden="true" tabindex="-1"></a><span class="st">haplo2 &lt;- read_csv(file.path(data_dir,"erap2_personalized_LCL_quantification_haplo2.csv"))</span></span>
+<span id="cb33-317"><a href="#cb33-317" aria-hidden="true" tabindex="-1"></a><span class="st">haplo2 &lt;- haplo2[,3:ncol(haplo2)]</span></span>
+<span id="cb33-318"><a href="#cb33-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-319"><a href="#cb33-319" aria-hidden="true" tabindex="-1"></a><span class="st">haplo2_rc &lt;- read_csv(file.path(data_dir,"erap2_personalized_LCL_quantification_haplo2_rc.csv"))</span></span>
+<span id="cb33-320"><a href="#cb33-320" aria-hidden="true" tabindex="-1"></a><span class="st">haplo2_rc &lt;- haplo2_rc[,3:ncol(haplo2_rc)]</span></span>
+<span id="cb33-321"><a href="#cb33-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-322"><a href="#cb33-322" aria-hidden="true" tabindex="-1"></a><span class="st">haplo2_ave = data.frame(t((haplo2_rc + haplo2)/2))</span></span>
+<span id="cb33-323"><a href="#cb33-323" aria-hidden="true" tabindex="-1"></a><span class="st">colnames(haplo2_ave) &lt;- c("expression")</span></span>
+<span id="cb33-324"><a href="#cb33-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-325"><a href="#cb33-325" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-326"><a href="#cb33-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-329"><a href="#cb33-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-330"><a href="#cb33-330" aria-hidden="true" tabindex="-1"></a><span class="st">haplo1_ave$ids &lt;- rownames(haplo1_ave)</span></span>
+<span id="cb33-331"><a href="#cb33-331" aria-hidden="true" tabindex="-1"></a><span class="st">haplo1_ave &lt;- haplo1_ave %&gt;% separate(ids,into = c("individual","mutated_variant","mutated_genotype"))</span></span>
+<span id="cb33-332"><a href="#cb33-332" aria-hidden="true" tabindex="-1"></a><span class="st">haplo1_ave$haplotype &lt;- "1"</span></span>
+<span id="cb33-333"><a href="#cb33-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-334"><a href="#cb33-334" aria-hidden="true" tabindex="-1"></a><span class="st">haplo1_ref &lt;- haplo1_ave[haplo1_ave$mutated_genotype == "REF",]</span></span>
+<span id="cb33-335"><a href="#cb33-335" aria-hidden="true" tabindex="-1"></a><span class="st">haplo1_alt &lt;- haplo1_ave[haplo1_ave$mutated_genotype == "ALT",]</span></span>
+<span id="cb33-336"><a href="#cb33-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-337"><a href="#cb33-337" aria-hidden="true" tabindex="-1"></a><span class="st">haplo2_ave$ids &lt;- rownames(haplo2_ave)</span></span>
+<span id="cb33-338"><a href="#cb33-338" aria-hidden="true" tabindex="-1"></a><span class="st">haplo2_ave &lt;- haplo2_ave %&gt;% separate(ids,into = c("individual","mutated_variant","mutated_genotype"))</span></span>
+<span id="cb33-339"><a href="#cb33-339" aria-hidden="true" tabindex="-1"></a><span class="st">haplo2_ave$haplotype &lt;- "2"</span></span>
+<span id="cb33-340"><a href="#cb33-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-341"><a href="#cb33-341" aria-hidden="true" tabindex="-1"></a><span class="st">haplo2_ref &lt;- haplo2_ave[haplo2_ave$mutated_genotype == "REF",]</span></span>
+<span id="cb33-342"><a href="#cb33-342" aria-hidden="true" tabindex="-1"></a><span class="st">haplo2_alt &lt;- haplo2_ave[haplo2_ave$mutated_genotype == "ALT",]</span></span>
+<span id="cb33-343"><a href="#cb33-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-344"><a href="#cb33-344" aria-hidden="true" tabindex="-1"></a><span class="st">ref_stack &lt;- rbind(haplo1_ref,haplo2_ref)</span></span>
+<span id="cb33-345"><a href="#cb33-345" aria-hidden="true" tabindex="-1"></a><span class="st">alt_stack &lt;- rbind(haplo1_alt,haplo2_alt)</span></span>
+<span id="cb33-346"><a href="#cb33-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-347"><a href="#cb33-347" aria-hidden="true" tabindex="-1"></a><span class="st">full_df &lt;- data.frame(individual=ref_stack$individual,haplotype=ref_stack$haplotype,mutated_variant=ref_stack$mutated_variant, ref_expression=ref_stack$expression, alt_expression=alt_stack$expression)</span></span>
+<span id="cb33-348"><a href="#cb33-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-349"><a href="#cb33-349" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-350"><a href="#cb33-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-351"><a href="#cb33-351" aria-hidden="true" tabindex="-1"></a><span class="st">We now have collected all our estimates into a concise data frame. Next we can calculate some effect-size related estimates by comparing the alt,ref</span></span>
+<span id="cb33-352"><a href="#cb33-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-355"><a href="#cb33-355" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-356"><a href="#cb33-356" aria-hidden="true" tabindex="-1"></a><span class="st">full_df$dif &lt;- full_df$alt_expression-full_df$ref_expression</span></span>
+<span id="cb33-357"><a href="#cb33-357" aria-hidden="true" tabindex="-1"></a><span class="st">full_df$fc &lt;- full_df$alt_expression/full_df$ref_expression</span></span>
+<span id="cb33-358"><a href="#cb33-358" aria-hidden="true" tabindex="-1"></a><span class="st">full_df$logfc &lt;- log2(full_df$fc)</span></span>
+<span id="cb33-359"><a href="#cb33-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-360"><a href="#cb33-360" aria-hidden="true" tabindex="-1"></a><span class="st">full_df$log_ref &lt;- log(full_df$ref_expression)</span></span>
+<span id="cb33-361"><a href="#cb33-361" aria-hidden="true" tabindex="-1"></a><span class="st">full_df$log_alt &lt;- log(full_df$alt_expression)</span></span>
+<span id="cb33-362"><a href="#cb33-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-363"><a href="#cb33-363" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-364"><a href="#cb33-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-365"><a href="#cb33-365" aria-hidden="true" tabindex="-1"></a><span class="st">We can also annotate our results by individual ancestry</span></span>
+<span id="cb33-366"><a href="#cb33-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-369"><a href="#cb33-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-370"><a href="#cb33-370" aria-hidden="true" tabindex="-1"></a><span class="st">full_df$ancestry &lt;- as.vector(pop_metadata[full_df$individual,]$population)</span></span>
+<span id="cb33-371"><a href="#cb33-371" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-372"><a href="#cb33-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-373"><a href="#cb33-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-376"><a href="#cb33-376" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-377"><a href="#cb33-377" aria-hidden="true" tabindex="-1"></a><span class="st"># TODO Plot against allele frequency</span></span>
+<span id="cb33-378"><a href="#cb33-378" aria-hidden="true" tabindex="-1"></a><span class="st"># TODO Color by ancestry </span></span>
+<span id="cb33-379"><a href="#cb33-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-380"><a href="#cb33-380" aria-hidden="true" tabindex="-1"></a><span class="st">ggplot(full_df) + geom_violin(aes(x=mutated_variant, y=dif, fill=mutated_variant)) + geom_jitter(aes(x=mutated_variant, y=dif))+geom_hline(yintercept = ref_dif[ref_dif$mutated_variant=="96916885","dif"], color="blue") + geom_hline(yintercept = ref_dif[ref_dif$mutated_variant=="96916728","dif"], color="green") + geom_hline(yintercept = ref_dif[ref_dif$mutated_variant=="96900192","dif"], color="red") +scale_color_manual(name='</span>Personalized vs. ref mutagenesis<span class="st">',</span></span>
+<span id="cb33-381"><a href="#cb33-381" aria-hidden="true" tabindex="-1"></a><span class="st">                     breaks=c('</span><span class="dv">96916885</span><span class="st">', '</span><span class="dv">96916728</span><span class="st">', '</span><span class="dv">96900192</span><span class="st">'),</span></span>
+<span id="cb33-382"><a href="#cb33-382" aria-hidden="true" tabindex="-1"></a><span class="st">                     values=c('</span><span class="dv">96916885</span><span class="st">'='</span>red<span class="st">', '</span><span class="dv">96916728</span><span class="st">'='</span>blue<span class="st">', '</span><span class="dv">96900192</span><span class="st">'='</span>green<span class="st">')) + theme(legend.title=element_text(size=20),</span></span>
+<span id="cb33-383"><a href="#cb33-383" aria-hidden="true" tabindex="-1"></a><span class="st">       legend.text=element_text(size=14))</span></span>
+<span id="cb33-384"><a href="#cb33-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-385"><a href="#cb33-385" aria-hidden="true" tabindex="-1"></a><span class="st">ggplot(full_df) + geom_violin(aes(x=mutated_variant, y=dif, fill=haplotype))</span></span>
+<span id="cb33-386"><a href="#cb33-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-387"><a href="#cb33-387" aria-hidden="true" tabindex="-1"></a><span class="st">ggplot(full_df) + geom_violin(aes(x=mutated_variant, y=dif, fill=ancestry))</span></span>
+<span id="cb33-388"><a href="#cb33-388" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-389"><a href="#cb33-389" aria-hidden="true" tabindex="-1"></a><span class="st">The distributions are certainly interesting.</span></span>
+<span id="cb33-390"><a href="#cb33-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-391"><a href="#cb33-391" aria-hidden="true" tabindex="-1"></a><span class="st">It would be good to try and identify if the 96916728 "positive" group is an interaction with a specific variant present more frequently in that subgroup. </span></span>
+<span id="cb33-392"><a href="#cb33-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-395"><a href="#cb33-395" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-396"><a href="#cb33-396" aria-hidden="true" tabindex="-1"></a><span class="st">full_df_fm_96916728_pos &lt;- full_df[(full_df$dif &gt; 0) &amp; (full_df$mutated_variant == 96916728),]</span></span>
+<span id="cb33-397"><a href="#cb33-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-398"><a href="#cb33-398" aria-hidden="true" tabindex="-1"></a><span class="st">fm_96916728_pos_individuals &lt;- unique(full_df_fm_96916728_pos$individual)</span></span>
+<span id="cb33-399"><a href="#cb33-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-400"><a href="#cb33-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-401"><a href="#cb33-401" aria-hidden="true" tabindex="-1"></a><span class="st">allele_count_sub &lt;- as.data.frame(t(allele_count_df[rownames(dif_mat),]))</span></span>
+<span id="cb33-402"><a href="#cb33-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-403"><a href="#cb33-403" aria-hidden="true" tabindex="-1"></a><span class="st">allele_count_sub$fm_96916728_pos &lt;- rownames(allele_count_sub) %in% fm_96916728_pos_individuals</span></span>
+<span id="cb33-404"><a href="#cb33-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-405"><a href="#cb33-405" aria-hidden="true" tabindex="-1"></a><span class="st">fm_96916728_pos_cor &lt;- as.data.frame(cor(allele_count_sub[,colnames(allele_count_sub != "fm_96916728_pos")],allele_count_sub$fm_96916728_pos))</span></span>
+<span id="cb33-406"><a href="#cb33-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-407"><a href="#cb33-407" aria-hidden="true" tabindex="-1"></a><span class="st">fm_96916728_pos_cor$sites &lt;- as.numeric(rownames(fm_96916728_pos_cor))</span></span>
+<span id="cb33-408"><a href="#cb33-408" aria-hidden="true" tabindex="-1"></a><span class="st">colnames(fm_96916728_pos_cor) &lt;- c("cor", "sites")</span></span>
+<span id="cb33-409"><a href="#cb33-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-410"><a href="#cb33-410" aria-hidden="true" tabindex="-1"></a><span class="st">fm_96916728_pos_cor$allele_freq &lt;- as.numeric(variant_metadata_df[rownames(fm_96916728_pos_cor),1])</span></span>
+<span id="cb33-411"><a href="#cb33-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-412"><a href="#cb33-412" aria-hidden="true" tabindex="-1"></a><span class="st">ggplot(fm_96916728_pos_cor) + geom_point(aes(x=sites,y=cor, col=allele_freq))</span></span>
+<span id="cb33-413"><a href="#cb33-413" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb33-414"><a href="#cb33-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-415"><a href="#cb33-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-416"><a href="#cb33-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-417"><a href="#cb33-417" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

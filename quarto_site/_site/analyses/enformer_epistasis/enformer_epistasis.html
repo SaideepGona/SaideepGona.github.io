@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saideep Gona">
+
+<title>Daily-Blog-Sai - Enformer Epistasis Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daily-Blog-Sai</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#load-datasets-and-metadata" id="toc-load-datasets-and-metadata" class="nav-link active" data-scroll-target="#load-datasets-and-metadata">Load datasets and metadata</a></li>
+  <li><a href="#modeling-epistasis-using-nested-linear-models" id="toc-modeling-epistasis-using-nested-linear-models" class="nav-link" data-scroll-target="#modeling-epistasis-using-nested-linear-models">Modeling epistasis using nested linear models</a>
+  <ul class="collapse">
+  <li><a href="#evaluate-results" id="toc-evaluate-results" class="nav-link" data-scroll-target="#evaluate-results">Evaluate Results</a></li>
+  <li><a href="#enrichment-gsea-at-varying-significance-thresholds" id="toc-enrichment-gsea-at-varying-significance-thresholds" class="nav-link" data-scroll-target="#enrichment-gsea-at-varying-significance-thresholds">Enrichment, GSEA at Varying Significance Thresholds</a></li>
+  <li><a href="#cfap45" id="toc-cfap45" class="nav-link" data-scroll-target="#cfap45">CFAP45</a></li>
+  <li><a href="#epcam-gene" id="toc-epcam-gene" class="nav-link" data-scroll-target="#epcam-gene">EPCAM gene</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Enformer Epistasis Analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saideep Gona </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpmisc)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="load-datasets-and-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="load-datasets-and-metadata">Load datasets and metadata</h3>
+<p>Load the raw expression datasets</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dset_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/analysis-Sai/enformer_geuvadis/enformer_epistasis"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>haplo1 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">read_csv</span>(<span class="fu">file.path</span>(dset_dir,<span class="st">"CAGE_lcl_enformer_geuvadis_summed_haplo1_filtered.csv"</span>)))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(haplo1) <span class="ot">&lt;-</span> haplo1<span class="sc">$</span>...<span class="dv">1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>haplo1<span class="sc">$</span>...<span class="dv">1</span> <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>haplo2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">read_csv</span>(<span class="fu">file.path</span>(dset_dir,<span class="st">"CAGE_lcl_enformer_geuvadis_summed_haplo2_filtered.csv"</span>)))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(haplo2) <span class="ot">&lt;-</span> haplo2<span class="sc">$</span>...<span class="dv">1</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>haplo2<span class="sc">$</span>...<span class="dv">2</span> <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>geuvadis_full <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">read_table</span>(<span class="fu">file.path</span>(dset_dir,<span class="st">"GD462.GeneQuantRPKM.50FN.samplename.resk10.txt"</span>)))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>geuvadis <span class="ot">&lt;-</span> <span class="fu">separate</span>(geuvadis_full, <span class="dv">2</span>, <span class="st">"Gene_Symbol_uv"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(geuvadis) <span class="ot">&lt;-</span> geuvadis<span class="sc">$</span>Gene_Symbol_uv</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>geuvadis <span class="ot">&lt;-</span> geuvadis[,<span class="dv">5</span><span class="sc">:</span><span class="fu">ncol</span>(geuvadis)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Load metadata</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>metadata_dir <span class="ot">=</span> <span class="st">"/Users/saideepgona/Library/CloudStorage/Box-Box/imlab-data/data-Github/analysis-Sai/metadata"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>individual_metadata <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">read_delim</span>(<span class="fu">file.path</span>(metadata_dir,<span class="st">"igsr_samples.tsv"</span>)))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(individual_metadata) <span class="ot">&lt;-</span> individual_metadata<span class="sc">$</span><span class="st">`</span><span class="at">Sample name</span><span class="st">`</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(individual_metadata<span class="sc">$</span>Superpopulation.code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt; table of extent 0 &gt;</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gene_metadata <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">read_delim</span>(<span class="fu">file.path</span>(metadata_dir,<span class="st">"gene_metadata_full.csv"</span>)))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(gene_metadata) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(gene_metadata<span class="sc">$</span>...<span class="dv">1</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>gene_metadata<span class="sc">$</span>...<span class="dv">1</span> <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># gene_names &lt;- read.table(file.path(dset_dir,"protein_coding.tsv"), header = TRUE)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># gene_names &lt;- separate(gene_names, 2, "Gene_Symbol_uv")</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># gene_names &lt;- gene_names[!duplicated(gene_names[, "gene_name"]),]</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># rownames(gene_names) &lt;- gene_names$Gene_Symbol_uv</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># # rownames(gene_names) &lt;- gene_names$gene_name</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># geuvadis_gene_names &lt;- gene_names[gene_names$Gene_Symbol_uv %in% rownames(geuvadis),]</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># geuvadis &lt;- geuvadis[rownames(geuvadis) %in% geuvadis_gene_names$Gene_Symbol_uv,]</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># geuvadis_gene_names_ordered &lt;- geuvadis_gene_names[rownames(geuvadis),]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Prepare datasets for modeling</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove full NA genes/individuals</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ge_inds <span class="ot">&lt;-</span> <span class="fu">intersect</span>(<span class="fu">colnames</span>(geuvadis), <span class="fu">colnames</span>(haplo1))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ge_genes <span class="ot">&lt;-</span> <span class="fu">intersect</span>(<span class="fu">rownames</span>(geuvadis), <span class="fu">rownames</span>(haplo1))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>pos_genes <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">rownames</span>(gene_metadata[gene_metadata<span class="sc">$</span>strand<span class="sc">==</span><span class="st">"+"</span>,]))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ge_genes <span class="ot">&lt;-</span> ge_genes[ge_genes <span class="sc">%in%</span> pos_genes]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>haplo1_geu <span class="ot">&lt;-</span> haplo1[ge_genes,ge_inds]</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>haplo2_geu <span class="ot">&lt;-</span> haplo2[ge_genes,ge_inds]</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>geuvadis_enf <span class="ot">&lt;-</span> geuvadis[ge_genes,ge_inds]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="modeling-epistasis-using-nested-linear-models" class="level2">
+<h2 class="anchored" data-anchor-id="modeling-epistasis-using-nested-linear-models">Modeling epistasis using nested linear models</h2>
+<p>ge: geuvadis expression haplo1,haplo2: predicted summed haplotype expression for haplotype 1 and 2 from enformer</p>
+<p>Model 0: <span class="math display">\[ge \sim A*(haplo1+haplo2)\]</span> Model 1: <span class="math display">\[ge \sim A*haplo1 + B*haplo2\]</span> Model 2: <span class="math display">\[ge \sim A*haplo1 + B*haplo2 + C*haplo1|haplo2\]</span></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model_single_gene <span class="ot">&lt;-</span> <span class="cf">function</span>(lm_df_filt) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  summed_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(gt<span class="sc">~</span>both,lm_df_filt)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  basic_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(gt<span class="sc">~</span>haplo1<span class="sc">+</span>haplo2,lm_df_filt)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  basic_sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(basic_model)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(basic_sum<span class="sc">$</span>fstatistic[[<span class="dv">1</span>]])) {</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    basic_f_stat <span class="ot">=</span> <span class="cn">NA</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    basic_f_stat <span class="ot">=</span> <span class="fu">df</span>(basic_sum<span class="sc">$</span>fstatistic[[<span class="dv">1</span>]],basic_sum<span class="sc">$</span>fstatistic[[<span class="dv">2</span>]],basic_sum<span class="sc">$</span>fstatistic[[<span class="dv">3</span>]])</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  r2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(basic_model)<span class="sc">$</span>adj.r.squared</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  int_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(gt<span class="sc">~</span>haplo1<span class="sc">*</span>haplo2,lm_df_filt)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  nested_anova <span class="ot">&lt;-</span> <span class="fu">anova</span>(basic_model,int_model,<span class="at">test=</span><span class="st">"F"</span>)[<span class="dv">6</span>][<span class="dv">2</span>,]</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  cor_val <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">predict</span>(basic_model),lm_df_filt<span class="sc">$</span>gt)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(nested_anova,basic_f_stat,r2, cor_val))</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># lm_df &lt;- data.frame(gt=t(geuvadis_enf[1,]),haplo1=t(haplo1_no_zero_geu[1,]),haplo2=t(haplo2_no_zero_geu[1,]))</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># lm_df_filt &lt;- na.omit(lm_df)</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># colnames(lm_df_filt) &lt;- c("gt","haplo1","haplo2")</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># basic_model &lt;- lm(gt~haplo1+haplo2,lm_df_filt)</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># int_model &lt;- lm(gt~haplo1*haplo2,lm_df_filt)</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co"># anova(basic_model,int_model,test="F")[6][2,]</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>nested_f_test_pvals <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>f_test_pvals <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>genes_run <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>inds_per_test <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>r2_additive <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>r_additive <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>r_raw <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> <span class="fu">rownames</span>(haplo1_geu)</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(haplo1_geu)[<span class="dv">1</span>]) {</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a> cur_df <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(<span class="fu">data.frame</span>(<span class="at">gt=</span><span class="fu">t</span>(geuvadis_enf[i,]),</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>                              <span class="at">haplo1=</span><span class="fu">t</span>(haplo1_geu[i,]),</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>                              <span class="at">haplo2=</span><span class="fu">t</span>(haplo2_geu[i,]),</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>                              <span class="at">both =</span> <span class="fu">t</span>(haplo1_geu[i,])<span class="sc">+</span><span class="fu">t</span>(haplo2_geu[i,])</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>                              ))</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a> cur_df <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(cur_df)</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a> <span class="fu">colnames</span>(cur_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"gt"</span>,<span class="st">"haplo1"</span>,<span class="st">"haplo2"</span>,<span class="st">"both"</span>)</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a> o <span class="ot">&lt;-</span> <span class="fu">model_single_gene</span>(cur_df)</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a> nested_f_test_pvals <span class="ot">&lt;-</span> <span class="fu">c</span>(nested_f_test_pvals,o[<span class="dv">1</span>])</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a> f_test_pvals <span class="ot">&lt;-</span> <span class="fu">c</span>(f_test_pvals,o[<span class="dv">2</span>])</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a> genes_run <span class="ot">&lt;-</span> <span class="fu">c</span>(genes_run, gene_list[i])</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a> inds_per_test <span class="ot">&lt;-</span> <span class="fu">c</span>(inds_per_test, <span class="fu">nrow</span>(cur_df))</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a> r2_additive <span class="ot">&lt;-</span> <span class="fu">c</span>(r2_additive,o[<span class="dv">3</span>])</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a> r_additive <span class="ot">&lt;-</span> <span class="fu">c</span>(r_additive,o[<span class="dv">4</span>])</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a> r_raw <span class="ot">&lt;-</span> <span class="fu">c</span>(r_raw,<span class="fu">cor</span>(cur_df<span class="sc">$</span>gt,cur_df<span class="sc">$</span>both))</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Evaluate test results - no filtering based on single haplotype significance, fig.width=5, fig.height=5</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>results_df_raw <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">nested_pvals=</span>nested_f_test_pvals,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">mlog10p=</span><span class="sc">-</span><span class="fu">log10</span>(nested_f_test_pvals),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">nested_bh_pval=</span><span class="fu">p.adjust</span>(nested_f_test_pvals,<span class="at">method=</span><span class="st">"BH"</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">basic_f_pvals=</span>f_test_pvals,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">basic_bh_pval=</span><span class="fu">p.adjust</span>(f_test_pvals,<span class="at">method=</span><span class="st">"BH"</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">indiv_count=</span>inds_per_test,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">genes =</span> genes_run,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">adj.r2 =</span> r2_additive,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">r =</span> r_additive,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">r_raw =</span> r_raw)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>results_df_na <span class="ot">&lt;-</span> results_df_raw[<span class="fu">is.na</span>(results_df_raw<span class="sc">$</span>nested_pvals),]</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> results_df_raw[<span class="sc">!</span><span class="fu">is.na</span>(results_df_raw<span class="sc">$</span>nested_pvals),]</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results_df, <span class="fu">aes</span>(<span class="at">x=</span>nested_pvals)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/various plots-1.png" class="img-fluid" width="384"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(results_df<span class="sc">$</span>nested_pvals, <span class="at">breaks=</span><span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/various plots-2.png" class="img-fluid" width="384"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results_df, <span class="fu">aes</span>(<span class="at">x=</span>mlog10p)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/various plots-3.png" class="img-fluid" width="384"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(results_df<span class="sc">$</span>mlog10p, <span class="at">breaks=</span><span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/various plots-4.png" class="img-fluid" width="384"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results_df,<span class="fu">aes</span>(<span class="at">x=</span>indiv_count,<span class="at">y=</span>nested_pvals)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/various plots-5.png" class="img-fluid" width="384"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results_df,<span class="fu">aes</span>(<span class="at">x=</span>nested_bh_pval,<span class="at">y=</span>basic_bh_pval)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/various plots-6.png" class="img-fluid" width="384"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results_df, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">"R2 enformer,geuvadis additive"</span>,<span class="at">y=</span>adj.r2)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/various plots-7.png" class="img-fluid" width="384"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results_df, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">"Correlation enformer,geuvadis additive"</span>,<span class="at">y=</span>r)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/various plots-8.png" class="img-fluid" width="384"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results_df, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">"Correlation enformer,geuvadis raw"</span>,<span class="at">y=</span>r_raw)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Enformer vs. Geuvadis"</span>,<span class="at">y=</span><span class="st">"correlation coefficient(r)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/various plots-9.png" class="img-fluid" width="384"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdist)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results_df, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">"Correlation enformer,geuvadis raw"</span>,<span class="at">y=</span>r_raw)) <span class="sc">+</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_halfeye</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">adjust =</span> .<span class="dv">5</span>, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> .<span class="dv">6</span>, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.width =</span> <span class="dv">0</span>, </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">justification =</span> <span class="sc">-</span>.<span class="dv">2</span>, </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">point_colour =</span> <span class="cn">NA</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> .<span class="dv">15</span>, </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.shape =</span> <span class="cn">NA</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add justified jitter from the {gghalves} package</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  gghalves<span class="sc">::</span><span class="fu">geom_half_point</span>(</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="do">## draw jitter on the left</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">side =</span> <span class="st">"l"</span>, </span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="do">## control range of jitter</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">range_scale =</span> .<span class="dv">4</span>, </span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="do">## add some transparency</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> .<span class="dv">3</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="cn">NA</span>), <span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Enformer vs. Geuvadis"</span>,<span class="at">y=</span><span class="st">"correlation coefficient(r)"</span>)<span class="sc">+</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/various plots-10.png" class="img-fluid" width="384"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bh_sig_add_df <span class="ot">&lt;-</span> results_df[results_df<span class="sc">$</span>basic_bh_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>,]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>bh_sig_results_df_sub <span class="ot">&lt;-</span> bh_sig_add_df[bh_sig_add_df<span class="sc">$</span>nested_bh_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>,]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>bh_sig_results_df <span class="ot">&lt;-</span> results_df[results_df<span class="sc">$</span>nested_bh_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>,]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(results_df,<span class="st">"all_results_interaction.csv"</span>,<span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(bh_sig_results_df,<span class="st">"bh_sig_interaction.csv"</span>,<span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># QQPlot of pvals using Haky's code</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_gist</span>(<span class="st">"38431b74c6c0bf90c12f"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="evaluate-results" class="level3">
+<h3 class="anchored" data-anchor-id="evaluate-results">Evaluate Results</h3>
+<div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqunif</span>(results_df<span class="sc">$</span>basic_f_pvals)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqunif</span>(results_df<span class="sc">$</span>nested_pvals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-qqplots" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-qqplots-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="enformer_epistasis_files/figure-html/fig-qqplots-1.png" class="img-fluid figure-img" data-ref-parent="fig-qqplots" width="384"></p>
+<figcaption class="figure-caption">(a) Additive model test</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-qqplots-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="enformer_epistasis_files/figure-html/fig-qqplots-2.png" class="img-fluid figure-img" data-ref-parent="fig-qqplots" width="384"></p>
+<figcaption class="figure-caption">(b) Interaction model test</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Comparison between enformer and predixcan predictions against GEUVADIS expression. Each point corresponds to a single gene with correlations being done across individuals.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="enrichment-gsea-at-varying-significance-thresholds" class="level3">
+<h3 class="anchored" data-anchor-id="enrichment-gsea-at-varying-significance-thresholds">Enrichment, GSEA at Varying Significance Thresholds</h3>
+<p>Here we threshold the test results for significance and see how GSEA enrichment (hallmark gene sets) results change. In this case, “background” are genes passing significance for the additive model test. The enriched genes are a subset of the “background” which are also <span class="math inline">\(&lt;0.1\)</span> bh-pval.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fgsea)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(msigdbr)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>gene_counts_back <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>gene_counts_enrich <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>sig_pathways_back <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>sig_pathways_enrich <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>h_gene_sets <span class="ot">=</span> <span class="fu">msigdbr</span>(<span class="at">species =</span> <span class="st">"human"</span>, <span class="at">category =</span> <span class="st">"H"</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>msigdbr_list <span class="ot">=</span> <span class="fu">split</span>(<span class="at">x =</span> h_gene_sets<span class="sc">$</span>gene_symbol, <span class="at">f =</span> h_gene_sets<span class="sc">$</span>gs_name)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>cutoffs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.5</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (cutoff <span class="cf">in</span> cutoffs) { </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  results_df_raw <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">nested_pvals=</span>nested_f_test_pvals,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>                           <span class="at">mlog10p=</span><span class="sc">-</span><span class="fu">log10</span>(nested_f_test_pvals),</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>                           <span class="at">nested_bh_pval=</span><span class="fu">p.adjust</span>(nested_f_test_pvals,<span class="at">method=</span><span class="st">"BH"</span>),</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>                           <span class="at">basic_f_pvals=</span>f_test_pvals,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>                           <span class="at">basic_bh_pval=</span><span class="fu">p.adjust</span>(f_test_pvals,<span class="at">method=</span><span class="st">"BH"</span>),</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>                           <span class="at">indiv_count=</span>inds_per_test,</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>                           <span class="at">genes =</span> genes_run)</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  results_df_na <span class="ot">&lt;-</span> results_df_raw[<span class="fu">is.na</span>(results_df_raw<span class="sc">$</span>nested_pvals),]</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  results_df <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(results_df_raw)</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  results_df <span class="ot">&lt;-</span> results_df[results_df<span class="sc">$</span>basic_bh_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>,]</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  gene_counts_back <span class="ot">&lt;-</span> <span class="fu">c</span>(gene_counts_back, <span class="fu">nrow</span>(results_df))</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>  results_df_enrich <span class="ot">&lt;-</span> results_df[results_df<span class="sc">$</span>nested_bh_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>,]</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>  gene_counts_enrich <span class="ot">&lt;-</span> <span class="fu">c</span>(gene_counts_enrich, <span class="fu">nrow</span>(results_df_enrich))</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove non-significant additive model</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>  results_df_sorted <span class="ot">&lt;-</span> results_df[<span class="fu">order</span>(results_df<span class="sc">$</span>nested_bh_pval,<span class="at">decreasing =</span> <span class="cn">TRUE</span>),]</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>  stats <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(results_df_sorted<span class="sc">$</span>nested_bh_pval)</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(stats) <span class="ot">&lt;-</span> results_df_sorted<span class="sc">$</span>genes</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>  fgsea_res_back <span class="ot">&lt;-</span> <span class="fu">fgsea</span>(msigdbr_list, stats)</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>  sig_pathways_back <span class="ot">&lt;-</span> <span class="fu">c</span>(sig_pathways_back,<span class="fu">nrow</span>(fgsea_res_back[fgsea_res_back<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.1</span>,]))</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>  results_df_enrich_sorted <span class="ot">&lt;-</span> results_df_enrich[<span class="fu">order</span>(results_df_enrich<span class="sc">$</span>nested_bh_pval,<span class="at">decreasing =</span> <span class="cn">TRUE</span>),]</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>  stats <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(results_df_enrich_sorted<span class="sc">$</span>nested_bh_pval)</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(stats) <span class="ot">&lt;-</span> results_df_enrich_sorted<span class="sc">$</span>genes</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>  fgsea_res_enrich <span class="ot">&lt;-</span> <span class="fu">fgsea</span>(msigdbr_list, stats)</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>  sig_pathways_enrich <span class="ot">&lt;-</span> <span class="fu">c</span>(sig_pathways_enrich,<span class="fu">nrow</span>(fgsea_res_enrich[fgsea_res_enrich<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.1</span>,]))</span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>res_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cutoffs =</span> cutoffs,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">gene_counts_back=</span>gene_counts_back,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">gene_counts_enrich=</span>gene_counts_enrich,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sig_pathways_back=</span>sig_pathways_back,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sig_pathways_enrich=</span>sig_pathways_enrich)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># counts_df &lt;- data.frame(cutoffs = rep(cutoffs,2),</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                         gene_counts = c(gene_counts_back,gene_counts_enrich),</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#                         type=c(rep("background",length(cutoffs)),rep("enriched",length(cutoffs))))</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x=</span>cutoffs, <span class="at">y=</span>gene_counts_back)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">4</span>, <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">|</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x=</span>cutoffs, <span class="at">y=</span>gene_counts_enrich)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">4</span>, <span class="at">color=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/plots-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pathways_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cutoffs =</span> <span class="fu">rep</span>(cutoffs,<span class="dv">2</span>),</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sig_pathway_count =</span> <span class="fu">c</span>(sig_pathways_back,sig_pathways_enrich),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">type=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"background"</span>,<span class="fu">length</span>(cutoffs)),<span class="fu">rep</span>(<span class="st">"enriched"</span>,<span class="fu">length</span>(cutoffs))))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x=</span>cutoffs, <span class="at">y=</span>sig_pathways_back)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">4</span>, <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">|</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x=</span>cutoffs, <span class="at">y=</span>sig_pathways_enrich)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">4</span>, <span class="at">color=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/plots-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(pathways_df, aes(x=cutoffs, y=sig_pathway_count, color=type)) + geom_point(size=4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>It seems like fgsea is not so useful in deriving meaning from this data. It might be worth just taking a close look at the highly significant genes.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>results_df_raw <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">nested_pvals=</span>nested_f_test_pvals,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">mlog10p=</span><span class="sc">-</span><span class="fu">log10</span>(nested_f_test_pvals),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">nested_bh_pval=</span><span class="fu">p.adjust</span>(nested_f_test_pvals,<span class="at">method=</span><span class="st">"BH"</span>),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">basic_f_pvals=</span>f_test_pvals,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">basic_bh_pval=</span><span class="fu">p.adjust</span>(f_test_pvals,<span class="at">method=</span><span class="st">"BH"</span>),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">indiv_count=</span>inds_per_test,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">genes =</span> genes_run)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>raw_genes_metadata <span class="ot">&lt;-</span> gene_metadata[results_df_raw<span class="sc">$</span>genes,]</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>results_df_raw<span class="sc">$</span>gene_names <span class="ot">&lt;-</span> raw_genes_metadata<span class="sc">$</span>gene_name</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>results_df_na <span class="ot">&lt;-</span> results_df_raw[<span class="fu">is.na</span>(results_df_raw<span class="sc">$</span>nested_pvals),]</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">na.omit</span>(results_df_raw))</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>keep_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"gene_names"</span>, <span class="st">"nested_bh_pval"</span>)</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> results_df[results_df<span class="sc">$</span>basic_bh_pval <span class="sc">&lt;</span> <span class="fl">0.1</span>,]</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>results_df_write <span class="ot">&lt;-</span> results_df[,keep_cols]</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(results_df_write, <span class="fu">file.path</span>(dset_dir,<span class="st">"0.1_background_geneset_enformer_epistasis.csv"</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="dv">1</span>)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>results_df_enrich <span class="ot">&lt;-</span> results_df[results_df<span class="sc">$</span>nested_bh_pval <span class="sc">&lt;</span> <span class="fl">0.1</span>,]</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>results_df_enrich_write <span class="ot">&lt;-</span> results_df_enrich[,keep_cols]</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(results_df_enrich_write, <span class="fu">file.path</span>(dset_dir,<span class="st">"0.1_foreground_geneset_enformer_epistasis.csv"</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="cfap45" class="level3">
+<h3 class="anchored" data-anchor-id="cfap45">CFAP45</h3>
+<p>gene_length: 27801</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(ggrepel)</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(reshape2)</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># enformer_ind_exp &lt;- haplo1_geu + haplo2_geu</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># individual_metadata_sub &lt;- individual_metadata[rownames(individual_metadata) %in% colnames(geuvadis_enf),]</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># table(individual_metadata_sub$`Superpopulation code`)</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># CFAP45_expression_df &lt;- data.frame(individuals=colnames(geuvadis_enf), geuvadis=as.numeric(geuvadis_enf["ENSG00000213085",]),</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#                                   enformer=as.numeric(enformer_ind_exp["ENSG00000213085",]), haplo1=as.numeric(haplo1_geu["ENSG00000213085",]),</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">#                                   haplo2=as.numeric(haplo2_geu["ENSG00000213085",]),</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                                   population = as.character(individual_metadata_sub[colnames(geuvadis_enf),"Superpopulation code"]))</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># CFAP45_expression_df$haplo_diff &lt;- abs(CFAP45_expression_df$haplo2-CFAP45_expression_df$haplo1)</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co"># CFAP45_expression_df$haplo_prod &lt;- CFAP45_expression_df$haplo2*CFAP45_expression_df$haplo1</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co"># CFAP45_expression_df_all &lt;- melt(CFAP45_expression_df, measure.vars=c("haplo1","haplo2"))</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co"># CFAP45_expression_df_no_outlier &lt;- CFAP45_expression_df[!CFAP45_expression_df$individuals %in% c("NA19129","NA19175"),]</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="co"># CFAP45_expression_df_all_no_outlier &lt;- melt(CFAP45_expression_df_no_outlier, measure.vars=c("haplo1","haplo2"))</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co"># # Plot enformer vs. geuvadis expression</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ge &lt;- ggplot(CFAP45_expression_df, aes(x=geuvadis,y=enformer, label=individuals, col=population)) + geom_point(alpha=0.5) + geom_text_repel() +</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_line(aes(group=variable))</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="co"># ggExtra::ggMarginal(ge, groupFill = TRUE)</span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ge_no &lt;- ggplot(CFAP45_expression_df_no_outlier, aes(x=geuvadis,y=enformer, label=individuals, col=population)) + geom_point(alpha=0.5) + geom_text_repel()</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="co"># ggExtra::ggMarginal(ge_no, groupFill = TRUE)</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="co"># # Plot both haplotype expression vs. total </span></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="co"># ge_both_haplo &lt;- ggplot(CFAP45_expression_df_all, aes(x=geuvadis,y=value, label=individuals, col=population)) + geom_point(alpha=0.5) + geom_text_repel()+</span></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_line(aes(group=individuals), alpha=0.5)</span></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="co"># ggExtra::ggMarginal(ge_both_haplo, groupFill = TRUE)</span></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a><span class="co"># ge_both_haplo &lt;- ggplot(CFAP45_expression_df_all_no_outlier, aes(x=geuvadis,y=value, label=individuals, col=population)) + geom_point(alpha=0.5) + geom_text_repel()+</span></span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_line(aes(group=individuals), alpha=0.5)</span></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a><span class="co"># ggExtra::ggMarginal(ge_both_haplo, groupFill = TRUE)</span></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a><span class="co"># ge_h1 &lt;- ggplot(CFAP45_expression_df, aes(x=geuvadis,y=haplo1, label=individuals, col=population)) + geom_point(alpha=0.5) + geom_text_repel()</span></span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a><span class="co"># ggExtra::ggMarginal(ge_h1, groupFill = TRUE)</span></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a><span class="co"># ge_h2 &lt;- ggplot(CFAP45_expression_df, aes(x=geuvadis,y=haplo2, label=individuals, col=population)) + geom_point(alpha=0.5) + geom_text_repel()</span></span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ggExtra::ggMarginal(ge_h2, groupFill = TRUE)</span></span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a><span class="co"># ge_no_h1 &lt;- ggplot(CFAP45_expression_df_no_outlier, aes(x=geuvadis,y=haplo1, label=individuals, col=population)) + geom_point(alpha=0.5) + geom_text_repel()</span></span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a><span class="co"># ggExtra::ggMarginal(ge_no_h1, groupFill = TRUE)</span></span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="co"># ge_no_h2 &lt;- ggplot(CFAP45_expression_df_no_outlier, aes(x=geuvadis,y=haplo2, label=individuals, col=population)) + geom_point(alpha=0.5) + geom_text_repel()</span></span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a><span class="co"># ggExtra::ggMarginal(ge_no_h2, groupFill = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="epcam-gene" class="level3">
+<h3 class="anchored" data-anchor-id="epcam-gene">EPCAM gene</h3>
+<p>gene length: 42443</p>
+<p>UPDATE: This effect seems to disappear when centering the window on the CSS.</p>
+<p>The EPCAM gene is highly significant for the epistasis interaction test (bh-pval=<span class="math inline">\(4.067394e-208\)</span>). We can plot this gene a bit further to get a better idea.</p>
+<p>First let’s examine how the personalized predictions of the gene compare with Geuvadis:</p>
+<p>Recompute interactive model weights</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model_single_gene_return_weights <span class="ot">&lt;-</span> <span class="cf">function</span>(lm_df_filt) {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  summed_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(gt<span class="sc">~</span>both,lm_df_filt)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  basic_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(gt<span class="sc">~</span>haplo1<span class="sc">+</span>haplo2,lm_df_filt)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  basic_coef <span class="ot">=</span> basic_model<span class="sc">$</span>coefficients</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  basic_sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(basic_model)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(basic_sum)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(basic_sum<span class="sc">$</span>fstatistic[[<span class="dv">1</span>]])) {</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    basic_f_stat <span class="ot">=</span> <span class="cn">NA</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    basic_f_stat <span class="ot">=</span> <span class="fu">df</span>(basic_sum<span class="sc">$</span>fstatistic[[<span class="dv">1</span>]],basic_sum<span class="sc">$</span>fstatistic[[<span class="dv">2</span>]],basic_sum<span class="sc">$</span>fstatistic[[<span class="dv">3</span>]])</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  r2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(basic_model)<span class="sc">$</span>adj.r.squared</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  int_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(gt<span class="sc">~</span>haplo1<span class="sc">*</span>haplo2,lm_df_filt)</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  int_sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(int_model)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(int_sum)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  nested_anova <span class="ot">&lt;-</span> <span class="fu">anova</span>(basic_model,int_model,<span class="at">test=</span><span class="st">"F"</span>)[<span class="dv">6</span>][<span class="dv">2</span>,]</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  cor_val <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">predict</span>(basic_model),lm_df_filt<span class="sc">$</span>gt)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  cor_val_int <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">predict</span>(int_model),lm_df_filt<span class="sc">$</span>gt)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  pred_basic <span class="ot">&lt;-</span> <span class="fu">predict</span>(basic_model)</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(pred_basic)</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  pred_int <span class="ot">&lt;-</span> <span class="fu">predict</span>(int_model)</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(nested_anova,basic_f_stat,r2, pred_basic, pred_int))</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>nested_f_test_pvals <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>f_test_pvals <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>genes_run <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>inds_per_test <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>r2_additive <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>r_additive <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>r_raw <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> <span class="fu">rownames</span>(haplo1_geu)</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>i <span class="ot">=</span> <span class="st">"ENSG00000119888"</span></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>cur_df <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(<span class="fu">data.frame</span>(<span class="at">gt=</span><span class="fu">t</span>(geuvadis_enf[i,]),</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>                            <span class="at">haplo1=</span><span class="fu">t</span>(haplo1_geu[i,]),</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>                            <span class="at">haplo2=</span><span class="fu">t</span>(haplo2_geu[i,]),</span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>                            <span class="at">both =</span> <span class="fu">t</span>(haplo1_geu[i,])<span class="sc">+</span><span class="fu">t</span>(haplo2_geu[i,])</span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>                            ))</span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a>cur_df <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(cur_df)</span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cur_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"gt"</span>,<span class="st">"haplo1"</span>,<span class="st">"haplo2"</span>,<span class="st">"both"</span>)</span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">model_single_gene_return_weights</span>(cur_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = gt ~ haplo1 + haplo2, data = lm_df_filt)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.55940 -0.17107 -0.04218  0.13716  1.23886 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -8.505007   0.147136  -57.80   &lt;2e-16 ***
+haplo1       0.085067   0.001834   46.38   &lt;2e-16 ***
+haplo2       0.065552   0.001845   35.52   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2446 on 443 degrees of freedom
+Multiple R-squared:  0.8879,    Adjusted R-squared:  0.8874 
+F-statistic:  1754 on 2 and 443 DF,  p-value: &lt; 2.2e-16
+
+
+Call:
+lm(formula = gt ~ haplo1 * haplo2, data = lm_df_filt)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.49294 -0.12693 -0.02067  0.10318  1.13533 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   80.435644   5.891638   13.65   &lt;2e-16 ***
+haplo1        -1.494835   0.104645  -14.29   &lt;2e-16 ***
+haplo2        -1.426001   0.098795  -14.43   &lt;2e-16 ***
+haplo1:haplo2  0.026506   0.001755   15.10   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1989 on 442 degrees of freedom
+Multiple R-squared:  0.926, Adjusted R-squared:  0.9255 
+F-statistic:  1845 on 3 and 442 DF,  p-value: &lt; 2.2e-16
+
+      HG00096       HG00097       HG00099       HG00100       HG00101 
+-0.0523254019 -1.2405827868 -0.0414719321  0.2532733754  0.1023902231 
+      HG00102       HG00103       HG00104       HG00105       HG00106 
+ 0.1500385537  0.1922299671  0.2458288314  0.1666678061 -0.0411292350 
+      HG00108       HG00109       HG00110       HG00111       HG00112 
+ 0.0856060289  0.3486417944  0.1719694765  0.0230546682  0.4274864555 
+      HG00114       HG00115       HG00116       HG00117       HG00118 
+-0.0635557578  0.3253091727  0.2396630645  0.0714852885  0.2230854324 
+      HG00119       HG00120       HG00121       HG00122       HG00123 
+ 0.1516033292  0.2533410458  0.1009169628  8.4309705733  0.2358669760 
+      HG00125       HG00126       HG00127       HG00128       HG00129 
+ 0.1885335631 -0.1730825553  0.2419462854  0.3607917068  0.1501783914 
+      HG00130       HG00131       HG00132       HG00133       HG00134 
+ 0.2771954972  0.2972449904  0.2411650201  0.2073747535  0.1839822056 
+      HG00135       HG00136       HG00137       HG00139       HG00141 
+-0.0404951581  0.0943895002  0.2177059058  0.3158408100  0.1956255704 
+      HG00142       HG00143       HG00145       HG00146       HG00148 
+ 0.0110292701 -0.2208677849  0.1683470499 -0.0632825351 -0.1217851618 
+      HG00149       HG00150       HG00151       HG00152       HG00154 
+ 0.0359686756  0.1323073094 -0.0098673075  0.2464151686  0.2964189515 
+      HG00155       HG00156       HG00157       HG00158       HG00159 
+ 0.0143549815 -0.0689862265  0.3475434625 -0.2849897180  0.2124054121 
+      HG00160       HG00171       HG00173       HG00174       HG00176 
+ 0.2008417469  0.1144653279 -0.2655522745  0.1715783962  0.0215056823 
+      HG00177       HG00178       HG00179       HG00180       HG00181 
+ 0.1228975396  0.1440968423  0.2008628766 -0.0229555599  0.0200455616 
+      HG00182       HG00183       HG00185       HG00186       HG00187 
+ 0.0592165255  0.1071523548  0.4219689131  0.0296134427  0.3482101455 
+      HG00188       HG00189       HG00231       HG00232       HG00233 
+ 0.2726666695  0.1899052494 -0.1629995968  0.1994313641  0.3758280432 
+      HG00234       HG00235       HG00236       HG00238       HG00239 
+ 0.1904853220 -0.0294961034  0.3160229024 -0.0891826884  0.0034454304 
+      HG00240       HG00242       HG00243       HG00244       HG00245 
+-0.0963268133  0.1020996337  0.1722687092  0.1924954975  0.1757588093 
+      HG00246       HG00249       HG00250       HG00251       HG00252 
+-0.0636729525 -0.0398641140  0.2054713797  0.0069353296  0.2282637640 
+      HG00253       HG00255       HG00256       HG00257       HG00258 
+ 0.1789901508  0.2292574880 -0.0566339252  0.2568499700  0.2038501317 
+      HG00259       HG00261       HG00262       HG00263       HG00264 
+-0.2009371439  0.1700947915  0.0464145195  0.3311689655  0.0490945599 
+      HG00265       HG00266       HG00267       HG00268       HG00269 
+ 0.1776731049  0.2871816903  0.0489802644  0.1519437913 -0.0811974231 
+      HG00271       HG00272       HG00273       HG00274       HG00275 
+-0.1011900441  0.2056720899 -0.0823446790  0.3046182994  0.0932250743 
+      HG00276       HG00277       HG00278       HG00280       HG00281 
+ 0.1687261562 -0.0286758017  0.2052904332 -0.1276594106  0.2031416312 
+      HG00282       HG00284       HG00285       HG00306       HG00308 
+-0.0318815741  0.3154579615 -0.2525072427  0.1753755263  0.0376144788 
+      HG00309       HG00310       HG00311       HG00312       HG00313 
+ 0.1831059280  0.3578551042  0.0925177860  0.2316576694  0.1202888094 
+      HG00315       HG00319       HG00320       HG00321       HG00323 
+ 0.1186677178  0.3064640882 -0.1409884094  0.2712229593  0.1483420522 
+      HG00324       HG00325       HG00326       HG00327       HG00328 
+-0.0306837274  0.2431133200  0.1448383496  0.2222347255  0.0821896928 
+      HG00329       HG00330       HG00331       HG00332       HG00334 
+ 0.2427724956  0.1204219333  0.2086531266  0.1336426165  0.2412831540 
+      HG00335       HG00336       HG00337       HG00338       HG00339 
+ 0.2275556372  0.0997961475 -0.0143054276  0.2109615915  0.1942743204 
+      HG00341       HG00342       HG00343       HG00344       HG00345 
+-0.0852839066  0.2041864792 -0.0278272480  0.2560298080  0.1011345321 
+      HG00346       HG00349       HG00350       HG00351       HG00353 
+ 0.1743479819 -0.0315320761 -0.0965029340  0.1335667779  0.2819642822 
+      HG00355       HG00356       HG00358       HG00359       HG00360 
+ 0.3331153672  0.0841719092 -0.0253332120  0.1007328176  0.2488517035 
+      HG00361       HG00362       HG00364       HG00365       HG00366 
+ 0.0061154967 -0.0365093943  0.3382635715  0.2127133688  0.1752407635 
+      HG00367       HG00369       HG00371       HG00372       HG00373 
+ 0.4229066564  0.1523959029  0.1447034905  0.1418189535  0.2054557935 
+      HG00375       HG00376       HG00377       HG00378       HG00379 
+ 0.2154854809  0.2086601474  0.0176986446 -0.0067997861 -0.0936541408 
+      HG00380       HG00381       HG00382       HG00383       HG00384 
+ 0.1618025165 -0.0620831741  0.1808162918 -0.0754383990  0.1712204361 
+      HG01334       HG01789       HG01790       HG01791       HG02215 
+ 0.2371644047  0.2205273733 -0.0317625586  0.1659344913  0.1844196764 
+      NA06984       NA06985       NA06986       NA06989       NA06994 
+ 0.3829286470  0.1911063914  0.2581204718  0.1997793769 -0.0700888989 
+      NA07037       NA07048       NA07051       NA07056       NA07357 
+ 0.2422466525  0.1940650163  0.2470599474  0.1751349915 -0.0841713187 
+      NA10847       NA10851       NA11829       NA11830       NA11831 
+ 0.1734326340  0.2233413739 -0.0127608325 -0.1571690158 -0.0673231464 
+      NA11832       NA11840       NA11843       NA11881       NA11892 
+ 0.0988928279  0.3508169779 -0.1552002321 -0.0572666095  0.0141932232 
+      NA11893       NA11894       NA11918       NA11920       NA11930 
+ 0.4229034505  0.2894349789 -0.2109463874  0.1438631538  0.1582098045 
+      NA11931       NA11992       NA11995       NA12004       NA12005 
+ 0.2581650087  0.2909587568  0.0389908639  0.2095790074 -0.0506598583 
+      NA12006       NA12043       NA12044       NA12045       NA12058 
+ 0.1473868205  0.0604646101 -0.0031792056  0.3103164364  0.3035323382 
+      NA12144       NA12154       NA12155       NA12156       NA12234 
+ 0.1952067343  0.1186927759  0.3225602935 -0.0563251456 -0.0827496917 
+      NA12249       NA12272       NA12273       NA12275       NA12282 
+ 0.1736739358  0.2193207079 11.1776924118  0.2117227914 -0.0610877914 
+      NA12283       NA12286       NA12287       NA12340       NA12341 
+ 0.0682505023  0.3088733316  0.1714313899  0.2304067657 -0.0677877731 
+      NA12342       NA12347       NA12348       NA12383       NA12399 
+ 0.1894298092  0.1967591279  0.2064755275 -0.0085364950  0.2264074953 
+      NA12400       NA12413       NA12489       NA12546       NA12716 
+-0.0519769008  0.2065139535  0.1513953252  0.2833053201  0.3217564651 
+      NA12717       NA12718       NA12749       NA12750       NA12751 
+-0.1213818102  0.0293505201  0.2628422351 -0.0724038728  0.2288315776 
+      NA12760       NA12761       NA12762       NA12763       NA12775 
+ 0.2046050428  0.2172193813  0.1739687170  0.2909881065  0.1810319686 
+      NA12776       NA12777       NA12778       NA12812       NA12813 
+ 0.2319671196  0.2009272939  0.1897670700  0.1363320509  0.1638580768 
+      NA12814       NA12815       NA12827       NA12829       NA12830 
+ 0.2271001523  0.2276152283  0.1516896724  0.0987660186  0.3566606210 
+      NA12842       NA12843       NA12872       NA12873       NA12874 
+ 0.2433593147 -0.0262925918  0.2086697992  0.2028102181 -0.0842060500 
+      NA12889       NA12890       NA18486       NA18488       NA18489 
+ 0.1231052754 -0.0343210241 -0.1886487965 -0.0393158273 -0.1749215441 
+      NA18499       NA18502       NA18510       NA18511       NA18517 
+-0.0486446106 -0.3100271984 -0.3594929925 -0.3110394114 -0.2219428138 
+      NA18519       NA18520       NA18858       NA18861       NA18867 
+-0.3227919925 -0.3766036762 -0.3270755316 -0.2170516217 -0.3458465844 
+      NA18868       NA18907       NA18908       NA18909       NA18910 
+-0.2175211952  0.1497197202 -0.1920450480 -0.2846910179 -0.3158716663 
+      NA18912       NA18916       NA18917       NA18923       NA18933 
+-0.0374984290 -0.0111592707 -0.1517693793 -0.2700198422 -0.2769615572 
+      NA18934       NA19092       NA19093       NA19095       NA19096 
+ 0.0187780190 -0.0584283464 -0.2850127242 -0.2722401477 -0.2390154542 
+      NA19098       NA19099       NA19102       NA19107       NA19108 
+-0.2839092310 -0.2758142152 -0.3400617393 -0.3029230199 -0.3284466477 
+      NA19113       NA19114       NA19116       NA19117       NA19118 
+-0.1639871560 -0.2556407015  0.0615160329  0.1324080985 -0.2362956750 
+      NA19119       NA19121       NA19129       NA19130       NA19131 
+-0.2998258056 -0.1617143928 -0.2009475602 -0.1686647431  0.2469425061 
+      NA19137       NA19138       NA19141       NA19143       NA19144 
+-0.3009571133 -0.0896757342 -0.1973716566  0.3992278247 -0.3461029498 
+      NA19146       NA19147       NA19149       NA19152       NA19159 
+-0.3237166105 -0.1373709811 -0.1506402198 -0.1990903038 -0.3401558483 
+      NA19160       NA19171       NA19172       NA19175       NA19184 
+ 0.0099791978 -0.3279676016 -0.2809061007 -0.2799843763 -0.2146838726 
+      NA19185       NA19189       NA19190       NA19197       NA19198 
+-0.2082170296  0.0229903670  0.1202725301 -0.2725100932 -0.1787960625 
+      NA19200       NA19201       NA19204       NA19206       NA19207 
+-0.1273976168 -0.2256051838 -0.3358222482  0.0271511392 -0.2301780407 
+      NA19209       NA19210       NA19213       NA19214       NA19222 
+-0.0880518686 -0.2568070772 -0.4252887846 -0.2839201339  0.0122230503 
+      NA19223       NA19225       NA19235       NA19236       NA19247 
+-0.1501686929 -0.1806127044  0.0085954105 -0.3459011774 -0.0219065426 
+      NA19248       NA19256       NA19257       NA20502       NA20503 
+-0.3629904887  0.1127819191 -0.2131088776 -0.0109339658  0.2182055546 
+      NA20504       NA20505       NA20506       NA20507       NA20508 
+ 0.1825774828  0.2883665430 -0.0849449637  0.0158026041  0.2195117832 
+      NA20509       NA20510       NA20512       NA20513       NA20514 
+ 0.0982216226  0.1940566455  0.2131884229  0.1355584028 -0.0005715766 
+      NA20515       NA20516       NA20517       NA20518       NA20519 
+ 0.3272154224  0.0967896083  0.2991786527  0.1380582527 -0.0409845225 
+      NA20520       NA20521       NA20524       NA20525       NA20527 
+ 0.2495312522  0.2743855810  0.4124386953  0.2011851333 -0.0372681850 
+      NA20528       NA20529       NA20530       NA20531       NA20532 
+ 0.2028233522  0.0164674772  0.1881849961  0.2002307573  0.0842665303 
+      NA20534       NA20535       NA20536       NA20537       NA20538 
+ 0.2308355638  0.2160087996 -0.0249642446  0.0461070521 -0.1600927950 
+      NA20539       NA20540       NA20541       NA20542       NA20543 
+ 0.0212543750 -0.1291135474 -0.0747015105  0.2432408468  0.3010962429 
+      NA20544       NA20581       NA20582       NA20585       NA20586 
+ 0.0944518606  0.2927711374  0.2806560678  0.1766029243  0.1527573440 
+      NA20588       NA20589       NA20752       NA20754       NA20756 
+ 0.0793631915  0.0998151194 -0.0651030629  0.2383750373  0.2870186682 
+      NA20757       NA20758       NA20759       NA20760       NA20761 
+ 0.2309814218  0.1524726293 -0.0559386386  0.1752681892  0.2442855628 
+      NA20765       NA20766       NA20768       NA20769       NA20770 
+-0.0424310498 -0.0395875246  0.2182184610 -0.0228363836  0.2251328944 
+      NA20771       NA20772       NA20773       NA20774       NA20778 
+ 0.2239600871  0.0233394041  0.1495600670  0.0722998448 -0.1900139918 
+      NA20783       NA20785       NA20786       NA20787       NA20790 
+-0.0445612514  0.1329250761  0.0501805723 -0.1199795896  0.1838643223 
+      NA20792       NA20795       NA20796       NA20797       NA20798 
+ 0.2143449950 -0.0101320238  0.1471533335  0.1165487708  0.0427004679 
+      NA20799       NA20800       NA20801       NA20802       NA20803 
+ 0.2375919471  0.0132482104  0.2482383778  0.1174085869  0.2421124361 
+      NA20804       NA20805       NA20806       NA20807       NA20808 
+-0.2791623495 -0.0398579159  0.4691795163  0.0418063990 -0.0755354261 
+      NA20809       NA20810       NA20811       NA20812       NA20813 
+ 0.3023214441  0.1827149731  0.1702566281  0.0841263256  0.1552879801 
+      NA20814       NA20815       NA20816       NA20819       NA20826 
+-0.1595174615  0.0167263301  0.1362271525  0.1039902015  0.2918193646 
+      NA20828 
+ 0.0157381600 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>nested_f_test_pvals <span class="ot">&lt;-</span> <span class="fu">c</span>(nested_f_test_pvals,o[<span class="dv">1</span>])</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>f_test_pvals <span class="ot">&lt;-</span> <span class="fu">c</span>(f_test_pvals,o[<span class="dv">2</span>])</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>genes_run <span class="ot">&lt;-</span> <span class="fu">c</span>(genes_run, gene_list[i])</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>inds_per_test <span class="ot">&lt;-</span> <span class="fu">c</span>(inds_per_test, <span class="fu">nrow</span>(cur_df))</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>r2_additive <span class="ot">&lt;-</span> <span class="fu">c</span>(r2_additive,o[<span class="dv">3</span>])</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>r_additive <span class="ot">&lt;-</span> <span class="fu">c</span>(r_additive,o[<span class="dv">4</span>])</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>r_raw <span class="ot">&lt;-</span> <span class="fu">c</span>(r_raw,<span class="fu">cor</span>(cur_df<span class="sc">$</span>gt,cur_df<span class="sc">$</span>both))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>enformer_ind_exp <span class="ot">&lt;-</span> haplo1_geu <span class="sc">+</span> haplo2_geu</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>individual_metadata_sub <span class="ot">&lt;-</span> individual_metadata[<span class="fu">rownames</span>(individual_metadata) <span class="sc">%in%</span> <span class="fu">colnames</span>(geuvadis_enf),]</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(individual_metadata_sub<span class="sc">$</span><span class="st">`</span><span class="at">Superpopulation code</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+AFR EUR 
+ 81 365 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">=</span> <span class="fu">as.numeric</span>(haplo1_geu[<span class="st">"ENSG00000119888"</span>,])</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>h2 <span class="ot">=</span> <span class="fu">as.numeric</span>(haplo2_geu[<span class="st">"ENSG00000119888"</span>,])</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>EPCAM_expression_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">individuals=</span><span class="fu">colnames</span>(geuvadis_enf), <span class="at">geuvadis=</span><span class="fu">as.numeric</span>(geuvadis_enf[<span class="st">"ENSG00000119888"</span>,]),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">enformer=</span><span class="fu">as.numeric</span>(enformer_ind_exp[<span class="st">"ENSG00000119888"</span>,]), <span class="at">haplo1=</span>h1,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">haplo2=</span>h2,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">population =</span> <span class="fu">as.character</span>(individual_metadata_sub[<span class="fu">colnames</span>(geuvadis_enf),<span class="st">"Superpopulation code"</span>]),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">sum =</span> h1<span class="sc">+</span>h2,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">model_sum =</span> <span class="fu">as.numeric</span>(o[[<span class="dv">4</span>]]),</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">interaction_weights_sum =</span> <span class="fu">as.numeric</span>(o[[<span class="dv">5</span>]]))</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>ge <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis,<span class="at">y=</span>enformer, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>()</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>ggExtra<span class="sc">::</span><span class="fu">ggMarginal</span>(ge, <span class="at">groupFill =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>EPCAM_expression_df_no_outlier <span class="ot">&lt;-</span> EPCAM_expression_df[<span class="sc">!</span>EPCAM_expression_df<span class="sc">$</span>individuals <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"HG00122"</span>,<span class="st">"NA12273"</span>),]</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>ge_no <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df_no_outlier, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis,<span class="at">y=</span>enformer, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>()</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>ggExtra<span class="sc">::</span><span class="fu">ggMarginal</span>(ge_no, <span class="at">groupFill =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>ge_h1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis,<span class="at">y=</span>haplo1, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>()</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>ggExtra<span class="sc">::</span><span class="fu">ggMarginal</span>(ge_h1, <span class="at">groupFill =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>ge_h2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis,<span class="at">y=</span>haplo2, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>()</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>ggExtra<span class="sc">::</span><span class="fu">ggMarginal</span>(ge_h2, <span class="at">groupFill =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>ge_no_h1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df_no_outlier, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis,<span class="at">y=</span>haplo1, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>()</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>ggExtra<span class="sc">::</span><span class="fu">ggMarginal</span>(ge_no_h1, <span class="at">groupFill =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>ge_no_h2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df_no_outlier, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis,<span class="at">y=</span>haplo2, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>()</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>ggExtra<span class="sc">::</span><span class="fu">ggMarginal</span>(ge_no_h2, <span class="at">groupFill =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ge_no_sum <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df_no_outlier, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis,<span class="at">y=</span>sum, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"geuvadis expression"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"summed haplotype expression prediction"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>ge_no_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>ge_no_sum_model <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df_no_outlier, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis,<span class="at">y=</span>model_sum, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"geuvadis expression"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"summed haplotype expression prediction"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>ge_no_sum_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ge_no_sum_with_interact <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df_no_outlier, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis, <span class="at">y=</span>interaction_weights_sum, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"geuvadis expression"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"interaction model prediction"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>ge_no_sum_with_interact</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ge_sum <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis,<span class="at">y=</span>sum, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>()</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>ge_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/unnamed-chunk-11-4.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ge_sum_with_interact <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis, <span class="at">y=</span>interaction_weights_sum, <span class="at">label=</span>individuals, <span class="at">col=</span>population)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_text_repel</span>()</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>ge_sum_with_interact</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/unnamed-chunk-11-5.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cor_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"geuvadis"</span>,<span class="st">"sum"</span>,<span class="st">"model_sum"</span>,<span class="st">"interaction_weights_sum"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(EPCAM_expression_df[,cor_cols])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         geuvadis       sum model_sum interaction_weights_sum
+geuvadis                1.0000000 0.9349116 0.9422852               0.9623133
+sum                     0.9349116 1.0000000 0.9921747               0.9715252
+model_sum               0.9422852 0.9921747 1.0000000               0.9791876
+interaction_weights_sum 0.9623133 0.9715252 0.9791876               1.0000000</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>EPCAM_expression_df_no_outlier_flat <span class="ot">=</span> <span class="fu">melt</span>(EPCAM_expression_df_no_outlier, <span class="at">measure.vars=</span><span class="fu">c</span>(<span class="st">"haplo1"</span>,<span class="st">"haplo2"</span>))</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>ge_no_both_haplo <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(EPCAM_expression_df_no_outlier_flat, <span class="fu">aes</span>(<span class="at">x=</span>geuvadis,<span class="at">y=</span>value, <span class="at">shape=</span>variable)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span>individuals), <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">55</span>,<span class="dv">63</span>)) </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>ge_no_both_haplo </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>ggExtra<span class="sc">::</span><span class="fu">ggMarginal</span>(ge_no_both_haplo, <span class="at">groupFill =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="enformer_epistasis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Some takeaways:</p>
+<ul>
+<li>Two individuals, HG00122 and NA12273, are clear outliers in their expression as predicted by Enformer and as measured in Geuvadis</li>
+<li>Their expression differential appears to be driven by a single haplotype rather than consistent differences in both.</li>
+<li>There is a definite difference in predictions between ancestry groups, likely driven by differences in population structure</li>
+</ul>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

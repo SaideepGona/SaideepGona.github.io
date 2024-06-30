@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saideep Gona">
+<meta name="dcterms.date" content="2024-06-03">
+<meta name="description" content="This notebook creates inputs for Enformer after creating sets of fine-tuned variants from a GWAS">
+
+<title>Daily-Blog-Sai - enformer_peak_linearization</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daily-Blog-Sai</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a>
+  <ul class="collapse">
+  <li><a href="#collect-predictions-together" id="toc-collect-predictions-together" class="nav-link" data-scroll-target="#collect-predictions-together">Collect predictions together</a></li>
+  <li><a href="#xwas" id="toc-xwas" class="nav-link" data-scroll-target="#xwas">XWAS</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">enformer_peak_linearization</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+<div>
+  <div class="description">
+    This notebook creates inputs for Enformer after creating sets of fine-tuned variants from a GWAS
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saideep Gona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 3, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="context" class="level1">
+<h1>Context</h1>
+<p>Having fine-mapped some GWAS variants, we can make predictions at those loci with Enformer utilizing different personalized context. We can then make Con-EnPACT predictions at those loci and linearize against those.</p>
+<p>Notes:</p>
+<p>GEUVADIS individuals</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os,sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>proj_dir <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/SPrediXcan/sumstats_formatted/asthma_eczema_farreira_susie/enformer_preds"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>optimal_window_sizes <span class="op">=</span> {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27ac"</span>:<span class="dv">8</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K27me3"</span>:<span class="dv">64</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me1"</span>:<span class="dv">32</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H3K4me3"</span>:<span class="dv">8</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ATAC"</span>:<span class="dv">8</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>path_to_fine_mapped_variants <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/SPrediXcan/sumstats_formatted/asthma_eczema_farreira_susie/all_SNPs_susie_filt.txt"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fine_mapped_variants <span class="op">=</span> pd.read_csv(path_to_fine_mapped_variants, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>fine_mapped_variants</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">variable</th>
+<th data-quarto-table-cell-role="th">variable_prob</th>
+<th data-quarto-table-cell-role="th">cs</th>
+<th data-quarto-table-cell-role="th">SNP</th>
+<th data-quarto-table-cell-role="th">PIP</th>
+<th data-quarto-table-cell-role="th">ldBlock</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>389</td>
+<td>0.938377</td>
+<td>3</td>
+<td>1_151829204_G_A</td>
+<td>0.938377</td>
+<td>chr1_151566405_153208353</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>989</td>
+<td>0.907326</td>
+<td>1</td>
+<td>1_152206676_C_T</td>
+<td>0.907326</td>
+<td>chr1_151566405_153208353</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1283</td>
+<td>0.523677</td>
+<td>2</td>
+<td>1_152347096_T_C</td>
+<td>0.523677</td>
+<td>chr1_151566405_153208353</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4956</td>
+<td>0.981685</td>
+<td>2</td>
+<td>1_172746562_A_G</td>
+<td>0.981685</td>
+<td>chr1_170588635_173128768</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>4934</td>
+<td>0.777214</td>
+<td>1</td>
+<td>1_172731728_G_A</td>
+<td>0.777214</td>
+<td>chr1_170588635_173128768</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">60</td>
+<td>2559</td>
+<td>0.646169</td>
+<td>1</td>
+<td>19_33230549_C_T</td>
+<td>0.646169</td>
+<td>chr19_32255614_33772047</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">61</td>
+<td>7373</td>
+<td>0.813736</td>
+<td>1</td>
+<td>20_53568405_C_T</td>
+<td>0.813736</td>
+<td>chr20_50623121_53856010</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">62</td>
+<td>7507</td>
+<td>0.798462</td>
+<td>4</td>
+<td>20_53642336_C_T</td>
+<td>0.798462</td>
+<td>chr20_50623121_53856010</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">63</td>
+<td>2329</td>
+<td>0.636770</td>
+<td>-1</td>
+<td>20_51647549_T_C</td>
+<td>0.636770</td>
+<td>chr20_50623121_53856010</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">64</td>
+<td>2015</td>
+<td>0.606744</td>
+<td>2</td>
+<td>20_51524945_C_T</td>
+<td>0.606744</td>
+<td>chr20_50623121_53856010</td>
+</tr>
+</tbody>
+</table>
+
+<p>65 rows × 6 columns</p>
+</div>
+</div>
+</div>
+<p>Make interval lists</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>regions <span class="op">=</span> []</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>chroms_for_annotation <span class="op">=</span> []</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>starts <span class="op">=</span> []</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ends <span class="op">=</span> []</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(os.path.join(proj_dir, <span class="st">"interval_list.txt"</span>), <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> variant <span class="kw">in</span> fine_mapped_variants[<span class="st">"SNP"</span>]:</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        spl_var <span class="op">=</span> variant.split(<span class="st">"_"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        chroms_for_annotation.append(spl_var[<span class="dv">0</span>])</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(variant)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        chrom <span class="op">=</span> <span class="st">"chr"</span><span class="op">+</span>spl_var[<span class="dv">0</span>]</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        pos <span class="op">=</span> <span class="bu">int</span>(spl_var[<span class="dv">1</span>])</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        pos_offset <span class="op">=</span> pos <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        starts.append(<span class="bu">str</span>(pos))</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        ends.append(<span class="bu">str</span>(pos_offset))</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f"</span><span class="sc">{</span>chrom<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>pos<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>pos_offset<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        regions.append(<span class="ss">f"</span><span class="sc">{</span>chrom<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>pos<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>pos_offset<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1_151829204_G_A
+1_152206676_C_T
+1_152347096_T_C
+1_172746562_A_G
+1_172731728_G_A
+1_173177782_C_A
+1_226721532_A_G
+2_8302118_G_A
+2_101962555_G_T
+3_72345701_T_C
+3_188069858_A_G
+4_38797027_C_A
+4_38906484_A_G
+5_111066174_T_C
+5_111134439_C_A
+5_132637224_A_G
+6_31427086_T_G
+6_31383887_G_A
+6_31361729_T_C
+6_30845798_G_T
+6_31354911_T_C
+6_31432959_C_T
+6_32644302_T_C
+6_32616043_G_T
+6_32658626_A_G
+6_32709636_A_G
+6_32633491_T_C
+6_32401711_G_A
+6_32623421_C_T
+6_32669436_A_G
+6_32742619_G_A
+6_32719304_A_G
+6_33007604_A_G
+6_32755888_C_T
+6_33679281_T_C
+7_20521373_T_C
+8_127801845_A_G
+9_6213468_C_T
+9_6532544_G_A
+9_5064193_T_C
+9_6588227_C_T
+9_128850912_G_A
+10_9007290_C_T
+10_8993291_T_C
+10_8894199_C_T
+10_8808772_C_T
+11_36306032_T_G
+11_65784486_A_G
+11_76628620_C_T
+11_76588387_G_A
+11_76582714_G_A
+11_118872577_G_A
+12_57095926_T_C
+15_70271918_T_C
+16_11135271_G_T
+16_27360218_C_T
+17_1492388_C_T
+17_40549851_C_T
+17_39635234_A_C
+17_40740968_C_T
+19_33230549_C_T
+20_53568405_C_T
+20_53642336_C_T
+20_51647549_T_C
+20_51524945_C_T</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>path_to_gene_annotation <span class="op">=</span> os.path.join(proj_dir, <span class="st">"peak_annotation.txt"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>gene_annotation_dict <span class="op">=</span> {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"chr"</span>:chroms_for_annotation,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gene_id"</span>:regions,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gene_name"</span>:regions,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"start"</span>: starts,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"end"</span>: ends</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>gene_annotation_table <span class="op">=</span> pd.DataFrame(gene_annotation_dict)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>gene_annotation_table[<span class="st">"gene_type"</span>] <span class="op">=</span> <span class="st">"protein_coding"</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>gene_annotation_table.to_csv(path_to_gene_annotation, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>NameError: name 'chroms_for_annotation' is not defined</code></pre>
+</div>
+</div>
+<p>We can now make the linearization enformer config</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>path_to_config_template <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/enformer_predictions/aracena_preds/aracena_pred.json"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(path_to_config_template, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    config <span class="op">=</span> json.load(f)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>config[<span class="st">"interval_list_file"</span>] <span class="op">=</span> os.path.join(proj_dir, <span class="st">"interval_list.txt"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>config[<span class="st">"bins_to_save"</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>config[<span class="st">"project_dir"</span>] <span class="op">=</span> proj_dir</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(os.path.join(proj_dir, <span class="st">"config.json"</span>), <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    json.dump(config, f, indent<span class="op">=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="collect-predictions-together" class="level3">
+<h3 class="anchored" data-anchor-id="collect-predictions-together">Collect predictions together</h3>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>path_to_predictions <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/SPrediXcan/sumstats_formatted/asthma_eczema_farreira_susie/enformer_preds/predictions_folder/enformer_aracena_preds_genes/predictions_06-03-2024/enformer_predictions"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>collected_preds_dir <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/SPrediXcan/sumstats_formatted/asthma_eczema_farreira_susie/enformer_preds/collected_preds"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>path_to_inds_file <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/enformer_all_geuvadis/inputs/all_inds.txt"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>inds_pred <span class="op">=</span> []</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(path_to_inds_file, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        inds_pred.append(line.strip())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5py</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ind <span class="kw">in</span> inds_pred:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(ind)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if already complete</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    all_exist <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> window_size <span class="kw">in</span> [<span class="dv">8</span>,<span class="dv">32</span>,<span class="dv">64</span>]:</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> os.path.exists(os.path.join(collected_preds_dir, ind<span class="op">+</span><span class="st">"_"</span><span class="op">+</span><span class="bu">str</span>(window_size)<span class="op">+</span><span class="st">".txt"</span>)):</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>            all_exist <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> all_exist:</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"all exist for "</span>, ind)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.exists(os.path.join(collected_preds_dir, ind<span class="op">+</span><span class="st">"_haplo1.txt"</span>)):</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> os.path.exists(os.path.join(collected_preds_dir, ind<span class="op">+</span><span class="st">"_haplo2.txt"</span>)):</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    predictions_dicts <span class="op">=</span> {}</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> window_size <span class="kw">in</span> [<span class="dv">8</span>,<span class="dv">32</span>,<span class="dv">64</span>]:</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        predictions_dicts[window_size] <span class="op">=</span> {}</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> region <span class="kw">in</span> regions:</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        pred_file_h1 <span class="op">=</span> os.path.join(path_to_predictions,ind,<span class="st">"haplotype1"</span>,region<span class="op">+</span><span class="st">"_predictions.h5"</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        pred_file_h2 <span class="op">=</span> os.path.join(path_to_predictions,ind,<span class="st">"haplotype2"</span>,region<span class="op">+</span><span class="st">"_predictions.h5"</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (os.path.exists(pred_file_h1) <span class="kw">and</span> os.path.exists(pred_file_h2)):</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"missing"</span>,pred_file_h1,pred_file_h2)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> h5py.File(pred_file_h1,<span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>            pred_h1 <span class="op">=</span> f[region][:]</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> h5py.File(pred_file_h2,<span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>            pred_h2 <span class="op">=</span> f[region][:]</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        mean_pred <span class="op">=</span> (pred_h1 <span class="op">+</span> pred_h2)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> window_size <span class="kw">in</span> [<span class="dv">8</span>,<span class="dv">32</span>,<span class="dv">64</span>]:</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>            center_bin <span class="op">=</span> mean_pred.shape[<span class="dv">0</span>]<span class="op">//</span><span class="dv">2</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>            left_bin <span class="op">=</span> center_bin <span class="op">-</span> window_size<span class="op">//</span><span class="dv">2</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>            right_bin <span class="op">=</span> center_bin <span class="op">+</span> window_size<span class="op">//</span><span class="dv">2</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print(mean_pred.shape)</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>            center_mean <span class="op">=</span> mean_pred[left_bin:right_bin,]</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>            predictions_dicts[window_size][ind<span class="op">+</span><span class="st">"."</span><span class="op">+</span>region] <span class="op">=</span> center_mean.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> window_size <span class="kw">in</span> [<span class="dv">8</span>,<span class="dv">32</span>,<span class="dv">64</span>]:</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="bu">len</span>(predictions_dicts[window_size].keys()))</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>        predictions_dict <span class="op">=</span> pd.DataFrame(predictions_dicts[window_size]).T</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(predictions_dict.shape)</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>        predictions_dict.to_csv(os.path.join(collected_preds_dir, ind<span class="op">+</span><span class="st">"_"</span><span class="op">+</span><span class="bu">str</span>(window_size)<span class="op">+</span><span class="st">".txt"</span>),sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>    <span class="co"># predictions_dict = pd.DataFrame(predictions_dict_haplo1).T</span></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(predictions_dict.shape)</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># predictions_dict.to_csv(os.path.join(collected_preds_dir, ind+"_haplo1.txt"),sep="\t")</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># predictions_dict = pd.DataFrame(predictions_dict_haplo2).T</span></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># predictions_dict.to_csv(os.path.join(collected_preds_dir, ind+"_haplo2.txt"),sep="\t")</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>HG00096
+all exist for  HG00096
+HG00097
+all exist for  HG00097
+HG00099
+all exist for  HG00099
+HG00100
+all exist for  HG00100
+HG00101
+all exist for  HG00101
+HG00102
+all exist for  HG00102
+HG00103
+all exist for  HG00103
+HG00104
+all exist for  HG00104
+HG00105
+all exist for  HG00105
+HG00106
+all exist for  HG00106
+HG00108
+all exist for  HG00108
+HG00109
+all exist for  HG00109
+HG00110
+all exist for  HG00110
+HG00111
+all exist for  HG00111
+HG00112
+all exist for  HG00112
+HG00114
+all exist for  HG00114
+HG00115
+all exist for  HG00115
+HG00116
+all exist for  HG00116
+HG00117
+all exist for  HG00117
+HG00118
+all exist for  HG00118
+HG00119
+all exist for  HG00119
+HG00120
+all exist for  HG00120
+HG00121
+all exist for  HG00121
+HG00122
+all exist for  HG00122
+HG00123
+all exist for  HG00123
+HG00124
+all exist for  HG00124
+HG00125
+all exist for  HG00125
+HG00126
+all exist for  HG00126
+HG00127
+all exist for  HG00127
+HG00128
+all exist for  HG00128
+HG00129
+all exist for  HG00129
+HG00130
+all exist for  HG00130
+HG00131
+all exist for  HG00131
+HG00132
+all exist for  HG00132
+HG00133
+all exist for  HG00133
+HG00134
+all exist for  HG00134
+HG00135
+all exist for  HG00135
+HG00136
+all exist for  HG00136
+HG00137
+all exist for  HG00137
+HG00138
+all exist for  HG00138
+HG00139
+all exist for  HG00139
+HG00141
+all exist for  HG00141
+HG00142
+all exist for  HG00142
+HG00143
+all exist for  HG00143
+HG00145
+all exist for  HG00145
+HG00146
+all exist for  HG00146
+HG00148
+all exist for  HG00148
+HG00149
+all exist for  HG00149
+HG00150
+all exist for  HG00150
+HG00151
+all exist for  HG00151
+HG00152
+all exist for  HG00152
+HG00154
+all exist for  HG00154
+HG00155
+all exist for  HG00155
+HG00156
+all exist for  HG00156
+HG00157
+all exist for  HG00157
+HG00158
+all exist for  HG00158
+HG00159
+all exist for  HG00159
+HG00160
+all exist for  HG00160
+HG00171
+all exist for  HG00171
+HG00173
+all exist for  HG00173
+HG00174
+all exist for  HG00174
+HG00176
+all exist for  HG00176
+HG00177
+all exist for  HG00177
+HG00178
+all exist for  HG00178
+HG00179
+all exist for  HG00179
+HG00180
+all exist for  HG00180
+HG00181
+all exist for  HG00181
+HG00182
+all exist for  HG00182
+HG00183
+all exist for  HG00183
+HG00185
+all exist for  HG00185
+HG00186
+all exist for  HG00186
+HG00187
+all exist for  HG00187
+HG00188
+all exist for  HG00188
+HG00189
+all exist for  HG00189
+HG00231
+all exist for  HG00231
+HG00232
+all exist for  HG00232
+HG00233
+all exist for  HG00233
+HG00234
+all exist for  HG00234
+HG00235
+all exist for  HG00235
+HG00236
+all exist for  HG00236
+HG00238
+all exist for  HG00238
+HG00239
+all exist for  HG00239
+HG00240
+all exist for  HG00240
+HG00242
+all exist for  HG00242
+HG00243
+all exist for  HG00243
+HG00244
+all exist for  HG00244
+HG00245
+all exist for  HG00245
+HG00246
+all exist for  HG00246
+HG00247
+all exist for  HG00247
+HG00249
+all exist for  HG00249
+HG00250
+all exist for  HG00250
+HG00251
+all exist for  HG00251
+HG00252
+all exist for  HG00252
+HG00253
+all exist for  HG00253
+HG00255
+all exist for  HG00255
+HG00256
+all exist for  HG00256
+HG00257
+all exist for  HG00257
+HG00258
+all exist for  HG00258
+HG00259
+all exist for  HG00259
+HG00260
+all exist for  HG00260
+HG00261
+all exist for  HG00261
+HG00262
+all exist for  HG00262
+HG00263
+all exist for  HG00263
+HG00264
+all exist for  HG00264
+HG00265
+all exist for  HG00265
+HG00266
+all exist for  HG00266
+HG00267
+all exist for  HG00267
+HG00268
+all exist for  HG00268
+HG00269
+all exist for  HG00269
+HG00271
+all exist for  HG00271
+HG00272
+all exist for  HG00272
+HG00273
+all exist for  HG00273
+HG00274
+all exist for  HG00274
+HG00275
+all exist for  HG00275
+HG00276
+all exist for  HG00276
+HG00277
+all exist for  HG00277
+HG00278
+all exist for  HG00278
+HG00280
+all exist for  HG00280
+HG00281
+all exist for  HG00281
+HG00282
+all exist for  HG00282
+HG00284
+all exist for  HG00284
+HG00285
+all exist for  HG00285
+HG00306
+all exist for  HG00306
+HG00308
+all exist for  HG00308
+HG00309
+all exist for  HG00309
+HG00310
+all exist for  HG00310
+HG00311
+all exist for  HG00311
+HG00312
+all exist for  HG00312
+HG00313
+all exist for  HG00313
+HG00315
+all exist for  HG00315
+HG00319
+all exist for  HG00319
+HG00320
+all exist for  HG00320
+HG00321
+all exist for  HG00321
+HG00323
+all exist for  HG00323
+HG00324
+all exist for  HG00324
+HG00325
+all exist for  HG00325
+HG00326
+all exist for  HG00326
+HG00327
+all exist for  HG00327
+HG00328
+all exist for  HG00328
+HG00329
+all exist for  HG00329
+HG00330
+all exist for  HG00330
+HG00331
+all exist for  HG00331
+HG00332
+all exist for  HG00332
+HG00334
+all exist for  HG00334
+HG00335
+all exist for  HG00335
+HG00336
+all exist for  HG00336
+HG00337
+all exist for  HG00337
+HG00338
+all exist for  HG00338
+HG00339
+all exist for  HG00339
+HG00341
+all exist for  HG00341
+HG00342
+all exist for  HG00342
+HG00343
+all exist for  HG00343
+HG00344
+all exist for  HG00344
+HG00345
+all exist for  HG00345
+HG00346
+all exist for  HG00346
+HG00349
+all exist for  HG00349
+HG00350
+all exist for  HG00350
+HG00351
+all exist for  HG00351
+HG00353
+all exist for  HG00353
+HG00355
+all exist for  HG00355
+HG00356
+all exist for  HG00356
+HG00358
+all exist for  HG00358
+HG00359
+all exist for  HG00359
+HG00360
+all exist for  HG00360
+HG00361
+all exist for  HG00361
+HG00362
+all exist for  HG00362
+HG00364
+all exist for  HG00364
+HG00365
+all exist for  HG00365
+HG00366
+all exist for  HG00366
+HG00367
+all exist for  HG00367
+HG00369
+all exist for  HG00369
+HG00371
+all exist for  HG00371
+HG00372
+all exist for  HG00372
+HG00373
+all exist for  HG00373
+HG00375
+all exist for  HG00375
+HG00376
+all exist for  HG00376
+HG00377
+all exist for  HG00377
+HG00378
+all exist for  HG00378
+HG00379
+all exist for  HG00379
+HG00380
+all exist for  HG00380
+HG00381
+all exist for  HG00381
+HG00382
+all exist for  HG00382
+HG00383
+all exist for  HG00383
+HG00384
+all exist for  HG00384
+HG01334
+all exist for  HG01334
+HG01789
+all exist for  HG01789
+HG01790
+all exist for  HG01790
+HG01791
+all exist for  HG01791
+HG02215
+all exist for  HG02215
+NA06984
+all exist for  NA06984
+NA06985
+all exist for  NA06985
+NA06986
+all exist for  NA06986
+NA06989
+all exist for  NA06989
+NA06994
+all exist for  NA06994
+NA07037
+all exist for  NA07037
+NA07048
+all exist for  NA07048
+NA07051
+all exist for  NA07051
+NA07056
+all exist for  NA07056
+NA07346
+all exist for  NA07346
+NA07347
+all exist for  NA07347
+NA07357
+all exist for  NA07357
+NA10847
+all exist for  NA10847
+NA10851
+all exist for  NA10851
+NA11829
+all exist for  NA11829
+NA11830
+all exist for  NA11830
+NA11831
+all exist for  NA11831
+NA11832
+all exist for  NA11832
+NA11840
+all exist for  NA11840
+NA11843
+all exist for  NA11843
+NA11881
+all exist for  NA11881
+NA11892
+all exist for  NA11892
+NA11893
+all exist for  NA11893
+NA11894
+all exist for  NA11894
+NA11918
+all exist for  NA11918
+NA11920
+all exist for  NA11920
+NA11930
+all exist for  NA11930
+NA11931
+all exist for  NA11931
+NA11992
+all exist for  NA11992
+NA11993
+all exist for  NA11993
+NA11994
+all exist for  NA11994
+NA11995
+all exist for  NA11995
+NA12004
+all exist for  NA12004
+NA12005
+all exist for  NA12005
+NA12006
+all exist for  NA12006
+NA12043
+all exist for  NA12043
+NA12044
+all exist for  NA12044
+NA12045
+all exist for  NA12045
+NA12058
+all exist for  NA12058
+NA12144
+all exist for  NA12144
+NA12154
+all exist for  NA12154
+NA12155
+all exist for  NA12155
+NA12156
+all exist for  NA12156
+NA12234
+all exist for  NA12234
+NA12249
+all exist for  NA12249
+NA12272
+all exist for  NA12272
+NA12273
+all exist for  NA12273
+NA12275
+all exist for  NA12275
+NA12282
+all exist for  NA12282
+NA12283
+all exist for  NA12283
+NA12286
+all exist for  NA12286
+NA12287
+all exist for  NA12287
+NA12340
+all exist for  NA12340
+NA12341
+all exist for  NA12341
+NA12342
+all exist for  NA12342
+NA12347
+all exist for  NA12347
+NA12348
+all exist for  NA12348
+NA12383
+all exist for  NA12383
+NA12399
+all exist for  NA12399
+NA12400
+all exist for  NA12400
+NA12413
+all exist for  NA12413
+NA12489
+all exist for  NA12489
+NA12546
+all exist for  NA12546
+NA12716
+all exist for  NA12716
+NA12717
+all exist for  NA12717
+NA12718
+all exist for  NA12718
+NA12749
+all exist for  NA12749
+NA12750
+all exist for  NA12750
+NA12751
+all exist for  NA12751
+NA12760
+all exist for  NA12760
+NA12761
+all exist for  NA12761
+NA12762
+all exist for  NA12762
+NA12763
+all exist for  NA12763
+NA12775
+all exist for  NA12775
+NA12776
+all exist for  NA12776
+NA12777
+all exist for  NA12777
+NA12778
+all exist for  NA12778
+NA12812
+all exist for  NA12812
+NA12813
+all exist for  NA12813
+NA12814
+all exist for  NA12814
+NA12815
+all exist for  NA12815
+NA12827
+all exist for  NA12827
+NA12829
+all exist for  NA12829
+NA12830
+all exist for  NA12830
+NA12842
+all exist for  NA12842
+NA12843
+all exist for  NA12843
+NA12872
+all exist for  NA12872
+NA12873
+all exist for  NA12873
+NA12874
+all exist for  NA12874
+NA12889
+all exist for  NA12889
+NA12890
+all exist for  NA12890
+NA18486
+all exist for  NA18486
+NA18487
+all exist for  NA18487
+NA18488
+all exist for  NA18488
+NA18489
+all exist for  NA18489
+NA18498
+all exist for  NA18498
+NA18499
+all exist for  NA18499
+NA18502
+all exist for  NA18502
+NA18505
+all exist for  NA18505
+NA18508
+all exist for  NA18508
+NA18510
+all exist for  NA18510
+NA18511
+all exist for  NA18511
+NA18517
+all exist for  NA18517
+NA18519
+all exist for  NA18519
+NA18520
+all exist for  NA18520
+NA18858
+all exist for  NA18858
+NA18861
+all exist for  NA18861
+NA18867
+all exist for  NA18867
+NA18868
+all exist for  NA18868
+NA18870
+all exist for  NA18870
+NA18873
+all exist for  NA18873
+NA18907
+all exist for  NA18907
+NA18908
+all exist for  NA18908
+NA18909
+all exist for  NA18909
+NA18910
+all exist for  NA18910
+NA18912
+all exist for  NA18912
+NA18916
+all exist for  NA18916
+NA18917
+all exist for  NA18917
+NA18923
+all exist for  NA18923
+NA18933
+all exist for  NA18933
+NA18934
+all exist for  NA18934
+NA19092
+all exist for  NA19092
+NA19093
+all exist for  NA19093
+NA19095
+all exist for  NA19095
+NA19096
+all exist for  NA19096
+NA19098
+all exist for  NA19098
+NA19099
+all exist for  NA19099
+NA19102
+all exist for  NA19102
+NA19107
+all exist for  NA19107
+NA19108
+all exist for  NA19108
+NA19113
+all exist for  NA19113
+NA19114
+all exist for  NA19114
+NA19116
+all exist for  NA19116
+NA19117
+all exist for  NA19117
+NA19118
+all exist for  NA19118
+NA19119
+all exist for  NA19119
+NA19121
+all exist for  NA19121
+NA19129
+all exist for  NA19129
+NA19130
+all exist for  NA19130
+NA19131
+all exist for  NA19131
+NA19137
+all exist for  NA19137
+NA19138
+all exist for  NA19138
+NA19141
+all exist for  NA19141
+NA19143
+all exist for  NA19143
+NA19144
+all exist for  NA19144
+NA19146
+all exist for  NA19146
+NA19147
+all exist for  NA19147
+NA19149
+all exist for  NA19149
+NA19150
+all exist for  NA19150
+NA19152
+all exist for  NA19152
+NA19153
+all exist for  NA19153
+NA19159
+all exist for  NA19159
+NA19160
+all exist for  NA19160
+NA19171
+all exist for  NA19171
+NA19172
+all exist for  NA19172
+NA19175
+all exist for  NA19175
+NA19184
+all exist for  NA19184
+NA19185
+all exist for  NA19185
+NA19189
+all exist for  NA19189
+NA19190
+all exist for  NA19190
+NA19197
+all exist for  NA19197
+NA19198
+all exist for  NA19198
+NA19200
+all exist for  NA19200
+NA19201
+all exist for  NA19201
+NA19204
+all exist for  NA19204
+NA19206
+all exist for  NA19206
+NA19207
+all exist for  NA19207
+NA19209
+all exist for  NA19209
+NA19210
+all exist for  NA19210
+NA19213
+all exist for  NA19213
+NA19214
+all exist for  NA19214
+NA19222
+all exist for  NA19222
+NA19223
+all exist for  NA19223
+NA19225
+all exist for  NA19225
+NA19235
+all exist for  NA19235
+NA19236
+all exist for  NA19236
+NA19247
+all exist for  NA19247
+NA19248
+all exist for  NA19248
+NA19256
+all exist for  NA19256
+NA19257
+all exist for  NA19257
+NA20502
+all exist for  NA20502
+NA20503
+all exist for  NA20503
+NA20504
+all exist for  NA20504
+NA20505
+all exist for  NA20505
+NA20506
+all exist for  NA20506
+NA20507
+all exist for  NA20507
+NA20508
+all exist for  NA20508
+NA20509
+all exist for  NA20509
+NA20510
+all exist for  NA20510
+NA20512
+all exist for  NA20512
+NA20513
+all exist for  NA20513
+NA20514
+all exist for  NA20514
+NA20515
+all exist for  NA20515
+NA20516
+all exist for  NA20516
+NA20517
+all exist for  NA20517
+NA20518
+all exist for  NA20518
+NA20519
+all exist for  NA20519
+NA20520
+all exist for  NA20520
+NA20521
+all exist for  NA20521
+NA20524
+all exist for  NA20524
+NA20525
+all exist for  NA20525
+NA20527
+all exist for  NA20527
+NA20528
+all exist for  NA20528
+NA20529
+all exist for  NA20529
+NA20530
+all exist for  NA20530
+NA20531
+all exist for  NA20531
+NA20532
+all exist for  NA20532
+NA20534
+all exist for  NA20534
+NA20535
+all exist for  NA20535
+NA20536
+all exist for  NA20536
+NA20537
+all exist for  NA20537
+NA20538
+all exist for  NA20538
+NA20539
+all exist for  NA20539
+NA20540
+all exist for  NA20540
+NA20541
+all exist for  NA20541
+NA20542
+all exist for  NA20542
+NA20543
+all exist for  NA20543
+NA20544
+all exist for  NA20544
+NA20581
+all exist for  NA20581
+NA20582
+all exist for  NA20582
+NA20585
+all exist for  NA20585
+NA20586
+all exist for  NA20586
+NA20588
+all exist for  NA20588
+NA20589
+all exist for  NA20589
+NA20752
+all exist for  NA20752
+NA20754
+all exist for  NA20754
+NA20756
+all exist for  NA20756
+NA20757
+all exist for  NA20757
+NA20758
+all exist for  NA20758
+NA20759
+all exist for  NA20759
+NA20760
+all exist for  NA20760
+NA20761
+all exist for  NA20761
+NA20765
+all exist for  NA20765
+NA20766
+all exist for  NA20766
+NA20768
+all exist for  NA20768
+NA20769
+all exist for  NA20769
+NA20770
+all exist for  NA20770
+NA20771
+all exist for  NA20771
+NA20772
+all exist for  NA20772
+NA20773
+all exist for  NA20773
+NA20774
+all exist for  NA20774
+NA20778
+all exist for  NA20778
+NA20783
+all exist for  NA20783
+NA20785
+all exist for  NA20785
+NA20786
+all exist for  NA20786
+NA20787
+all exist for  NA20787
+NA20790
+all exist for  NA20790
+NA20792
+all exist for  NA20792
+NA20795
+all exist for  NA20795
+NA20796
+all exist for  NA20796
+NA20797
+all exist for  NA20797
+NA20798
+all exist for  NA20798
+NA20799
+all exist for  NA20799
+NA20800
+all exist for  NA20800
+NA20801
+all exist for  NA20801
+NA20802
+all exist for  NA20802
+NA20803
+all exist for  NA20803
+NA20804
+all exist for  NA20804
+NA20805
+all exist for  NA20805
+NA20806
+all exist for  NA20806
+NA20807
+all exist for  NA20807
+NA20808
+all exist for  NA20808
+NA20809
+all exist for  NA20809
+NA20810
+all exist for  NA20810
+NA20811
+all exist for  NA20811
+NA20812
+all exist for  NA20812
+NA20813
+all exist for  NA20813
+NA20814
+all exist for  NA20814
+NA20815
+all exist for  NA20815
+NA20816
+all exist for  NA20816
+NA20819
+all exist for  NA20819
+NA20826
+all exist for  NA20826
+NA20828
+all exist for  NA20828</code></pre>
+</div>
+</div>
+<p>we can now collect the predictions together and start linearizing</p>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>enpact_preds_linear_dir <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/SPrediXcan/sumstats_formatted/asthma_eczema_farreira_susie/enformer_preds/enpact_linear_preds"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>enpact_preds_linear_dir <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/projects/aracena_modeling/SPrediXcan/sumstats_formatted/asthma_eczema_farreira_susie/enformer_preds/enpact_linear_preds"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> modality <span class="kw">in</span> optimal_window_sizes.keys():</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cond <span class="kw">in</span> [<span class="st">"Flu"</span>,<span class="st">"NI"</span>]:</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        ind_table <span class="op">=</span> {}</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> ind <span class="kw">in</span> inds_pred:</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> os.path.exists(os.path.join(enpact_preds_linear_dir,<span class="ss">f"</span><span class="sc">{</span>ind<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">.txt"</span>)):</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                cur_table <span class="op">=</span> pd.read_csv(os.path.join(enpact_preds_linear_dir,<span class="ss">f"</span><span class="sc">{</span>ind<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">.txt"</span>),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                                        sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, skiprows<span class="op">=</span><span class="dv">2</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                ind_table[ind] <span class="op">=</span> cur_table[<span class="dv">1</span>]</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(modality, cond)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        ind_df <span class="op">=</span> pd.DataFrame(ind_table)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        ind_df.index <span class="op">=</span> [x.split(<span class="st">"."</span>)[<span class="dv">1</span>] <span class="cf">for</span> x <span class="kw">in</span> cur_table[<span class="dv">0</span>]]</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        ind_df.to_csv(os.path.join(enpact_preds_linear_dir, <span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">_combined_predictions.txt"</span>), sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, index<span class="op">=</span><span class="va">True</span>, index_label<span class="op">=</span><span class="st">"NAME"</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>                <span class="co"># ind_table[ind] = cur_table[]</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>            <span class="co"># else:</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>            <span class="co">#     print(os.path.join(enpact_preds_linear_dir,f"{ind}_{modality}_{cond}.txt"))</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co"># paste_com = [</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     "paste",</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="co">#     "-d'\t'"</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="co"># ]</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="co"># for modality in optimal_window_sizes.keys():</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="co">#     for cond in ["Flu","NI"]:</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co">#         inds_include = []</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="co">#         for ind in inds_pred:</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="co">#             if os.path.exists(os.path.join(enpact_preds_linear_dir,f"{ind}_{modality}_{cond}.txt")):</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="co">#                 paste_com.append(os.path.join(enpact_preds_linear_dir,f"{ind}_{modality}_{cond}.txt"))</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="co">#                 inds_include.append(ind)</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="co">#             # else:</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="co">#             #     print(os.path.join(enpact_preds_linear_dir,f"{ind}_{modality}_{cond}.txt"))</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="co">#         paste_com.append("|")</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="co">#         paste_com.append("tail")</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="co">#         paste_com.append("-n")</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="co">#         paste_com.append("+2")</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="co">#         paste_com.append("&gt;")</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="co">#         paste_com.append(os.path.join(enpact_preds_linear_dir, f"{modality}_{cond}_combined_predictions.txt"))</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="co">#         print(" ".join(paste_com))</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>        <span class="co"># os.system(" ".join(paste_com))</span></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>H3K27ac Flu
+H3K27ac NI
+H3K27me3 Flu
+H3K27me3 NI
+H3K4me1 Flu
+H3K4me1 NI
+H3K4me3 Flu
+H3K4me3 NI
+ATAC Flu
+ATAC NI</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># combined_expression_table = pd.read_csv(os.path.join(intermediates_dir, "enpact_personalized_predictions_combined.txt"), delimiter="\t", header=None)</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># combined_expression_table.columns = inds_include</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>predictDB_template <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/Con-EnPACT/scripts/run_predictDB.sbatch"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>predictDB_repo <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/forked_PredictDB-nextflow/PredictDb-nextflow"</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>snp_annotation <span class="op">=</span> <span class="st">"/beagle3/haky/users/charles/project/singleXcanDL/PredicDB/T2D_all_DL_PredictDb/meta_data/all_chrs.snp_annot_v1.txt"</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>genotype_file <span class="op">=</span> <span class="st">"/beagle3/haky/users/charles/project/singleXcanDL/PredicDB/T2D_all_DL_PredictDb/meta_data/all_chrs.geno_v1.txt"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pre_check_path <span class="op">=</span> <span class="st">"/beagle3/haky/users/saideep/github_repos/forked_PredictDB-nextflow/PredictDb-nextflow/bin/pre_flight_checks.R"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>modality<span class="op">=</span><span class="st">"ATAC"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>cond<span class="op">=</span><span class="st">"Flu"</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">" "</span>.join([</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rscript"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    pre_check_path,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"--snp_annotation"</span>, snp_annotation,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"--genotype_file"</span>, genotype_file,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"--gene_annotation"</span>, path_to_gene_annotation,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"--gene_expression"</span>, os.path.join(enpact_preds_linear_dir, <span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">_combined_predictions.txt"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rscript /beagle3/haky/users/saideep/github_repos/forked_PredictDB-nextflow/PredictDb-nextflow/bin/pre_flight_checks.R --snp_annotation /beagle3/haky/users/charles/project/singleXcanDL/PredicDB/T2D_all_DL_PredictDb/meta_data/all_chrs.snp_annot_v1.txt --genotype_file /beagle3/haky/users/charles/project/singleXcanDL/PredicDB/T2D_all_DL_PredictDb/meta_data/all_chrs.geno_v1.txt --gene_annotation /beagle3/haky/users/saideep/projects/aracena_modeling/SPrediXcan/sumstats_formatted/asthma_eczema_farreira_susie/enformer_preds/peak_annotation.txt --gene_expression /beagle3/haky/users/saideep/projects/aracena_modeling/SPrediXcan/sumstats_formatted/asthma_eczema_farreira_susie/enformer_preds/enpact_linear_preds/ATAC_Flu_combined_predictions.txt</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> modality <span class="kw">in</span> optimal_window_sizes.keys():</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cond <span class="kw">in</span> [<span class="st">"Flu"</span>,<span class="st">"NI"</span>]:</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        predictDB_dir <span class="op">=</span> os.path.join(proj_dir,<span class="st">"predictDB"</span>,<span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        os.makedirs(predictDB_dir, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(os.path.join(predictDB_template), <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>            predictDB_script <span class="op">=</span> f.read()</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>            predictDB_script <span class="op">=</span> predictDB_script.replace(<span class="st">"JOBNAME"</span>, <span class="st">"EnPACT_Linearization"</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>            predictDB_script <span class="op">=</span> predictDB_script.replace(<span class="st">"PREDICTDB_REPO"</span>, predictDB_repo)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            predictDB_script <span class="op">=</span> predictDB_script.replace(<span class="st">"EXPRESSION"</span>, os.path.join(enpact_preds_linear_dir, <span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">_combined_predictions.txt"</span>))</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>            predictDB_script <span class="op">=</span> predictDB_script.replace(<span class="st">"OUTPUT_DIR"</span>, predictDB_dir)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>            predictDB_script <span class="op">=</span> predictDB_script.replace(<span class="st">"GENE_ANNOTATION"</span>, path_to_gene_annotation)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>            predictDB_script <span class="op">=</span> predictDB_script.replace(<span class="st">"SNP_ANNOTATION"</span>, snp_annotation)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>            predictDB_script <span class="op">=</span> predictDB_script.replace(<span class="st">"GENOTYPE"</span>, genotype_file)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>            predictDB_script <span class="op">=</span> predictDB_script.replace(<span class="st">"NFOLDS"</span>, <span class="st">"10"</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(os.path.join(predictDB_dir,<span class="st">"run_predictDB.sbatch"</span>), <span class="st">"w"</span>) <span class="im">as</span> rp:</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>                rp.write(predictDB_script)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>            subprocess.run([<span class="st">"sbatch"</span>, os.path.join(predictDB_dir,<span class="st">"run_predictDB.sbatch"</span>)], cwd <span class="op">=</span> predictDB_dir)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Submitted batch job 20877105
+Submitted batch job 20877106
+Submitted batch job 20877107
+Submitted batch job 20877108
+Submitted batch job 20877109
+Submitted batch job 20877110
+Submitted batch job 20877111
+Submitted batch job 20877112
+Submitted batch job 20877113
+Submitted batch job 20877114</code></pre>
+</div>
+</div>
+</section>
+<section id="xwas" class="level3">
+<h3 class="anchored" data-anchor-id="xwas">XWAS</h3>
+<p>Finally, having run the linearization, we can now run XWAS to get the final predictions</p>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> modality <span class="kw">in</span> optimal_window_sizes.keys():</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cond <span class="kw">in</span> [<span class="st">"Flu"</span>,<span class="st">"NI"</span>]:</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        job_name <span class="op">=</span> <span class="ss">f"EnPACT_Linearization_</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        model_db_path <span class="op">=</span> os.path.join(proj_dir,<span class="st">"predictDB"</span>,<span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">"</span>, <span class="st">"filtered_db"</span>, <span class="st">"predict_db_Model_training_filtered.db"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        cov_path <span class="op">=</span> os.path.join(proj_dir,<span class="st">"predictDB"</span>,<span class="ss">f"</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">"</span>, <span class="st">"filtered_db"</span>, <span class="st">"predict_db_Model_training_filtered.txt.gz"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        output_path <span class="op">=</span> os.path.join(proj_dir,<span class="st">"spredixcan"</span>,<span class="ss">f"spredixcan_results_</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">.txt"</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>        spredixcan_script <span class="op">=</span> <span class="ss">f'''#!/bin/bash</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="ss">#SBATCH --job-name=SPrediXcan_</span><span class="sc">{</span>job_name<span class="sc">}</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="ss">#SBATCH --account=pi-haky</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="ss">#SBATCH --partition=caslake</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="ss">#SBATCH --nodes=1</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="ss">#SBATCH --cpus-per-task=24</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="ss">#SBATCH --time=06:00:00</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="ss">#SBATCH --mem=52G</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="ss">#SBATCH --error=slurm-%A_%a.err</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="ss">conda activate /beagle3/haky/users/saideep/envs/enformer</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="ss">/beagle3/haky/users/saideep/github_repos/MetaXcan/software/SPrediXcan.py </span><span class="ch">\</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="ss">--model_db_path </span><span class="sc">{</span>model_db_path<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="ss">--covariance </span><span class="sc">{</span>cov_path<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="ss">--gwas_file /beagle3/haky/users/saideep/projects/aracena_modeling/SPrediXcan/sumstats_formatted/Asthma_eczema_farreira_FORMATTED.txt.chromb38 </span><span class="ch">\</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="ss">--model_db_snp_key varID </span><span class="ch">\</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="ss">--snp_column panel_variant_id </span><span class="ch">\</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="ss">--effect_allele_column effect_allele </span><span class="ch">\</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="ss">--non_effect_allele_column non_effect_allele </span><span class="ch">\</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="ss">--beta_column effect_size </span><span class="ch">\</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="ss">--pvalue_column pvalue </span><span class="ch">\</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="ss">--keep_non_rsid </span><span class="ch">\</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="ss">--output_file </span><span class="sc">{</span>output_path<span class="sc">}</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="ss">        '''</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(os.path.join(proj_dir,<span class="st">"spredixcan"</span>,<span class="ss">f"spredixcan_</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">.sbatch"</span>), <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>            f.write(spredixcan_script)</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>        subprocess.run([<span class="st">"sbatch"</span>, os.path.join(proj_dir,<span class="st">"spredixcan"</span>,<span class="ss">f"spredixcan_</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">.sbatch"</span>)], cwd <span class="op">=</span> os.path.join(proj_dir,<span class="st">"spredixcan"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Submitted batch job 20878939
+Submitted batch job 20878940
+Submitted batch job 20878941
+Submitted batch job 20878942
+Submitted batch job 20878943
+Submitted batch job 20878944
+Submitted batch job 20878945
+Submitted batch job 20878946
+Submitted batch job 20878947
+Submitted batch job 20878948</code></pre>
+</div>
+</div>
+<p>Now we have the XWAS results! We can collect them into a singular table now.</p>
+<div class="cell" data-execution_count="20">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>results_tables <span class="op">=</span> []</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> modality <span class="kw">in</span> optimal_window_sizes.keys():</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cond <span class="kw">in</span> [<span class="st">"Flu"</span>,<span class="st">"NI"</span>]:</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        path_to_results <span class="op">=</span> os.path.join(proj_dir,<span class="st">"spredixcan"</span>,<span class="ss">f"spredixcan_results_</span><span class="sc">{</span>modality<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>cond<span class="sc">}</span><span class="ss">.txt"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        results <span class="op">=</span> pd.read_csv(path_to_results, sep<span class="op">=</span><span class="st">","</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        results[<span class="st">"modality"</span>] <span class="op">=</span> modality</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        results[<span class="st">"condition"</span>] <span class="op">=</span> cond</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        header<span class="op">=</span>results.iloc[<span class="dv">0</span>]</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(results.head())</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        results_tables.append(results)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>results_table_full <span class="op">=</span> pd.concat(results_tables)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results_table_full.shape)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>results_table_full.to_csv(os.path.join(proj_dir,<span class="st">"spredixcan"</span>,<span class="st">"spredixcan_results_full.txt"</span>), sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       gene                 gene_name    zscore  effect_size  \
+0    chr6_32633491_32633493    chr6_32633491_32633493  9.547982     0.328423   
+1   chr11_76582714_76582716   chr11_76582714_76582716 -9.299150    -1.705122   
+2      chr2_8302118_8302120      chr2_8302118_8302120 -9.154066    -2.186974   
+3  chr5_111066174_111066176  chr5_111066174_111066176 -8.733922    -2.850392   
+4   chr16_11135271_11135273   chr16_11135271_11135273 -8.143531    -2.094074   
+
+         pvalue     var_g  pred_perf_r2  pred_perf_pval  pred_perf_qval  \
+0  1.322473e-21  0.019164      0.909489    0.000000e+00             NaN   
+1  1.415723e-20  0.000524      0.799633   1.155488e-195             NaN   
+2  5.482984e-20  0.000303      0.939929    0.000000e+00             NaN   
+3  2.459898e-18  0.000175      0.808673   9.366178e-205             NaN   
+4  3.839157e-16  0.000245      0.894833   7.096157e-307             NaN   
+
+   n_snps_used  n_snps_in_cov  n_snps_in_model modality condition  
+0           91            129              129  H3K27ac       Flu  
+1          236            282              282  H3K27ac       Flu  
+2          137            175              175  H3K27ac       Flu  
+3          113            138              138  H3K27ac       Flu  
+4          215            267              267  H3K27ac       Flu  
+                       gene                 gene_name     zscore  effect_size  \
+0    chr4_38797027_38797029    chr4_38797027_38797029 -11.171582    -1.659374   
+1   chr16_11135271_11135273   chr16_11135271_11135273 -10.635322    -2.474143   
+2    chr6_32633491_32633493    chr6_32633491_32633493  10.121508     0.402041   
+3  chr5_111134439_111134441  chr5_111134439_111134441   9.431472     2.982706   
+4    chr4_38906484_38906486    chr4_38906484_38906486   8.924140     3.889340   
+
+         pvalue     var_g  pred_perf_r2  pred_perf_pval  pred_perf_qval  \
+0  5.617130e-29  0.001132      0.923508    0.000000e+00             NaN   
+1  2.041223e-26  0.000307      0.941674    0.000000e+00             NaN   
+2  4.435293e-24  0.014704      0.907585    0.000000e+00             NaN   
+3  4.043731e-21  0.000188      0.920107    0.000000e+00             NaN   
+4  4.491741e-19  0.000130      0.603079   4.749972e-114             NaN   
+
+   n_snps_used  n_snps_in_cov  n_snps_in_model modality condition  
+0          126            167              167  H3K27ac        NI  
+1          170            199              199  H3K27ac        NI  
+2           56             90               90  H3K27ac        NI  
+3          146            181              181  H3K27ac        NI  
+4          154            201              201  H3K27ac        NI  
+                       gene                 gene_name     zscore  effect_size  \
+0   chr11_76588387_76588389   chr11_76588387_76588389 -12.358268    -3.311811   
+1    chr4_38797027_38797029    chr4_38797027_38797029   8.718000     0.683150   
+2  chr5_111066174_111066176  chr5_111066174_111066176  -8.522314    -2.328081   
+3  chr5_111134439_111134441  chr5_111134439_111134441  -8.515787    -1.976937   
+4   chr11_76628620_76628622   chr11_76628620_76628622  -8.085678    -1.862680   
+
+         pvalue     var_g  pred_perf_r2  pred_perf_pval  pred_perf_qval  \
+0  4.395250e-35  0.000253      0.895698    0.000000e+00             NaN   
+1  2.831588e-18  0.001655      0.849409   1.669071e-237             NaN   
+2  1.563968e-17  0.000224      0.838334   8.159932e-234             NaN   
+3  1.654622e-17  0.000320      0.895191    0.000000e+00             NaN   
+4  6.181913e-16  0.000352      0.845098   1.023845e-246             NaN   
+
+   n_snps_used  n_snps_in_cov  n_snps_in_model  modality condition  
+0          152            186              186  H3K27me3       Flu  
+1          159            213              213  H3K27me3       Flu  
+2          124            149              149  H3K27me3       Flu  
+3          123            167              167  H3K27me3       Flu  
+4           92            113              113  H3K27me3       Flu  
+                       gene                 gene_name     zscore  effect_size  \
+0   chr11_76588387_76588389   chr11_76588387_76588389 -11.716066    -3.125000   
+1  chr5_111134439_111134441  chr5_111134439_111134441  -8.685853    -2.066755   
+2   chr11_76628620_76628622   chr11_76628620_76628622  -8.469822    -1.868597   
+3    chr6_32633491_32633493    chr6_32633491_32633493  -8.382416    -0.203040   
+4   chr16_11135271_11135273   chr16_11135271_11135273   8.266658     1.335046   
+
+         pvalue     var_g  pred_perf_r2  pred_perf_pval  pred_perf_qval  \
+0  1.054562e-31  0.000252      0.905802    0.000000e+00             NaN   
+1  3.759114e-18  0.000302      0.890662   5.614408e-303             NaN   
+2  2.457692e-17  0.000381      0.867941   3.583789e-271             NaN   
+3  5.185241e-17  0.041321      0.904682    0.000000e+00             NaN   
+4  1.377668e-16  0.000627      0.954031    0.000000e+00             NaN   
+
+   n_snps_used  n_snps_in_cov  n_snps_in_model  modality condition  
+0          152            197              197  H3K27me3        NI  
+1          118            165              165  H3K27me3        NI  
+2          208            253              253  H3K27me3        NI  
+3           99            137              137  H3K27me3        NI  
+4          108            125              125  H3K27me3        NI  
+                      gene                gene_name    zscore  effect_size  \
+0   chr6_32644302_32644304   chr6_32644302_32644304 -9.271755    -0.887774   
+1   chr4_38797027_38797029   chr4_38797027_38797029 -8.981647    -0.819981   
+2     chr2_8302118_8302120     chr2_8302118_8302120 -8.177436    -0.657194   
+3     chr9_6213468_6213470     chr9_6213468_6213470 -7.576102    -1.791899   
+4  chr11_76582714_76582716  chr11_76582714_76582716 -7.047422    -1.075773   
+
+         pvalue     var_g  pred_perf_r2  pred_perf_pval  pred_perf_qval  \
+0  1.831085e-20  0.002952      0.809229   7.246220e-210             NaN   
+1  2.667429e-19  0.003083      0.871703   1.384399e-265             NaN   
+2  2.899463e-16  0.002660      0.956907    0.000000e+00             NaN   
+3  3.560931e-14  0.000306      0.888655   1.387084e-291             NaN   
+4  1.822631e-12  0.000782      0.743594   3.000845e-171             NaN   
+
+   n_snps_used  n_snps_in_cov  n_snps_in_model modality condition  
+0           44             70               70  H3K4me1       Flu  
+1          104            139              139  H3K4me1       Flu  
+2          125            159              159  H3K4me1       Flu  
+3          124            154              154  H3K4me1       Flu  
+4          232            277              277  H3K4me1       Flu  
+                      gene                gene_name     zscore  effect_size  \
+0   chr4_38797027_38797029   chr4_38797027_38797029 -10.698585    -0.816747   
+1   chr6_32644302_32644304   chr6_32644302_32644304  -9.198776    -0.907013   
+2   chr4_38906484_38906486   chr4_38906484_38906486   8.424720     3.308340   
+3     chr2_8302118_8302120     chr2_8302118_8302120  -8.290471    -0.651513   
+4  chr20_53568405_53568407  chr20_53568405_53568407   7.928505     3.577987   
+
+         pvalue     var_g  pred_perf_r2  pred_perf_pval  pred_perf_qval  \
+0  1.033439e-26  0.003927      0.916797    0.000000e+00             NaN   
+1  3.620493e-20  0.002710      0.796436   5.728714e-195             NaN   
+2  3.616147e-17  0.000156      0.774963   3.011172e-187             NaN   
+3  1.128005e-16  0.002786      0.956841    0.000000e+00             NaN   
+4  2.217998e-15  0.000086      0.895434    0.000000e+00             NaN   
+
+   n_snps_used  n_snps_in_cov  n_snps_in_model modality condition  
+0          126            169              169  H3K4me1        NI  
+1           43             63               63  H3K4me1        NI  
+2          190            252              252  H3K4me1        NI  
+3          121            163              163  H3K4me1        NI  
+4          131            146              146  H3K4me1        NI  
+                       gene                 gene_name     zscore  effect_size  \
+0   chr11_76588387_76588389   chr11_76588387_76588389 -14.149766    -2.477659   
+1   chr11_76582714_76582716   chr11_76582714_76582716 -13.763971    -3.409770   
+2   chr16_11135271_11135273   chr16_11135271_11135273 -10.354444    -2.121070   
+3      chr2_8302118_8302120      chr2_8302118_8302120 -10.055464    -2.416658   
+4  chr5_132637224_132637226  chr5_132637224_132637226  -7.430645    -8.819775   
+
+         pvalue     var_g  pred_perf_r2  pred_perf_pval  pred_perf_qval  \
+0  1.873788e-45  0.000575      0.935108    0.000000e+00             NaN   
+1  4.198175e-43  0.000299      0.859549   1.067125e-252             NaN   
+2  3.994999e-25  0.000371      0.901121    0.000000e+00             NaN   
+3  8.691102e-24  0.000299      0.880640   4.862282e-289             NaN   
+4  1.080698e-13  0.000013      0.420446    1.527513e-58             NaN   
+
+   n_snps_used  n_snps_in_cov  n_snps_in_model modality condition  
+0          149            176              176  H3K4me3       Flu  
+1          194            228              228  H3K4me3       Flu  
+2          198            246              246  H3K4me3       Flu  
+3           70             89               89  H3K4me3       Flu  
+4           81             98               98  H3K4me3       Flu  
+                       gene                 gene_name     zscore  effect_size  \
+0  chr5_111134439_111134441  chr5_111134439_111134441  11.161489     3.803763   
+1   chr16_11135271_11135273   chr16_11135271_11135273 -10.369018    -1.951014   
+2      chr2_8302118_8302120      chr2_8302118_8302120 -10.130860    -1.829771   
+3  chr5_111066174_111066176  chr5_111066174_111066176   9.712393     1.819449   
+4   chr11_76582714_76582716   chr11_76582714_76582716  -7.326456    -2.826627   
+
+         pvalue     var_g  pred_perf_r2  pred_perf_pval  pred_perf_qval  \
+0  6.292868e-29  0.000156      0.909274    0.000000e+00             NaN   
+1  3.430315e-25  0.000446      0.947267    0.000000e+00             NaN   
+2  4.030882e-24  0.000520      0.937519    0.000000e+00             NaN   
+3  2.669939e-22  0.000560      0.852033   3.472546e-255             NaN   
+4  2.363188e-13  0.000120      0.753139   4.409897e-165             NaN   
+
+   n_snps_used  n_snps_in_cov  n_snps_in_model modality condition  
+0           96            148              148  H3K4me3        NI  
+1          147            170              170  H3K4me3        NI  
+2          137            174              174  H3K4me3        NI  
+3          114            150              150  H3K4me3        NI  
+4          240            288              288  H3K4me3        NI  
+                       gene                 gene_name     zscore  effect_size  \
+0   chr11_76582714_76582716   chr11_76582714_76582716 -13.489373    -3.295994   
+1  chr5_111134439_111134441  chr5_111134439_111134441  10.204171     3.818776   
+2   chr16_11135271_11135273   chr16_11135271_11135273 -10.143527    -2.384734   
+3    chr6_32633491_32633493    chr6_32633491_32633493  -9.805530    -0.334582   
+4      chr9_6213468_6213470      chr9_6213468_6213470  -8.918155    -1.410380   
+
+         pvalue     var_g  pred_perf_r2  pred_perf_pval  pred_perf_qval  \
+0  1.806291e-41  0.000306      0.871800   4.608740e-273             NaN   
+1  1.899357e-24  0.000124      0.898641    0.000000e+00             NaN   
+2  3.540785e-24  0.000297      0.964486    0.000000e+00             NaN   
+3  1.065860e-22  0.021027      0.846749   2.442459e-242             NaN   
+4  4.741197e-19  0.000682      0.926805    0.000000e+00             NaN   
+
+   n_snps_used  n_snps_in_cov  n_snps_in_model modality condition  
+0          171            206              206     ATAC       Flu  
+1           98            126              126     ATAC       Flu  
+2          147            170              170     ATAC       Flu  
+3           68            102              102     ATAC       Flu  
+4          143            175              175     ATAC       Flu  
+                       gene                 gene_name     zscore  effect_size  \
+0  chr5_111134439_111134441  chr5_111134439_111134441  12.496988     5.461482   
+1    chr4_38797027_38797029    chr4_38797027_38797029 -11.784354    -1.361173   
+2    chr6_32644302_32644304    chr6_32644302_32644304 -10.990890    -1.689367   
+3   chr16_11135271_11135273   chr16_11135271_11135273 -10.655064    -1.685421   
+4   chr11_76588387_76588389   chr11_76588387_76588389  10.425832     3.058947   
+
+         pvalue     var_g  pred_perf_r2  pred_perf_pval  pred_perf_qval  \
+0  7.753331e-36  0.000095      0.942002    0.000000e+00             NaN   
+1  4.700087e-32  0.001944      0.859229   1.795906e-253             NaN   
+2  4.227356e-28  0.001096      0.760080   7.252959e-173             NaN   
+3  1.651306e-26  0.000656      0.973919    0.000000e+00             NaN   
+4  1.889973e-25  0.000206      0.825668   1.321652e-216             NaN   
+
+   n_snps_used  n_snps_in_cov  n_snps_in_model modality condition  
+0          124            157              157     ATAC        NI  
+1           88            115              115     ATAC        NI  
+2           32             53               53     ATAC        NI  
+3           84             95               95     ATAC        NI  
+4          189            244              244     ATAC        NI  
+(650, 14)</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
