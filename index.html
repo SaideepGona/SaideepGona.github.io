@@ -31,7 +31,7 @@ https://www.tooplate.com/view/2120-ben-resume
         <div class="container">
 
             <a class="navbar-brand" href="#">
-                Sai's Website
+                Saideep Gona
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,13 +41,10 @@ https://www.tooplate.com/view/2120-ben-resume
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="#intro" class="nav-link smoothScroll">Introduction</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="#about" class="nav-link smoothScroll">About Me</a>
                     </li>
                     <li class="nav-item">
-                      <a href="#skills" class="nav-link smoothScroll">Skills</a>
+                      <a href="#miniblog" class="nav-link smoothScroll">Mini-blog</a>
                     </li>
                     <li class="nav-item">
                       <a href="#skills" class="nav-link smoothScroll">Skills</a>
@@ -163,7 +160,7 @@ https://www.tooplate.com/view/2120-ben-resume
 
     <!-- Micro-blog -->
 
-    <section class="testimonials section-padding" id="microblog">
+    <section class="testimonials section-padding" id="miniblog">
       <div class="container">
         <h2 class="mb-5">What have I been up to lately?</h3>
         <div id="accordion">
@@ -178,7 +175,7 @@ https://www.tooplate.com/view/2120-ben-resume
               </h5>
             </div>
         
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
                 <p>One of the events associated with my Genetic Mechanism and Evolution training grant is an annual hackathon.
                   As the training grant supports students with varying levels of computational experience, one of the aims is to improve
@@ -246,7 +243,7 @@ https://www.tooplate.com/view/2120-ben-resume
               </h5>
             </div>
         
-            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
                 <p>Argonne Leadership Computing Facility (ALCF) hosts regular workshops and trainings to improve AI researcher's capacity
                   to adopt AI into their work and make use of their vast supercompute resources. I attended the AI for Science Training Series,
@@ -257,15 +254,28 @@ https://www.tooplate.com/view/2120-ben-resume
                   I do have a pretty solid machine learning/AI background, but I still found the series very useful. For one, ALCF has one of the most
                   powerful GPU clusters in the world. Even though we have been able to utilize these resources ourselves to perform inference and training,
                   there is still a great deal we don't know about this infrastructure. For example, ALCF also experiments with AI testbeds housing 
-                  up-and-coming specialized hardware resources. Some of these hardware like groq-chips, could proliferate due to their efficient 
-                  inference potential relative to standard NVIDIA A100 gpus. 
+                  up-and-coming specialized hardware resources. Some of these hardware, like groq-chips, could proliferate due to their efficient 
+                  inference potential relative to standard NVIDIA A100 gpus. It was cool to get some exposure to these technologies.
                 </p>
                 <p>
                   Another nice benefit of this series was that it gave me a chance to revisit the mathematics of transformers, specifically self-attention.
                   I've been pretty busy so I never really had a chance to sit down and properly derive the math at the core of the hubub surrounding 
-                  LLMs. What helped me is to just think of attention as analogous to other neural network layers, such as fully connected layers which map
-                  inputs to outputs via linear transformations with added weights. From that perspective, self-attention is just a different way of performing
-                  such transformations which has a number of desirable properties over other layers for language-based tasks. I made a little diagram/explainer 
+                  LLMs. During my Master's coursework at CMU it was the standard to build every neural network architecture from scratch which, at the time,
+                  where primarily:
+
+                  <ol>
+                    <li>Fully connected layers</li>
+                    <li>Convolutional filters</li>
+                    <li>Recurrent neural nets</li>
+                  </ol>
+
+                  It therefore bothered me that I didn't really have the "best" intuitive understanding of self-attention.
+                </p>
+                <p>
+                  Fortunately, self-attention isn't as complicated as it seems. What helped me is to just think of attention as analogous to other neural network
+                  layers, such as those mentioned above. In essence, they all operate as functions which map inputs to outputs via linear transformations with added 
+                  weights. From that perspective, self-attention is just a different way of performing such transformations. What it does have is a number of 
+                  desirable properties over other architectures for language-based tasks. I made a little diagram/explainer 
                   <a href="https://drive.google.com/file/d/1pFi4Nw7OgvUJJtTfypotlZLNq6Yhdiag/view?usp=sharing" target="_blank" rel="noopener noreferrer">here!</a>
                 </p>
                 <p>
@@ -275,44 +285,128 @@ https://www.tooplate.com/view/2120-ben-resume
             </div>
           </div>
 
-          <!-- <div class="card row">
+          <div class="card row">
             <div class="card-header" id="headingThree">
               <h5 class="mb-0">
                 <button class="btn btn-link text-center" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  <h6 class="mb-0 text-center">ALCF AI for Science Training Series</h6>
-                  <p>April 2024</p>
+                  <h6 class="mb-0 text-center">Software and Data Carpentry Workshop in R</h6>
+                  <p>Mar 2024</p>
                 </button>
               </h5>
             </div>
         
-            <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
               <div class="card-body">
-                <p>Argonne Leadership Computing Facility (ALCF) hosts regular workshops and trainings to improve AI researcher's capacity
-                  to adopt AI into their work and make use of their vast supercompute resources. I attended the AI for Science Training Series,
-                  a multi-lecture series with homeworks. Here is the <a href="https://github.com/SaideepGona/ai-science-training-series/tree/main" target="_blank" rel="noopener noreferrer">repo.</a>
-
+                <p>The UChicago program in Computational Biology (PCB) is an umbrella organization bringing together computational biology research 
+                  groups from different departments across campus. One of the goals of PCB is to help improve computational literacy across 
+                  UChicago's huge biomedical research ecosystem.
                 </p>
                 <p>
-                  I do have a pretty solid machine learning/AI background, but I still found the series very useful. For one, ALCF has one of the most
-                  powerful GPU clusters in the world. Even though we have been able to utilize these resources ourselves to perform inference and training,
-                  there is still a great deal we don't know about this infrastructure. For example, ALCF also experiments with AI testbeds housing 
-                  up-and-coming specialized hardware resources. Some of these hardware like groq-chips, could proliferate due to their efficient 
-                  inference potential relative to standard NVIDIA A100 gpus. 
+                  As part of this, PCB engages with the Software Carpentry organization to run workshops. I have been interested in 
+                  becoming a certified Software Carpentry instructor, so I decided to volunteer as a helper for the kickstart workshop after 
+                  COVID (the workshops were discontinued during COVID). Shoutout to Vivaswat(Viv), my friend and colleague who is a certified instructor
+                  and who was the primary organizer of this workshop.
                 </p>
                 <p>
-                  Another nice benefit of this series was that it gave me a chance to revisit the mathematics of transformers, specifically self-attention.
-                  I've been pretty busy so I never really had a chance to sit down and properly derive the math at the core of the hubub surrounding 
-                  LLMs. What helped me is to just think of attention as analogous to other neural network layers, such as fully connected layers which map
-                  inputs to outputs via linear transformations with added weights. From that perspective, self-attention is just a different way of performing
-                  such transformations which has a number of desirable properties over other layers for language-based tasks. I made a little diagram/explainer 
-                  <a href="https://drive.google.com/file/d/1pFi4Nw7OgvUJJtTfypotlZLNq6Yhdiag/view?usp=sharing" target="_blank" rel="noopener noreferrer">here!</a>
+                  The theme was to help beginners refresh their knowledge in the programming language R (most common among biomedical researchers) as
+                  well as give a walkthrough of plotting using the ggplot package. These are workhorse tools for allowing researchers to be 
+                  able to analyze and present their experiemental results.
                 </p>
                 <p>
-                  Finally, after completing all the assignments, the ALCF people were so kind as to give me a digital badge for my efforts :).
+                  The event itself took place over a single day. Viv is a natural presenter and really smooth coding to an audience. As volunteers, 
+                  our main goal was to help resolve issues along the way so everyone could keep up with the lesson. The epxerience definitely solidified
+                  my interest in becoming a certified instructor. For one, it was obvious how useful the single day was for the participants. Most of them
+                  are super motivated because of their own immediate research goals. Interestingly, even for us advanced programmers there were so many little 
+                  tricks which were shared that most of us weren't even aware of! It definitely goes to show that reviewing the basics is never a waste of time,
+                  and teaching is the best way to achieve mastery.
                 </p>              
               </div>
             </div>
-          </div> -->
+          </div>
+
+          <div class="card row">
+            <div class="card-header" id="headingFour">
+              <h5 class="mb-0">
+                <button class="btn btn-link text-center" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  <h6 class="mb-0 text-center">American Society of Human Genetics (ASHG) Annual Conference 2023</h6>
+                  <p>Nov 2023</p>
+                </button>
+              </h5>
+            </div>
+        
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+              <div class="card-body">
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>              
+              </div>
+            </div>
+          </div>
+
+          <div class="card row">
+            <div class="card-header" id="headingFive">
+              <h5 class="mb-0">
+                <button class="btn btn-link text-center" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  <h6 class="mb-0 text-center">The Biology of Genomes Conference 2023</h6>
+                  <p>May 2023</p>
+                </button>
+              </h5>
+            </div>
+        
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+              <div class="card-body">
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>              
+              </div>
+            </div>
+          </div>
+
+          <div class="card row">
+            <div class="card-header" id="headingSix">
+              <h5 class="mb-0">
+                <button class="btn btn-link text-center" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                  <h6 class="mb-0 text-center">ALCF INCITE Open Hackathon</h6>
+                  <p>April 2023</p>
+                </button>
+              </h5>
+            </div>
+        
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+              <div class="card-body">
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>              
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -443,15 +537,45 @@ https://www.tooplate.com/view/2120-ben-resume
         <div class="row about-third">
           <div class="col-lg-4 col-md-4 col-12">
             <h3>HTML, CSS, JS</h3>
-            <p>Web literacy is critical for deploying outward facing, responsive data visualizations.</p>
+            <p>Web literacy is critical for deploying outward facing, responsive data visualizations and tools. I've built some of these over the years!</p>
           `</div>
             <div class="col-lg-4 col-md-4 col-12">
               <h3>Statistics</h3>
-              <p>This is where I do my statistical analysis and especially data viz!</p>
+              <p>
+                Statistical analysis is a regular part of biomedical research and a major part of my PhD coursework. As part of a statistical genetics lab, 
+                statistical rigour is part of everything I do.
+              </p>
             </div>
             <div class="col-lg-4 col-md-4 col-12">
               <h3>Machine Learning</h3>
-              <p>Genetics is full of big data and heavy computation. I have experience on 5+ supercompute clusters.</p>
+              <p>From prior coursework, internship expereince, and my current thesis project, I have extensive machine learning experience.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row about-third">
+          <div class="col-lg-4 col-md-4 col-12">
+            <h3>Algorithms</h3>
+            <p>I've taken and succeeded in multiple algorithms courses, and also subsequently TA'ed the subject. The efficiency of my code reflects this 
+              attention to efficiency.
+            </p>
+          `</div>
+            <div class="col-lg-4 col-md-4 col-12">
+              <h3>Bioinformatics</h3>
+              <p>
+                I have two years of direct work expereince as a staff bioinformatician serving labs with 70+ TB of next-generation sequencing
+                data. I have an additional five years of coursework and experience handling next-generation sequencing data. I am very comfortable 
+                in this setting!
+              </p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+              <h3>Continous Learning</h3>
+              <p>
+                I am a fast learner who is constantly picking up new skills. I can quickly adapt to different computational and research settings. 
+                You could say it is baked into my DNA ;D.
+              </p>
             </div>
           </div>
         </div>
